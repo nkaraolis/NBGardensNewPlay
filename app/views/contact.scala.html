@@ -3,6 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
+    <link rel="stylesheet" type="text/CSS" href="http://fonts.googleapis.com/css?family=Raleway:400,600"/>
+
 
     <title>NB Gardens</title>
 </head>
@@ -15,7 +17,7 @@
 
     <div id="searchBar">
         <form action="\entity.CustomerDetails">
-            <input type="text" name="Search" class="mytext" style="width: 300px;" placeholder="Search.."><br>
+            <input type="text" name="Search" class="mytext" style="width: 300px;"><br>
         </form>
     </div>
     <div id="searchBarImg"><a href= "Home.html"><img src="@routes.Assets.versioned("images/search.png")" alt="NB Gardens Logo" /></a></div>
@@ -29,7 +31,6 @@
 </div>
 
 <div id="sidebar">
-
     <ul>
         <li><a href="default.asp">Categories</a></li>
         <li><a href="news.asp">Gnomes</a></li>
@@ -40,45 +41,28 @@
 
 </div>
 
-<div id="pageStart">
-</div>
-
-<div id="homeBanner">
-
-    <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
-    <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
-    <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
-
-</div>
-<div class ="line">
-
-</div>
-
-
 <div id="content">
+    <div id="contactheader">Contact NB Gardens</div>
+    <fieldset id="contactform">
+        <legend></legend>
+        <div class="formtext">Name: </div><br>
+        <input type="text" placeholder="John Doe"><br>
 
-    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/gnomeBanner.png")" alt="Fresh Gnomes Str8 from the block." style="width: 1000px; display:block; margin-left: 540px; margin-right: auto;"/></a>
+        <div class="formtext">Email: </div><br>
+        <input type="text" placeholder="person&#64example.com"><br>
 
+        <div class="formtext">Your Message: </div><br>
+        <textarea name="message" placeholder="Leave a message.."></textarea><br>
 
-    <textSetting style="opacity: 1;">
-        <br>
-        <img src="@routes.Assets.versioned("images/drift.png")" alt="NANI" style="width: auto; display:block;margin-left: auto; margin-right: auto;"/>
-        <br>
-        Running in the nineties, is a new way I like to be.<br>
-        I'm just running in the nineties, come on baby run to me<br>
-        We are running in the nineties, is a new way to set me free.<br>
-        I'm just running in the nineties.<br>
-        Yes I wanna know, yes I wanna see.<br>
-        New desire.<br>
-        I need fire.<br>
-
-    </textSetting>
+        <input type="submit" value="SEND"/>
+    </fieldset>
 
 </div>
 
 <div id="footer">
 
-    <a href="@routes.ContactController.contact" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
+
+    <a href="#" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
     <a href="home.scala.html" style="padding-right: 30px; padding-left: 0px"><div id="helpSupport"></div></a>
     <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb2.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" WIDTH="auto" HEIGHT="80px" style=" padding-top: 0px;"/></a>
