@@ -2,22 +2,28 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Route to show the homepage
-GET     /                           controllers.HomeController.home
-
 # An example controller showing a sample home page
-GET     /browse                      controllers.HomeController.home()
+GET     /                           controllers.HomeController.index
+GET     /browse                     controllers.HomeController.home()
 # An example controller showing how to use dependency injection
-
 GET     /count                      controllers.CountController.count
-
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-# Route to show the registration page
 GET     /registration               controllers.RegistrationController.registration
 
 POST    /registration               controllers.RegistrationController.saveCustomer
+
+GET     /about                      controllers.AboutController.about
+
+GET     /contact                    controllers.ContactController.contact
+
+#GET    /findCustomer               controllers.LoginController.findCustomer(u:String)
+
+
+#GET    /login                      controllers.LoginController.login(u:String, p:String)
+
+GET     /index                      controllers.LoginController.index
