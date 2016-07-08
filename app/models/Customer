@@ -1,7 +1,0 @@
-//Customer class
-
-case class Customer(val username:String, var email:String, var telephone:String, val name:String, var password:String){
-
-
-
-}
