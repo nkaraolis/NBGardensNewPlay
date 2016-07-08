@@ -68,12 +68,43 @@ body
     position: relative;
 	height: 1700px;
 	width: 100%;
-	background-color: #edb494;
-	#background-image:url(gowest4.jpg);
+	padding-top: 60px;
+	/**background-color: #edb494;**/
+	background-color: #fffdee;
 	background-size:cover;
 	text-align:center;
 	/*padding-left: 96px;*/
 }
+
+#pageStart {
+
+    position: relative;
+    height: 102px;
+    width: 100%;
+    background-color: #FFFFFF;
+    text-align:center;
+}
+
+#homeBanner {
+
+    position: relative;
+    height: 90px;
+    width: 100%;
+    background-color: #fffdee;
+    text-align:center;
+}
+
+.line {
+    position: relative;
+    height: 1px;
+    width: 100%;
+    background-color: #444444;
+    text-align:center;
+    opacity:0.5;
+    filter:alpha(opacity=50);
+}
+
+
 
 #footer {
 
@@ -162,7 +193,7 @@ textSetting {
 	position:relative;
 	text-align: center;
 	vertical-align: middle;
-	top:200px;
+	/**top:200px;**/
 	padding-left: 200px;
 	padding-right:200px;
     font-family:"Helvetica";
