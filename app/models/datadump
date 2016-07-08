@@ -1,0 +1,25 @@
+import scala.collection.mutable.ArrayBuffer
+
+//datadump
+
+object datadump{
+
+
+  def getCustomers: ArrayBuffer[Customer] ={
+
+    ArrayBuffer(Customer(
+      "john123", "john@gmail.com", "07898000000", "John", "password"),
+      Customer("joe123", "joe@gmail.com", "07898000000", "Joe", "password"),
+      Customer("fred123", "fred@gmail.com", "07898000000", "Fred", "password"),
+      Customer("jane123", "jane@gmail.com", "07898000000", "Jane", "password")
+    )
+  }
+
+
+
+
+
+
+
+
+}

@@ -1,0 +1,15 @@
+@(products: List[Product])(implicit lang: Lang)
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+
+@main(Messages("application.name")) {
+    <dl class="products">
+        @for(product <- products) {
+        <dt>@product.productId</dt>
+        <dt>@product.Name</dt>
+        <dd>@product.description</dd>
+        }
+    </dl>
+}

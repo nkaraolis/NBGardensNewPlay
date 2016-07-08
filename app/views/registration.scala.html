@@ -1,0 +1,72 @@
+@(registrationForm: Form[CustomerDetails])
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import helper._
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")" />
+
+    <title>NB Gardens</title>
+</head>
+
+<body>
+
+<div id="menu">
+
+    <a href= "home.html"> <img src="@routes.Assets.versioned("images/NBGardens.png")" />
+
+    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
+
+        <a href= "Home.html"><div id="icon1"></div></a>
+
+    </div>
+</div>
+
+<div id="sidebar">
+
+    <ul>
+        <li><a href="default.asp">Categories</a></li>
+        <li><a href="news.asp">Gnomes</a></li>
+        <li><a href="contact.asp">Tools</a></li>
+        <li><a href="about.asp">Gardening Supplies</a></li>
+        <li><a href="about.asp">Outdoor Equipment</a></li>
+    </ul>
+</div>
+
+<div id="content">
+
+    @main(Messages("registration.form")) {
+    <h2>@Messages("registration.form")</h2>
+    @helper.form(action = routes.RegistrationController.saveCustomer()) {
+    <fieldset>
+        <legend>
+            @Messages("customer.details", Messages("customer.new"))
+        </legend>
+        @helper.inputText(registrationForm("First Name"))
+        @helper.inputText(registrationForm("Last Name"))
+        @helper.inputText(registrationForm("Email"))
+        @helper.inputText(registrationForm("Telephone"))
+        @helper.inputText(registrationForm("Username"))
+        @helper.inputText(registrationForm("Password"))
+    </fieldset>
+    <p>
+        <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")'>
+    </p>
+    }
+    }
+</div>
+
+<div id="footer">
+    <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 10px; padding-right: 40px;"/></a>
+    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" WIDTH="auto" HEIGHT="70px"  /></a>
+    <a href= "https://twitter.com/"><img src="@routes.Assets.versioned("images/icontw.png")" alt="Twitter" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 10px; padding-left: 40px;"/></a>
+    <br>
+</div>
+</body>
+
+</html>
