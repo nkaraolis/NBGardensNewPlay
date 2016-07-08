@@ -17,6 +17,7 @@ GET     /registration               controllers.RegistrationController.registrat
 
 POST    /registration               controllers.RegistrationController.saveCustomer
 
+
 GET     /about                      controllers.AboutController.about
 
 GET     /contact                    controllers.ContactController.contact
@@ -27,3 +28,6 @@ GET     /contact                    controllers.ContactController.contact
 #GET    /login                      controllers.LoginController.login(u:String, p:String)
 
 GET     /index                      controllers.LoginController.index
+
+GET     /allCustomers               controllers.RegistrationController.show
+
