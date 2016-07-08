@@ -21,3 +21,5 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /registration               controllers.RegistrationController.registration
 
 POST    /registration               controllers.RegistrationController.saveCustomer
+
+GET     /allCustomers               controllers.RegistrationController.show
