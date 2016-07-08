@@ -1,0 +1,22 @@
+@(LoginForm: Form[Customer])(implicit flash: Flash, lang: Lang)
+
+@import helper._
+@import play.api.Play.current
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+
+@main(Messages("customers.form")) {
+<h2>@Messages("customers.form")</h2>
+@helper.form(action = routes.LoginController.save()) {
+<fieldset>
+    <legend>
+        @Messages("customers.details", Messages("login"))
+    </legend>
+    @helper.inputText(LoginForm("Email"))
+    @helper.inputText(LoginForm("password"))
+</fieldset>
+<p>
+    <input type="submit" class="btn-primary" value='@Messages("login")'>
+</p>
+}
+}
