@@ -4,4 +4,4 @@ registration.form = Registration details
 customer.details = CustomerDetails: {0}
 customer.new = (new)
 customer.new.submit = Add
-application.name = All customers
+login.errors = The entered username or password was incorrect

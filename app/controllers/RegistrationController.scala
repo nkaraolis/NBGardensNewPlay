@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject._
 
-import models.{Customer, CustomerDetails}
+import models.{Customer, CustomerDetails, CustomerLogin}
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
