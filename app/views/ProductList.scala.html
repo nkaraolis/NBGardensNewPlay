@@ -10,8 +10,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <link rel="stylesheet"type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
-    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/style.css")"/>
-    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/touchTouch.css")"/>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseStyle.css")"/>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseTouchTouch.css")"/>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseButton.css")"/>
 
     <script src="@routes.Assets.versioned("javascripts/jquery.js")"></script>
     <script src="@routes.Assets.versioned("javascripts/jquery.ui.totop.js")"></script>
@@ -60,10 +61,11 @@
                         <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
                     </div>
                     </a>
-                    <div class="title"><a href="#">
+                    <div class="title">
                         <dt>Name: @product.Name</dt>
                         <dt>Description: @product.description</dt>
-                        <dt>Price: @product.price</dt></a>
+                        <dt>Price: @product.price</dt>
+                        <a class="button add">Add to Cart</a>
                     </div>
                 </div>
             }
