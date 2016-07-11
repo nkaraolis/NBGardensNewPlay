@@ -1,0 +1,86 @@
+@(products: List[Product])(implicit lang: Lang)
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+
+@main(Messages("application.name")) {
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet"type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseStyle.css")"/>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseTouchTouch.css")"/>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseButton.css")"/>
+
+    <script src="@routes.Assets.versioned("javascripts/jquery.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/jquery.ui.totop.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/superfish.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/touchTouch.jquery.js")"></script>
+
+    <script>
+		$(document).ready(function(){
+			$().UItoTop({ easingType: 'easeOutQuart' });
+			$('.gallery a.gal').touchTouch();
+		})
+	</script>
+    <title>Our Gallery</title>
+</head>
+
+<body>
+
+<div id="menu">
+    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
+    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
+        <a href= "Home.html"><div id="icon1"></div></a>
+    </div>
+</div>
+
+
+<div id="sidebar">
+    <ul>
+        <li><a href="default.asp">Categories</a></li>
+        <li><a href="news.asp">Gnomes</a></li>
+        <li><a href="contact.asp">Tools</a></li>
+        <li><a href="about.asp">Gardening Supplies</a></li>
+        <li><a href="about.asp">Outdoor Equipment</a></li>
+    </ul>
+</div>
+
+<div id="content">
+    <div class="container_12">
+        <div class="title">
+            <h2>Our Gallery</h2>
+        </div>
+        <div class="gallery">
+            @for(product <- products) {
+                <div class="grid_3">
+                    <a href="@routes.Assets.versioned(product.imgL)" class="gal">
+                    <div class="img_block">
+                        <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
+                    </div>
+                    </a>
+                    <div class="title">
+                        <dt>Name: @product.Name</dt>
+                        <dt>Description: @product.description</dt>
+                        <dt>Price: @product.price</dt>
+                        <a class="button add">Add to Cart</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div id="footer">
+    <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 10px; padding-right: 40px;"/></a>
+    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" WIDTH="auto" HEIGHT="70px" style=" padding-top: 15px;"/></a>
+    <a href= "https://twitter.com/"><img src="@routes.Assets.versioned("images/icontw.png")" alt="Twitter" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 10px; padding-left: 40px;"/></a>
+    <br>
+</div>
+
+</body>
+
+}
