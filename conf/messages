@@ -1,0 +1,7 @@
+application.name = NB Gardens
+register.validation.errors = Incorrect details added
+customers.new.success = New customer added
+registration.form = Registration details
+customer.details = CustomerDetails: {0}
+customer.new = (new)
+customer.new.submit = Add
