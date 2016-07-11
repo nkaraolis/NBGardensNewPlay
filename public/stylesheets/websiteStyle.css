@@ -59,21 +59,66 @@ body
     padding-left: 1215px;
 }
 
+#emailBar {
+	height: 50px;
+    position: relative;
+    top: 0px;
+    display: inline-block;
+    font-family:"Helvetica";
+    font-size: 20px;
+    left: 12px;
+}
+
+#emailIcon {
+	height: 50px;
+    width: 50px;
+    top:18px;
+    right:20px;
+    position: relative;
+    display: inline-block;
+}
+
+input[type = "submit"] {
+
+    height: 31px;
+    width: 100px;
+    background-color: #009933;
+    border: 1px solid #009933;
+    color: #fff;
+    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+
+}
+
+#submitBtn {
+	height: 100px;
+    width: 800px;
+    position: relative;
+    top: 34px;
+    display: inline-block;
+}
+
 .mytext {
     font-family:"Helvetica";
     font-size: 20px;
 }
 
+
 #content{
     position: relative;
-	height: 1700px;
 	width: 100%;
 	padding-top: 60px;
 	/**background-color: #edb494;**/
-	background-color: #fffdee;
+	background-color: #fff;
 	background-size:cover;
 	text-align:center;
-	/*padding-left: 96px;*/
+	/**padding-left: 96px;**/
 }
 
 #pageStart {
@@ -90,7 +135,7 @@ body
     position: relative;
     height: 90px;
     width: 100%;
-    background-color: #fffdee;
+    background-color: #fff;
     text-align:center;
 }
 
@@ -110,11 +155,12 @@ body
 
 	#position: fixed;
 	bottom: 0;
-	height: 90px;
+	height: 100px;
 	background-color: #F0F0F0;
 	width: 100%;
 	text-align:center;
 	padding: 10px 0 5px 0px;
+	font-size: 12px;
 }
 #footer img{
 	opacity:1;
@@ -161,6 +207,55 @@ body
 	background-image:url(../images/AboutUsHover.png);
 	display: inline-block;
 }
+
+#deal1{
+	background-image:url(../images/deal.png);
+	width: 231px;
+	height: 276px;
+	display:inline-block;
+	margin: 0px 8px 0px 10px;
+}
+#deal1:hover{
+	background-image:url(../images/dealh.png);
+	display: inline-block;
+}
+
+#deal2{
+	background-image:url(../images/deal2.png);
+	width: 231px;
+	height: 276px;
+	display:inline-block;
+	margin-right: 8px;
+}
+#deal2:hover{
+	background-image:url(../images/deal2h.png);
+	display: inline-block;
+}
+
+#deal3{
+	background-image:url(../images/deal3.png);
+	width: 231px;
+	height: 276px;
+	display:inline-block;
+	margin-right: 8px;
+}
+#deal3:hover{
+	background-image:url(../images/deal3h.png);
+	display: inline-block;
+}
+
+#deal4{
+	background-image:url(../images/deal4.png);
+	width: 231px;
+	height: 276px;
+	display:inline-block;
+	margin-right: 8px;
+}
+#deal4:hover{
+	background-image:url(../images/deal4h.png);
+	display: inline-block;
+}
+
 
 /**Previous size - 0.583333**/
 

@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
+    <link rel="stylesheet" type="text/CSS" href="http://fonts.googleapis.com/css?family=Raleway:400,600""/>
 
     <title>NB Gardens</title>
 </head>
@@ -18,7 +19,7 @@
             <input type="text" name="Search" class="mytext" style="width: 300px;" placeholder="Search.."><br>
         </form>
     </div>
-    <div id="searchBarImg"><a href= "Home.html"><img src="@routes.Assets.versioned("images/search.png")" alt="NB Gardens Logo" /></a></div>
+    <div id="searchBarImg"><a href= "Home.html"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
 
 
     <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
@@ -43,13 +44,16 @@
 <div id="pageStart">
 </div>
 
+<div style="margin-left: 150px;">
+
 <div id="homeBanner">
 
     <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+    </div>
 
-</div>
+
 <div class ="line">
 
 </div>
@@ -57,12 +61,49 @@
 
 <div id="content">
 
-    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/gnomeBanner.png")" alt="Fresh Gnomes Str8 from the block." style="width: auto; display:block; margin-left: auto; margin-right: auto;"/></a>
+    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/gnomeBanner.png")" alt="Fresh Gnomes Str8 from the block." style="width: 1200px; display:block; margin-left: auto; margin-right: auto;"/></a>
 
+
+    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/special2.jpg")" alt="InitialD" style=" margin-left: 0px; width: 474px; display:inline-block; padding: 50px 10px 0px 0px; "/></a>
+    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/special3.jpg")" alt="Deals" style="width: 474px; display:inline-block;"/></a>
+
+    <br>
+
+    <div style="padding: 30px 0px 0px 0px;">
+    <a href="home.scala.html"><div id="deal1"></div></a>
+    <a href="home.scala.html"><div id="deal2"></div></a>
+    <a href="home.scala.html"><div id="deal3"></div></a>
+    <a href="home.scala.html"><div id="deal4"></div></a>
+    </div>
+    <!--<a href="home.scala.html"><img src="@routes.Assets.versioned("images/deal.png")" alt="Deals" style="width: 231px; margin-left: 210px; display:inline-block; padding: 30px 10px 0px 0px;"/></a>
+    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/deal2.png")" alt="Deals" style="width: 231px; display:inline-block; padding: 30px 10px 0px 0px;"/></a>
+    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/deal3.png")" alt="Deals" style="width: 231px; display:inline-block; padding: 30px 10px 0px 0px;"/></a>
+    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/deal4.png")" alt="Deals" style="width: 231px; display:inline-block; padding: 30px 10px 0px 0px;"/></a>-->
+
+    <br>
+
+    <div id="emailBar">
+
+    <div id="emailIcon"><img src="@routes.Assets.versioned("images/email.png")" alt="Email Icon" style="width: 50px;"/></div>
+
+    Get our exclusive offers in your inbox!
+
+
+        <form style="width: 300px; margin-left: 30px; display: inline-block;" action="\entity.CustomerDetails">
+            <input type="text" name="Search" class="mytext" style="width: 300px; display: inline-block;" placeholder="Enter your email address">
+        </form>
+
+        <input type = "submit" value = "SUBMIT">
+    </div>
+
+    </div>
+
+    <br>
+    <br>
 
     <textSetting style="opacity: 1;">
-        <br>
-        <img src="@routes.Assets.versioned("images/drift.png")" alt="NANI" style="width: auto; display:block;margin-left: auto; margin-right: auto;"/>
+
+        <!--<img src="@routes.Assets.versioned("images/drift.png")" alt="NANI" style="width: auto; display:block;margin-left: auto; margin-right: auto;"/>
         <br>
         Running in the nineties, is a new way I like to be.<br>
         I'm just running in the nineties, come on baby run to me<br>
@@ -70,9 +111,11 @@
         I'm just running in the nineties.<br>
         Yes I wanna know, yes I wanna see.<br>
         New desire.<br>
-        I need fire.<br>
+        I need fire.<br>-->
 
     </textSetting>
+
+</div>
 
 </div>
 
@@ -88,7 +131,12 @@
     <a href="home.scala.html" style="padding-right: 0px; padding-left: 15px"><div id="ourPolicies"></div></a>
 
     <br>
+    <div style="margin-left: 4%;">
+    © NB Gardens 2016. All Rights Reserved.
+    </div>
 </div>
+
+
 
 </body>
 
