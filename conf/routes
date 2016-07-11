@@ -4,7 +4,10 @@
 
 # Route to show the homepage
 GET     /                           controllers.HomeController.home
-GET     /browse                     controllers.BrowseController.index()
+#GET     /browse                     controllers.BrowseController.index()
+GET     /browse                     controllers.BrowseController.list()
+
+
 # An example controller showing a sample home page
 # An example controller showing how to use dependency injection
 
