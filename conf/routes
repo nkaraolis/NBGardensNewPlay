@@ -7,6 +7,8 @@ GET     /                           controllers.HomeController.home
 
 # An example controller showing a sample home page
 GET     /browse                      controllers.HomeController.home()
+
+
 # An example controller showing how to use dependency injection
 
 GET     /count                      controllers.CountController.count
@@ -23,8 +25,7 @@ GET     /registration               controllers.RegistrationController.registrat
 POST    /registration               controllers.RegistrationController.saveCustomer
 
 GET     /login                      controllers.LoginController.index
-GET     /login                      controllers.LoginController.newLogin
 
 POST    /login                      controllers.LoginController.save
 
-GET     /customers/:Email           controllers.LoginController.show(Email:String)
+GET     /login                       controllers.HomeController.confirm()

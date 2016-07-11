@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject._
 
-import models.Customer
+import models.CustomerLogin
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms.{mapping, nonEmptyText}
@@ -21,16 +21,17 @@ class LoginController @Inject() extends Controller {
 
 
 
-  //  def login(Email:String, password:String) {
-  //    val user = findCustomer(Email).get
-  //    print(user)
-  //    if(user.password == password) {
-  //      //log the user in
-  //      print("@username is logged in")
-  //    }  /*else {
-  //      print("The password you have entered is incorrect")
-  //    }*/
-  //  }
+    def login(Email:String, password:String) {
+      val user = CustomerLogin.findCustomer(Email).get
+      var status = false
+      if(user.password == password) {
+        //log the user in
+        status = true
+      }  else {
+        status = false
+      }
+      status
+    }
 
 
   def index = Action {
@@ -38,19 +39,18 @@ class LoginController @Inject() extends Controller {
       Ok(views.html.loginOurs(LoginForm))
   }
 
+//  def show(Email: String) = Action {
+//    implicit request =>
+//      CustomerLogin.findCustomer(Email).map {
+//        customer =>
+//          Ok(views.html.details(CustomerLogin(Email, "password")))
+//      }.getOrElse(NotFound)
+//  }
 
 
-  def show(Email: String) = Action {
-    implicit request =>
-      Customer.findCustomer(Email).map {
-        customer =>
-          Ok(views.html.details(Customer(Email, "password")))
-      }.getOrElse(NotFound)
-  }
-
-  private val LoginForm: Form[Customer] = Form(mapping("Email" ->
-    nonEmptyText, "Password" ->
-    nonEmptyText)(Customer.apply)(Customer.unapply))
+  private val LoginForm: Form[CustomerLogin] = Form(mapping(
+    "Email" -> nonEmptyText,
+    "password" -> nonEmptyText)(CustomerLogin.apply)(CustomerLogin.unapply))
 
 
   def save = Action {
@@ -58,12 +58,19 @@ class LoginController @Inject() extends Controller {
       val newLoginForm = LoginForm.bindFromRequest()
       newLoginForm.fold(hasErrors = {
         form =>
-          Redirect(routes.LoginController.newLogin()).flashing(Flash(form.data) +
+          Redirect(routes.LoginController.index()).flashing(Flash(form.data) +
             ("error" -> Messages("validation.errors")))
       }, success = {
         newLogin =>
-          Redirect(routes.LoginController.show(newLogin.Email)).flashing("success" ->
-            Messages("customers.new.success", newLogin.Email))
+          val status2 = login(newLoginForm.Email, newLoginForm.password)
+          if (status2) {
+            Redirect(routes.HomeController.confirm(newLoginForm).flashing("success" ->
+              Messages("customers.new.success", newLogin.Email)))
+          } else {
+            Redirect(routes.LoginController.index()).flashing(Flash(form.data) +
+              ("error" -> Messages("login.errors")))
+          }
+
       })
   }
 
