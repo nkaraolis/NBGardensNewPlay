@@ -17,6 +17,11 @@ class HomeController @Inject() extends Controller {
     Ok(views.html.home())
   }
 
+  def confirm(email: String) = Action {
+    implicit request =>
+      Ok(views.html.confirmation(email))
+  }
+
   def home() = Action {
     implicit request =>
       Ok(views.html.home())

@@ -12,7 +12,7 @@
 
 <div id="menu">
 
-    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
+    <a href= "@routes.HomeController.home()"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
 
     <div id="searchBar">
         <form action="\entity.CustomerDetails">
@@ -48,7 +48,7 @@
 
 <div id="homeBanner">
 
-    <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+    <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
     <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     </div>
@@ -121,13 +121,12 @@
 
 <div id="footer">
 
-
-    <a href="home.scala.html" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
+    <a href="@routes.ContactController.contact" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
     <a href="home.scala.html" style="padding-right: 30px; padding-left: 0px"><div id="helpSupport"></div></a>
     <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb2.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" WIDTH="auto" HEIGHT="80px" style=" padding-top: 0px;"/></a>
     <a href= "https://twitter.com/"><img src="@routes.Assets.versioned("images/icontw2.png")" alt="Twitter" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-left: 40px;"/></a>
-    <a href="home.scala.html" style="padding-right: 0px; padding-left: 30px"><div id="aboutUs"></div></a>
+    <a href= "@routes.AboutController.about" style="padding-right: 0px; padding-left: 30px"><div id="aboutUs"></div></a>
     <a href="home.scala.html" style="padding-right: 0px; padding-left: 15px"><div id="ourPolicies"></div></a>
 
     <br>
@@ -135,8 +134,6 @@
     © NB Gardens 2016. All Rights Reserved.
     </div>
 </div>
-
-
 
 </body>
 

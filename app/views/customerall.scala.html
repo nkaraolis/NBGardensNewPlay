@@ -1,0 +1,32 @@
+@(cust: List[CustomerDetails])(implicit lang: Lang, flash: Flash)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import helper._
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <link rel="stylesheet" type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+@main(Messages("application.name")) {
+<dl class="customer">
+    @for(p <- cust) { <dt><a
+        href="@controllers.routes.RegistrationController.show">@p.username</a></dt>
+    <dd>@p.firstName</dd> }
+</dl>
+}
+
+
+</body>
+</html>

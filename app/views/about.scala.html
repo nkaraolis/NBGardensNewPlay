@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet"type="text/CSS" href="websiteStyle.css"/>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")" />
+    <link rel="stylesheet" type="text/CSS" href="http://fonts.googleapis.com/css?family=Raleway:400,600"/>
     <title>NB Gardens</title>
 </head>
 
@@ -10,13 +11,13 @@
 
 <div id="menu">
 
-    <a href= "Home.html"><img src="img/NBGardens.png" alt="NB Gardens Logo" /></a>
+    <a href="@routes.HomeController.home()"> <img src="@routes.Assets.versioned("images/NBGardens.png")" />
 
-    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
+        <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
 
-        <a href= "Home.html"><div id="icon1"></div></a>
+            <a href= "Home.html"><div id="icon1"></div></a>
 
-    </div>
+        </div>
 </div>
 
 <div id="sidebar">
@@ -42,11 +43,11 @@
             NB gardens have been established since 1875.
         </div>
         <div id="aboutimg">
-            <img src="img/garden.png" height="336px" width="550px"/>
+            <img src="@routes.Assets.versioned("images/garden.png")" height="336px" width="550px"/>
         </div>
 
         <div id="aboutgnome">
-            <img src="img/gnomes.png" />
+            <img src="@routes.Assets.versioned("images/gnomes.png")" />
         </div>
 
         <div id="aboutdesc">
@@ -58,16 +59,21 @@
             Each order is processed within 15 minutes and on average have a value of £200.00. Last year’s net income for NB Gardens was £100 million pounds.
             NB gardens have been established since 1875.
         </div>
-     </div>
+    </div>
 
 
 
 </div>
 
 <div id="footer">
-    <a href= "https://www.facebook.com"><img src="img/iconfb.png" alt="Facebook" width="40px" height="40px" style=" padding-bottom: 10px; padding-right: 40px;"/></a>
-    <a href= "Home.html"><img src="img/NBGardens.png" alt="NB Gardens Logo" width="auto" height="70px" style="  padding-top: 15px;"/></a>
-    <a href= "https://twitter.com/"><img src="img/icontw.png" alt="Twitter" width="40px" height="40px" style=" padding-bottom: 10px; padding-left: 40px;"/></a>
+    <a href="@routes.ContactController.contact" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
+    <a href="home.scala.html" style="padding-right: 30px; padding-left: 0px"><div id="helpSupport"></div></a>
+    <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb2.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" WIDTH="auto" HEIGHT="80px" style=" padding-top: 0px;"/></a>
+    <a href= "https://twitter.com/"><img src="@routes.Assets.versioned("images/icontw2.png")" alt="Twitter" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-left: 40px;"/></a>
+    <a href= "@routes.AboutController.about" style="padding-right: 0px; padding-left: 30px"><div id="aboutUs"></div></a>
+    <a href="home.scala.html" style="padding-right: 0px; padding-left: 15px"><div id="ourPolicies"></div></a>
+    <br>
 </div>
 
 </body>
