@@ -28,4 +28,4 @@ GET     /login                      controllers.LoginController.index
 
 POST    /login                      controllers.LoginController.save
 
-GET     /login                       controllers.HomeController.confirm()
+GET     /login                      controllers.HomeController.confirm(Email:String)
