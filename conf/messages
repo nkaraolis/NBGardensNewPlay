@@ -5,3 +5,6 @@ customer.details = CustomerDetails: {0}
 customer.new = (new)
 customer.new.submit = Add
 login.errors = The entered username or password was incorrect
+customer.login = Login
+login.success = You have successfully logged in
+login.form.success = Form filled in correctly

@@ -24,8 +24,21 @@ GET     /registration               controllers.RegistrationController.registrat
 
 POST    /registration               controllers.RegistrationController.saveCustomer
 
-GET     /login                      controllers.LoginController.index
+GET     /registration               controllers.RegistrationController.show
 
+
+
+
+GET     /login                      controllers.LoginController.newLogin
 POST    /login                      controllers.LoginController.save
 
-GET     /login                      controllers.HomeController.confirm(Email:String)
+GET    /login/:Email               controllers.LoginController.login3(Email:String)
+
+#GET    /login/:user                controllers.HomeController.confirm(user: CustomerLogin)
+
+
+
+
+GET     /contact                    controllers.ContactController.contact
+
+GET     /about                      controllers.AboutController.about
