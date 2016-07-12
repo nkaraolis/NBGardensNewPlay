@@ -14,19 +14,7 @@ case class CustomerDetails(firstName: String, lastName: String, email: String, t
     def add(customer : CustomerDetails): Unit ={
       customers = customers + customer
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 19b9e0b8a9f1946b211543a67d4ebd603d0c513d
 
     def findAllCustomer = customers.toList.sortBy(_.username)
-
-
-
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> 19b9e0b8a9f1946b211543a67d4ebd603d0c513d
   }
 
