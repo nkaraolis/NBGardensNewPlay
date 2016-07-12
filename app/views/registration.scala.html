@@ -1,32 +1,21 @@
-@(registrationForm: Form[CustomerDetails])
+@(registrationForm: Form[CustomerDetails])(implicit flash: Flash, lang: Lang)
+
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import helper._
 
-<body>
+@sidebar = {
+}
 
-<div id="sidebar">
-
-    <ul>
-        <li><a href="default.asp">Categories</a></li>
-        <li><a href="news.asp">Gnomes</a></li>
-        <li><a href="contact.asp">Tools</a></li>
-        <li><a href="about.asp">Gardening<br>Supplies</a></li>
-        <li><a href="about.asp">Outdoor<br>Equipment</a></li>
-    </ul>
-
-</div>
+@main(Messages("registration.page"))(sidebar) {
 <br>
 <br>
-
 <br>
 <br>
-
 <div id="content">
 
-    @main(Messages("registration.form")) {
     <h2>@Messages("registration.form")</h2>
     @helper.form(action = routes.RegistrationController.saveCustomer()) {
     <fieldset>
@@ -44,7 +33,5 @@
         <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")'>
     </p>
     }
-    }
 </div>
-
-</body>
+}

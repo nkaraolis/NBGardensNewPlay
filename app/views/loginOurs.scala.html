@@ -1,59 +1,20 @@
-@(LoginForm: Form[CustomerLogin])
+@(LoginForm: Form[CustomerLogin])(implicit flash: Flash, lang: Lang)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import helper._
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
-
-    <title>NB Gardens</title>
-</head>
-
-<body>
-
-<div id="menu">
-
-    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
-
-    <div id="searchBar">
-        <form action="\entity.CustomerDetails">
-            <input type="text" name="Search" class="mytext" style="width: 300px;"><br>
-        </form>
-    </div>
-    <div id="searchBarImg"><a href= "Home.html"><img src="@routes.Assets.versioned("images/search.png")" alt="NB Gardens Logo" /></a></div>
+@sidebar = {
+}
 
 
-    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
-
-        <a href= "home.scala.html"><div id="icon1"></div></a><a href= "home.scala.html"><div id="trolley"></div></a>
-    </div>
-
-</div>
-
-<div id="sidebar">
-
-    <ul>
-        <li><a href="default.asp">Categories</a></li>
-        <li><a href="news.asp">Gnomes</a></li>
-        <li><a href="contact.asp">Tools</a></li>
-        <li><a href="about.asp">Gardening<br>Supplies</a></li>
-        <li><a href="about.asp">Outdoor<br>Equipment</a></li>
-    </ul>
-
-</div>
+@main(Messages("login.page"))(sidebar) {
 <br>
 <br>
-
 <br>
 <br>
 <div id="content">
-
-    @main(Messages("login.form")) {
     <h2>@Messages("login form")</h2>
     @helper.form(action = routes.LoginController.save) {
     <fieldset>
@@ -67,23 +28,5 @@
         <input type="submit" class="btn-primary" value='@Messages("submit")'>
     </p>
     }
-    }
 </div>
-
-<div id="footer">
-
-
-    <a href="home.scala.html" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
-    <a href="home.scala.html" style="padding-right: 30px; padding-left: 0px"><div id="helpSupport"></div></a>
-    <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb2.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
-    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" WIDTH="auto" HEIGHT="80px" style=" padding-top: 0px;"/></a>
-    <a href= "https://twitter.com/"><img src="@routes.Assets.versioned("images/icontw2.png")" alt="Twitter" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-left: 40px;"/></a>
-    <a href="home.scala.html" style="padding-right: 0px; padding-left: 30px"><div id="aboutUs"></div></a>
-    <a href="home.scala.html" style="padding-right: 0px; padding-left: 15px"><div id="ourPolicies"></div></a>
-
-    <br>
-</div>
-
-</body>
-
-</html>
+}

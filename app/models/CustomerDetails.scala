@@ -8,13 +8,16 @@ import play.api.data._
   */
 case class CustomerDetails(firstName: String, lastName: String, email: String, telephone: Int, username: String, password: String)
 
-  object Customer {
-    var customers = Set(CustomerDetails("Nick", "Noob", "MrNoob@everywhere.com", 999, "bigNoob", "mrPassword"))
+object Customer {
+  var customers = Set(CustomerDetails("Nick", "Noob", "MrNoob@everywhere.com", 999, "bigNoob", "mrPassword"))
+
 
     def add(customer : CustomerDetails): Unit ={
       customers = customers + customer
     }
 
     def findAllCustomer = customers.toList.sortBy(_.username)
-  }
 
+
+
+}
