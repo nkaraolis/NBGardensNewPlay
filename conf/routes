@@ -26,13 +26,17 @@ POST    /registration               controllers.RegistrationController.saveCusto
 
 GET     /allCustomers               controllers.RegistrationController.show
 
-GET     /login                      controllers.LoginController.index
+GET     /login                      controllers.LoginController.newLogin
 
 POST    /login                      controllers.LoginController.save
+
+#GET     /login/:Email/:Password     controllers.LoginController.login(Email:String, Password:String)
+
+GET    /login/:Email                controllers.LoginController.login3(Email:String)
 
 GET     /login                      controllers.HomeController.confirm(Email:String)
 
 GET     /about                      controllers.AboutController.about
 
-GET     /contact                   controllers.ContactController.contact
+GET     /contact                    controllers.ContactController.contact
 

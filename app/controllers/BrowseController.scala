@@ -19,8 +19,5 @@ class BrowseController extends Controller{
     Ok(views.html.ProductList(products)) //render view template
 
   }
-  def index = Action{
-    Ok(views.html.products())
-  }
-//Changes
+
 }
