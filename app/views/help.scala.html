@@ -1,0 +1,52 @@
+@()(implicit flash: Flash, lang: Lang)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+
+@sidebar = {
+<ul>
+    <li><a href="default.asp">Categories</a></li>
+    <li><a href="news.asp">Gnomes</a></li>
+    <li><a href="contact.asp">Tools</a></li>
+    <li><a href="about.asp">Gardening<br>Supplies</a></li>
+    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+</ul>
+}
+
+@main(Messages("help.page"))(sidebar) {
+
+<div id="content">
+    <div id="helpcont">
+
+        <b>Sign up for NB Gardens account</b><br>
+
+        <p>It's free to create an NB Gardens account.<br>
+        Visit the NB Gardens registration page.<br>
+        Follow the steps on the screen to complete your account setup.<br>
+        After you've created your NB Gardens Account, you can use it to sign in to NB Gardens and make purchases.</p>
+
+        <em>Q: The username I want is taken</em>
+        <p>You won't be able to get an NB Gardens address if:<br>
+
+        The exact username you requested is already being used.<br>
+        The username was used by someone in the past, and they deleted their account.</p>
+
+        <em>Q: How do I edit my account details?</em>
+        <p>Visit your account page. <br>
+        Click the edit account details link.<br>
+        Follow the steps on the screen to complete the changes to your account.<br>
+        After saving these changes you are now able to resume making your purchases with ease.</p>
+
+        <em>Q: How do I search and browse for items?</em>
+        <p>If you're looking for a specific item, enter a few words into the search box on the NB Gardens home page and we'll show you all the matching results. <br><br>
+        <strong>Note:</strong> The only information we have about a particular item is what we display on the product detail page for that item. Details usually include customer reviews, which can sometimes provide helpful information about content and product compatibility.
+        </p>
+
+
+
+    </div>
+
+</div>
+}
