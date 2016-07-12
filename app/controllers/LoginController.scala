@@ -1,12 +1,6 @@
 package controllers
 
 import javax.inject._
-<<<<<<< HEAD
-import play.api._
-import play.api.mvc._
-import play.api.mvc.{Action, Controller, Flash}
-=======
-
 import models.CustomerLogin
 import play.api._
 import play.api.data.Form
@@ -27,6 +21,7 @@ import views.html.helper.form
 @Singleton
 class LoginController @Inject() extends Controller {
 
+
     def login(Email:String, password:String): Boolean = {
       val user = CustomerLogin.findCustomer(Email).get
       var status:Boolean = false
@@ -38,7 +33,6 @@ class LoginController @Inject() extends Controller {
       }
       status
     }
-
 
   def index = Action {
     implicit request =>
@@ -86,7 +80,6 @@ class LoginController @Inject() extends Controller {
       )
   }
 
-
   def newLogin = Action {
     implicit request =>
       val form = if(request2flash.get("error").isDefined)
@@ -95,4 +88,5 @@ class LoginController @Inject() extends Controller {
         LoginForm
       Ok(views.html.loginOurs(form))
   }
+
 }

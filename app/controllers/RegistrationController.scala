@@ -2,11 +2,8 @@ package controllers
 
 import javax.inject._
 
-<<<<<<< HEAD
-import models.{Customer, CustomerDetails}
-=======
+
 import models.{Customer, CustomerDetails, CustomerLogin}
->>>>>>> master
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -62,4 +59,10 @@ class RegistrationController  @Inject() extends Controller{
           userForm
       Ok(views.html.home())
   }
+
+def show = Action {
+  implicit request => val customers = Customer.findAllCustomer
+    Ok(views.html.customerall(customers))
+}
+
 }

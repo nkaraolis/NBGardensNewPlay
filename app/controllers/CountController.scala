@@ -23,3 +23,4 @@ class CountController @Inject() (counter: Counter) extends Controller {
   def count = Action { Ok(counter.nextCount().toString) }
 
 }
+//change
