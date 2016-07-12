@@ -2,7 +2,11 @@ package controllers
 
 import javax.inject._
 
+<<<<<<< HEAD
 import models.{Customer, CustomerDetails}
+=======
+import models.{Customer, CustomerDetails, CustomerLogin}
+>>>>>>> master
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -46,7 +50,7 @@ class RegistrationController  @Inject() extends Controller{
       }, success = {
           newCustomer =>
             Customer.add(newCustomer)
-            Redirect(routes.HomeController.home()).flashing("success" -> Messages("customers.new.success", newCustomer.firstName))}
+            Redirect(routes.HomeController.home).flashing("success" -> Messages("customers.new.success", newCustomer.firstName))}
       )
   }
 
@@ -58,5 +62,4 @@ class RegistrationController  @Inject() extends Controller{
           userForm
       Ok(views.html.home())
   }
-
 }

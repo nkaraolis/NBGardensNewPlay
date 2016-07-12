@@ -6,7 +6,9 @@
 GET     /                           controllers.HomeController.home
 
 # An example controller showing a sample home page
+
 GET     /browse                      controllers.BrowseController.list()
+
 
 
 # An example controller showing how to use dependency injection

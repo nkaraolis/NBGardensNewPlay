@@ -1,0 +1,67 @@
+
+@import "grid.css";
+
+
+h2 {
+    font-family: 'Marvel', sans-serif;;
+	color: #1a1a1a;
+    font-weight: normal;
+    padding-top: 66px;
+    color: #5f604b;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 30px;
+    margin-bottom: 56px;
+    text-align: left;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	outline: none;
+	transition: 0.5s ease;
+	-o-transition: 0.5s ease;
+	-webkit-transition: 0.5s ease;
+}
+
+a:hover {
+	color: #ce9f56;
+}
+
+a.btn {
+    color: #a09f85;
+    font-size: 18px;
+    margin-top: 27px;
+    display: inline-block;
+}
+
+.img_inner {
+	max-width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom:0px;
+	margin-top: 0px;
+    border: 5px solid #717262;
+}
+
+a.gal {
+    background: url(../img/magnify.png) center center no-repeat;
+    display: block;
+}
+
+a.gal .img_block {
+    margin-bottom: 0;
+}
+
+.gallery a.gal:hover .img_block{
+    opacity: 0.5;
+}
+
+.gallery .title {
+    padding-bottom: 20px;
+    text-align: center;
+    font: 22px/30px 'Marvel', sans-serif;
+    color: #5f604b;
+}
