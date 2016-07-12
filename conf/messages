@@ -6,3 +6,6 @@ customer.new = (new)
 customer.new.submit = Add
 login.errors = The entered username or password was incorrect
 password.error = The password you have entered was incorrect
+customer.login = Login
+login.success = You have successfully logged in
+login.form.success = Form filled in correctly

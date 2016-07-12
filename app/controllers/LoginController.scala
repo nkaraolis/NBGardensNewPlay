@@ -62,6 +62,8 @@ class LoginController @Inject() extends Controller {
   )
 
 
+
+
   def save = Action {
     implicit  request =>
       val newLoginForm = LoginForm.bindFromRequest()
@@ -72,12 +74,10 @@ class LoginController @Inject() extends Controller {
       }, success = {
         newLogin =>
           Redirect(routes.LoginController.login3(newLogin.Email)).flashing("success" ->
-            Messages("customers.new.success", newLogin.Email))}
-      )
+            Messages("customers.new.success", newLogin.Email))
+    }
   }
 
-
-  //Messages("validation.errors")
 
   def newLogin = Action {
     implicit request =>

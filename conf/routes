@@ -30,8 +30,6 @@ GET     /login                      controllers.LoginController.newLogin
 
 POST    /login                      controllers.LoginController.save
 
-#GET     /login/:Email/:Password     controllers.LoginController.login(Email:String, Password:String)
-
 GET    /login/:Email                controllers.LoginController.login3(Email:String)
 
 GET     /login                      controllers.HomeController.confirm(Email:String)
@@ -39,4 +37,3 @@ GET     /login                      controllers.HomeController.confirm(Email:Str
 GET     /about                      controllers.AboutController.about
 
 GET     /contact                    controllers.ContactController.contact
-

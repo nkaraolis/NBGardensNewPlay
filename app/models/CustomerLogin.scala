@@ -4,7 +4,7 @@ package models
   * Created by Administrator on 07/07/2016.
   */
 
-case class CustomerLogin(var Email:String, var password:String) {
+case class CustomerLogin(var email:String, var password:String) {
 
 }
 
@@ -14,7 +14,7 @@ object CustomerLogin {
     CustomerLogin("fred@gmail.com",  "password"),
     CustomerLogin( "jane@gmail.com",  "password"))
 
-  def findCustomer(cusId: String) = customers.find(_.Email == cusId)
+  def findCustomer(cusId: String) = customers.find(_.email == cusId)
 
 }
 

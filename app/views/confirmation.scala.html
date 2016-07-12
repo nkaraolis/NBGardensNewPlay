@@ -1,4 +1,10 @@
-@(email: String)(implicit flash: Flash)
+@(user: CustomerLogin)(implicit lang: Lang, flash: Flash)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import helper._
 
 <!DOCTYPE html>
 <html lang="en">
