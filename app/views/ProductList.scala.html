@@ -31,22 +31,49 @@
 <body>
 
 <div id="menu">
-    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
+
+    <a href= "@routes.HomeController.home()"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
+
+    <div id="searchBar">
+        <form action="\entity.CustomerDetails">
+            <input type="text" name="Search" class="mytext" style="width: 300px;" placeholder="Search.."><br>
+        </form>
+    </div>
+    <div id="searchBarImg"><a href= "Home.html"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
+
+
     <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
-        <a href= "Home.html"><div id="icon1"></div></a>
+
+        <a href= "home.scala.html"><div id="icon1"></div></a><a href= "home.scala.html"><div id="trolley"></div></a>
+    </div>
+
+</div>
+
+<div id="sidebar">
+
+    <ul>
+        <li><a href="browse">Categories</a></li>
+        <li><a href="news.asp">Gnomes</a></li>
+        <li><a href="contact.asp">Tools</a></li>
+        <li><a href="about.asp">Gardening<br>Supplies</a></li>
+        <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+    </ul>
+
+</div>
+
+<div id="pageStart">
+</div>
+
+<div style="margin-left: 150px;">
+    <div id="homeBanner">
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     </div>
 </div>
 
+<div class ="line"></div>
 
-<div id="sidebar">
-    <ul>
-        <li><a href="default.asp">Categories</a></li>
-        <li><a href="news.asp">Gnomes</a></li>
-        <li><a href="contact.asp">Tools</a></li>
-        <li><a href="about.asp">Gardening Supplies</a></li>
-        <li><a href="about.asp">Outdoor Equipment</a></li>
-    </ul>
-</div>
 
 <div id="content">
     <div class="container_12">
@@ -75,10 +102,18 @@
 
 
 <div id="footer">
-    <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 10px; padding-right: 40px;"/></a>
-    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" WIDTH="auto" HEIGHT="70px" style=" padding-top: 15px;"/></a>
-    <a href= "https://twitter.com/"><img src="@routes.Assets.versioned("images/icontw.png")" alt="Twitter" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 10px; padding-left: 40px;"/></a>
+    <a href="@routes.ContactController.contact" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
+    <a href="home.scala.html" style="padding-right: 30px; padding-left: 0px"><div id="helpSupport"></div></a>
+    <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb2.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" WIDTH="auto" HEIGHT="80px" style=" padding-top: 0px;"/></a>
+    <a href= "https://twitter.com/"><img src="@routes.Assets.versioned("images/icontw2.png")" alt="Twitter" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-left: 40px;"/></a>
+    <a href= "@routes.AboutController.about" style="padding-right: 0px; padding-left: 30px"><div id="aboutUs"></div></a>
+    <a href="home.scala.html" style="padding-right: 0px; padding-left: 15px"><div id="ourPolicies"></div></a>
+
     <br>
+    <div style="margin-left: 4%;">
+        © NB Gardens 2016. All Rights Reserved.
+    </div>
 </div>
 
 </body>

@@ -6,12 +6,12 @@ h2 {
     font-family: 'Marvel', sans-serif;;
 	color: #1a1a1a;
     font-weight: normal;
-    padding-top: 66px;
+    padding-top: auto;
     color: #5f604b;
     font-size: 30px;
     font-weight: bold;
     line-height: 30px;
-    margin-bottom: 56px;
+    margin-bottom: 30px;
     text-align: left;
 }
 
@@ -31,7 +31,7 @@ a:hover {
 a.btn {
     color: #a09f85;
     font-size: 18px;
-    margin-top: 27px;
+    margin-top: 15px;
     display: inline-block;
 }
 
@@ -64,4 +64,12 @@ a.gal .img_block {
     text-align: center;
     font: 22px/30px 'Marvel', sans-serif;
     color: #5f604b;
+}
+
+.container_12 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+  height: 1600px;
+  /*padding-top: auto;*/
 }
