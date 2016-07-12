@@ -110,12 +110,14 @@ input[type = "submit"] {
 }
 
 #aboutcont{
-    padding: 250px 0 0 400px;
+    padding: 250px 0 0 250px;
     text-align: justify;
     width: 1200px;
-    height: 700px;
+    height: 1000px;
+    margin-left: 200px;
     color: #e3e3e3;
     float: left;
+    display: block;
 }
 
 #aboutintro{
@@ -432,8 +434,8 @@ textSetting {
 
 ul {
     list-style-type: none;
-    margin: 192px 0;
-    padding: 0;
+    margin: 0px 0px 0px 0px;
+    padding-right: 0px;
     width: 192px;
     background-color: #f1f1f1;
 

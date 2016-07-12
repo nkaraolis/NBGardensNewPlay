@@ -1,12 +1,21 @@
-@(email: String)(implicit flash: Flash)
+@(email: String)(implicit flash: Flash, lang: Lang))
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+
+
+@sidebar = {
+<ul>
+    <li><a href="default.asp">Categories</a></li>
+    <li><a href="news.asp">Gnomes</a></li>
+    <li><a href="contact.asp">Tools</a></li>
+    <li><a href="about.asp">Gardening<br>Supplies</a></li>
+    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+</ul>
+}
+
+@main(Messages("home.page"))(sidebar) {
 <h1> CONGRATULATIONS @email </h1>
-</body>
-</html>
+}

@@ -12,6 +12,7 @@ import play.api.mvc.{Action, Controller, Flash, Request}
 class ContactController  @Inject() extends Controller{
 
   def contact = Action {
+    implicit request =>
     Ok(views.html.contact())
   }
 
