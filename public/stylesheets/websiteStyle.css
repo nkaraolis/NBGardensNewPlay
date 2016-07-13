@@ -226,6 +226,7 @@ input[type = "submit"] {
 	background-size:cover;
 	text-align:center;
 	/**padding-left: 96px;**/
+	height: 1800px;
 }
 
 #pageStart {

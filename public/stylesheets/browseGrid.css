@@ -1,6 +1,16 @@
 /* `Container
 ----------------------------------------------------------------------------------------------------*/
 
+
+.container_12 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+  height:: 960px;
+  padding-top: 50px;
+}
+
+
 .grid_1,
 .grid_2,
 .grid_3,
