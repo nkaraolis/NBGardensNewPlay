@@ -11,11 +11,10 @@ import play.api.i18n.Messages.Implicits._
   * Created by Administrator on 06/07/2016.
   */
 @Singleton
-class AboutController  @Inject() extends Controller{
+class UpdateAccountController  @Inject() extends Controller{
 
-  def about = Action {
+  def updateAccount = Action {
     implicit request =>
-    Ok(views.html.about())
+      Ok(views.html.updateAccount())
   }
-
 }

@@ -1,4 +1,4 @@
-@(products: List[Product])(implicit lang: Lang)
+@(products: List[Product])(implicit flash: Flash, lang: Lang)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -6,37 +6,30 @@
 @import models.{Cart}
 
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+@sidebar = {
+<ul>
+    <li><a href="default.asp">Categories</a></li>
+    <li><a href="news.asp">Gnomes</a></li>
+    <li><a href="contact.asp">Tools</a></li>
+    <li><a href="about.asp">Gardening<br>Supplies</a></li>
+    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+</ul>
+}
 
-    <link rel="stylesheet"type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
-    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseStyle.css")"/>
-    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseTouchTouch.css")"/>
-    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/browseButton.css")"/>
+@main(Messages("productList.page"))(sidebar) {
 
-    <script src="@routes.Assets.versioned("javascripts/jquery.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/jquery.ui.totop.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/superfish.js")"></script>
-    <script src="@routes.Assets.versioned("javascripts/touchTouch.jquery.js")"></script>
+<div id="pageStart">
+</div>
 
-    <script>
-		$(document).ready(function(){
-			$().UItoTop({ easingType: 'easeOutQuart' });
-			$('.gallery a.gal').touchTouch();
-		})
-	</script>
-    <title>Our Gallery</title>
-</head>
-
-<body>
-
-<div id="menu">
-    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
-    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
-        <a href= "Home.html"><div id="icon1"></div></a>
+<div style="margin-left: 150px;">
+    <div id="homeBanner">
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     </div>
 </div>
 
+<<<<<<< HEAD
 
 <div id="sidebar">
     <ul>
@@ -47,6 +40,9 @@
         <li><a href="about.asp">Outdoor Equipment</a></li>
     </ul>
 </div>
+=======
+<div class ="line"></div>
+>>>>>>> 4ed3bb623d2702cbb3acdde7b75ec4c2e269b596
 
 <div id="content">
     <div class="container_12">
@@ -73,6 +69,7 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 
 <div id="footer">
     <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 10px; padding-right: 40px;"/></a>
@@ -83,3 +80,6 @@
 
 </body>
 
+=======
+}
+>>>>>>> 4ed3bb623d2702cbb3acdde7b75ec4c2e269b596

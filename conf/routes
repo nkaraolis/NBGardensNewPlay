@@ -5,9 +5,13 @@
 # Route to show the homepage
 GET     /                           controllers.HomeController.home
 
+<<<<<<< HEAD
 # An example controller showing a sample home page
 GET     /browse                      controllers.BrowseController.list
 
+=======
+GET     /browse                     controllers.BrowseController.list()
+>>>>>>> 4ed3bb623d2702cbb3acdde7b75ec4c2e269b596
 
 # An example controller showing how to use dependency injection
 
@@ -20,21 +24,28 @@ GET     /message                    controllers.AsyncController.message
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # Route to show the registration page
-GET     /registration               controllers.RegistrationController.registration
+GET     /registration               controllers.RegistrationController.newCustomer
 
 POST    /registration               controllers.RegistrationController.saveCustomer
 
 GET     /allCustomers               controllers.RegistrationController.show
 
-GET     /login                      controllers.LoginController.index
+GET     /login                      controllers.LoginController.newLogin
 
 POST    /login                      controllers.LoginController.save
 
-GET     /login                      controllers.HomeController.confirm(Email:String)
+GET     /login/:Email               controllers.LoginController.login3(Email:String)
 
 GET     /about                      controllers.AboutController.about
 
-GET     /contact                   controllers.ContactController.contact
+GET     /contact                    controllers.ContactController.contact
+
+
+GET     /policies                   controllers.PoliciesController.policies
+
+GET     /help                       controllers.HelpController.help
+
+GET     /updateAccount              controllers.UpdateAccountController.updateAccount
 
 GET     /Cart                       controllers.CartController.list()
 GET     /addCart                    controllers.CartController.add(product:String)

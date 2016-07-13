@@ -5,28 +5,23 @@
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import helper._
+@import play.api._
+@import play.api.data.Form
+@import play.api.data.Forms.{mapping, nonEmptyText}
+@import play.api.mvc.{Action, Controller, Flash}
+@import play.api.data.Forms.{longNumber, mapping, nonEmptyText}
+@import views.html.helper.form
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
+@sidebar = {
 
+}
 
-    <link rel="stylesheet" type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
-
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-
-@main(Messages("application.name")) {
+@main(Messages("customerAll.page"))(sidebar) {
 <dl class="customer">
-    @for(p <- cust) { <dt><a
-        href="@controllers.routes.RegistrationController.show">@p.username</a></dt>
+    @for(p <- cust) { <dt>
+    <a
+        href="@controllers.routes.RegistrationController.show">@p.username</a>
+</dt>
     <dd>@p.firstName</dd> }
 </dl>
 }
-
-
-</body>
-</html>

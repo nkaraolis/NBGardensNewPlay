@@ -9,11 +9,11 @@ import play.api.mvc.{Action, Controller, Flash, Request}
   * Created by Administrator on 06/07/2016.
   */
 @Singleton
-class ContactController  @Inject() extends Controller{
+class PoliciesController @Inject() extends Controller{
 
-  def contact = Action {
+  def policies = Action {
     implicit request =>
-    Ok(views.html.contact())
+    Ok(views.html.policies())
   }
 
 }
