@@ -72,7 +72,7 @@ body
 #emailIcon {
 	height: 50px;
     width: 50px;
-    top:-2px;
+    bottom: -16px;
     right:20px;
     position: relative;
     display: inline-block;
@@ -468,3 +468,23 @@ light green - RGB 0 153 51 - #009933
  dark green - RGB 0 102 51 - #006633
 
 */
+
+
+#policycont{
+    padding-left: 250px;
+    width: 1000px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    height: 1500px;
+    overflow: hidden;
+    text-align: left;
+}
+
+#helpcont{
+    padding-left: 250px;
+    width: 800px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    height: 700px;
+    text-align: left;
+}

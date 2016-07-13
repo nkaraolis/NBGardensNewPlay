@@ -32,6 +32,12 @@ GET    /login/:Email                controllers.LoginController.login3(Email:Str
 
 GET     /login                      controllers.HomeController.confirm(Email:String)
 
-GET     /about                     controllers.AboutController.about
+GET     /about                      controllers.AboutController.about
 
 GET     /contact                    controllers.ContactController.contact
+
+
+GET     /policies                   controllers.PoliciesController.policies
+
+GET     /help                       controllers.HelpController.help
+

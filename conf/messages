@@ -24,3 +24,5 @@ login.page = Our Login Page
 productList.page = Products List Page
 registration.page = Registration Page
 
+help.page = Help
+policies.page = Policies
