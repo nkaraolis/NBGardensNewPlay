@@ -1,5 +1,4 @@
 @(registrationForm: Form[CustomerDetails])(implicit flash: Flash, lang: Lang)
-
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -14,7 +13,7 @@
 <br>
 <br>
 <br>
-<div id="content">
+
 
     <h2>@Messages("registration.form")</h2>
     @helper.form(action = routes.RegistrationController.saveCustomer()) {
@@ -29,9 +28,21 @@
         @helper.inputText(registrationForm("Username"))
         @helper.inputText(registrationForm("Password"))
     </fieldset>
+
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+        }
+    </div>
     <p>
         <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")'>
     </p>
     }
-</div>
+
 }

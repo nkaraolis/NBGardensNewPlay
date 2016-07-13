@@ -6,6 +6,13 @@
 @import helper._
 
 @sidebar = {
+<ul>
+    <li><a href="default.asp">Categories</a></li>
+    <li><a href="news.asp">Gnomes</a></li>
+    <li><a href="contact.asp">Tools</a></li>
+    <li><a href="about.asp">Gardening<br>Supplies</a></li>
+    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+</ul>
 }
 
 
@@ -14,19 +21,32 @@
 <br>
 <br>
 <br>
-<div id="content">
-    <h2>@Messages("login form")</h2>
-    @helper.form(action = routes.LoginController.save) {
-    <fieldset>
-        <legend>
-            @Messages("customer.details", Messages("customer.new"))
-        </legend>
-        @helper.inputText(LoginForm("Email"))
-        @helper.inputText(LoginForm("Password"))
-    </fieldset>
-    <p>
-        <input type="submit" class="btn-primary" value='@Messages("submit")'>
-    </p>
+<h2>Login form</h2>
+
+<h2>@Messages("login.form")</h2>
+@helper.form(action = routes.LoginController.save) {
+<fieldset>
+    <legend>
+        @Messages("customer.details", Messages("customer.login"))
+
+    </legend>
+    @helper.inputText(LoginForm("Email"))
+    @helper.inputText(LoginForm("Password"))
+</fieldset>
+
+<div class="container">
+    @if(flash.get("success").isDefined){
+    <div class="alert alert-success">
+        @flash.get("success")
+    </div>
+    }@if(flash.get("error").isDefined){
+    <div class="alert alert-error">
+        @flash.get("error")
+    </div>
     }
 </div>
+<p>
+    <input type="submit" class="btn-primary" value='@Messages("submit")'>
+</p>
+}
 }

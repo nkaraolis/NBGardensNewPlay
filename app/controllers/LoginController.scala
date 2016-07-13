@@ -22,7 +22,15 @@ import views.html.helper.form
 class LoginController @Inject() extends Controller {
 
 
-    def login(Email:String, password:String): Boolean = {
+  def login3(Email:String) = Action {
+    implicit request =>
+      CustomerLogin.findCustomer(Email).map {
+        user =>
+          Ok(views.html.confirmation(user.email))
+      }   .getOrElse(NotFound)
+  }
+
+    def checkUserCredentials(Email:String, password:String): Boolean = {
       val user = CustomerLogin.findCustomer(Email).get
       var status:Boolean = false
       if(user.password == password) {
@@ -30,6 +38,7 @@ class LoginController @Inject() extends Controller {
         status = true
       }  else {
         status = false
+
       }
       status
     }
@@ -39,44 +48,25 @@ class LoginController @Inject() extends Controller {
       Ok(views.html.loginOurs(LoginForm))
   }
 
-//  def show(Email: String) = Action {
-//    implicit request =>
-//      CustomerLogin.findCustomer(Email).map {
-//        customer =>
-//          Ok(views.html.details(CustomerLogin(Email, "password")))
-//      }.getOrElse(NotFound)
-//  }
-
-
   private val LoginForm: Form[CustomerLogin] = Form(mapping(
-    "Email" -> nonEmptyText,
-    "password" -> nonEmptyText)(CustomerLogin.apply)(CustomerLogin.unapply))
-
+    "Email" -> nonEmptyText.verifying("validation.email.nonexistant",
+      !CustomerLogin.findCustomer(_).isEmpty),
+    "Password" -> nonEmptyText)(CustomerLogin.apply)(CustomerLogin.unapply)
+    verifying ("user not registered", f => checkUserCredentials(f.email, f.password))
+  )
 
   def save = Action {
     implicit  request =>
       val newLoginForm = LoginForm.bindFromRequest()
       newLoginForm.fold(hasErrors = {
-
         form =>
-          Redirect(routes.LoginController.index()).flashing(Flash(form.data) +
-            ("error" -> Messages("validation.errors")))
-
+          Redirect(routes.LoginController.newLogin()).flashing(Flash(form.data) +
+            ("error" -> Messages("password.error")))
       }, success = {
         newLogin =>
-//          Redirect(routes.HomeController.confirm(newLogin.Email)).flashing("success" ->
-//            Messages("customers.new.success", newLogin.Email))
-          Redirect(routes.HomeController.home()).flashing("success" -> Messages("customers.new.success", newLogin.Email))}
-//          val status2:Boolean = login(newLogin.Email, newLogin.password)
-//
-//          if (status2) {
-//            Redirect(routes.HomeController.confirm(newLogin.Email)).flashing("success" ->
-//              Messages("customers.new.success", newLogin.Email))
-//          } else {
-//            Redirect(routes.LoginController.index())
-//            //Redirect(routes.LoginController.index()).flashing(Flash(form.data) + ("error" -> Messages("login.errors")))
-//          }
-
+          Redirect(routes.LoginController.login3(newLogin.email)).flashing("success" ->
+            Messages("customers.new.success", newLogin.email))
+        }
       )
   }
 
