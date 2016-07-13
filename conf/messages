@@ -1,26 +1,6 @@
 application.name = NB Gardens
 
-
-validation.email.duplicate = A user with that email already exists
-validation.username.duplicate = A user with that username already exists
-register.validation.errors = Incorrect details added
-customers.new.success = New customer added
-registration.form = Registration details
-customer.details = CustomerDetails: {0}
-customer.new = (new)
-customer.new.submit = Add
-
-
-
-
-login.errors = The entered username or password was incorrect
-password.error = The password you have entered was incorrect
-customer.login = Login
-login.form = Login Form
-login.success = You have successfully logged in
-login.form.success = Form filled in correctly
-
-
+#Set the tab title for each page
 about.page = About Us Page
 browse.page = Browse Products
 confirmation.page = Confirmation Page
@@ -34,3 +14,24 @@ policies.page = Policies
 productList.page = Products List Page
 registration.page = Registration Page
 updateAccount.page = Update Account
+
+#Validation messages for registration
+validation.email.duplicate = A user with that email already exists
+validation.username.duplicate = A user with that username already exists
+register.validation.errors = Incorrect details added
+customers.new.success = New customer added
+registration.form = Registration details
+customer.details = CustomerDetails: {0}
+customer.new = (new)
+customer.new.submit = Add
+
+#Validation messages for login
+login.errors = The entered username or password was incorrect
+password.error = The password you have entered was incorrect
+customer.login = Login
+login.form = Login Form
+login.success = You have successfully logged in
+login.form.success = Form filled in correctly
+
+#Validation messages for updating customer detaails
+details.update =

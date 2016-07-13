@@ -18,15 +18,6 @@ import play.api.Play.current
 @Singleton
 class RegistrationController  @Inject() extends Controller{
 
-  def registration = Action {
-    implicit request =>
-    Ok(views.html.registration(userForm))
-  }
-
-  def goHome = Action {
-    Redirect(routes.HomeController.home())
-  }
-
   private val userForm : Form[CustomerDetails] =
     Form(mapping(
       "First Name" -> nonEmptyText,

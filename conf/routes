@@ -31,6 +31,10 @@ POST    /login                      controllers.LoginController.save
 
 GET     /login/:Email               controllers.LoginController.login3(Email:String)
 
+GET     /updateAccount              controllers.UpdateAccountController.updateAccount
+
+POST    /updateAccount              controllers.UpdateAccountController.saveChanges
+
 GET     /about                      controllers.AboutController.about
 
 GET     /contact                    controllers.ContactController.contact
