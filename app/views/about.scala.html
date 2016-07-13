@@ -16,7 +16,7 @@
 }
 
 @main(Messages("about.page"))(sidebar) {
-<div style="margin-left: 150px;">
+<div id="content" style="height: 2000px;">
     <div id="aboutcont">
         <div id="aboutintro">
             NB Gardens is a traditional catalogue company based in the North-West of England.  It sells garden products to its registered customers via phone and mail.
@@ -28,8 +28,6 @@
             NB gardens have been established since 1875.
         </div>
         <div id="aboutimg">
-
-
             <img src="@routes.Assets.versioned("images/garden.png")" height="336px" width="550px"/>
         </div>
 
@@ -48,5 +46,5 @@
             NB gardens have been established since 1875.
         </div>
     </div>
-    </div>
+</div>
 }
