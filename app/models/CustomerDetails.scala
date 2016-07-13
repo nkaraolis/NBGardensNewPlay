@@ -11,8 +11,8 @@ case class CustomerDetails(firstName: String, lastName: String, email: String, t
 }
 
 object Customer {
-  var customers = Set(CustomerDetails("Nick", "Noob", "MrNoob@everywhere.com", 999, "bigNoob", "mrPassword"))
-
+  var customers = Set(CustomerDetails("Nick", "Noob", "MrNoob@everywhere.com", 999, "bigNoob", "mrPassword"),
+    CustomerDetails("Jay", "Noob", "JayNoob@everywhere.com", 999, "JayNoob", "mrPassword"), CustomerDetails("Tom", "Noob", "Tom@everywhere.com", 999, "TomNoob", "mrPassword"))
 
   def add(customer: CustomerDetails): Unit = {
     customers = customers + customer
@@ -23,5 +23,7 @@ object Customer {
   def findByEmail(email: String) = customers.find(_.email == email)
 
   def findByUsername(username: String) = customers.find(_.username == username)
+
+  def findCustomer(username : String) = customers.find(_.username == username).head
 
 }

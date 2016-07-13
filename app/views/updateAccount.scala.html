@@ -16,7 +16,7 @@
     @helper.form(action = routes.UpdateAccountController.saveChanges()) {
     <fieldset id="contactform" style="margin-left: 700px;">
       <legend>
-            @Messages("update.details", Messages("details.update"))
+            @Messages("Update Details", Messages("details.request"))
         </legend>
         @helper.inputText(updateAccounts("First Name"))
         @helper.inputText(updateAccounts("Last Name"))
@@ -37,8 +37,8 @@
         }
     </div>
     <p>
-        <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")'>
+        <input type="submit" class="btn-primary" value='@Messages("details.update")'>
     </p>
     }
 </div>
-    })
+    }
