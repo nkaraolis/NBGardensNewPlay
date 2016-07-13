@@ -1,7 +1,6 @@
 package controllers
 
 import javax.inject._
-
 import models.{Customer, CustomerDetails, CustomerLogin}
 import play.api._
 import play.api.data.Form
@@ -20,6 +19,7 @@ import play.api.Play.current
 class RegistrationController  @Inject() extends Controller{
 
   def registration = Action {
+    implicit request =>
     Ok(views.html.registration(userForm))
   }
 
@@ -63,7 +63,5 @@ def show = Action {
   implicit request => val customers = Customer.findAllCustomer
     Ok(views.html.customerall(customers))
 }
-
-
 
 }

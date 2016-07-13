@@ -1,4 +1,4 @@
-@(LoginForm: Form[CustomerLogin])(implicit lang: Lang, flash: Flash)
+@(LoginForm: Form[CustomerLogin])(implicit flash: Flash, lang: Lang)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -17,9 +17,9 @@
     </ul>
 
 </div>
-<br>
-<br>
 
+<br>
+<br>
 <br>
 <br>
 <div id="content">
@@ -27,6 +27,8 @@
     @main(Messages("login.form")) {
 
     <h2>Login form</h2>
+
+    <h2>@Messages("login form")</h2>
     @helper.form(action = routes.LoginController.save) {
     <fieldset>
         <legend>

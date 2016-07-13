@@ -16,6 +16,7 @@ import play.api.i18n.Messages.Implicits._
 class HomeController @Inject() extends Controller {
 
   def index = Action {
+    implicit request =>
     Ok(views.html.home())
   }
 

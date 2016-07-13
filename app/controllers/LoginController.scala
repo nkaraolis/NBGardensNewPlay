@@ -1,7 +1,6 @@
 package controllers
 
 import javax.inject._
-
 import models.CustomerLogin
 import play.api._
 import play.api.data.Form
@@ -14,7 +13,6 @@ import play.api.Play.current
 import play.api.data.Forms.{longNumber, mapping, nonEmptyText}
 import play.api.i18n.Messages.Implicits._
 import views.html.helper.form
-
 
 
 /**
@@ -47,7 +45,6 @@ class LoginController @Inject() extends Controller {
       status
     }
 
-
   def index = Action {
     implicit request =>
       Ok(views.html.loginOurs(LoginForm))
@@ -78,7 +75,6 @@ class LoginController @Inject() extends Controller {
     }
   }
 
-
   def newLogin = Action {
     implicit request =>
       val form = if(request2flash.get("error").isDefined)
@@ -87,6 +83,5 @@ class LoginController @Inject() extends Controller {
         LoginForm
       Ok(views.html.loginOurs(form))
   }
-
 
 }

@@ -1,9 +1,10 @@
-@(user: CustomerLogin)(implicit lang: Lang, flash: Flash)
+@(email: String)(implicit flash: Flash, lang: Lang))
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
+<<<<<<< HEAD
 @import helper._
 
 <!DOCTYPE html>
@@ -16,3 +17,16 @@
 <h1> Hello @email you are now logged in</h1>
 </body>
 </html>
+
+@sidebar = {
+<ul>
+    <li><a href="default.asp">Categories</a></li>
+    <li><a href="news.asp">Gnomes</a></li>
+    <li><a href="contact.asp">Tools</a></li>
+    <li><a href="about.asp">Gardening<br>Supplies</a></li>
+    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+</ul>
+}
+
+
+
