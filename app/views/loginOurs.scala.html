@@ -15,7 +15,6 @@
 </ul>
 }
 
-
 @main(Messages("login.page"))(sidebar) {
 <br>
 <br>
@@ -30,7 +29,7 @@
         @Messages("customer.details", Messages("customer.login"))
 
     </legend>
-    @helper.inputText(LoginForm("Email"))
+    @helper.inputText(LoginForm("Username"))
     @helper.inputText(LoginForm("Password"))
 </fieldset>
 
@@ -46,7 +45,7 @@
     }
 </div>
 <p>
-    <input type="submit" class="btn-primary" value='@Messages("submit")'>
+    <input type="submit" class="btn-primary" value='@Messages("Login")'>
 </p>
 }
 }

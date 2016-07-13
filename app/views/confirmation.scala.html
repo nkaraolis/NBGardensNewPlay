@@ -1,9 +1,10 @@
-@(email: String)(implicit flash: Flash, lang: Lang))
+@(email: String)(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
+@import play.api.mvc.Session
 @import helper._
 
 <!DOCTYPE html>
@@ -13,7 +14,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1> Hello @email you are now logged in</h1>
 </body>
 </html>
 

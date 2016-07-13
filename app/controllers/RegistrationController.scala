@@ -41,6 +41,7 @@ class RegistrationController  @Inject() extends Controller{
       )
   }
 
+
   def newCustomer = Action {
     implicit request =>
       val form = if(request2flash.get("error").isDefined)
