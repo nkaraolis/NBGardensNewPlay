@@ -488,3 +488,8 @@ light green - RGB 0 153 51 - #009933
     height: 700px;
     text-align: left;
 }
+
+.formtextUpdate{
+    float: left;
+    margin-left: -100px;
+}
