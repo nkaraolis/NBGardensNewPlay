@@ -20,10 +20,10 @@ validation.email.duplicate = A user with that email already exists
 validation.username.duplicate = A user with that username already exists
 register.validation.errors = Incorrect details added
 customers.new.success = New customer added
-registration.form = Registration details
+registration.form = Create Account
 customer.details = CustomerDetails: {0}
 customer.new = (new)
-customer.new.submit = Add
+customer.new.submit = SUBMIT
 
 #Validation messages for login
 login.errors = The entered username or password was incorrect
