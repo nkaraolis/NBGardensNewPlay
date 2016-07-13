@@ -66,7 +66,7 @@ class LoginController @Inject() extends Controller {
         newLogin =>
           Redirect(routes.LoginController.login3(newLogin.email)).flashing("success" ->
             Messages("customers.new.success", newLogin.email))
-        }
+      Ok("Welcome").withSession("connected" -> newLogin.email)       }
       )
   }
 

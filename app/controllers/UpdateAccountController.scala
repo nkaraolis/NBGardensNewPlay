@@ -13,6 +13,16 @@ import play.api.i18n.Messages.Implicits._
 @Singleton
 class UpdateAccountController  @Inject() extends Controller{
 
+
+  def index = Action {
+    request => request.session.get("connected").map {
+      user => Ok("Hello " + user)}.getOrElse{
+      Unauthorized(" hhggh")
+    }
+    }
+
+
+
   def updateAccount = Action {
     implicit request =>
       Ok(views.html.updateAccount())
