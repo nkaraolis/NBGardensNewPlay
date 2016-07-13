@@ -25,7 +25,7 @@
 			$('.gallery a.gal').touchTouch();
 		})
 	</script>
-    <title>Our Gallery</title>
+    <title>Your Cart</title>
 </head>
 
 <body>
@@ -51,7 +51,10 @@
 <div id="content">
     <div class="container_12">
         <div class="title">
-            <h2 >Our Gallery <a class="button goCart" href="@routes.CartController.list()">My Cart</a></h2>
+            <h2>My Cart
+                <a class="button browse" href="@routes.BrowseController.list">Continue Shopping</a><a class="button toPay" href="">To Pay</a>
+
+            </h2>
         </div>
         <div class="gallery">
             @for(product <- products) {
@@ -65,7 +68,7 @@
                         <dt>Name: @product.Name</dt>
                         <dt>Description: @product.description</dt>
                         <dt>Price: @product.price</dt>
-                        <a class="button add" href="@routes.CartController.add(product.Name)">Add to Cart</a>
+                        <a class="button delete" href="@routes.CartController.remove(product.Name)">Delete</a>
                     </div>
                 </div>
             }
@@ -82,4 +85,3 @@
 </div>
 
 </body>
-

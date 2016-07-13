@@ -20,6 +20,8 @@ object Product {
 
   def findAll = products.toList.sortBy(_.Name)
 
+  def findByName(name: String) = products.toList.find(_.Name == name)
+
   def add(Id: String, Name: String, description: String, price: String, imgS: String, imgL: String): Unit ={
     products += Product(Id,Name,description,price,imgS,imgL)
   }

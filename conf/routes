@@ -6,7 +6,7 @@
 GET     /                           controllers.HomeController.home
 
 # An example controller showing a sample home page
-GET     /browse                      controllers.HomeController.home()
+GET     /browse                      controllers.BrowseController.list
 
 
 # An example controller showing how to use dependency injection
@@ -36,3 +36,6 @@ GET     /about                      controllers.AboutController.about
 
 GET     /contact                   controllers.ContactController.contact
 
+GET     /Cart                       controllers.CartController.list()
+GET     /addCart                    controllers.CartController.add(product:String)
+GET     /removeCart                 controllers.CartController.remove(product:String)
