@@ -1,51 +1,3 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
-    <link rel="stylesheet" type="text/CSS" href="http://fonts.googleapis.com/css?family=Raleway:400,600""/>
-
-    <title>NB Gardens</title>
-</head>
-
-<body>
-
-<div id="menu">
-
-    <a href= "@routes.HomeController.home()"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
-
-    <div id="searchBar">
-        <form action="\entity.CustomerDetails">
-            <input type="text" name="Search" class="mytext" style="width: 300px;" placeholder="Search.."><br>
-        </form>
-    </div>
-    <div id="searchBarImg"><a href= "Home.html"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
-
-
-    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
-
-        <a href= "home.scala.html"><div id="icon1"></div></a><a href= "home.scala.html"><div id="trolley"></div></a>
-    </div>
-
-</div>
-
-<div id="sidebar">
-
-    <ul>
-        <li><a href=browse >Categories</a></li>
-        <li><a href="news.asp">Gnomes</a></li>
-        <li><a href="contact.asp">Tools</a></li>
-        <li><a href="about.asp">Gardening<br>Supplies</a></li>
-        <li><a href="about.asp">Outdoor<br>Equipment</a></li>
-    </ul>
-
-</div>
-
-<div id="pageStart">
-</div>
-
-=======
 @()(implicit flash: Flash, lang: Lang)
 
 @import play.api.Play.current
@@ -64,7 +16,6 @@
 }
 
 @main(Messages("home.page"))(sidebar) {
->>>>>>> 4ed3bb623d2702cbb3acdde7b75ec4c2e269b596
 <div style="margin-left: 150px;">
     <div id="homeBanner">
         <a href= "@routes.HomeController.home"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 50px;"/></a>
