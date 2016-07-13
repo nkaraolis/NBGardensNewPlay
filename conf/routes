@@ -37,3 +37,5 @@ GET     /contact                    controllers.ContactController.contact
 GET     /policies                   controllers.PoliciesController.policies
 
 GET     /help                       controllers.HelpController.help
+
+GET     /updateAccount              controllers.UpdateAccountController.updateAccount

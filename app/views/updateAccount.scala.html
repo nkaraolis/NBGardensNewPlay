@@ -1,0 +1,43 @@
+@()(implicit flash: Flash, lang: Lang)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import helper._
+
+@sidebar = {
+}
+
+@main(Messages("updateAccount.page"))(sidebar) {
+<div style="height : 1050px;">
+
+    <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Update your NB Gardens Account</div>
+    <fieldset id="contactform" style="margin-left: 500px;">
+        <legend></legend>
+
+        <div class="formtextUpdate">Username: </div><br>
+        <input type="text" placeholder="e.g. SPEEDYSPEEDBOY"><br>
+
+        <div class="formtextUpdate">First Name: </div><br>
+        <input type="text" placeholder="Dagumi"><br>
+
+        <div class="formtextUpdate">Last Name: </div><br>
+        <input type="text" placeholder="Fujiwara"><br>
+
+        <div class="formtextUpdate">Email: </div><br>
+        <input type="text" placeholder="driftking&#64akinadownhill.com"><br>
+
+        <div class="formtextUpdate">Telephone: </div><br>
+        <input type="text" placeholder=""><br>
+
+        <div class="formtextUpdate">Password: </div><br>
+        <input type="text" placeholder=""><br>
+
+        <input type="submit" style="width: 200px;" value="UPDATE ACCOUNT"/>
+    </fieldset>
+
+    <br>
+
+</div>
+}
