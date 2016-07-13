@@ -13,19 +13,25 @@
 <br>
 <br>
 <br>
+<div id="content" style="height: 1330px; margin-left: 200px;">
 
+    <div id="contactheader" style="margin-top: -270px; margin-left: -800px;">@Messages("registration.form")</div>
     @helper.form(action = routes.RegistrationController.saveCustomer()) {
-    <fieldset>
-        <legend>
-            @Messages("customer.details", Messages("customer.new"))
+    <fieldset id="contactform">
+        <legend style="margin-left: -90px;">
+            @Messages("Register your account details.", Messages("customer.new"))
         </legend>
+
         @helper.inputText(registrationForm("First Name"))
         @helper.inputText(registrationForm("Last Name"))
         @helper.inputText(registrationForm("Email"))
         @helper.inputText(registrationForm("Telephone"))
         @helper.inputText(registrationForm("Username"))
         @helper.inputText(registrationForm("Password"))
+
     </fieldset>
+
+
 
     <div class="container">
         @if(flash.get("success").isDefined){
@@ -38,9 +44,11 @@
         </div>
         }
     </div>
-    <p>
-        <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")'>
+    <p  style="margin-left: -750px;">
+        <a href="@routes.PoliciesController.policies">By signing in you agree to NB Gardens' Terms & Conditions.</a>
+        <br>
+        <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")' style="margin-top: 50px;">
     </p>
     }
-
+</div>
 }
