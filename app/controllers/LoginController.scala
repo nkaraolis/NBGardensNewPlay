@@ -26,11 +26,9 @@ class LoginController @Inject() extends Controller {
     implicit request =>
       CustomerLogin.findCustomer(Email).map {
         user =>
-          Ok(views.html.confirmation(user.Email))
+          Ok(views.html.confirmation(user.email))
       }   .getOrElse(NotFound)
-
   }
-
 
     def checkUserCredentials(Email:String, password:String): Boolean = {
       val user = CustomerLogin.findCustomer(Email).get
@@ -50,16 +48,12 @@ class LoginController @Inject() extends Controller {
       Ok(views.html.loginOurs(LoginForm))
   }
 
-
   private val LoginForm: Form[CustomerLogin] = Form(mapping(
     "Email" -> nonEmptyText.verifying("validation.email.nonexistant",
       !CustomerLogin.findCustomer(_).isEmpty),
     "Password" -> nonEmptyText)(CustomerLogin.apply)(CustomerLogin.unapply)
-    verifying ("user not registered", f => checkUserCredentials(f.Email, f.password))
+    verifying ("user not registered", f => checkUserCredentials(f.email, f.password))
   )
-
-
-
 
   def save = Action {
     implicit  request =>
@@ -70,9 +64,10 @@ class LoginController @Inject() extends Controller {
             ("error" -> Messages("password.error")))
       }, success = {
         newLogin =>
-          Redirect(routes.LoginController.login3(newLogin.Email)).flashing("success" ->
-            Messages("customers.new.success", newLogin.Email))
-    }
+          Redirect(routes.LoginController.login3(newLogin.email)).flashing("success" ->
+            Messages("customers.new.success", newLogin.email))
+        }
+      )
   }
 
   def newLogin = Action {

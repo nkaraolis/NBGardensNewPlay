@@ -18,7 +18,7 @@ GET     /message                    controllers.AsyncController.message
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # Route to show the registration page
-GET     /registration               controllers.RegistrationController.registration
+GET     /registration               controllers.RegistrationController.newCustomer
 
 POST    /registration               controllers.RegistrationController.saveCustomer
 
@@ -28,9 +28,7 @@ GET     /login                      controllers.LoginController.newLogin
 
 POST    /login                      controllers.LoginController.save
 
-GET    /login/:Email                controllers.LoginController.login3(Email:String)
-
-GET     /login                      controllers.HomeController.confirm(Email:String)
+GET     /login/:Email               controllers.LoginController.login3(Email:String)
 
 GET     /about                      controllers.AboutController.about
 
