@@ -7,6 +7,12 @@ customer.new = (new)
 customer.new.submit = Add
 login.errors = The entered username or password was incorrect
 
+password.error = The password you have entered was incorrect
+customer.login = Login
+login.success = You have successfully logged in
+login.form.success = Form filled in correctly
+
+
 about.page = About Us Page
 browse.page = Browse Products
 confirmation.page = Confirmation Page
@@ -17,3 +23,4 @@ home.page = NBGardens
 login.page = Our Login Page
 productList.page = Products List Page
 registration.page = Registration Page
+
