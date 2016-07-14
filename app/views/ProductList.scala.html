@@ -11,8 +11,8 @@
     <li><a href= browse >Categories</a></li>
     <li><a href="news.asp">Gnomes</a></li>
     <li><a href="contact.asp">Tools</a></li>
-    <li><a href="about.asp">Gardening Supplies</a></li>
-    <li><a href="about.asp">Outdoor Equipment</a></li>
+    <li><a href="about.asp">Gardening<br>Supplies</a></li>
+    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
@@ -53,13 +53,15 @@
                         </div>
                     </a>
                     <div class="title" name="get">
-                        <dt>Name: @product.Name</dt>
+                        <a href="@routes.ProductPageController.goToProduct(product.Name)"><dt>Name: @product.Name</dt></a>
                         <dt>Description: @product.description</dt>
                         <dt>Price: @product.price</dt>
-                        <input style = "width: 45px; height: 30px" type="text" value="1" placeholder="Qty." name="Qty"
+
+                        <input class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty." name="Qty"
                                onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >
 
-                        <a class="button add" href="@routes.CartController.add(product.Name, product.need)">Add to Cart</a>
+                        <a href="@routes.CartController.add(product.Name, product.need)"><input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/></a>
+
                     </div>
                 </div>
             }

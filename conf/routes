@@ -44,6 +44,8 @@ GET     /policies                   controllers.PoliciesController.policies
 
 GET     /help                       controllers.HelpController.help
 
+GET     /productPage                controllers.ProductPageController.goToProduct(product:String)
+
 GET     /updateAccount              controllers.UpdateAccountController.updateAccount
 
 GET     /Cart                       controllers.CartController.list()
