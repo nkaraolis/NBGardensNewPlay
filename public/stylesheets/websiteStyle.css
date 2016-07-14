@@ -23,15 +23,27 @@ body
 }
 
 #icon1 {
-	background-image:url(../images/i2.png);
-	height: 102px;
-    width: 102px;
-	display: inline-block;
-}
-#icon1:hover{
-	background-image:url(../images/i22.png);
-	display: inline-block;
-}
+ 	background-image:url(../images/i2.png);
+ 	height: 102px;
+     width: 102px;
+ 	display: inline-block;
+ }
+ #icon1:hover{
+ 	background-image:url(../images/i22.png);
+ 	display: inline-block;
+ }
+
+#icon2 {
+ 	background-image:url(../images/i2.png);
+ 	height: 102px;
+     width: 102px;
+ 	display: inline-block;
+ }
+#icon2:hover{
+ 	background-image:url(../images/logout.png);
+ 	display: inline-block;
+ }
+
 #trolley {
 	background-image:url(../images/t1.png);
 	height: 102px;
