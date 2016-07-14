@@ -6,13 +6,13 @@ import play.api.data._
 /**
   * Created by Administrator on 06/07/2016.
   */
-case class CustomerDetails(firstName: String, lastName: String, email: String, telephone: Int, username: String, password: String) {
+case class CustomerDetails(var firstName: String, lastName: String, email: String, telephone: String, var username: String, password: String) {
 
 }
 
 object Customer {
-  var customers = Set(CustomerDetails("Nick", "Noob", "MrNoob@everywhere.com", 999, "bigNoob", "mrPassword"),
-    CustomerDetails("Jay", "Noob", "JayNoob@everywhere.com", 999, "JayNoob", "mrPassword"), CustomerDetails("Tom", "Noob", "Tom@everywhere.com", 999, "TomNoob", "mrPassword"))
+  var customers = Set(CustomerDetails("Nick", "Noob", "MrNoob@everywhere.com", "999", "bigNoob", "mrPassword"),
+    CustomerDetails("Jay", "Noob", "JayNoob@everywhere.com", "999", "JayNoob", "mrPassword"), CustomerDetails("Tom", "Noob", "Tom@everywhere.com", "999", "TomNoob", "mrPassword"))
 
   def add(customer: CustomerDetails): Unit = {
     customers = customers + customer
@@ -25,5 +25,7 @@ object Customer {
   def findByUsername(username: String) = customers.find(_.username == username)
 
   def findCustomer(username : String) = customers.find(_.username == username).head
+
+
 
 }

@@ -23,7 +23,7 @@ class RegistrationController  @Inject() extends Controller{
       "First Name" -> nonEmptyText,
       "Last Name" -> nonEmptyText,
       "Email" -> nonEmptyText.verifying("validation.email.duplicate", Customer.findByEmail(_).isEmpty),
-      "Telephone" -> number,
+      "Telephone" -> nonEmptyText,
       "Username" -> nonEmptyText.verifying("validation.username.duplicate", Customer.findByUsername(_).isEmpty),
       "Password" -> nonEmptyText
     )(CustomerDetails.apply)(CustomerDetails.unapply))
@@ -48,7 +48,7 @@ class RegistrationController  @Inject() extends Controller{
           userForm.bind(request2flash.data)
       else
           userForm
-      Ok(views.html.registration(form))
+       Ok(views.html.registration(form))
   }
 
 def show = Action {
