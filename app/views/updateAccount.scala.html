@@ -1,4 +1,4 @@
-@()(implicit flash: Flash, lang: Lang)
+@(updateAccounts: Form[CustomerDetails])(implicit flash: Flash, lang: Lang)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -13,31 +13,32 @@
 <div style="height : 1050px;">
 
     <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Update your NB Gardens Account</div>
-    <fieldset id="contactform" style="margin-left: 500px;">
-        <legend></legend>
-
-        <div class="formtextUpdate">Username: </div><br>
-        <input type="text" placeholder="e.g. SPEEDYSPEEDBOY"><br>
-
-        <div class="formtextUpdate">First Name: </div><br>
-        <input type="text" placeholder="Dagumi"><br>
-
-        <div class="formtextUpdate">Last Name: </div><br>
-        <input type="text" placeholder="Fujiwara"><br>
-
-        <div class="formtextUpdate">Email: </div><br>
-        <input type="text" placeholder="driftking&#64akinadownhill.com"><br>
-
-        <div class="formtextUpdate">Telephone: </div><br>
-        <input type="text" placeholder=""><br>
-
-        <div class="formtextUpdate">Password: </div><br>
-        <input type="text" placeholder=""><br>
-
-        <input type="submit" style="width: 200px;" value="UPDATE ACCOUNT"/>
+    @helper.form(action = routes.UpdateAccountController.saveChanges()) {
+    <fieldset id="contactform" style="margin-left: 700px;">
+      <legend>
+            @Messages("Update Details", Messages("details.request"))
+        </legend>
+        @helper.inputText(updateAccounts("First Name"))
+        @helper.inputText(updateAccounts("Last Name"))
+        @helper.inputText(updateAccounts("Email"))
+        @helper.inputText(updateAccounts("Telephone"))
+        @helper.inputText(updateAccounts("Username"))
+        @helper.inputText(updateAccounts("Password"))
     </fieldset>
-
-    <br>
-
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+        }
+    </div>
+    <p>
+        <input type="submit" class="btn-primary" value='@Messages("details.update")'>
+    </p>
+    }
 </div>
-}
+    }

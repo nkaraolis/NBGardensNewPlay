@@ -1,7 +1,8 @@
 package controllers
 
 import javax.inject._
-import models.CustomerLogin
+
+import models.{Customer, CustomerDetails, CustomerLogin}
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -14,34 +15,31 @@ import play.api.data.Forms.{longNumber, mapping, nonEmptyText}
 import play.api.i18n.Messages.Implicits._
 import views.html.helper.form
 
-
 /**
-  * This controller is to able users to log in
+  * This controller is to enable users to log in
   */
 @Singleton
 class LoginController @Inject() extends Controller {
 
-
-  def login3(Email:String) = Action {
+  def login3(username: String) = Action {
     implicit request =>
-      CustomerLogin.findCustomer(Email).map {
+      CustomerLogin.findCustomer(username).map {
         user =>
-          Ok(views.html.confirmation(user.email))
-      }   .getOrElse(NotFound)
+          Ok(views.html.confirmation(user.username))
+      }.getOrElse(NotFound)
   }
 
-    def checkUserCredentials(Email:String, password:String): Boolean = {
-      val user = CustomerLogin.findCustomer(Email).get
-      var status:Boolean = false
-      if(user.password == password) {
-        //log the user in
-        status = true
-      }  else {
-        status = false
-
-      }
-      status
+  def checkUserCredentials(Email: String, password: String): Boolean = {
+    val user = CustomerLogin.findCustomer(Email).get
+    var status: Boolean = false
+    if (user.password == password) {
+      //log the user in
+      status = true
+    } else {
+      status = false
     }
+    status
+  }
 
   def index = Action {
     implicit request =>
@@ -49,14 +47,14 @@ class LoginController @Inject() extends Controller {
   }
 
   private val LoginForm: Form[CustomerLogin] = Form(mapping(
-    "Email" -> nonEmptyText.verifying("validation.email.nonexistant",
+    "Username" -> nonEmptyText.verifying("validation.email.nonexistant",
       !CustomerLogin.findCustomer(_).isEmpty),
     "Password" -> nonEmptyText)(CustomerLogin.apply)(CustomerLogin.unapply)
-    verifying ("user not registered", f => checkUserCredentials(f.email, f.password))
+    verifying("user not registered", f => checkUserCredentials(f.username, f.password))
   )
 
   def save = Action {
-    implicit  request =>
+    implicit request =>
       val newLoginForm = LoginForm.bindFromRequest()
       newLoginForm.fold(hasErrors = {
         form =>
@@ -64,15 +62,25 @@ class LoginController @Inject() extends Controller {
             ("error" -> Messages("password.error")))
       }, success = {
         newLogin =>
-          Redirect(routes.LoginController.login3(newLogin.email)).flashing("success" ->
-            Messages("customers.new.success", newLogin.email))
-        }
+          Redirect(routes.HomeController.home())
+        // val currentCustomer = Customer.findCustomer(newLogin.username)
+        //val custSession = request.session + ("username" -> currentCustomer.username)
+        /*    val customerSession = request.session +
+  ("first name" -> currentCustomer.firstName) +
+  ("last name" -> currentCustomer.lastName) +
+  ("email" -> currentCustomer.email) +
+  ("telephone" -> currentCustomer.telephone.toString) +
+  ("username" -> currentCustomer.username) +
+  ("password" -> currentCustomer.password)*/
+
+        //        Redirect(views.html.home.(request.session).withSession("New session" -> LoginForm.bindFromRequest().data("username"))
+      }
       )
   }
 
   def newLogin = Action {
     implicit request =>
-      val form = if(request2flash.get("error").isDefined)
+      val form = if (request2flash.get("error").isDefined)
         LoginForm.bind(request2flash.data)
       else
         LoginForm
