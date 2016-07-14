@@ -4,22 +4,15 @@ package models
   * Created by Administrator on 07/07/2016.
   */
 
-case class CustomerLogin(var email:String, var password:String) {
+case class CustomerLogin(username:String, password:String) {
 
 }
 
 object CustomerLogin {
-  var customers = Set(CustomerLogin("john@gmail.com", "password"),
-    CustomerLogin( "joe@gmail.com", "password"),
-    CustomerLogin("fred@gmail.com",  "password"),
-    CustomerLogin( "jane@gmail.com",  "password"))
+  var customers = Set(CustomerLogin("bigNoob", "password"),
+    CustomerLogin("TomNoob", "password"),
+    CustomerLogin("JayNoob",  "password"))
 
-  def findCustomer(cusId: String) = customers.find(_.email == cusId)
+  def findCustomer(user: String) = customers.find(_.username == user)
 
 }
-
-
-
-
-
-
