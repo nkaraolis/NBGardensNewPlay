@@ -1,4 +1,5 @@
-@(LoginForm: Form[CustomerLogin])(implicit flash: Flash, lang: Lang)
+@(LoginForm: Form[CustomerLogin])(implicit flash: Flash, lang: Lang, session : Session)
+
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._

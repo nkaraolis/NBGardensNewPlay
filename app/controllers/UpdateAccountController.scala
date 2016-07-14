@@ -12,12 +12,15 @@ import play.api.mvc._
 import play.api.mvc.{Action, Controller, Flash, Request}
 import play.api.Play.current
 import play.api.data.Form
+import play.api.mvc.Session
 
 /**
   * Created by Administrator on 06/07/2016.
   */
 @Singleton
 class UpdateAccountController @Inject() extends Controller {
+
+  var currentCustomer = new CustomerDetails("", "", "", "", "", "")
 
   def index = Action {
     request => request.session.get("connected").map {
@@ -27,20 +30,29 @@ class UpdateAccountController @Inject() extends Controller {
     }
   }
 
+
+  currentCustomer.username = "nameYo"
+
   val updateForm: Form[CustomerDetails] =
     Form(mapping(
-      "First Name" -> nonEmptyText,
-      "Last Name" -> nonEmptyText,
-      "Email" -> nonEmptyText.verifying("validation.email.duplicate", Customer.findByEmail(_).isEmpty),
-      "Telephone" -> number,
-      "Username" -> nonEmptyText.verifying("validation.username.duplicate", Customer.findByUsername(_).isEmpty),
-      "Passsword" -> nonEmptyText
+      "First Name" -> text,
+      "Last Name" -> text,
+      "Email" -> text.verifying("validation.email.duplicate", Customer.findByEmail(_).isEmpty),
+      "Telephone" -> text,
+      "Username" -> default(text, currentCustomer.username),
+      "Passsword" -> text
     )(CustomerDetails.apply)(CustomerDetails.unapply))
 
 
   def updateAccount = Action {
     implicit request =>
-      Ok(views.html.updateAccount(updateForm))
+      if (request.session.get("username").isEmpty) {
+        Redirect(routes.LoginController.newLogin())
+      } else {
+        //TODO Update customerDetails to use telephone as a string
+        currentCustomer = new CustomerDetails(request.session.get("firstName").toString,request.session.get("lastName").toString,request.session.get("email").toString,request.session.get("telephone").toString,request.session.get("username").toString,request.session.get("passsword").toString)
+        Ok(views.html.updateAccount(updateForm))
+      }
   }
 
   def saveChanges = Action {
@@ -49,6 +61,10 @@ class UpdateAccountController @Inject() extends Controller {
         updateForm.bind(request2flash.data)
       else
         updateForm
+     /* if(!(updateForm.value.head.firstName.length == 0)) {
+
+        Customer.findByUsername(currentCustomer.username).head.firstName = updateForm.data("First Name")
+      }*/
       Ok(views.html.updateAccount(form))
   }
 }

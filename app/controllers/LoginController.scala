@@ -62,18 +62,15 @@ class LoginController @Inject() extends Controller {
             ("error" -> Messages("password.error")))
       }, success = {
         newLogin =>
-          Redirect(routes.HomeController.home())
-        // val currentCustomer = Customer.findCustomer(newLogin.username)
-        //val custSession = request.session + ("username" -> currentCustomer.username)
-        /*    val customerSession = request.session +
-  ("first name" -> currentCustomer.firstName) +
-  ("last name" -> currentCustomer.lastName) +
-  ("email" -> currentCustomer.email) +
-  ("telephone" -> currentCustomer.telephone.toString) +
-  ("username" -> currentCustomer.username) +
-  ("password" -> currentCustomer.password)*/
-
-        //        Redirect(views.html.home.(request.session).withSession("New session" -> LoginForm.bindFromRequest().data("username"))
+          val currentCustomer = Customer.findCustomer(newLogin.username)
+          val customerSession = request.session +
+            ("firstName" -> currentCustomer.firstName) +
+            ("lastName" -> currentCustomer.lastName) +
+            ("email" -> currentCustomer.email) +
+            ("telephone" -> currentCustomer.telephone.toString) +
+            ("username" -> currentCustomer.username) +
+            ("password" -> currentCustomer.password)
+          Redirect(routes.HomeController.home()).withSession(customerSession)
       }
       )
   }
@@ -85,6 +82,11 @@ class LoginController @Inject() extends Controller {
       else
         LoginForm
       Ok(views.html.loginOurs(form))
+  }
+
+  def logout = Action {
+    implicit request =>
+      Redirect(routes.HomeController.home()).withNewSession
   }
 
 }

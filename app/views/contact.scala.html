@@ -1,4 +1,4 @@
-@()(implicit flash: Flash, lang: Lang)
+@()(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -30,7 +30,7 @@
         <div class="formtext">Your Message: </div><br>
         <textarea name="message" placeholder="Leave a message.."></textarea><br>
 
-        <input type="submit" value="SEND"/>
+        <input type="submit" class="btn-primary" value="SEND" style="margin-top: 20px; float: left;"/>
     </fieldset>
 
 </div>

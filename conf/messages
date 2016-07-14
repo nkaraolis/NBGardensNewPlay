@@ -46,6 +46,7 @@ home.page = NBGardens
 login.page = Login Page
 policies.page = Policies
 productList.page = Products List Page
+productPage.page = Product Details Page
 registration.page = Registration Page
 updateAccount.page = Update Account
 
