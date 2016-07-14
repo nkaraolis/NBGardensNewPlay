@@ -14,8 +14,6 @@ object Product {
     Product("0005","Zebra Paperclips", "Zebra Length 28mm Assorted 150 Pack", "£100", "images/page3_img5.jpg", "images/big5.jpg", ""),
     Product("0006","AA", "Giant Plain Pack of 10000", "£100", "images/page3_img6.jpg", "images/big6.jpg", ""),
     Product("0007","BB", "No Tear Extra Large Pack of 1000", "£100", "images/page3_img7.jpg", "images/big7.jpg", ""),
-    Product("0008","CC", "Zebra Length 28mm Assorted 150 Pack", "£100", "images/page3_img8.jpg", "images/big8.jpg", ""),
-    Product("0009","DD", "Zebra Length 28mm Assorted 150 Pack", "£100", "images/page3_img8.jpg", "images/big8.jpg", ""),
     Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "£100", "images/page3_img8.jpg", "images/big8.jpg", "10")
   )
 
