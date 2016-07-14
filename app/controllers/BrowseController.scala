@@ -8,10 +8,10 @@ import models.Product
   */
 class BrowseController extends Controller{
 
-  def list = Action {    implicit request =>  //controller action
-    val products = Product.findAll  //get product from model
-    Ok(views.html.ProductList(products)) //render view template
-
+  def list = Action {
+    implicit request =>  //controller action
+      val products = Product.findAll  //get product from model
+      Ok(views.html.ProductList(products)) //render view template
   }
 
 }

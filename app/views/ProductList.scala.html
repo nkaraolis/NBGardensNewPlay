@@ -8,15 +8,23 @@
 
 @sidebar = {
 <ul>
-    <li><a href="default.asp">Categories</a></li>
+    <li><a href= browse >Categories</a></li>
     <li><a href="news.asp">Gnomes</a></li>
     <li><a href="contact.asp">Tools</a></li>
-    <li><a href="about.asp">Gardening<br>Supplies</a></li>
-    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+    <li><a href="about.asp">Gardening Supplies</a></li>
+    <li><a href="about.asp">Outdoor Equipment</a></li>
 </ul>
 }
 
 @main(Messages("productList.page"))(sidebar) {
+
+<script language="JavaScript">
+    function getQty(){
+        var value = get.Qty.value;
+        value
+    }
+</script>
+
 
 <div id="pageStart">
 </div>
@@ -44,11 +52,14 @@
                             <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
                         </div>
                     </a>
-                    <div class="title">
+                    <div class="title" name="get">
                         <dt>Name: @product.Name</dt>
                         <dt>Description: @product.description</dt>
                         <dt>Price: @product.price</dt>
-                        <a class="button add" href="@routes.CartController.add(product.Name)">Add to Cart</a>
+                        <input style = "width: 45px; height: 30px" type="text" value="1" placeholder="Qty." name="Qty"
+                               onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >
+
+                        <a class="button add" href="@routes.CartController.add(product.Name, product.need)">Add to Cart</a>
                     </div>
                 </div>
             }

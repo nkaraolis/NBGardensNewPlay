@@ -15,9 +15,7 @@ object Cart{
   }
 
   def removeFromCart(product: Product): Array[Product] ={
-
     def checkCart(productsIn: Array[Product], product: Product): Array[Product] = {
-
       if (productsIn.isEmpty) {
         productsIn
       }
