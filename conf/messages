@@ -33,10 +33,10 @@ login.form = Login Form
 login.success = You have successfully logged in
 login.form.success = Form filled in correctly
 
-<<<<<<< HEAD
-
+#Individual page messages
 about.page = About Us Page
 browse.page = Browse Products
+cartpage.page = Your Cart
 confirmation.page = Confirmation Page
 contact.page = Contacts Page
 createAccount.page = Create New Account
@@ -48,9 +48,11 @@ policies.page = Policies
 productList.page = Products List Page
 registration.page = Registration Page
 updateAccount.page = Update Account
-cartpage.page = Your Cart
-=======
+
 #Validation messages for updating customer detaails
 details.request = Update form loaded
 details.update = Account details updated
->>>>>>> 998b9bff33acd39707db405446930d20fabd011c
+
+#Validation messages for updating customer detaails
+details.request = Update form loaded
+details.update = Account details updated
