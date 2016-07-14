@@ -17,36 +17,33 @@
 }
 
 @main(Messages("login.page"))(sidebar) {
-<br>
-<br>
-<br>
-<br>
+<div id="content" style="height: 1000px;">
 <h2>Login form</h2>
 
 <h2>@Messages("login.form")</h2>
-@helper.form(action = routes.LoginController.save) {
-<fieldset>
-    <legend>
-        @Messages("customer.details", Messages("customer.login"))
+    <div style="padding: 20px 0 0 0; font-family: 'Raleway';  font-weight: 600; font-size: 32px; color: #006633; margin-left: -600px;">Enter your login details </div>
 
-    </legend>
-    @helper.inputText(LoginForm("Username"))
-    @helper.inputText(LoginForm("Password"))
-</fieldset>
+    @helper.form(action = routes.LoginController.save) {
+    <fieldset id="loginform">
+        <legend>
+            @Messages("", Messages("customer.login"))
+        </legend>
+        @helper.inputText(LoginForm("Username"))
+        @helper.inputText(LoginForm("Password"))
+        <input type="submit" class="btnlogin" value='@Messages("LOGIN")'>
+    </fieldset>
 
-<div class="container">
-    @if(flash.get("success").isDefined){
-    <div class="alert alert-success">
-        @flash.get("success")
-    </div>
-    }@if(flash.get("error").isDefined){
-    <div class="alert alert-error">
-        @flash.get("error")
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+        }
     </div>
     }
 </div>
-<p>
-    <input type="submit" class="btn-primary" value='@Messages("Login")'>
-</p>
-}
 }
