@@ -14,7 +14,7 @@ class CartController extends Controller {
 
   var products: Array[Product] = Array.empty
 
-  def add(product: String) = Action {
+  def add(product: String, Qty: String) = Action {
     implicit request =>  //controller action
       products :+ Cart.addToCart(Product.findByName(product).get)  //get product from model
       Redirect(routes.BrowseController.list) //render view template

@@ -10,7 +10,7 @@ object DataDump {
   def getCart: Array[Product] = {
 
     Array{
-      Product("0001","Paperclips Large","Large Plain Pack of 1000", "£100", "images/page3_img1.jpg", "images/big1.jpg")
+      Product("0001","Paperclips Large","Large Plain Pack of 1000", "£100", "images/page3_img1.jpg", "images/big1.jpg", "")
     }
 
   }

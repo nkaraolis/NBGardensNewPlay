@@ -33,6 +33,24 @@ login.form = Login Form
 login.success = You have successfully logged in
 login.form.success = Form filled in correctly
 
+
+#Individual page messages
+about.page = About Us Page
+browse.page = Browse Products
+cartpage.page = Your Cart
+confirmation.page = Confirmation Page
+contact.page = Contacts Page
+createAccount.page = Create New Account
+customerAll.page = All Customers
+help.page = Help
+home.page = NBGardens
+login.page = Login Page
+policies.page = Policies
+productList.page = Products List Page
+registration.page = Registration Page
+updateAccount.page = Update Account
+
+
 #Validation messages for updating customer detaails
 details.request = Update form loaded
 details.update = Account details updated
