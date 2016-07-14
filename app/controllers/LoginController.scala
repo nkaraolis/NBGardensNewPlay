@@ -64,8 +64,8 @@ class LoginController @Inject() extends Controller {
         newLogin =>
           val currentCustomer = Customer.findCustomer(newLogin.username)
           val customerSession = request.session +
-            ("first name" -> currentCustomer.firstName) +
-            ("last name" -> currentCustomer.lastName) +
+            ("firstName" -> currentCustomer.firstName) +
+            ("lastName" -> currentCustomer.lastName) +
             ("email" -> currentCustomer.email) +
             ("telephone" -> currentCustomer.telephone.toString) +
             ("username" -> currentCustomer.username) +
