@@ -20,12 +20,7 @@
 
 @main(Messages("productList.page"))(sidebar) {
 
-
-
-<div id="pageStart">
-</div>
-
-<div style="margin-left: 150px;">
+<div style="margin-left: 0px;">
     <div id="homeBanner">
         <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
         <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
@@ -38,34 +33,28 @@
 <div id="content" style="height: 1950px;">
     <div class="container_12">
         <div class="title">
-            <h2 >Our Gallery <a class="button goCart" href="@routes.CartController.list()">My Cart</a></h2>
+            <div class="fontTypeD" style="padding-bottom: 50px;">All Products</div>
         </div>
         <div class="gallery">
             @for(product <- products) {
-                <div class="grid_3">
+            <div class="borderGrid">
+                <div class="grid_3" style="">
                     <a href="@routes.Assets.versioned(product.imgL)" class="gal">
-                        <div class="img_block">
+                        <div class="img_block" style="padding: 5px 5px 20px 5px;">
                             <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
                         </div>
                     </a>
                     <div class="title" name="get" style="text-align: left;">
                         <div style="height: 130px;">
-                        <a href="@routes.ProductPageController.goToProduct(product.Name)"><dt style="color: #000;">@product.Name</dt></a>
+                        <a href="@routes.ProductPageController.goToProduct(product.Name)"><dt>@product.Name</dt></a>
                         <dt style="font-size: 14px;">Description: @product.description</dt>
                         </div>
                         <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">@product.price</dt>
-
-
-
 
                         <!--<input style = "width: 45px; height: 30px" type="text" value="1" placeholder="Qty." name="Qty"-->
                             <!--onfocus=" value = @CartForm("Qty").value.getOrElse("2")" onblur=" value = @CartForm("Qty").value.getOrElse("3")">-->
 
                         <!--@inputText(CartForm("Qty"), 'style->"width: 45px; height: 30px", 'placeholder->"Qty")-->
-
-
-
-
 
                         <!--<dl class=" " id="Qty_field">-->
                             <!--<dt>-->
@@ -99,6 +88,7 @@
 
                     </div>
                 </div>
+            </div>
             }
         </div>
     </div>
