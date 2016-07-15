@@ -9,9 +9,14 @@ import play.api.data.format.Formats._
 
 class CartController extends Controller {
 
-  val CartForm: Form[aFormForCart] = Form(mapping(
-    "Product" -> of[String],
-    "Qty" -> of[String])(aFormForCart.apply)(aFormForCart.unapply))
+  val CartForm: Form[aFormForCart] = Form(
+    mapping(
+      "Product" -> of[String],
+      "Qty" -> of[String]
+    )
+    (aFormForCart.apply)
+    (aFormForCart.unapply)
+  )
 
   def list = Action {
     implicit request =>  //controller action
@@ -41,9 +46,18 @@ class CartController extends Controller {
       Ok(views.html.cartpage(products.toList, CartForm)) //render view template
   }
 
-  def update(Qty: String) = Action {
+  def update() = Action {
     implicit request =>  //controller action
-//      products = Cart.removeFromCart(Product.findByName(product).get)   //get product from model
+      val p = Product.findByName(CartForm.bindFromRequest().data("Product")).get
+      val q:String = CartForm.bindFromRequest().data("Qty")
+      def np : Product = {
+        Product.removeFromProduct(p)
+        Product.add(p.productId, p.Name, p.description, p.price, p.imgS, p.imgL, q)
+        val t = Product.findByName(p.Name).toArray.apply(0)
+        t
+      }
+      val cp = Cart.addToCart(np)
+      products :+  cp //get product from model
       Ok(views.html.cartpage(products.toList, CartForm)) //render view template
   }
 }

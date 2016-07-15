@@ -54,4 +54,4 @@ GET     /Cart                       controllers.CartController.list
 GET     /addCart                    controllers.CartController.add(product:String, Qty: String)
 
 GET     /removeCart                 controllers.CartController.remove(product:String)
-GET     /updateCart                 controllers.CartController.update(Qty:String)
+GET     /updateCart                 controllers.CartController.update()

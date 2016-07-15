@@ -30,7 +30,7 @@
         </div>
         <div class="gallery">
             @for(product <- products) {
-                @helper.form(routes.CartController.update(CartForm("Qty").value.getOrElse("1"))) {
+                @helper.form(routes.CartController.update) {
                     <div class="grid_3">
                         <a href="@routes.Assets.versioned(product.imgL)" class="gal">
                             <div class="img_block">
@@ -43,7 +43,8 @@
                             <dt>Price: @product.price</dt>
                             <dt>Qty: @product.need</dt>
 
-                            @inputText(CartForm("Qty"))
+                            <input type="hidden" name="Product" value="@product.Name">
+                            <input name="Qty">
 
                             <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
 
