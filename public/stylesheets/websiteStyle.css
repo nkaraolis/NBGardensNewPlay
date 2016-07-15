@@ -44,6 +44,17 @@ body
  	display: inline-block;
  }
 
+#icon3 {
+  	background-image:url(../images/howwude.png);
+  	height: 102px;
+    width: 102px;
+  	display: inline-block;
+  }
+#icon3:hover{
+#  	background-image:url(../images/logout.png);
+  	display: inline-block;
+  }
+
 #trolley {
 	background-image:url(../images/t1.png);
 	height: 102px;

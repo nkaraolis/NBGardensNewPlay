@@ -46,7 +46,7 @@ class UpdateAccountController @Inject() extends Controller {
       if (request.session.get("username").isEmpty) {
         Redirect(routes.LoginController.newLogin())
       } else {
-        currentCustomer = Customer.findCustomer(request.session.get("username").toString)
+        currentCustomer = Customer.findCustomer(request.session.get("username").get)
         val formMapping = Map("firstName" -> currentCustomer.firstName,
         "lastName" -> currentCustomer.lastName,
         "email" -> currentCustomer.email,

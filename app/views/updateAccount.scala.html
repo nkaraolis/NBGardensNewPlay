@@ -12,8 +12,7 @@
 @main(Messages("updateAccount.page"))(sidebar) {
 <div style="height : 1050px;">
 
-    <p>@session.get("username")</p>
-
+    <h2><center>Welcome @session.get("username")!</center></h2>
 
     <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Update your NB Gardens Account</div>
     @helper.form(action = routes.UpdateAccountController.saveChanges()) {
