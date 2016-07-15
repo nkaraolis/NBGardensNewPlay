@@ -22,17 +22,13 @@
         <legend style="margin-left: -90px;">
             @Messages("Register your account details.", Messages("customer.new"))
         </legend>
-
         @helper.inputText(registrationForm("First Name"))
         @helper.inputText(registrationForm("Last Name"))
         @helper.inputText(registrationForm("Email"))
         @helper.inputText(registrationForm("Telephone"))
         @helper.inputText(registrationForm("Username"))
-        @helper.inputText(registrationForm("Password"))
-
+        @helper.inputPassword(registrationForm("Password"))
     </fieldset>
-
-
 
     <div class="container">
         @if(flash.get("success").isDefined){

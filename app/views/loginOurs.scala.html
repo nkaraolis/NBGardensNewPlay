@@ -29,7 +29,7 @@
             @Messages("", Messages("customer.login"))
         </legend>
         @helper.inputText(LoginForm("Username"))
-        @helper.inputText(LoginForm("Password"))
+        @helper.inputPassword(LoginForm("Password"))
         <input type="submit" class="btnlogin" value='@Messages("LOGIN")'>
     </fieldset>
 
@@ -45,5 +45,7 @@
         }
     </div>
     }
+
+    <button type="button"><a href=@routes.RegistrationController.newCustomer> Register</a></button>
 </div>
 }

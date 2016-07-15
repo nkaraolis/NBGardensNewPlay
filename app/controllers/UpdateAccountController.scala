@@ -30,9 +30,6 @@ class UpdateAccountController @Inject() extends Controller {
     }
   }
 
-
-  currentCustomer.username = "nameYo"
-
   val updateForm: Form[CustomerDetails] =
     Form(mapping(
       "First Name" -> text,
@@ -40,7 +37,7 @@ class UpdateAccountController @Inject() extends Controller {
       "Email" -> text.verifying("validation.email.duplicate", Customer.findByEmail(_).isEmpty),
       "Telephone" -> text,
       "Username" -> default(text, currentCustomer.username),
-      "Passsword" -> text
+      "Password" -> text
     )(CustomerDetails.apply)(CustomerDetails.unapply))
 
 
@@ -49,9 +46,15 @@ class UpdateAccountController @Inject() extends Controller {
       if (request.session.get("username").isEmpty) {
         Redirect(routes.LoginController.newLogin())
       } else {
-        //TODO Update customerDetails to use telephone as a string
-        currentCustomer = new CustomerDetails(request.session.get("firstName").toString,request.session.get("lastName").toString,request.session.get("email").toString,request.session.get("telephone").toString,request.session.get("username").toString,request.session.get("passsword").toString)
-        Ok(views.html.updateAccount(updateForm))
+        currentCustomer = Customer.findCustomer(request.session.get("username").toString)
+        val formMapping = Map("firstName" -> currentCustomer.firstName,
+        "lastName" -> currentCustomer.lastName,
+        "email" -> currentCustomer.email,
+        "telephone" -> currentCustomer.telephone,
+        "password" -> currentCustomer.password
+        )
+        val userData = updateForm.bind(formMapping)
+        Ok(views.html.updateAccount(userData))
       }
   }
 
@@ -61,10 +64,10 @@ class UpdateAccountController @Inject() extends Controller {
         updateForm.bind(request2flash.data)
       else
         updateForm
-     /* if(!(updateForm.value.head.firstName.length == 0)) {
-
-        Customer.findByUsername(currentCustomer.username).head.firstName = updateForm.data("First Name")
-      }*/
+      if(!(updateForm.value.head.firstName.isEmpty)) {
+        val bigNoob = Customer.findCustomer(request.session.get("username").toString)
+        bigNoob.firstName = updateForm.bindFromRequest().data("First Name")
+      }
       Ok(views.html.updateAccount(form))
   }
 }
