@@ -40,7 +40,7 @@
 
 <div class ="line"></div>
 
-<div id="content">
+<div id="content" style="height: 1950px;">
     <div class="container_12">
         <div class="title">
             <h2 >Our Gallery <a class="button goCart" href="@routes.CartController.list()">My Cart</a></h2>
@@ -53,10 +53,12 @@
                             <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
                         </div>
                     </a>
-                    <div class="title" name="get">
-                        <a href="@routes.ProductPageController.goToProduct(product.Name)"><dt>Name: @product.Name</dt></a>
-                        <dt>Description: @product.description</dt>
-                        <dt>Price: @product.price</dt>
+                    <div class="title" name="get" style="text-align: left;">
+                        <div style="height: 130px;">
+                        <a href="@routes.ProductPageController.goToProduct(product.Name)"><dt style="color: #000;">@product.Name</dt></a>
+                        <dt style="font-size: 14px;">Description: @product.description</dt>
+                        </div>
+                        <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">@product.price</dt>
 
                         <input class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty." name="Qty"
                                onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >
