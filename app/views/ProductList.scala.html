@@ -1,5 +1,5 @@
 
-@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang)
+@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -20,12 +20,6 @@
 
 @main(Messages("productList.page"))(sidebar) {
 
-<script language="JavaScript">
-    function getQty(){
-        var value = get.Qty.value;
-        value
-    }
-</script>
 
 
 <div id="pageStart">
@@ -58,6 +52,7 @@
                         <a href="@routes.ProductPageController.goToProduct(product.Name)"><dt>Name: @product.Name</dt></a>
                         <dt>Description: @product.description</dt>
                         <dt>Price: @product.price</dt>
+
 
 
 
