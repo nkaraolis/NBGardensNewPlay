@@ -26,6 +26,12 @@
   float: left;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 25px;
+}
+
+.grid_3 :hover{
+
+
 }
 
 .container_12 .grid_1 {
