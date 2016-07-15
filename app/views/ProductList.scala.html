@@ -1,5 +1,5 @@
 
-@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang)
+@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -20,12 +20,6 @@
 
 @main(Messages("productList.page"))(sidebar) {
 
-<script language="JavaScript">
-    function getQty(){
-        var value = get.Qty.value;
-        value
-    }
-</script>
 
 
 <div id="pageStart">
@@ -60,6 +54,7 @@
                         <dt style="font-size: 14px;">Description: @product.description</dt>
                         </div>
                         <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">@product.price</dt>
+
 
 
 
