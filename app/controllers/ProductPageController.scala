@@ -17,6 +17,21 @@ class ProductPageController extends Controller {
 
   }
 
+  def leaveReview = Action {
+    implicit request =>
+      if(request.session.get("username").isEmpty){
+        Redirect(routes.LoginController.newLogin())
+      } else {
+        null
+      }
+
+  }
+
+  def submitReview = Action {
+    implicit request =>
+
+  }
+
   /**var products: Array[Product] = Array.empty
 
   def add(product: String, Qty: String) = Action {
