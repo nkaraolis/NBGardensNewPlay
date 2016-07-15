@@ -19,32 +19,46 @@ import views.html.helper.form
 class SearchController @Inject() extends Controller {
 
   private val SearchForm: Form[SearchProduct] = Form(mapping(
-    "Search" -> nonEmptyText.verifying("validation.Name.nonexistant", !SearchProduct.findByName(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
+    "Search" -> nonEmptyText.verifying("validation.Name.nonexistant",
+      !SearchProduct.findByName(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
   )
 
-  def show(name: String) = Action {
-        implicit request =>
-          Product.findByName(name).map {
-            product =>
-              Ok(views.html.Productdetails(product))//create this html
-          }.getOrElse(NotFound)
-      }
+
+//  def show(name: String) = Action {
+//        implicit request =>
+//          Product.findByName(name).map {
+//            product =>
+//              Ok(views.html.Productdetails(product))//create this html
+//          }.getOrElse(NotFound)
+//      }
   //link search bar to this controller
+
+
+  def listResult(Searched: String) = Action {
+    implicit request =>
+      SearchProduct.findByName(Searched).map {
+        search =>
+          val searchedProduct = Product.findByName(search.Name)
+          Ok(views.html.listResult(searchedProduct))
+      }.getOrElse(NotFound)
+  }
 
   def save = Action {
     implicit request =>
       val newSearchForm = SearchForm.bindFromRequest()
+
       newSearchForm.fold(hasErrors = {
         form =>
           Redirect(routes.SearchController.newSearch()).flashing(Flash(form.data) +
             ("error" -> Messages("product.error")))
       }, success = {
         newSearch =>
-          Redirect(routes.Homecontroller.home())}
 
+          Redirect(routes.SearchController.listResult(newSearch.Name))}
       )
   }
 
+  //pass form into home html in html document
   def newSearch = Action {
     implicit request =>
       val form = if (request2flash.get("error").isDefined)
