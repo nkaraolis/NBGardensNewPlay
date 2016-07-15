@@ -1,5 +1,5 @@
 
-@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang)
+@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
