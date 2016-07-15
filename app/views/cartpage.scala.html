@@ -1,9 +1,10 @@
-@(products: List[Product])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import models.{Cart}
+@import helper._
 
 
 
@@ -29,20 +30,27 @@
         </div>
         <div class="gallery">
             @for(product <- products) {
-                <div class="grid_3">
-                    <a href="@routes.Assets.versioned(product.imgL)" class="gal">
-                        <div class="img_block">
-                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
+                @helper.form(routes.CartController.update(CartForm("Qty").value.getOrElse("1"))) {
+                    <div class="grid_3">
+                        <a href="@routes.Assets.versioned(product.imgL)" class="gal">
+                            <div class="img_block">
+                                <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
+                            </div>
+                        </a>
+                        <div class="title">
+                            <dt>Name: @product.Name</dt>
+                            <dt>Description: @product.description</dt>
+                            <dt>Price: @product.price</dt>
+                            <dt>Qty: @product.need</dt>
+
+                            @inputText(CartForm("Qty"))
+
+                            <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
+
+                            <a class="button delete" href="@routes.CartController.remove(product.Name)">Delete</a>
                         </div>
-                    </a>
-                    <div class="title">
-                        <dt>Name: @product.Name</dt>
-                        <dt>Description: @product.description</dt>
-                        <dt>Price: @product.price</dt>
-                        <dt>Qty: @product.need</dt>
-                        <a class="button delete" href="@routes.CartController.remove(product.Name)">Delete</a>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>
