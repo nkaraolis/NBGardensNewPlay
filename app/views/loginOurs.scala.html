@@ -29,8 +29,7 @@
             @Messages("", Messages("customer.login"))
         </legend>
         @helper.inputText(LoginForm("Username"))
-
-        @helper.inputText(LoginForm("Password"))
+        @helper.inputPassword(LoginForm("Password"))
         <input type="submit" class="btn-primary" style="margin-left: -375px;" value='@Messages("LOGIN")'>
     </fieldset>
 
