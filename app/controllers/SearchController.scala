@@ -18,7 +18,7 @@ import views.html.helper.form
   */
 class SearchController @Inject() extends Controller {
 
-  private val SearchForm: Form[SearchProduct] = Form(mapping(
+  val SearchForm: Form[SearchProduct] = Form(mapping(
     "Search" -> nonEmptyText.verifying("validation.Name.nonexistant",
       !SearchProduct.findByName(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
   )
@@ -38,7 +38,7 @@ class SearchController @Inject() extends Controller {
     implicit request =>
       SearchProduct.findByName(Searched).map {
         search =>
-          val searchedProduct = Product.findByName(search.Name)
+          val searchedProduct = Product.findByNameOB(Searched)
           Ok(views.html.listResult(searchedProduct))
       }.getOrElse(NotFound)
   }
@@ -49,11 +49,10 @@ class SearchController @Inject() extends Controller {
 
       newSearchForm.fold(hasErrors = {
         form =>
-          Redirect(routes.SearchController.newSearch()).flashing(Flash(form.data) +
+          Redirect(routes.HomeController.home()).flashing(Flash(form.data) +
             ("error" -> Messages("product.error")))
       }, success = {
         newSearch =>
-
           Redirect(routes.SearchController.listResult(newSearch.Name))}
       )
   }
@@ -65,7 +64,7 @@ class SearchController @Inject() extends Controller {
         SearchForm.bind(request2flash.data)
       else
         SearchForm
-      Ok(views.html.home(form))
+      Ok(views.html.home())
   }
 
 }

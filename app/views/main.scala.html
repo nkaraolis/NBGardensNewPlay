@@ -1,9 +1,9 @@
-@(title: String)(sidebar: Html)(content: Html)(implicit flash: Flash, lang: Lang, session: Session)
-
+@(title: String)(sidebar: Html)(content: Html)(chosenForm : Form[Product])(implicit flash: Flash, lang: Lang, session: Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
+@import controllers.SearchController
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,11 +57,26 @@
 
 <div id="menu">
     <a href= "@routes.HomeController.home()"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
-    <div id="searchBar">
-        <form action="\entity.CustomerDetails">
-            <input type="text" name="Search" class="mytext" style="width: 300px;" placeholder="Search.."><br>
-        </form>
+    @helper.form(action = routes.SearchController.save) {
+    <fieldset id="searchBar">
+        <legend>
+            @Messages("", Messages("search.page"))
+        </legend>
+        @helper.inputText(routes.SearchController.SearchForm("Search"))
+        <input type="submit" class="mytext" value='@Messages("LOGIN")' style="width: 300px;" placeholder="Search..">
+    </fieldset>
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+        }
     </div>
+    }
     <div id="searchBarImg"><a href= "@routes.BrowseController.list"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
     <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
         @if(session.get("username").isEmpty) {
