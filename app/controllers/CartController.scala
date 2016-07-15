@@ -16,7 +16,15 @@ class CartController extends Controller {
 
   def add(product: String, Qty: String) = Action {
     implicit request =>  //controller action
-      products :+ Cart.addToCart(Product.findByName(product).get)  //get product from model
+      val p = Product.findByName(product).get
+      def np : Product = {
+        Product.removeFromProduct(p)
+        Product.add(p.productId, p.Name, p.description, p.price, p.imgS, p.imgL, Qty)
+        val t = Product.findByName(p.Name).toArray.apply(0)
+        t
+      }
+      val cp = Cart.addToCart(np)
+      products :+  cp //get product from model
       Redirect(routes.BrowseController.list) //render view template
   }
 
