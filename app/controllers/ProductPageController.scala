@@ -27,10 +27,10 @@ class ProductPageController extends Controller {
 
   }
 
-  def submitReview = Action {
-    implicit request =>
+  //def submitReview = Action {
+    //implicit request =>
 
-  }
+  //}
 
   /**var products: Array[Product] = Array.empty
 
