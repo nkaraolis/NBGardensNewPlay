@@ -200,6 +200,20 @@ input[type = "submit"] {
     border-radius: 3px;
 }
 
+#loginform input[type="password"] {
+    margin: 15px 0 20px -100px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
 #loginform dd.info{
     margin-left: -400px;
     padding-bottom: 30px;
@@ -275,6 +289,21 @@ input[type = "submit"] {
 
 
 #contactform input[type="text"] {
+    margin: 15px 0 20px -100px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+
+#contactform input[type="password"] {
     margin: 15px 0 20px -100px;
     overflow: hidden;
     padding: 10px;
