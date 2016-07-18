@@ -1,11 +1,10 @@
 
-@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: List[Product])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
-@import models.{Cart}
 @import helper._
 
 @sidebar = {
@@ -51,40 +50,12 @@
                         </div>
                         <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">@product.price</dt>
 
-                        <!--<input style = "width: 45px; height: 30px" type="text" value="1" placeholder="Qty." name="Qty"-->
-                            <!--onfocus=" value = @CartForm("Qty").value.getOrElse("2")" onblur=" value = @CartForm("Qty").value.getOrElse("3")">-->
-
-                        <!--@inputText(CartForm("Qty"), 'style->"width: 45px; height: 30px", 'placeholder->"Qty")-->
-
-                        <!--<dl class=" " id="Qty_field">-->
-                            <!--<dt>-->
-                                <!--<label for="Qty">Qty</label>-->
-                            <!--</dt>-->
-                            <!--<dd>-->
-                                <!--<input type="text" id="Qty" name="Qty" value="" />-->
-                            <!--</dd>-->
-                        <!--</dl>-->
-
-                        <!--@helper.inputText(CartForm("Qty"))-->
-
-
-                        <!--<input style = "width: 45px; height: 30px" type="text" value="1" placeholder="Qty." name="Qty"-->
-                               <!--onfocus="@CartForm("Qty").value = get.value" onblur="@CartForm("Qty").value = get.value" @helper.input = get.value>-->
-
-                        <!--onfocus="@CartForm("Qty").value = value" onblur="@CartForm("Qty").value.getOrElse("5")">-->
-
-                        <!--onfocus="value = @(CartForm("Qty") -> "6") " onblur="value = @(CartForm("Qty") -> "5")">-->
-
-                        <!--onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >-->
-
-                        <!--<a class="button add" href="@routes.CartController.add(product.Name, CartForm("Qty").value.toString)">Add to Cart</a>-->
-
-                        <!--<a class="button add" href="@routes.CartController.add(product.Name, CartForm("Qty").value.getOrElse("5"))">Add to Cart</a>-->
-
                         <input class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty." name="Qty"
                                onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >
 
-                        <a href="@routes.CartController.add(product.Name, product.need)"><input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/></a>
+                            <a href="@routes.CartController.add(product.Name, "1")">
+                                <input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/>
+                            </a>
 
                     </div>
                 </div>
@@ -93,5 +64,4 @@
         </div>
     </div>
 </div>
-
 }
