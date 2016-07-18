@@ -44,6 +44,17 @@ body
  	display: inline-block;
  }
 
+#icon3 {
+  	background-image:url(../images/howwude.png);
+  	height: 102px;
+    width: 102px;
+  	display: inline-block;
+  }
+#icon3:hover{
+#  	background-image:url(../images/logout.png);
+  	display: inline-block;
+  }
+
 #trolley {
 	background-image:url(../images/t1.png);
 	height: 102px;
@@ -95,8 +106,6 @@ input[type = "submit"] {
 
     height: 31px;
     width: 100px;
-    background-color: #009933;
-    border: 1px solid #009933;
     color: #fff;
     font-size: 12px;
     font-family: 'Raleway', sans-serif;
@@ -202,6 +211,20 @@ input[type = "submit"] {
     border-radius: 3px;
 }
 
+#loginform input[type="password"] {
+    margin: 15px 0 20px -100px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
 #loginform dd.info{
     margin-left: -400px;
     padding-bottom: 30px;
@@ -210,6 +233,47 @@ input[type = "submit"] {
 
 .btnlogin{
     margin-left: -370px;
+}
+
+#reviewForm{
+    margin-left: -10px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+#reviewForm label{
+
+    margin-left: -50px;
+    text-align: left;
+}
+
+
+
+#reviewForm input[type="text"] {
+    overflow: hidden;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+#reviewForm textarea{
+    #margin-top: 10px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 800px;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
 }
 
 
@@ -236,6 +300,21 @@ input[type = "submit"] {
 
 
 #contactform input[type="text"] {
+    margin: 15px 0 20px -100px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+
+#contactform input[type="password"] {
     margin: 15px 0 20px -100px;
     overflow: hidden;
     padding: 10px;
@@ -591,6 +670,7 @@ light green - RGB 0 153 51 - #009933
     height: 30px;
     margin: 0 20px;
 
+    background-color: white;
     background: #fafafa;
     border: 1px solid #ccc;
     font-size: 14px;
@@ -599,7 +679,17 @@ light green - RGB 0 153 51 - #009933
     border-radius: 1px;
 }
 
+.productQuantity :hover{
 
+    background-color: none;
+    background: none;
+}
+
+.productQuantity :focus{
+
+    background-color: white;
+    background: white;
+}
 
 .fontTypeA{
 
@@ -614,7 +704,14 @@ light green - RGB 0 153 51 - #009933
 
     font-family: "Arial", sans-serif;
     font-size: 30px;
+}
 
+.fontTypeD{
+    margin-left: -750px;
+    font-family: 'Raleway', sans-serif;
+    color: #006633;
+    font-weight: 600;
+    font-size: 32px;
 }
 
 .productDivs{
@@ -624,6 +721,18 @@ light green - RGB 0 153 51 - #009933
     font-family: 'Raleway', sans-serif;
     color: #000;
     font-size: 17px;
+}
+
+.borderGrid {
+
+    display: inline;
+    float: left;
+    margin: 0px;
+}
+
+.borderGrid :hover{
+
+    background-color: #F0F0F0;
 }
 
 .nbBtn{

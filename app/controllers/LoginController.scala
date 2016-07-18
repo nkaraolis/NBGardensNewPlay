@@ -47,8 +47,7 @@ class LoginController @Inject() extends Controller {
   }
 
   private val LoginForm: Form[CustomerLogin] = Form(mapping(
-    "Username" -> nonEmptyText.verifying("validation.email.nonexistant",
-      !CustomerLogin.findCustomer(_).isEmpty),
+    "Username" -> nonEmptyText.verifying("validation.email.nonexistant", !CustomerLogin.findCustomer(_).isEmpty),
     "Password" -> nonEmptyText)(CustomerLogin.apply)(CustomerLogin.unapply)
     verifying("user not registered", f => checkUserCredentials(f.username, f.password))
   )

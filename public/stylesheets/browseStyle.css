@@ -47,7 +47,7 @@ a.btn {
 }
 
 a.gal {
-    background: url(../images/magnify.png) center center no-repeat;
+    background: url(../images/magnify2.png) center center no-repeat;
     display: block;
 }
 
@@ -56,14 +56,14 @@ a.gal .img_block {
 }
 
 .gallery a.gal:hover .img_block{
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .gallery .title {
-    padding-bottom: 20px;
     text-align: center;
     font: 22px/30px 'Marvel', sans-serif;
-    color: #5f604b;
+    color: #262626;
+    padding: 5px 10px 20px 10px;
 }
 
 .container_12 {

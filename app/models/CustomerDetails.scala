@@ -6,7 +6,7 @@ import play.api.data._
 /**
   * Created by Administrator on 06/07/2016.
   */
-case class CustomerDetails(var firstName: String, lastName: String, email: String, telephone: String, var username: String, password: String) {
+case class CustomerDetails(var firstName: String, var lastName: String, var email: String, var telephone: String, val username: String, var password: String) {
 
 }
 
@@ -26,6 +26,8 @@ object Customer {
 
   def findCustomer(username : String) = customers.find(_.username == username).head
 
+  def updateCustomers(username : String, newData : String): Unit = {
 
+  }
 
 }
