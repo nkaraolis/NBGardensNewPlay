@@ -54,13 +54,13 @@
                         </div>
                     </a>
                     <div class="title" name="get">
-                        <dt>Name: @product.Name</dt>
+                        <dt>Name: @product.name</dt>
                         <dt>Description: @product.description</dt>
                         <dt>Price: @product.price</dt>
                         <input style = "width: 45px; height: 30px" type="text" value="1" placeholder="Qty." name="Qty"
                                onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >
 
-                        <a class="button add" href="@routes.CartController.add(product.Name, product.need)">Add to Cart</a>
+                        <a class="button add" href="@routes.CartController.add(product.name, product.need)">Add to Cart</a>
                     </div>
                 </div>
             }

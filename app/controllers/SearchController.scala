@@ -19,7 +19,7 @@ import views.html.helper.form
 class SearchController @Inject() extends Controller {
 
   val SearchForm: Form[SearchProduct] = Form(mapping(
-    "Search" -> nonEmptyText.verifying("validation.Name.nonexistant",
+    "SearchIN" -> nonEmptyText.verifying("validation.Name.nonexistant",
       !SearchProduct.findByName(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
   )
 

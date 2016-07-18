@@ -57,16 +57,17 @@
 
 <body>
 
+
 <div id="menu">
     <a href= "@routes.HomeController.home()"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
     @helper.form(action = routes.SearchController.save) {
-    <fieldset id="searchBar">
-        <legend>
-            @Messages("", Messages("search.page"))
-        </legend>
-        @helper.inputText(SearchForm("Search"))
-        <input type="submit" class="mytext" value='@Messages("LOGIN")' style="width: 300px;" placeholder="Search..">
-    </fieldset>
+
+    <div id = "searchBar">
+        <form action="routes.SearchController.save">
+            <input type="text" name="SearchIN" class="Search" style="width: 300px;" placeholder="Search.."><br>
+        </form>
+    </div>
+
     <div class="container">
         @if(flash.get("success").isDefined){
         <div class="alert alert-success">

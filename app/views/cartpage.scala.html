@@ -36,11 +36,11 @@
                         </div>
                     </a>
                     <div class="title">
-                        <dt>Name: @product.Name</dt>
+                        <dt>Name: @product.name</dt>
                         <dt>Description: @product.description</dt>
                         <dt>Price: @product.price</dt>
                         <dt>Qty: @product.need</dt>
-                        <a class="button delete" href="@routes.CartController.remove(product.Name)">Delete</a>
+                        <a class="button delete" href="@routes.CartController.remove(product.name)">Delete</a>
                     </div>
                 </div>
             }
