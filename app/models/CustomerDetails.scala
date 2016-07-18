@@ -11,8 +11,8 @@ case class CustomerDetails(var firstName: String, var lastName: String, var emai
 }
 
 object Customer {
-  var customers = Set(CustomerDetails("Nick", "Noob", "MrNoob@everywhere.com", "999", "bigNoob", "mrPassword"),
-    CustomerDetails("Jay", "Noob", "JayNoob@everywhere.com", "999", "JayNoob", "mrPassword"), CustomerDetails("Tom", "Noob", "Tom@everywhere.com", "999", "TomNoob", "mrPassword"))
+  var customers = Set(CustomerDetails("Nick", "Noob", "MrNoob@everywhere.com", "999", "NickKaraolis", "mrPassword"),
+    CustomerDetails("Jay", "Noob", "JayNoob@everywhere.com", "999", "TevynAllen", "mrPassword"), CustomerDetails("Ben", "Cosford", "ben@everywhere.com", "999", "BenCosford", "mrPassword"))
 
   def add(customer: CustomerDetails): Unit = {
     customers = customers + customer
