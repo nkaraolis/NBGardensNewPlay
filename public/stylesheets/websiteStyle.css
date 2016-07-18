@@ -11,7 +11,7 @@ body
 #menu {
 
 	position: fixed;
-	z-index: 9999;
+	z-index: 99;
 	height: 102px;
 	width: 100%;
 	background-color: #F0F0F0;
@@ -44,16 +44,65 @@ body
  	display: inline-block;
  }
 
-#icon3 {
-  	background-image:url(../images/howwude.png);
+/**#icon3{
+  	background-image:url(../images/iconA.png);
   	height: 102px;
-    width: 102px;
+    width: 153px;
   	display: inline-block;
+    font-family: 'Raleway', sans-serif;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 20px;
+
+    content: 'NEW';
   }
+
 #icon3:hover{
-#  	background-image:url(../images/logout.png);
+ 	background-image:url(../images/iconA.png);
   	display: inline-block;
-  }
+  	font-family: 'Raleway', sans-serif;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 20px;
+
+    content: 'Your Account';
+}**/
+
+.icon3{
+
+    z-index: 999;
+    background-image:url(../images/iconA.png);
+  	height: 80px;
+    width: 140px;
+    display: inline-block;
+    font-family: 'Raleway', sans-serif;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: -102px;
+}
+
+a.icon3:visited, a.icon3:link, a.icon3:before {
+
+    padding-top:22px;
+    text-decoration: none;
+    color: #FFF;
+    content:"Hello, ";
+}
+
+a.icon3:hover:after {
+    content:"'s Account";
+    text-decoration: none;
+}
+a.icon3:hover:before {
+    content:"";
+    text-decoration: none;
+}
+
+#a.ex5:visited, a.ex5:link {text-decoration: none;}
+#a.ex5:hover, a.ex5:active {text-decoration: underline;}
 
 #trolley {
 	background-image:url(../images/t1.png);
@@ -68,7 +117,7 @@ body
 
 #searchBar {
 	height: 0px;
-    width: 800px;
+    width: 400px;
     position: fixed;
     top: 30px;
     padding-left: 900px;
@@ -553,7 +602,7 @@ input[type = "submit"] {
 
 
 #sidebar{
-	z-index: 999;
+	z-index: 9;
 	position: fixed;
 	float: left;
 	width: 192px;
