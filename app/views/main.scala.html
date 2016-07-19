@@ -60,10 +60,10 @@
 
 <div id="menu">
     <a href= "@routes.HomeController.home()"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
-    @helper.form(action = routes.SearchController.save) {
+    @helper.form(action = routes.SearchController.saveSearch) {
 
     <div id = "searchBar">
-        <form action="routes.SearchController.save">
+        <form action="routes.SearchController.saveSearch">
             <input type="text" name="SearchIN" class="Search" style="width: 300px;" placeholder="Search.."><br>
         </form>
     </div>
@@ -80,7 +80,7 @@
         }
     </div>
     }
-    <div id="searchBarImg"><a href= "@routes.BrowseController.list"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
+    <div id="searchBarImg"><a href= "@routes.SearchController.saveSearch"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
     <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
         @if(session.get("username").isEmpty) {
         <a href= "@routes.LoginController.newLogin"><div id="icon1"></div></a>

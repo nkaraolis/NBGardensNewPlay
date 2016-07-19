@@ -44,14 +44,14 @@
                     </a>
                     <div class="title" name="get" style="text-align: left;">
                         <div style="height: 130px;">
-                            <a href="@routes.ProductPageController.goToProduct(product.Name)"><dt>@product.Name</dt></a>
+                            <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
                             <dt style="font-size: 14px;">Description: @product.description</dt>
                             <br>
                             <dt style="font-size: 14px;">Quantity: @product.need</dt>
                         </div>
                         <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">@product.price</dt>
 
-                        <input type="hidden" name="Product" value="@product.Name">
+                        <input type="hidden" name="Product" value="@product.name">
                         <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
                         <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
 
@@ -59,7 +59,7 @@
                 </div>
             </div>
             }
-            <a href="@routes.CartController.remove(product.Name)">
+            <a href="@routes.CartController.remove(product.name)">
                 <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
             </a>
             }

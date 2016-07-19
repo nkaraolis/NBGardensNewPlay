@@ -39,29 +39,37 @@ value
 
 <div class ="line"></div>
 
-<div id="content">
+<div id="content" style="height: 1950px;">
     <div class="container_12">
         <div class="title">
-            <h2 >Our Gallery <a class="button goCart" href="@routes.CartController.list()">My Cart</a></h2>
+            <div class="fontTypeD" style="padding-bottom: 50px;">Search Results</div>
         </div>
         <div class="gallery">
             @for(product <- chosenProducts) {
-                <div class="grid_3">
+            <div class="borderGrid">
+                <div class="grid_3" style="">
                     <a href="@routes.Assets.versioned(product.imgL)" class="gal">
-                        <div class="img_block">
+                        <div class="img_block" style="padding: 5px 5px 20px 5px;">
                             <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
                         </div>
                     </a>
-                    <div class="title" name="get">
-                        <dt>Name: @product.name</dt>
-                        <dt>Description: @product.description</dt>
-                        <dt>Price: @product.price</dt>
-                        <input style = "width: 45px; height: 30px" type="text" value="1" placeholder="Qty." name="Qty"
+                    <div class="title" name="get" style="text-align: left;">
+                        <div style="height: 130px;">
+                            <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
+                            <dt style="font-size: 14px;">Description: @product.description</dt>
+                        </div>
+                        <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">@product.price</dt>
+
+                        <input class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty." name="Qty"
                                onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >
 
-                        <a class="button add" href="@routes.CartController.add(product.name, product.need)">Add to Cart</a>
+                        <a href="@routes.CartController.add(product.name, "1")">
+                        <input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/>
+                        </a>
+
                     </div>
                 </div>
+            </div>
             }
         </div>
     </div>
