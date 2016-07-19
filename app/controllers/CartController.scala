@@ -36,7 +36,7 @@ class CartController extends Controller {
         t
       }
       products = Cart.addToCart(np) //get product from model
-      Redirect(routes.BrowseController.list) //render view template
+      Redirect(routes.BrowseController.productList) //render view template
   }
 
   def remove(product: String) = Action {
