@@ -62,7 +62,7 @@
             <input type="text" name="Search" class="mytext" style="width: 300px;" placeholder="Search.."><br>
         </form>
     </div>
-    <div id="searchBarImg"><a href= "@routes.BrowseController.list"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
+    <div id="searchBarImg"><a href= "@routes.BrowseController.categoryList"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
     <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
         @if(session.get("username").isEmpty) {
         <a href= "@routes.LoginController.newLogin"><div id="icon1"></div></a>

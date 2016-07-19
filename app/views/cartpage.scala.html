@@ -8,11 +8,11 @@
 
 @sidebar = {
 <ul>
-    <li><a href="@routes.BrowseController.list">Categories</a></li>
-    <li><a href="@routes.BrowseController.list">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.list">Tools</a></li>
-    <li><a href="@routes.BrowseController.list">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.list">Outdoor<br>Equipment</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
@@ -25,7 +25,7 @@
             <div class="fontTypeD" style="margin-left: 30px; display: inline;">Your Trolley</div>
 
             <div style="display: inline-block; margin-left: 650px;">
-                <a href="@routes.BrowseController.list"><input type="submit" class="btn-cont" value="CONTINUE SHOPPING" style="width:180px; margin-right: 30px;"/></a>
+                <a href="@routes.BrowseController.productList"><input type="submit" class="btn-cont" value="CONTINUE SHOPPING" style="width:180px; margin-right: 30px;"/></a>
 
                 <a href=""><input type="submit" class="btn-primary" value="CHECKOUT" style="width:190px;"/></a>
             </div>
@@ -42,19 +42,19 @@
                             </div>
                         </a>
                         <div class="title" name="get" style="text-align: left;">
-                            <dt>Name: @product.Name</dt>
+                            <dt>Name: @product.name</dt>
                             <dt>Description: @product.description</dt>
                             <dt>Price: @product.price</dt>
                             <dt>Qty: @product.need</dt>
 
-                            <input type="hidden" name="Product" value="@product.Name">
+                            <input type="hidden" name="Product" value="@product.name">
                             <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
                             <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
 
                         </div>
                     </div>
                 }
-                <a href="@routes.CartController.remove(product.Name)">
+                <a href="@routes.CartController.remove(product.name)">
                     <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
                 </a>
             }

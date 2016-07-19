@@ -3,7 +3,7 @@ package models
 /**
   * Created by Administrator on 08/07/2016.
   */
-case class Product(productId: String, Name: String, description: String, price: String, imgS: String, imgL: String, need: String)
+case class Product(productId: String, name: String, description: String, price: String, imgS: String, imgL: String, need: String)
 
 object Product {
   var products = Set(
@@ -19,11 +19,11 @@ object Product {
     Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "£100.00", "images/page3_img8.jpg", "images/big8.jpg", "10")
   )
 
-  def findAll = products.toList.sortBy(_.Name)
+  def findAll = products.toList.sortBy(_.name)
 
-  def findProductByName(name: String) = products.find(_.Name == name)
+  def findProductByName(name: String) = products.find(_.name == name)
 
-  def findByName(name: String) = products.toList.find(_.Name == name)
+  def findByName(name: String) = products.toList.find(_.name == name)
 
   def add(Id: String, Name: String, description: String, price: String, imgS: String, imgL: String, need: String): Unit ={
     products += Product(Id,Name,description,price,imgS,imgL, need)
@@ -47,9 +47,9 @@ object Product {
 
   def setQTY (name: String, need: String): Unit ={
     def findByName(name: String) = {
-      val tp = products.toList.find(_.Name == name).get
+      val tp = products.toList.find(_.name == name).get
       removeFromProduct(tp)
-      add(tp.productId,tp.Name,tp.description,tp.price,tp.imgS,tp.imgL,need)
+      add(tp.productId,tp.name,tp.description,tp.price,tp.imgS,tp.imgL,need)
     }
     findByName(name)
   }
