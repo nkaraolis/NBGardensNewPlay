@@ -31,18 +31,20 @@
             </div>
 
         </div>
+        <br>
 
         <div class="gallery">
             @for(product <- products) {
-            @helper.form(routes.CartController.update) {
             <div class="borderGrid">
                 <div class="grid_3" style="">
+
                     <a href="@routes.Assets.versioned(product.imgL)" class="gal">
                         <div class="img_block" style="padding: 5px 5px 20px 5px;">
                             <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
                         </div>
                     </a>
                     <div class="title" name="get" style="text-align: left;">
+                        @helper.form(routes.CartController.update) {
                         <div style="height: 130px;">
                             <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
                             <dt style="font-size: 14px;">Description: @product.description</dt>
@@ -55,13 +57,14 @@
                         <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
                         <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
 
+                        }
+                        <br>
+                        <a href="@routes.CartController.remove(product.name)" style="padding-left: 80px;">
+                            <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
+                        </a>
                     </div>
                 </div>
             </div>
-            }
-            <a href="@routes.CartController.remove(product.name)">
-                <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
-            </a>
             }
         </div>
     </div>
