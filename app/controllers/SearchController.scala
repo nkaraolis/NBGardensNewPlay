@@ -24,13 +24,13 @@ class SearchController @Inject() extends Controller {
   )
  
 
-//  def show(name: String) = Action {
-//        implicit request =>
-//          Product.findByName(name).map {
-//            product =>
-//              Ok(views.html.Productdetails(product))//create this html
-//          }.getOrElse(NotFound)
-//      }
+  //  def show(name: String) = Action {
+  //        implicit request =>
+  //          Product.findByName(name).map {
+  //            product =>
+  //              Ok(views.html.Productdetails(product))//create this html
+  //          }.getOrElse(NotFound)
+  //      }
   //link search bar to this controller
 
 
