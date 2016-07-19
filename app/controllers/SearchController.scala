@@ -43,17 +43,20 @@ class SearchController @Inject() extends Controller {
       }.getOrElse(NotFound)
   }
 
-  def save = Action {
+  def saveSearch = Action {
     implicit request =>
       val newSearchForm = SearchForm.bindFromRequest()
 
       newSearchForm.fold(hasErrors = {
         form =>
+          println("Faillllllllllll")
           Redirect(routes.HomeController.home()).flashing(Flash(form.data) +
             ("error" -> Messages("product.error")))
       }, success = {
         newSearch =>
+          println("Succesfullllllllllll")
           Redirect(routes.SearchController.listResult(newSearch.Name))}
+
       )
   }
 

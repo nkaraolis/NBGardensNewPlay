@@ -31,8 +31,8 @@ class CartController extends Controller {
       val p = Product.findByName(product).get
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.Name, p.description, p.price, p.imgS, p.imgL, Qty)
-        val t = Product.findByName(p.Name).toArray.apply(0)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, Qty)
+        val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
       products = Cart.addToCart(np) //get product from model
@@ -49,11 +49,11 @@ class CartController extends Controller {
     implicit request =>  //controller action
       val p = Product.findByName(CartForm.bindFromRequest().data("Product")).get
       val q:String = CartForm.bindFromRequest().data("Qty")
-      removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.Name)
+      removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.Name, p.description, p.price, p.imgS, p.imgL, q)
-        val t = Product.findByName(p.Name).toArray.apply(0)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q)
+        val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
       val cp = Cart.addToCart(np)
