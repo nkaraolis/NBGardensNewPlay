@@ -55,3 +55,7 @@ GET     /addCart                    controllers.CartController.add(product:Strin
 
 GET     /removeCart                 controllers.CartController.remove(product:String)
 GET     /updateCart                 controllers.CartController.update()
+
+POST    /Search                     controllers.SearchController.save
+
+GET     /login/:Result              controllers.SearchController.listResult(Result:String)

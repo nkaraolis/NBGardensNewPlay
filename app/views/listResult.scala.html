@@ -1,11 +1,10 @@
-@(products: List[Product])(implicit flash: Flash, lang: Lang, session : Session)
+@(chosenProducts: List[Product])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import models.{Cart}
-
 
 @sidebar = {
 <ul>
@@ -17,17 +16,17 @@
 </ul>
 }
 
-@main(Messages("productList.page"))(sidebar) {
+@main(Messages("listResult.page.page"))(sidebar) {
 
-<script language="JavaScript">
-    function getQty(){
-        var value = get.Qty.value;
-        value
-    }
+<script language=""JavaScript">
+function getQty(){
+var value = get.Qty.value;
+value
+}
 </script>
 
 
-<div id="pageStart">
+<div id = "pageStart">
 </div>
 
 <div style="margin-left: 150px;">
@@ -46,7 +45,7 @@
             <h2 >Our Gallery <a class="button goCart" href="@routes.CartController.list()">My Cart</a></h2>
         </div>
         <div class="gallery">
-            @for(product <- products) {
+            @for(product <- chosenProducts) {
                 <div class="grid_3">
                     <a href="@routes.Assets.versioned(product.imgL)" class="gal">
                         <div class="img_block">
@@ -67,5 +66,4 @@
         </div>
     </div>
 </div>
-
 }

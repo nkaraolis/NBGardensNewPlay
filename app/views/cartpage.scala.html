@@ -42,19 +42,19 @@
                             </div>
                         </a>
                         <div class="title" name="get" style="text-align: left;">
-                            <dt>Name: @product.Name</dt>
+                            <dt>Name: @product.name</dt>
                             <dt>Description: @product.description</dt>
                             <dt>Price: @product.price</dt>
                             <dt>Qty: @product.need</dt>
 
-                            <input type="hidden" name="Product" value="@product.Name">
+                            <input type="hidden" name="Product" value="@product.name">
                             <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
                             <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
 
                         </div>
                     </div>
                 }
-                <a href="@routes.CartController.remove(product.Name)">
+                <a href="@routes.CartController.remove(product.name)">
                     <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
                 </a>
             }
