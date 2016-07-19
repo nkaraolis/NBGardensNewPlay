@@ -232,6 +232,54 @@ input[type = "submit"] {
 
 }
 
+#searchform{
+    #margin-top: 0px;
+    #margin-left: 400px;
+    #width: 600px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+#searchform label{
+    margin-left: -200px;
+    padding-top: 30px;
+}
+
+#searchform input[type="text"] {
+    #margin: 15px 0 20px -100px;
+    overflow: hidden;
+    #padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+#searchform input[type="password"] {
+    margin: 15px 0 20px -100px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+#searchform dd.info{
+    margin-left: -400px;
+    #padding-bottom: 30px;
+    color: #FF0000;
+}
+
 #loginform{
     margin-top: 0px;
     margin-left: 400px;
