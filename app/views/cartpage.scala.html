@@ -32,34 +32,38 @@
 
         </div>
 
-        <div class="gallery" style="padding: 50px;">
+        <div class="gallery">
             @for(product <- products) {
-                @helper.form(routes.CartController.update) {
-                    <div class="grid_3">
-                        <a href="@routes.Assets.versioned(product.imgL)" class="gal">
-                            <div class="img_block">
-                                <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
-                            </div>
-                        </a>
-                        <div class="title" name="get" style="text-align: left;">
-                            <dt>Name: @product.name</dt>
-                            <dt>Description: @product.description</dt>
-                            <dt>Price: @product.price</dt>
-                            <dt>Qty: @product.need</dt>
-
-                            <input type="hidden" name="Product" value="@product.name">
-                            <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
-                            <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
-
+            @helper.form(routes.CartController.update) {
+            <div class="borderGrid">
+                <div class="grid_3" style="">
+                    <a href="@routes.Assets.versioned(product.imgL)" class="gal">
+                        <div class="img_block" style="padding: 5px 5px 20px 5px;">
+                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
                         </div>
+                    </a>
+                    <div class="title" name="get" style="text-align: left;">
+                        <div style="height: 130px;">
+                            <a href="@routes.ProductPageController.goToProduct(product.Name)"><dt>@product.Name</dt></a>
+                            <dt style="font-size: 14px;">Description: @product.description</dt>
+                            <br>
+                            <dt style="font-size: 14px;">Quantity: @product.need</dt>
+                        </div>
+                        <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">@product.price</dt>
+
+                        <input type="hidden" name="Product" value="@product.Name">
+                        <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
+                        <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
+
                     </div>
-                }
-                <a href="@routes.CartController.remove(product.name)">
-                    <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
-                </a>
+                </div>
+            </div>
+            }
+            <a href="@routes.CartController.remove(product.Name)">
+                <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
+            </a>
             }
         </div>
     </div>
 </div>
-
 }
