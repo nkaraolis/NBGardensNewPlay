@@ -58,7 +58,7 @@ object Product {
       if (products.isEmpty)
         results
       else {
-        if (products.head.name.equals(name))
+        if (products.head.name contains(name))
           filter(products.tail, results + products.head)
         else
           filter(products.tail, results)

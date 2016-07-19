@@ -22,6 +22,4 @@ object SearchProduct {
   def findByName(name: String) = searchproducts.toList.find(_.Name == name)
 
 
-
-
 }
