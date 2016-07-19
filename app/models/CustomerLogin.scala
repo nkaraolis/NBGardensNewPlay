@@ -9,9 +9,9 @@ case class CustomerLogin(username:String, password:String) {
 }
 
 object CustomerLogin {
-  var customers = Set(CustomerLogin("bigNoob", "password"),
-    CustomerLogin("TomNoob", "password"),
-    CustomerLogin("JayNoob",  "password"))
+  var customers = Set(CustomerLogin("NickKaraolis", "password"),
+    CustomerLogin("TevynAllen", "password"),
+    CustomerLogin("BenCosford",  "password"))
 
   def findCustomer(user: String) = customers.find(_.username == user)
 

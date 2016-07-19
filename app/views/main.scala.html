@@ -1,9 +1,11 @@
 @(title: String)(sidebar: Html)(content: Html)(implicit flash: Flash, lang: Lang, session: Session)
-
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
+@import controllers.SearchController
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,19 +57,37 @@
 
 <body>
 
+
 <div id="menu">
     <a href= "@routes.HomeController.home()"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
-    <div id="searchBar">
-        <form action="\entity.CustomerDetails">
-            <input type="text" name="Search" class="mytext" style="width: 300px;" placeholder="Search.."><br>
+    @helper.form(action = routes.SearchController.saveSearch) {
+
+    <div id = "searchBar">
+        <form action="routes.SearchController.saveSearch">
+            <input type="text" name="SearchIN" class="Search" style="width: 300px;" placeholder="Search.."><br>
         </form>
     </div>
-    <div id="searchBarImg"><a href= "@routes.BrowseController.categoryList"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
+
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+        }
+    </div>
+    }
+    <div id="searchBarImg"><a href= "@routes.SearchController.saveSearch"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
+
     <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
         @if(session.get("username").isEmpty) {
         <a href= "@routes.LoginController.newLogin"><div id="icon1"></div></a>
         } else {
-        <a href= "@routes.UpdateAccountController.updateAccount"><div id="icon3"></div></a>
+        <a class="icon3" href= "@routes.UpdateAccountController.updateAccount">@session.get("username")</a>
+
         <a href= "@routes.LoginController.logout"><div id="icon2"></div></a>
         }
         <a href= "@routes.CartController.list"><div id="trolley"></div></a>

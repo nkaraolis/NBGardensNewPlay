@@ -1,24 +1,35 @@
-@(products: List[Product])(implicit flash: Flash, lang: Lang, session : Session)
+@(chosenProducts: List[Product])(implicit flash: Flash, lang: Lang, session : Session)
+
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
-@import helper._
 @import models.{Cart}
 
 @sidebar = {
 <ul>
-    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    <li><a href= browse >Categories</a></li>
+    <li><a href="news.asp">Gnomes</a></li>
+    <li><a href="contact.asp">Tools</a></li>
+    <li><a href="about.asp">Gardening Supplies</a></li>
+    <li><a href="about.asp">Outdoor Equipment</a></li>
 </ul>
 }
 
-@main(Messages("productList.page"))(sidebar) {
+@main(Messages("listResult.page.page"))(sidebar) {
 
-<div style="margin-left: 0px;">
+<script language=""JavaScript">
+function getQty(){
+var value = get.Qty.value;
+value
+}
+</script>
+
+
+<div id = "pageStart">
+</div>
+
+<div style="margin-left: 150px;">
     <div id="homeBanner">
         <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
         <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
@@ -31,10 +42,10 @@
 <div id="content" style="height: 1950px;">
     <div class="container_12">
         <div class="title">
-            <div class="fontTypeD" style="padding-bottom: 50px;">All Products</div>
+            <div class="fontTypeD" style="padding-bottom: 50px;">Search Results</div>
         </div>
         <div class="gallery">
-            @for(product <- products) {
+            @for(product <- chosenProducts) {
             <div class="borderGrid">
                 <div class="grid_3" style="">
                     <a href="@routes.Assets.versioned(product.imgL)" class="gal">
@@ -55,6 +66,7 @@
                         <a href="@routes.CartController.add(product.name, "1")">
                         <input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/>
                         </a>
+
                     </div>
                 </div>
             </div>

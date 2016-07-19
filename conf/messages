@@ -58,3 +58,7 @@ details.update = Account details updated
 #Validation messages for updating customer detaails
 details.request = Update form loaded
 details.update = Account details updated
+
+#Search messages
+search.page = Search Results
+listResult.page = List Results
