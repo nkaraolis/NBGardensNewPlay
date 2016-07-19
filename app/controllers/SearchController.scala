@@ -54,7 +54,7 @@ class SearchController @Inject() extends Controller {
             ("error" -> Messages("product.error")))
       }, success = {
         newSearch =>
-          println("Succesfullllllllllll")
+          println("Successfullllllllllll")
           Redirect(routes.SearchController.listResult(newSearch.Name))}
 
       )
