@@ -22,7 +22,9 @@ class SearchController @Inject() extends Controller {
     "SearchIN" -> nonEmptyText.verifying("validation.Name.nonexistant",
       !SearchProduct.findByName(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
   )
-  
+
+
+
   //  def show(name: String) = Action {
   //        implicit request =>
   //          Product.findByName(name).map {
