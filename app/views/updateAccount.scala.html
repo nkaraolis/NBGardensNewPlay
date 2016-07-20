@@ -16,17 +16,17 @@
     @helper.form(action = routes.UpdateAccountController.saveChanges()) {
 
     <div id="existingDetails">
-        <div id="detailsheader">@Messages("Existing Details", Messages("details.request"))<br></div>
-        <div id="detailsusername">Username: @session.get("username")<br></div><br>
-        First Name: @session.get("firstName")<br>
-        Last Name: @session.get("lastName")<br>
-        Email: @session.get("email")<br>
-        Telephone: @session.get("telephone")<br>
-        Password: ********
+        <div id="detailsheader">@Messages("Existing Details", Messages("details.request"))<br></div><br>
+        <div id="detailsusername">Username:  <b>@session.get("username")</b><br></div><br>
+        First Name: <b>@session.get("firstName")</b><br>
+        Last Name:  <b>@session.get("lastName")</b><br>
+        Email:  <b>@session.get("email")</b><br>
+        Telephone: <b>@session.get("telephone")</b><br>
+        Password: <b>********</b>
 
     </div>
 
-    <fieldset id="contactform" style="margin-left: 400px;">
+    <fieldset id="contactform" style="margin-left: 250px;">
       <legend>
             @Messages("Update Details", Messages("details.request"))
         </legend>

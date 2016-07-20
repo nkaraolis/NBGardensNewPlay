@@ -58,3 +58,5 @@ GET     /updateCart                 controllers.CartController.update()
 POST    /Search                     controllers.SearchController.saveSearch
 
 GET     /Search/:Result              controllers.SearchController.listResult(Result:String)
+
+GET     /userAccount                 controllers.UserAccountController.userAccount

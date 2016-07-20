@@ -86,7 +86,7 @@
         @if(session.get("username").isEmpty) {
         <a href= "@routes.LoginController.newLogin"><div id="icon1"></div></a>
         } else {
-        <a class="icon3" href= "@routes.UpdateAccountController.updateAccount">@session.get("username")</a>
+        <a class="icon3" href= "@routes.UserAccountController.userAccount">@session.get("username")</a>
 
         <a href= "@routes.LoginController.logout"><div id="icon2"></div></a>
         }

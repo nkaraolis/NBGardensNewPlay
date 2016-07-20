@@ -811,6 +811,19 @@ light green - RGB 0 153 51 - #009933
     font-size: 32px;
 }
 
+.fontTypeE{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+
+.fontTypeF{
+
+    font-family: 'Raleway', sans-serif;
+    color: #006633;
+    font-weight: 600;
+    font-size: 24px;
+}
+
 .productDivs{
 
     margin-left: 50px;
@@ -851,7 +864,7 @@ light green - RGB 0 153 51 - #009933
 
 #existingDetails{
     float: left;
-    margin: 115px 0 100px 300px;
+    margin: 115px 0 100px 500px;
     font-family: 'Raleway', sans-serif;
     text-align: left;
     color: #333;
@@ -867,5 +880,26 @@ light green - RGB 0 153 51 - #009933
 
 #detailsusername{
     font-size: 19px;
+
+}
+
+.accountInfo{
+
+    margin-left: 540px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 900px;
+    height: 100px;
+    padding: 20px;
+
+    text-align: left;
+
+    background-color: white;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    border-radius: 3px;
 
 }
