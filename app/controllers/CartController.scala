@@ -12,7 +12,8 @@ class CartController extends Controller {
   val CartForm: Form[aFormForCart] = Form(
     mapping(
       "Product" -> of[String],
-      "Qty" -> of[String]
+      "Qty" -> of[String],
+      "sTotal" -> of[String]
     )
     (aFormForCart.apply)
     (aFormForCart.unapply)
@@ -59,6 +60,22 @@ class CartController extends Controller {
       val cp = Cart.addToCart(np)
       products =  cp //get product from model
       Ok(views.html.cartpage(products.toList, CartForm))//render view template
+  }
+
+  def updateFromPL() = Action {
+    implicit request =>  //controller action
+      val p = Product.findByName(CartForm.bindFromRequest().data("Product")).get
+      val q:String = CartForm.bindFromRequest().data("Qty")
+      removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
+      def np : Product = {
+        Product.removeFromProduct(p)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q)
+        val t = Product.findByName(p.name).toArray.apply(0)
+        t
+      }
+      val cp = Cart.addToCart(np)
+      products =  cp //get product from model
+      Redirect(routes.BrowseController.productList)//render view template
   }
 
   def removeO(product: String) : Array[Product] ={
