@@ -376,7 +376,7 @@ input[type = "submit"] {
 
 #contactform{
     margin-top: 100px;
-    margin-left: 400px;
+    margin-left: 200px;
     float: left;
     border: none;
     font-family: 'Raleway', sans-serif;
@@ -847,4 +847,25 @@ light green - RGB 0 153 51 - #009933
     display: inline-block;
     position: relative;
     top: -3px;
+}
+
+#existingDetails{
+    float: left;
+    margin: 115px 0 100px 300px;
+    font-family: 'Raleway', sans-serif;
+    text-align: left;
+    color: #333;
+    font-size: 17px;
+}
+
+#detailsheader{
+    font-size: 21px;
+    color: #333;
+
+
+}
+
+#detailsusername{
+    font-size: 19px;
+
 }
