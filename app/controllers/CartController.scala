@@ -44,6 +44,7 @@ class CartController extends Controller {
   def remove(product: String) = Action {
     implicit request =>  //controller action
       products = Cart.removeFromCart(Product.findByName(product).get)   //get product from model
+      renewTotalPrice(Product.findByName(product).get.name)
       Ok(views.html.cartpage(products.toList, CartForm)) //render view template
   }
 
