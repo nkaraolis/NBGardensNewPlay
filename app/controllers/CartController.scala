@@ -12,7 +12,8 @@ class CartController extends Controller {
   val CartForm: Form[aFormForCart] = Form(
     mapping(
       "Product" -> of[String],
-      "Qty" -> of[String]
+      "Qty" -> of[String],
+      "sTotal" -> of[String]
     )
     (aFormForCart.apply)
     (aFormForCart.unapply)
