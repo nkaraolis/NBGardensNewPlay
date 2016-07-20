@@ -62,3 +62,5 @@ details.update = Account details updated
 #Search messages
 search.page = Search Results
 listResult.page = List Results
+
+userAccount.page = User Account
