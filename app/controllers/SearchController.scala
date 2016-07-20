@@ -19,8 +19,8 @@ import views.html.helper.form
 class SearchController @Inject() extends Controller {
 
   val SearchForm: Form[SearchProduct] = Form(mapping(
-    "SearchIN" -> nonEmptyText.verifying("validation.Name.nonexistant",
-      !SearchProduct.findByName(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
+    "SearchIN" -> nonEmptyText.verifying("validation.name.nonexistant",
+      !SearchProduct.findByNameOB(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
   )
 
 
@@ -55,9 +55,8 @@ class SearchController @Inject() extends Controller {
             ("error" -> Messages("product.error")))
       }, success = {
         newSearch =>
-          println("Successfullllllllllll")
-          Redirect(routes.SearchController.listResult(newSearch.Name))}
-
+          println("Successfullllllllllll" )
+          Redirect(routes.SearchController.listResult(newSearch.name))}
       )
   }
 
