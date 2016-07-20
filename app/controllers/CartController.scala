@@ -53,6 +53,7 @@ class CartController extends Controller {
       val q:String = CartForm.bindFromRequest().data("Qty")
       val subTot = (CartForm.bindFromRequest().data("Qty").toDouble) * (p.price.toDouble)
       removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
+      renewTotalPrice(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
       def np : Product = {
         Product.removeFromProduct(p)
         Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q)
@@ -91,6 +92,11 @@ class CartController extends Controller {
   def removeO(product: String) : Array[Product] ={
     products = Cart.removeFromCart(Product.findByName(product).get)   //get product from model
     products
+  }
+
+  def renewTotalPrice(product: String) : Double ={
+    totalT = totalT - (Product.findByName(product).get.price.toDouble * Product.findByName(product).get.need.toDouble)
+    totalT
   }
 
 }
