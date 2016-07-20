@@ -7,9 +7,9 @@ case class  Category (catName: String, description: String, imgS: String, imgL: 
 
 object Category {
   var Categories = Set(
-    Category("Lawnmower","Whatever the size of your lawn find the right lawnmower here", "images/page3_img1.jpg", "images/big1.jpg"),
-    Category("Barbecues","Cook up a feast on one of our barbecues - shop the range here", "images/page3_img2.jpg", "images/big2.jpg"),
-    Category("Furniture", "Browse our garden furniture sets & find the right one for your garden", "images/page3_img3.jpg", "images/big3.jpg")
+    Category("Lawnmower","Whatever the size of your lawn find the right lawnmower here", "images/Lawnmowers.jpg", "images/Lawnmowers.jpg"),
+    Category("Barbecues","Cook up a feast on one of our barbecues - shop the range here", "images/Barbecues.jpg", "images/Barbecues.jpg"),
+    Category("Furniture", "Browse our garden furniture sets & find the right one for your garden", "images/Furniture.jpg", "images/Furniture.jpg")
   )
 
   def findAll = Categories.toList.sortBy(_.catName)
