@@ -64,7 +64,7 @@
 
     <div id = "searchBar">
         <form action="routes.SearchController.saveSearch">
-            <input type="text" name="SearchIN" class="Search" style="width: 300px;" placeholder="Search.."><br>
+            <input type="text" name="SearchIN" class="mytext" style="width: 300px;" placeholder="Search.."><br>
         </form>
     </div>
 
@@ -82,7 +82,7 @@
     }
     <div id="searchBarImg"><a href= "@routes.SearchController.saveSearch"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
 
-    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
+    <div id="icons" style="float:right; margin-right:20px; font-size:0px; margin-top: -167px;">
         @if(session.get("username").isEmpty) {
         <a href= "@routes.LoginController.newLogin"><div id="icon1"></div></a>
         } else {
