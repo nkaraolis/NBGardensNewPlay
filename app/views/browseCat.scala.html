@@ -23,10 +23,9 @@
 
 @main(Messages("browseCategory.page"))(sidebar) {
 
-    <script src="@routes.Assets.versioned("javascripts/catDis.js")"></script>
-
     <div style="margin-left: 0px;">
         <div id="homeBanner">
+
             <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
             <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
             <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
@@ -41,48 +40,17 @@
                 <div class="fontTypeD" style="padding-bottom: 50px;">Category</div>
             </div>
             <div class="gallery">
-
-                <table width="99%" border="2" align="center" cellpadding="0" cellspacing="2">
-                    <tr align="center" valign="middle">
-                        <td>
-                            <div id="ifocus">
-                                <div id="ifocus_pic">
-                                    <div id="ifocus_piclist" style="left: 0px; top: 0px;">
-                                        <ul>
-                                            @for(cat <- categories) {
-                                                <li><img src="@routes.Assets.versioned(cat.imgL)" onload="" onclick="" style="cursor:pointer;" /></li>
-                                            }
-                                        </ul>
-                                    </div>
-                                    <div id="ifocus_tx">
-                                        <li class="current">Barbecues</li>
-                                        <li class="normal">Furniture</li>
-                                        <li class="normal">Lawnmower</li>
-                                    </div>
-                                    <div id="ifocus_btn">
-                                        <ul>
-                                            @for(cat <- categories) {
-                                                <li class="current"><img src="@routes.Assets.versioned(cat.imgS)" alt="" onload="" style="cursor:pointer;"/></li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
                 @for(cat <- categories) {
                     <div class="borderGrid">
-                        <div class="grid_3" style="text-align: left;">
-                            <a href="@routes.BrowseController.productList" class="gal">
-                                <div class="img_block" style="padding: 5px 5px 20px 5px;">
-                                    <img src="@routes.Assets.versioned(cat.imgS)">
+                        <div class="grid_3" style="text-align: left; width: 268px;">
+                            <a href="@routes.Assets.versioned(cat.imgL)" class="gal">
+                                <div class="img_block" style="padding: 10px 10px 20px 10px;">
+                                    <img src="@routes.Assets.versioned(cat.imgL)" alt="" class="img_inner">
                                 </div>
                             </a>
                             <div class="title" style="text-align: left;">
                                 <div style="height: 130px;">
-                                    <dt>@cat.catName</dt>
+                                    <a href="@routes.BrowseController.productList"><dt>@cat.catName</dt></a>
                                     <dt style="font-size: 14px;">@cat.description</dt>
                                 </div>
                                 <a href="@routes.BrowseController.productList">
