@@ -16,10 +16,10 @@
 <br>
 <div id="content" style="height: 1330px; margin-left: 200px;">
 
-    <div id="contactheader" style="margin-top: -270px; margin-left: -800px;">@Messages("registration.form")</div>
+    <div id="contactheader" style="margin-top: -270px; margin-left: -960px;">@Messages("registration.form")</div>
     @helper.form(action = routes.RegistrationController.saveCustomer()) {
     <fieldset id="contactform">
-        <legend style="margin-left: -90px;">
+        <legend>
             @Messages("Register your account details.", Messages("customer.new"))
         </legend>
         @helper.inputText(registrationForm("First Name"))

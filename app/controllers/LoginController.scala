@@ -21,16 +21,8 @@ import views.html.helper.form
 @Singleton
 class LoginController @Inject() extends Controller {
 
-  def login3(username: String) = Action {
-    implicit request =>
-      CustomerLogin.findCustomer(username).map {
-        user =>
-          Ok(views.html.confirmation(user.username))
-      }.getOrElse(NotFound)
-  }
-
-  def checkUserCredentials(Email: String, password: String): Boolean = {
-    val user = CustomerLogin.findCustomer(Email).get
+  def checkUserCredentials(username: String, password: String): Boolean = {
+    val user = Customer.findCustomer(username)
     var status: Boolean = false
     if (user.password == password) {
       //log the user in

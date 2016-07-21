@@ -383,16 +383,14 @@ input[type = "submit"] {
 }
 
 #contactform label{
-
     margin-left: -50px;
     text-align: left;
 }
 
 
 #contactform dd.info{
-
-    margin-left: -370px;
-    color: #ff6759;
+    margin-left: -405px;
+    color: #FF0000;
 }
 
 
