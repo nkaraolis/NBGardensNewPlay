@@ -68,17 +68,6 @@
         </form>
     </div>
 
-    <div class="container">
-        @if(flash.get("success").isDefined){
-        <div class="alert alert-success">
-            @flash.get("success")
-        </div>
-        }@if(flash.get("error").isDefined){
-        <div class="alert alert-error">
-            @flash.get("error")
-        </div>
-        }
-    </div>
     }
     <div id="searchBarImg"><a href= "@routes.SearchController.saveSearch"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
 
@@ -91,6 +80,20 @@
         <a href= "@routes.LoginController.logout"><div id="icon2"></div></a>
         }
         <a href= "@routes.CartController.list"><div id="trolley"></div></a>
+    </div>
+
+    <div class="container" style="float: left; display: inline-block; margin-top: -112px; margin-left: 980px; width: 160px; height: 20px;">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @if(flash.get("error").contains("0 Results Found..")){
+            @flash.get("error")
+            }
+        </div>
+        }
     </div>
 </div>
 
