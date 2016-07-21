@@ -15,7 +15,7 @@
     <h2>Login form</h2>
 
     <h2>@Messages("login.form")</h2>
-    <div style="padding: 20px 0 0 0; font-family: 'Raleway';  font-weight: 600; font-size: 32px; color: #006633; margin-left: 0px; width: 500px; display: inline-block;">Enter your login details </div>
+    <div style="padding-top: 20px; font-family: 'Raleway';  font-weight: 600; font-size: 32px; color: #006633; margin-left: 0px; width: 500px; display: inline-block;">Enter your login details </div>
     <div style="padding: 0px 0 0 0; font-family: 'Raleway';  font-weight: 600; font-size: 32px; color: #006633; margin-left: 100px; width: 500px; display: inline-block;">Create an NB Gardens Account</div>
     @helper.form(action = routes.LoginController.save) {
     <fieldset id="loginform">
@@ -33,7 +33,7 @@
             @flash.get("success")
         </div>
         }@if(flash.get("error").isDefined){
-        <div class="alert alert-error">
+        <div class="alert alert-error" style="width: 300px; padding-left: 100px; color: #FF0000; font-family:'Raleway'">
             @flash.get("error")
         </div>
         }
