@@ -1,11 +1,15 @@
 /* `Container
 ----------------------------------------------------------------------------------------------------*/
 
+
 .container_12 {
   margin-left: auto;
   margin-right: auto;
   width: 960px;
+  height:: 960px;
+  padding-top: 50px;
 }
+
 
 .grid_1,
 .grid_2,
@@ -22,6 +26,10 @@
   float: left;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 25px;
+}
+
+.grid_3 :hover{
 }
 
 .container_12 .grid_1 {

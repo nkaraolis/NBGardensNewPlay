@@ -1,0 +1,119 @@
+
+@import "browseGrid.css";
+
+
+h2 {
+    font-family: 'Marvel', sans-serif;;
+	color: #1a1a1a;
+    font-weight: normal;
+    padding-top: auto;
+    color: #5f604b;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 30px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	outline: none;
+	transition: 0.5s ease;
+	-o-transition: 0.5s ease;
+	-webkit-transition: 0.5s ease;
+}
+
+a:hover {
+	color: #009933;
+}
+
+a.btn {
+    color: #a09f85;
+    font-size: 18px;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.img_inner {
+	max-width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom:0px;
+	margin-top: 0px;
+    border: 1px solid #717262;
+}
+
+a.gal {
+    background: url(../images/magnify2.png) center center no-repeat;
+    display: block;
+}
+
+a.gal .img_block {
+    margin-bottom: 0;
+}
+
+.gallery a.gal:hover .img_block{
+    opacity: 0.6;
+}
+
+.gallery .title {
+    text-align: center;
+    font: 22px/30px 'Marvel', sans-serif;
+    color: #262626;
+    padding: 5px 10px 20px 10px;
+}
+
+.container_12 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+  height: 1600px;
+  /*padding-top: auto;*/
+}
+
+
+#ifocus {
+    width: 525px;
+    height: 400px;
+    margin: 20px;
+    border: 1px solid #DEDEDE;
+    background: #F8F8F8;
+    float: none;
+}
+
+#ifocus_pic {
+    display:inline;
+    position:relative;
+    float:left;
+    width:470px;
+    height:370px;
+    overflow:hidden;
+    margin:10px 0 0 10px;
+}
+
+#ifocus_piclist {
+    position: absolute;
+    height: 451px;
+    width: 353px;
+}
+
+#ifocus_piclist li { width:310px; height:355px; overflow:hidden; }
+#ifocus_piclist img { width:310px; height:355px; }
+#ifocus_btn { display:inline; float:right; width:125px; margin:9px 9px 0 0; }
+#ifocus_btn li { width:91px; height:57px; cursor:pointer; opacity:0.5; -moz-opacity:0.5; filter:alpha(opacity=50); }
+#ifocus_btn img { width:75px; height:45px; margin:7px 0 0 11px; }
+#ifocus_btn .current { opacity:1; -moz-opacity:1; filter:alpha(opacity=100); }
+
+#ifocus_tx {
+    position:absolute;
+    left:87px;
+    bottom:8px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 28px;
+    color: #F63;
+    background-color:
+}
+#ifocus_tx .normal { display:none; }

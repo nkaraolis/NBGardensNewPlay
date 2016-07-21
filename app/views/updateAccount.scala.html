@@ -1,0 +1,55 @@
+@(updateAccounts: Form[CustomerDetails])(implicit flash: Flash, lang: Lang, session : Session)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import helper._
+
+@sidebar = {
+}
+
+@main(Messages("updateAccount.page"))(sidebar) {
+<div style="height : 1200px;">
+
+    <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Update your NB Gardens Account</div>
+    @helper.form(action = routes.UpdateAccountController.saveChanges()) {
+
+    <div id="existingDetails">
+        <div id="detailsheader">@Messages("Existing Details", Messages("details.request"))<br></div><br>
+        <div id="detailsusername">Username:  <b>@session.get("username")</b><br></div><br>
+        First Name: <b>@session.get("firstName")</b><br>
+        Last Name:  <b>@session.get("lastName")</b><br>
+        Email:  <b>@session.get("email")</b><br>
+        Telephone: <b>@session.get("telephone")</b><br>
+        Password: <b>********</b>
+
+    </div>
+
+    <fieldset id="contactform" style="margin-left: 250px;">
+      <legend>
+            @Messages("Update Details", Messages("details.request"))
+        </legend>
+        @helper.inputText(updateAccounts("First Name"))
+        @helper.inputText(updateAccounts("Last Name"))
+        @helper.inputText(updateAccounts("Email"))
+        @helper.inputText(updateAccounts("Telephone"))
+        @helper.inputText(updateAccounts("Password"))
+    </fieldset>
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+        }
+    </div>
+    <p>
+        <input type="submit" class="btn-primary" value='UPDATE DETAILS' style="width: 230px; margin-left: 270px;">
+    </p>
+    }
+</div>
+    }

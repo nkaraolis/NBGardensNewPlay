@@ -1,95 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/CSS" href="@routes.Assets.versioned("stylesheets/websiteStyle.css")"/>
+@()(implicit flash: Flash, lang: Lang, session : Session)
 
-    <title>NB Gardens</title>
-</head>
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
 
-<body>
+@sidebar = {
+<ul>
+    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+</ul>
+}
 
-<div id="menu">
-
-    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" /></a>
-
-    <div id="searchBar">
-        <form action="\entity.CustomerDetails">
-            <input type="text" name="Search" class="mytext" style="width: 300px;" placeholder="Search.."><br>
-        </form>
-    </div>
-    <div id="searchBarImg"><a href= "Home.html"><img src="@routes.Assets.versioned("images/search.png")" alt="NB Gardens Logo" /></a></div>
-
-
-    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
-
-        <a href= "home.scala.html"><div id="icon1"></div></a><a href= "home.scala.html"><div id="trolley"></div></a>
+@main(Messages("home.page"))(sidebar) {
+<div style="margin-left: 150px;">
+    <div id="homeBanner">
+        <a href= "@routes.HomeController.home"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 50px;"/></a>
+        <a href= "@routes.HomeController.home"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+        <a href= "@routes.HomeController.home"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     </div>
 
-</div>
+    <div class ="line">
+    </div>
 
-<div id="sidebar">
+    <div id="content">
 
-    <ul>
-        <li><a href="default.asp">Categories</a></li>
-        <li><a href="news.asp">Gnomes</a></li>
-        <li><a href="contact.asp">Tools</a></li>
-        <li><a href="about.asp">Gardening<br>Supplies</a></li>
-        <li><a href="about.asp">Outdoor<br>Equipment</a></li>
-    </ul>
+        <a href="@routes.BrowseController.categoryList"><img src="@routes.Assets.versioned("images/gnomeBanner.png")" alt="Fresh Gnomes Str8 from the block." style="width: 1200px; display:block; margin-left: auto; margin-right: auto;"/></a>
+        <a href="@routes.BrowseController.categoryList"><img src="@routes.Assets.versioned("images/special2.jpg")" alt="InitialD" style=" width: 474px; display:inline-block; padding: 50px 0px 0px 0px; "/></a>
+        <a href="@routes.BrowseController.categoryList"><img src="@routes.Assets.versioned("images/special3.jpg")" alt="Deals" style="width: 474px; display:inline-block; padding: 50px 0px 0px 0px; margin-left: 20px;"/></a>
 
-</div>
-
-<div id="pageStart">
-</div>
-
-<div id="homeBanner">
-
-    <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
-    <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
-    <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
-
-</div>
-<div class ="line">
-
-</div>
-
-
-<div id="content">
-
-    <a href="home.scala.html"><img src="@routes.Assets.versioned("images/gnomeBanner.png")" alt="Fresh Gnomes Str8 from the block." style="width: auto; display:block; margin-left: auto; margin-right: auto;"/></a>
-
-
-    <textSetting style="opacity: 1;">
         <br>
-        <img src="@routes.Assets.versioned("images/drift.png")" alt="NANI" style="width: auto; display:block;margin-left: auto; margin-right: auto;"/>
+
+        <div style="padding: 30px 0px 0px 0px;">
+            <a href="@routes.BrowseController.categoryList"><div id="deal1"></div></a>
+            <a href="@routes.BrowseController.categoryList"><div id="deal2"></div></a>
+            <a href="@routes.BrowseController.categoryList"><div id="deal3"></div></a>
+            <a href="@routes.BrowseController.categoryList"><div id="deal4"></div></a>
+        </div>
+
         <br>
-        Running in the nineties, is a new way I like to be.<br>
-        I'm just running in the nineties, come on baby run to me<br>
-        We are running in the nineties, is a new way to set me free.<br>
-        I'm just running in the nineties.<br>
-        Yes I wanna know, yes I wanna see.<br>
-        New desire.<br>
-        I need fire.<br>
 
-    </textSetting>
+        <div id="emailBar">
 
+            <div id="emailIcon"><img src="@routes.Assets.versioned("images/email.png")" alt="Email Icon" style="width: 50px;"/></div>
+
+            Get our exclusive offers in your inbox!
+
+            <form style="width: 300px; margin-left: 30px; display: inline-block;" action="\entity.CustomerDetails">
+                <input type="text" name="Search" class="mytext" style="width: 300px; display: inline-block;" placeholder="Enter your email address">
+            </form>
+
+            <input type = "submit" class="btn-primary" value = "SUBMIT">
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
 </div>
+}
 
-<div id="footer">
-
-
-    <a href="home.scala.html" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
-    <a href="home.scala.html" style="padding-right: 30px; padding-left: 0px"><div id="helpSupport"></div></a>
-    <a href= "https://www.facebook.com"><img src="@routes.Assets.versioned("images/iconfb2.png")" alt="Facebook" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
-    <a href= "Home.html"><img src="@routes.Assets.versioned("images/NBGardens.png")" alt="NB Gardens Logo" WIDTH="auto" HEIGHT="80px" style=" padding-top: 0px;"/></a>
-    <a href= "https://twitter.com/"><img src="@routes.Assets.versioned("images/icontw2.png")" alt="Twitter" WIDTH="40px" HEIGHT="40px" style=" padding-bottom: 20px; padding-left: 40px;"/></a>
-    <a href="home.scala.html" style="padding-right: 0px; padding-left: 30px"><div id="aboutUs"></div></a>
-    <a href="home.scala.html" style="padding-right: 0px; padding-left: 15px"><div id="ourPolicies"></div></a>
-
-    <br>
-</div>
-
-</body>
-
-</html>

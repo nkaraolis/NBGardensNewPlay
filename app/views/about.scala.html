@@ -1,37 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet"type="text/CSS" href="websiteStyle.css"/>
-    <title>NB Gardens</title>
-</head>
+@()(implicit flash: Flash, lang: Lang, session : Session)
 
-<body>
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
 
-<div id="menu">
+@sidebar = {
+<ul>
+    <li><a href="@routes.BrowseController.productList">Categories</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+</ul>
+}
 
-    <a href= "Home.html"><img src="img/NBGardens.png" alt="NB Gardens Logo" /></a>
+@main(Messages("about.page"))(sidebar) {
+<div id="content" style="height: 1000px;">
 
-    <div id="icons" style="float:right; margin-right:20px; font-size:0px;">
-
-        <a href= "Home.html"><div id="icon1"></div></a>
-
-    </div>
-</div>
-
-<div id="sidebar">
-
-    <ul>
-        <li><a href="default.asp">Categories</a></li>
-        <li><a href="news.asp">Gnomes</a></li>
-        <li><a href="contact.asp">Tools</a></li>
-        <li><a href="about.asp">Gardening Supplies</a></li>
-        <li><a href="about.asp">Outdoor Equipment</a></li>
-    </ul>
-</div>
-
-<div id="content">
-    <div id="aboutcont">
+    <div id="contactheader" style="padding-top: 20px; margin-left: 0px;">About NB Gardens</div>
+    <div id="aboutcont" style="height: 800px;">
         <div id="aboutintro">
             NB Gardens is a traditional catalogue company based in the North-West of England.  It sells garden products to its registered customers via phone and mail.
             NB Gardens specialises in gnomes, gnome accessories and garden ornaments and it prides itself on the speed and quality of its service to its expanding customer base.
@@ -42,14 +30,15 @@
             NB gardens have been established since 1875.
         </div>
         <div id="aboutimg">
-            <img src="img/garden.png" height="336px" width="550px"/>
+            <img src="@routes.Assets.versioned("images/garden.png")" height="336px" width="550px"/>
         </div>
 
-        <div id="aboutgnome">
-            <img src="img/gnomes.png" />
+        <div id="aboutgnome" style="margin-bottom: -100px;">
+            <img src="@routes.Assets.versioned("images/gnomes.png")" />
+
         </div>
 
-        <div id="aboutdesc">
+        <div id="aboutdesc" style="margin-bottom: -100px;">
             NB Gardens is a traditional catalogue company based in the North-West of England.  It sells garden products to its registered customers via phone and mail.
             NB Gardens specialises in gnomes, gnome accessories and garden ornaments and it prides itself on the speed and quality of its service to its expanding customer base.
             NB Gardens employs a “buy now, pay if satisfied” purchase model. The company is renowned for the quality of its products, sourcing its stock from only the finest suppliers.
@@ -58,18 +47,6 @@
             Each order is processed within 15 minutes and on average have a value of £200.00. Last year’s net income for NB Gardens was £100 million pounds.
             NB gardens have been established since 1875.
         </div>
-     </div>
-
-
-
+    </div>
 </div>
-
-<div id="footer">
-    <a href= "https://www.facebook.com"><img src="img/iconfb.png" alt="Facebook" width="40px" height="40px" style=" padding-bottom: 10px; padding-right: 40px;"/></a>
-    <a href= "Home.html"><img src="img/NBGardens.png" alt="NB Gardens Logo" width="auto" height="70px" style="  padding-top: 15px;"/></a>
-    <a href= "https://twitter.com/"><img src="img/icontw.png" alt="Twitter" width="40px" height="40px" style=" padding-bottom: 10px; padding-left: 40px;"/></a>
-</div>
-
-</body>
-
-</html>
+}

@@ -1,8 +1,7 @@
 package controllers
 
 import javax.inject._
-
-import models.{Customer, CustomerDetails}
+import models.{Customer, CustomerDetails, CustomerLogin}
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -19,22 +18,14 @@ import play.api.Play.current
 @Singleton
 class RegistrationController  @Inject() extends Controller{
 
-  def registration = Action {
-    Ok(views.html.registration(userForm))
-  }
-
-  def goHome = Action {
-    Redirect(routes.HomeController.home())
-  }
-
   private val userForm : Form[CustomerDetails] =
     Form(mapping(
-      "name" -> nonEmptyText,
-      "lastName" -> nonEmptyText,
-      "email" -> nonEmptyText,
-      "telephone" -> number,
-      "username" -> nonEmptyText,
-      "password" -> nonEmptyText
+      "First Name" -> nonEmptyText,
+      "Last Name" -> nonEmptyText,
+      "Email" -> nonEmptyText.verifying("validation.email.duplicate", Customer.findByEmail(_).isEmpty),
+      "Telephone" -> nonEmptyText,
+      "Username" -> nonEmptyText.verifying("validation.username.duplicate", Customer.findByUsername(_).isEmpty),
+      "Password" -> nonEmptyText
     )(CustomerDetails.apply)(CustomerDetails.unapply))
 
   def saveCustomer = Action {
@@ -42,13 +33,14 @@ class RegistrationController  @Inject() extends Controller{
       val newCustomerForm = userForm.bindFromRequest()
       newCustomerForm.fold(hasErrors = {
         form =>
-          Redirect(routes.RegistrationController.registration()).flashing(Flash(form.data) + ("error" -> Messages("register.validation.errors")))
+          Redirect(routes.RegistrationController.newCustomer()).flashing(Flash(form.data) + ("error" -> Messages("register.validation.errors")))
       }, success = {
           newCustomer =>
             Customer.add(newCustomer)
-            Redirect(routes.HomeController.home).flashing("success" -> Messages("customers.new.success", newCustomer.firstName))}
+            Redirect(routes.LoginController.newLogin()).flashing("success" -> Messages("customers.new.success", newCustomer.firstName))}
       )
   }
+
 
   def newCustomer = Action {
     implicit request =>
@@ -56,14 +48,12 @@ class RegistrationController  @Inject() extends Controller{
           userForm.bind(request2flash.data)
       else
           userForm
-      Ok(views.html.home())
+       Ok(views.html.registration(form))
   }
 
 def show = Action {
   implicit request => val customers = Customer.findAllCustomer
     Ok(views.html.customerall(customers))
 }
-
-
 
 }

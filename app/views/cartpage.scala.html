@@ -1,0 +1,73 @@
+@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import models.{Cart}
+@import helper._
+
+@sidebar = {
+<ul>
+    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+</ul>
+}
+
+@main(Messages("cartpage.page"))(sidebar) {
+
+<div id="content">
+    <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 670)px;">
+
+        <div class="title">
+            <div class="fontTypeD" style="margin-left: 30px; display: inline;">Your Trolley</div>
+
+            <div style="display: inline-block; margin-left: 650px;">
+                <a href="@routes.BrowseController.productList"><input type="submit" class="btn-cont" value="CONTINUE SHOPPING" style="width:180px; margin-right: 30px;"/></a>
+
+                <a href="@routes.CartController.checkout"><input type="submit" class="btn-primary" value="CHECKOUT" style="width:190px;"/></a>
+            </div>
+
+        </div>
+        <br>
+
+        <div class="gallery">
+            @for(product <- products) {
+            <div class="borderGrid">
+                <div class="grid_3" style="">
+
+                    <a href="@routes.Assets.versioned(product.imgL)" class="gal">
+                        <div class="img_block" style="padding: 5px 5px 20px 5px;">
+                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
+                        </div>
+                    </a>
+                    <div class="title" name="get" style="text-align: left;">
+                        @helper.form(routes.CartController.update) {
+                        <div style="height: 130px;">
+                            <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
+                            <dt style="font-size: 14px;">Description: @product.description</dt>
+                            <br>
+                            <dt style="font-size: 14px;">Quantity: @product.need</dt>
+                        </div>
+                        <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@Product.getPrice(product.price, product.need)</dt>
+
+                        <input type="hidden" name="Product" value="@product.name">
+                        <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
+                        <input type="hidden" name="sTotal" value="@Product.getPrice(product.price, product.need)">
+
+                        <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
+                        }
+                        <br>
+                        <a href="@routes.CartController.remove(product.name)" style="padding-left: 80px;">
+                            <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+}

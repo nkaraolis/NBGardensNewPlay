@@ -1,7 +1,66 @@
+application.name = NB Gardens
+
+#Set the tab title for each page
+about.page = About Us Page
+browse.page = Browse Products
+confirmation.page = Confirmation Page
+contact.page = Contacts Page
+createAccount.page = Create New Account
+customerAll.page = All Customers
+help.page = Help
+home.page = NBGardens
+login.page = Login Page
+policies.page = Policies
+productList.page = Products List Page
+registration.page = Registration Page
+updateAccount.page = Update Account
+browseCategory.page = Category List Page
+
+#Validation messages for registration
+validation.email.duplicate = A user with that email already exists
+validation.username.duplicate = A user with that username already exists
 register.validation.errors = Incorrect details added
 customers.new.success = New customer added
-registration.form = Registration details
+registration.form = Create Account
 customer.details = CustomerDetails: {0}
 customer.new = (new)
-customer.new.submit = Add
-application.name = All customers
+customer.new.submit = SUBMIT
+
+#Validation messages for login
+login.errors = The entered username or password was incorrect
+password.error = The password you have entered was incorrect
+customer.login = Login
+login.form = Login Form
+login.success = You have successfully logged in
+login.form.success = Form filled in correctly
+
+#Individual page messages
+about.page = About Us Page
+browse.page = Browse Products
+cartpage.page = Your Cart
+confirmation.page = Confirmation Page
+contact.page = Contacts Page
+createAccount.page = Create New Account
+customerAll.page = All Customers
+help.page = Help
+home.page = NBGardens
+login.page = Login Page
+policies.page = Policies
+productList.page = Products List Page
+productPage.page = Product Details Page
+registration.page = Registration Page
+updateAccount.page = Update Account
+
+#Validation messages for updating customer detaails
+details.request = Update form loaded
+details.update = Account details updated
+
+#Validation messages for updating customer detaails
+details.request = Update form loaded
+details.update = Account details updated
+
+#Search messages
+search.page = Search Results
+listResult.page = List Results
+
+userAccount.page = User Account

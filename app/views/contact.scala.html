@@ -1,0 +1,37 @@
+@()(implicit flash: Flash, lang: Lang, session : Session)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+
+
+@sidebar = {
+<ul>
+    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+</ul>
+}
+
+@main(Messages("contact.page"))(sidebar) {
+<div id="content" style="height: 800px;">
+    <div id="contactheader" style="padding-top: 20px;">Contact NB Gardens</div>
+    <fieldset id="contactform">
+        <legend></legend>
+        <div class="formtext">Name: </div><br>
+        <input type="text" placeholder="Keisuke Takahashi"><br>
+
+        <div class="formtext">Email: </div><br>
+        <input type="text" placeholder="mazdarx7fan&#64gmail.com"><br>
+
+        <div class="formtext">Your Message: </div><br>
+        <textarea name="message" placeholder="Leave a message.."></textarea><br>
+
+        <input type="submit" class="btn-primary" value="SEND" style="margin-top: 20px; float: left;"/>
+    </fieldset>
+
+</div>
+}

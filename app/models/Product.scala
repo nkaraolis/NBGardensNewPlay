@@ -1,0 +1,75 @@
+package models
+
+/**
+  * Created by Administrator on 08/07/2016.
+  */
+case class Product(productId: String, name: String, description: String, price: String, imgS: String, imgL: String, need: String)
+
+object Product {
+  var products = Set(
+    Product("0001","Paperclips Large","Large Plain Pack of 1000", "100", "images/page3_img1.jpg", "images/big1.jpg", "1"),
+    Product("0002","Giant Paperclips","Giant Plain 51mm 100 pack", "100", "images/page3_img2.jpg", "images/big2.jpg", "1"),
+    Product("0003","Paperclip Giant Plain", "Giant Plain Pack of 10000", "100", "images/page3_img3.jpg", "images/big3.jpg", "1"),
+    Product("0004","No Tear Paper Clip", "No Tear Extra Large Pack of 1000", "100", "images/page3_img4.jpg", "images/big4.jpg", "1"),
+    Product("0005","Zebra Paperclips", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img5.jpg", "images/big5.jpg", "1"),
+    Product("0006","AA", "Giant Plain Pack of 10000", "100", "images/page3_img6.jpg", "images/big6.jpg", "1"),
+    Product("0007","BB", "No Tear Extra Large Pack of 1000", "100", "images/page3_img7.jpg", "images/big7.jpg", "1"),
+    Product("0008","CC", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "1"),
+    Product("0009","DD", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "1"),
+    Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "10")
+  )
+
+  def getPrice(qty:String, price:String): Double ={
+    val tPrice = (qty.toDouble) * (price.toDouble)
+    tPrice
+  }
+
+  def findAll = products.toList.sortBy(_.name)
+
+  def findByName(user: String) = products.find(_.name == user)
+  def findProductByName(name: String) = products.find(_.name == name)
+
+
+  def add(Id: String, Name: String, description: String, price: String, imgS: String, imgL: String, need: String): Unit ={
+    products += Product(Id,Name,description,price,imgS,imgL, need)
+  }
+
+  def removeFromProduct(product: Product): Set[Product] ={
+    def checkOldList(productsOld: Array[Product], product: Product): Array[Product] = {
+      if (productsOld.isEmpty) {
+        productsOld
+      }
+      else if (product.productId == productsOld.head.productId) {
+        checkOldList(productsOld.tail, product)
+      }
+      else {
+        checkOldList(productsOld.tail, product) :+ productsOld.head
+      }
+    }
+    products = checkOldList(products.toArray, product).toSet
+    products
+  }
+
+  def setQTY (name: String, need: String): Unit ={
+    def findByName(name: String) = {
+      val tp = products.toList.find(_.name == name).get
+      removeFromProduct(tp)
+      add(tp.productId,tp.name,tp.description,tp.price,tp.imgS,tp.imgL,need)
+    }
+    findByName(name)
+  }
+
+  def findByNameOB(name: String) ={
+    def filter(products: Set[Product], results: Set[Product]) : Set[Product] ={
+      if (products.isEmpty)
+        results
+      else {
+        if (products.head.name.equals(name))
+          filter(products.tail, results + products.head)
+        else
+          filter(products.tail, results)
+      }
+    }
+    filter(products, Set.empty[Product]).toList
+  }
+}
