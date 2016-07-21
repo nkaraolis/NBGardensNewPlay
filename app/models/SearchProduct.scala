@@ -4,7 +4,7 @@ package models
 case class SearchProduct(name: String)
 
 object SearchProduct {
-  var nsearchproducts = Set
+
   var searchproducts = Set(
     SearchProduct("Paperclips Large"),
     SearchProduct("Giant Paperclips"),
@@ -16,16 +16,20 @@ object SearchProduct {
     SearchProduct("Zebra Length 28mm Assorted 150 Pack"),
     SearchProduct("Zebra Length 28mm Assorted 150 Pack"),
     SearchProduct("Zebra Length 28mm Assorted 150 Pack")
-
-
   )
+  //var nsearchproducts = Set(fill(Product.products, Set.empty[Product]))
 
-  def fill () : Unit = {
-    for (i <- Product.products) {
-      nsearchproducts(Product.products(Product).name)
+
+    def fill(products: Set[SearchProduct], results: Set[SearchProduct]) : Set[SearchProduct] ={
+      if (products.nonEmpty) {
+        fill(products.tail, results + products.head)
+        fill(products.tail, results)
+      }
+       else {
+        results
+      }
     }
-    nsearchproducts = searchproducts.toIndexedSeq(1)
-  }
+
 
   def findAll = searchproducts.toList.sortBy(_.name)
 

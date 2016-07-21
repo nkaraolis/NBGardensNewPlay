@@ -22,8 +22,8 @@ object Product {
   def findAll = products.toList.sortBy(_.name)
 
   def findByName(user: String) = products.find(_.name == user)
-
   def findProductByName(name: String) = products.find(_.name == name)
+
 
   def add(Id: String, Name: String, description: String, price: String, imgS: String, imgL: String, need: String): Unit ={
     products += Product(Id,Name,description,price,imgS,imgL, need)
@@ -67,4 +67,7 @@ object Product {
     }
     filter(products, Set.empty[Product]).toList
   }
+
+  def findByNameS(name: String) = products.toList.find(_.name.toLowerCase() contains(name.toLowerCase()))
+
 }

@@ -18,32 +18,30 @@ import views.html.helper.form
   */
 class SearchController @Inject() extends Controller {
 
-  val SearchForm: Form[SearchProduct] = Form(mapping(
-    "SearchIN" -> nonEmptyText.verifying("validation.name.nonexistant",
-      !SearchProduct.findByNameOB(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
+//  val SearchForm: Form[SearchProduct] = Form(mapping(
+//    "SearchIN" -> nonEmptyText.verifying("validation.name.nonexistant",
+//      !SearchProduct.findByNameOB(_).isEmpty))(SearchProduct.apply)(SearchProduct.unapply)
+//  )
+
+  val SearchForm : Form[SearchProduct] = Form(mapping(
+    "SearchIN" -> nonEmptyText.verifying("validation.name.nonexistant", !Product.findByNameS(_).isEmpty)
+    )(SearchProduct.apply)(SearchProduct.unapply)
   )
-
-
-
-  //  def show(name: String) = Action {
-  //        implicit request =>
-  //          Product.findByName(name).map {
-  //            product =>
-  //              Ok(views.html.Productdetails(product))//create this html
-  //          }.getOrElse(NotFound)
-  //      }
-  //link search bar to this controller
 
 
   def listResult(Searched: String) = Action {
     implicit request =>
-      SearchProduct.findByName(Searched).map {
+      Product.findByNameS(Searched).map {
         search =>
           val searchedProduct = Product.findByNameOB(Searched)
           Ok(views.html.listResult(searchedProduct))
       }.getOrElse(NotFound)
   }
 
+//  def printForm () = {
+//    val pp = SearchForm
+//    for (print <-SearchForm) println(print)
+//  }
   def saveSearch = Action {
     implicit request =>
       val newSearchForm = SearchForm.bindFromRequest()
