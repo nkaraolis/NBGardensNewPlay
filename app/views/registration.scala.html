@@ -13,7 +13,7 @@
 
 <div id="content" style="height: 1530px;">
 
-    <div id="contactheader" style="margin-top: -200px; margin-left: -580px;">@Messages("registration.form")</div>
+    <div id="contactheader" style="margin-top: -180px; margin-left: -580px;">@Messages("registration.form")</div>
     @helper.form(action = routes.RegistrationController.saveCustomer()) {
     <fieldset id="contactform" style="padding-left: 200px;">
         <legend>
@@ -38,7 +38,7 @@
         </div>
         }
     </div>
-    <p  style="margin-left: -410px;">
+    <p style="margin-left: -410px;">
         <a href="@routes.PoliciesController.policies">By signing in you agree to NB Gardens' Terms & Conditions.</a>
         <br>
         <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")' style="margin-top: 30px;">
