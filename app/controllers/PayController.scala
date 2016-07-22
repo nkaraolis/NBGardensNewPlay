@@ -32,7 +32,7 @@ class PayController extends Controller {
       Ok(views.html.payPage(items, total, CardForm)) //render view template
   }
 
-  def save = Action {
+  def save (products: String) = Action {
     implicit request =>
       val newCardForm = CardForm.bindFromRequest()
       val newCard = cardDetails(newCardForm.get.method, newCardForm.get.name, newCardForm.get.cardNu, newCardForm.get.exp, newCardForm.get.securityCode, newCardForm.get.issueNu, newCardForm.get.start)

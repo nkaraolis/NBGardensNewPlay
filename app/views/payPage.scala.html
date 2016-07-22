@@ -17,13 +17,6 @@
 }
 
 @main(Messages("payment.page"))(sidebar) {
-
-<script language="JavaScript">
-    function doIt(){
-        val v = ("input[name='PaymentM']:checked").val();
-    }
-</script>
-
     <div id="content">
         <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 670)px;">
 
@@ -38,7 +31,7 @@
             <br>
 
             <div class="Pay">
-                @helper.form(routes.PayController.save) {
+                @helper.form(routes.PayController.save(products.toString)) {
                     Payment Information<br/><br/>
 
                     @helper.inputRadioGroup(
