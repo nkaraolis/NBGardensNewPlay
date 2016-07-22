@@ -34,6 +34,9 @@ login.form = Login Form
 login.success = You have successfully logged in
 login.form.success = Form filled in correctly
 
+#Validation messages for update accounts
+updateAccount.validation.errors = Update account form errors
+
 #Individual page messages
 about.page = About Us Page
 browse.page = Browse Products
