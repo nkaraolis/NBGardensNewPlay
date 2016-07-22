@@ -33,7 +33,8 @@ class SearchController @Inject() extends Controller {
     implicit request =>
       Product.findByNameS(Searched).map {
         search =>
-          val searchedProduct = Product.findByNameS(Searched).toList
+          val searchedProduct = Product.findByNameOB(Searched)
+          println(Product.findByNameOB(Searched).size)
           Ok(views.html.listResult(searchedProduct))
       }.getOrElse(NotFound)
   }
