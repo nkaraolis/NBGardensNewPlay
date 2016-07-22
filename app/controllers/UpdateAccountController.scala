@@ -59,26 +59,26 @@ class UpdateAccountController @Inject() extends Controller {
       val editCustomerForm = updateForm.bindFromRequest()
       editCustomerForm.fold(hasErrors = {
         form =>
-          Redirect(routes.UpdateAccountController.updateAccount()).flashing(Flash(form.data) + ("error") -> Messages("updateAccount.validation.errors"))
+          Redirect(routes.UpdateAccountController.updateAccount()).flashing(Flash(form.data) + ("error" -> Messages("updateAccount.validation.errors")))
       }, success = {
         editCustomer =>
           val currentCustomer = Customer.findCustomer(request.session.get("username").get)
-          if(!(editCustomerForm.data("First Name").length == 0)){
+          if (!(editCustomerForm.data("First Name").length == 0)) {
             currentCustomer.firstName = editCustomerForm.data("First Name")
           }
-          if(!(editCustomerForm.data("Last Name").length == 0)){
+          if (!(editCustomerForm.data("Last Name").length == 0)) {
             currentCustomer.lastName = editCustomerForm.data("Last Name")
           }
-          if(!(editCustomerForm.data("Email").length == 0)){
+          if (!(editCustomerForm.data("Email").length == 0)) {
             currentCustomer.email = editCustomerForm.data("Email")
           }
-          if(!(editCustomerForm.data("Telephone").length == 0)){
+          if (!(editCustomerForm.data("Telephone").length == 0)) {
             currentCustomer.telephone = editCustomerForm.data("Telephone")
           }
-          if(!(editCustomerForm.data("Username").length == 0)){
+          if (!(editCustomerForm.data("Username").length == 0)) {
             currentCustomer.username = editCustomerForm.data("Username")
           }
-          if(!(editCustomerForm.data("Password").length == 0)){
+          if (!(editCustomerForm.data("Password").length == 0)) {
             currentCustomer.password = editCustomerForm.data("Password")
           }
           val updateCustomer = Customer.findCustomer(currentCustomer.username)
