@@ -68,8 +68,12 @@ class CartController extends Controller {
 
   def checkout() = Action {
     implicit request =>  //controller action
-      Ok(views.html.checkout(products.toList, totalT))//render view template
-  }
+      if (request.session.get("username").isEmpty) {
+        Redirect(routes.LoginController.newLogin())
+      } else {
+        Ok(views.html.checkout(products.toList, totalT)) //render view template
+      }
+      }
 
   def updateFromPL() = Action {
     implicit request =>  //controller action

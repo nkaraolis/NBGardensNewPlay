@@ -19,7 +19,7 @@
 @main(Messages("cartpage.page"))(sidebar) {
 
 <div id="content">
-    <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 670)px;">
+    <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 700)px;">
 
         <div class="title">
             <div class="fontTypeD" style="margin-left: 30px; display: inline;">Your Trolley</div>
@@ -33,7 +33,7 @@
         </div>
         <br>
 
-        <div class="gallery">
+        <div class="gallery" style="margin-left: 30px;">
             @for(product <- products) {
                 <div class="borderGrid">
                     <div class="grid_3" style="">
