@@ -50,10 +50,10 @@
                             </a>
                             <div class="title" style="text-align: left;">
                                 <div style="height: 130px;">
-                                    <a href="@routes.BrowseController.productList"><dt>@cat.catName</dt></a>
+                                    <a href="@routes.BrowseController.productList(cat.catName)"><dt>@cat.catName</dt></a>
                                     <dt style="font-size: 14px;">@cat.description</dt>
                                 </div>
-                                <a href="@routes.BrowseController.productList">
+                                <a href="@routes.BrowseController.productList(cat.catName)">
                                     <input type="submit" class="btn-primary" value="Have a Look" style="width:110px;"/>
                                 </a>
                             </div>

@@ -6,7 +6,7 @@
 GET     /                           controllers.HomeController.home
 
 GET     /browse                     controllers.BrowseController.categoryList
-GET     /browseAnCat                controllers.BrowseController.productList
+GET     /browseAnCat                controllers.BrowseController.productList(cart:String)
 
 
 # An example controller showing how to use dependency injection
