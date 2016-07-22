@@ -383,16 +383,14 @@ input[type = "submit"] {
 }
 
 #contactform label{
-
     margin-left: -50px;
     text-align: left;
 }
 
 
 #contactform dd.info{
-
-    margin-left: -370px;
-    color: #ff6759;
+    margin-left: -405px;
+    color: #FF0000;
 }
 
 
@@ -902,4 +900,11 @@ light green - RGB 0 153 51 - #009933
     resize: none;
     border-radius: 3px;
 
+}
+
+#loginform dd.error{
+    text-align: left;
+    margin-left: 70px;
+    padding-bottom: 10px;
+    color: #FF0000;
 }

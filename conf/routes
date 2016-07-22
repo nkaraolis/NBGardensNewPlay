@@ -30,8 +30,6 @@ GET     /login                      controllers.LoginController.newLogin
 
 POST    /login                      controllers.LoginController.save
 
-GET     /login/:Email               controllers.LoginController.login3(Email:String)
-
 GET     /logout                     controllers.LoginController.logout
 
 GET     /updateAccount              controllers.UpdateAccountController.updateAccount
