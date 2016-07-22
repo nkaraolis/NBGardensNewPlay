@@ -6,7 +6,7 @@ import play.api.data._
 /**
   * Created by Administrator on 06/07/2016.
   */
-case class CustomerDetails(var firstName: String, var lastName: String, var email: String, var telephone: String, val username: String, var password: String) {
+case class CustomerDetails(var firstName: String, var lastName: String, var email: String, var telephone: String, var  username: String, var password: String) {
 
 }
 
