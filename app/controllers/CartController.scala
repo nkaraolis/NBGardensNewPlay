@@ -32,12 +32,12 @@ class CartController extends Controller {
     implicit request =>  //controller action
       val p = Product.findByName(product).get
       def np : Product = {
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, Qty)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, Qty, p.carId)
         val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
       products = Cart.addToCart(np) //get product from model
-      Redirect(routes.BrowseController.productList) //render view template
+      Redirect(routes.BrowseController.productList(p.carId)) //render view template
   }
 
   def remove(product: String) = Action {
@@ -56,7 +56,7 @@ class CartController extends Controller {
       removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId)
         val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
@@ -79,14 +79,14 @@ class CartController extends Controller {
       removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId)
         val t = Product.findByName(p.name).toArray.apply(0)//
         t
       }
       val cp = Cart.addToCart(np)
       products =  cp //get product from model
       totalT += subTot
-      Redirect(routes.BrowseController.productList)//render view template
+      Redirect(routes.BrowseController.productList(p.carId))//render view template
   }
 
   def removeO(product: String) : Array[Product] ={
