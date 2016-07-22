@@ -36,7 +36,7 @@ login.success = You have successfully logged in
 login.form.success = Form filled in correctly
 
 #Validation messages for update accounts
-updateAccount.validation.errors = Update account form errors
+updateAccount.validation.errors = Please fix the errors in the form before resubmitting
 
 #Individual page messages
 about.page = About Us Page
