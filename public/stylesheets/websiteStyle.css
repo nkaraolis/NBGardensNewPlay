@@ -902,6 +902,23 @@ light green - RGB 0 153 51 - #009933
 
 }
 
+.checkoutDiv{
+
+    margin-left: 540px;
+    margin-top: -20px;
+    margin-bottom: 50px;
+    width: 900px;
+    padding: 20px;
+
+    text-align: left;
+
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    border-radius: 3px;
+
+}
+
 #loginform dd.error{
     text-align: left;
     margin-left: 70px;
