@@ -29,4 +29,6 @@ object Cart{
     productsInCart = checkCart(productsInCart, product)
     productsInCart
   }
+
+  def findAllInCart = productsInCart.toList.sortBy(_.name)
 }
