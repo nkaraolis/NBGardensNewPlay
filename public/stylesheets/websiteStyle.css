@@ -925,3 +925,10 @@ light green - RGB 0 153 51 - #009933
     padding-bottom: 10px;
     color: #FF0000;
 }
+
+#contactform dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 10px;
+    color: #FF0000;
+}
