@@ -18,13 +18,6 @@ import views.html.helper.form
 @Singleton
 class ReviewController @Inject() extends Controller {
 
-
-
-  def leaveReview = Action {
-
-  }
-
-
   def sessionReviewCheck = Action {
     implicit request =>
       if (request.session.get("username").isEmpty) {
