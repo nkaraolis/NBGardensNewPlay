@@ -33,7 +33,6 @@
             <div class="Pay">
                 @helper.form(routes.PayController.save(products.toString)) {
                     Payment Information<br/><br/>
-
                     @helper.inputRadioGroup(
                         CardForm("method"),
                         options = Seq("Card online Now" -> "Card online Now", "Card online Later" -> "Card online Later", "Paypal" -> "Paypal"),

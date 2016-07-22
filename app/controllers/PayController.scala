@@ -15,11 +15,11 @@ class PayController extends Controller {
 
   val CardForm: Form[cardDetails] = Form(
     mapping(
-      "method" -> of[String],
-      "name" -> of[String],
-      "cardNu" -> of[String],
-      "exp" -> of[String],
-      "securityCode" -> of[String],
+      "method" -> nonEmptyText,
+      "name" -> nonEmptyText,
+      "cardNu" -> nonEmptyText,
+      "exp" -> nonEmptyText,
+      "securityCode" -> nonEmptyText,
       "issueNu" -> of[String],
       "start" -> of[String]
     )
