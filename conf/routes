@@ -30,8 +30,6 @@ GET     /login                      controllers.LoginController.newLogin
 
 POST    /login                      controllers.LoginController.save
 
-GET     /login/:Email               controllers.LoginController.login3(Email:String)
-
 GET     /logout                     controllers.LoginController.logout
 
 GET     /updateAccount              controllers.UpdateAccountController.updateAccount
@@ -54,7 +52,11 @@ GET     /Cart                       controllers.CartController.list
 GET     /addCart                    controllers.CartController.add(product:String, Qty: String)
 GET     /removeCart                 controllers.CartController.remove(product:String)
 GET     /updateCart                 controllers.CartController.update()
+GET     /updateCartFromPL           controllers.CartController.updateFromPL()
 
 POST    /Search                     controllers.SearchController.saveSearch
+GET     /Search/:Result             controllers.SearchController.listResult(Result:String)
 
-GET     /Search/:Result              controllers.SearchController.listResult(Result:String)
+GET     /userAccount                controllers.UserAccountController.userAccount
+
+GET     /toCheckout                 controllers.CartController.checkout()

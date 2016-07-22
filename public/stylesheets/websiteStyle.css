@@ -232,6 +232,54 @@ input[type = "submit"] {
 
 }
 
+#searchform{
+    #margin-top: 0px;
+    #margin-left: 400px;
+    #width: 600px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+#searchform label{
+    margin-left: -200px;
+    padding-top: 30px;
+}
+
+#searchform input[type="text"] {
+    #margin: 15px 0 20px -100px;
+    overflow: hidden;
+    #padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+#searchform input[type="password"] {
+    margin: 15px 0 20px -100px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+#searchform dd.info{
+    margin-left: -400px;
+    #padding-bottom: 30px;
+    color: #FF0000;
+}
+
 #loginform{
     margin-top: 0px;
     margin-left: 400px;
@@ -335,16 +383,14 @@ input[type = "submit"] {
 }
 
 #contactform label{
-
     margin-left: -50px;
     text-align: left;
 }
 
 
 #contactform dd.info{
-
-    margin-left: -370px;
-    color: #ff6759;
+    margin-left: -405px;
+    color: #FF0000;
 }
 
 
@@ -763,6 +809,19 @@ light green - RGB 0 153 51 - #009933
     font-size: 32px;
 }
 
+.fontTypeE{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+
+.fontTypeF{
+
+    font-family: 'Raleway', sans-serif;
+    color: #006633;
+    font-weight: 600;
+    font-size: 24px;
+}
+
 .productDivs{
 
     margin-left: 50px;
@@ -799,4 +858,53 @@ light green - RGB 0 153 51 - #009933
     display: inline-block;
     position: relative;
     top: -3px;
+}
+
+#existingDetails{
+    float: left;
+    margin: 115px 0 100px 500px;
+    font-family: 'Raleway', sans-serif;
+    text-align: left;
+    color: #333;
+    font-size: 17px;
+}
+
+#detailsheader{
+    font-size: 21px;
+    color: #333;
+
+
+}
+
+#detailsusername{
+    font-size: 19px;
+
+}
+
+.accountInfo{
+
+    margin-left: 540px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 900px;
+    height: 100px;
+    padding: 20px;
+
+    text-align: left;
+
+    background-color: white;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    border-radius: 3px;
+
+}
+
+#loginform dd.error{
+    text-align: left;
+    margin-left: 70px;
+    padding-bottom: 10px;
+    color: #FF0000;
 }

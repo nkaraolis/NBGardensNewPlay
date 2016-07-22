@@ -51,7 +51,7 @@ class SearchController @Inject() extends Controller {
         form =>
           println("Faillllllllllll")
           Redirect(routes.HomeController.home()).flashing(Flash(form.data) +
-            ("error" -> Messages("product.error")))
+            ("error" -> Messages("0 Results Found..")))
       }, success = {
         newSearch =>
           println("Succesfullllllllllll")

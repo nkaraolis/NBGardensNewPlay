@@ -12,11 +12,12 @@
 
 @main(Messages("login.page"))(sidebar) {
 <div id="content" style="height: 1000px;">
-    <h2>Login form</h2>
 
     <h2>@Messages("login.form")</h2>
-    <div style="padding: 20px 0 0 0; font-family: 'Raleway';  font-weight: 600; font-size: 32px; color: #006633; margin-left: -600px;">Enter your login details </div>
-
+    <div style="font-family: 'Raleway'; font-weight: 600; font-size: 32px; color: #006633; margin-left: 400px; margin-top: 10px; width: 500px; display: block;">Enter your login details </div>
+    <div style="font-family: 'Raleway'; font-weight: 600; font-size: 32px; color: #006633; margin-left: 1050px; margin-top: -48px; width: 500px; display: block;">Create an NB Gardens Account
+        <a href=@routes.RegistrationController.newCustomer><input type="submit" class="btn-primary" style="margin-top: 20px;" value='@Messages("REGISTER")'></a>
+    </div>
     @helper.form(action = routes.LoginController.save) {
     <fieldset id="loginform">
         <legend>
@@ -33,12 +34,12 @@
             @flash.get("success")
         </div>
         }@if(flash.get("error").isDefined){
-        <div class="alert alert-error">
+        <div class="alert alert-error" style="width: 300px; padding-left: 100px; color: #FF0000; font-family: 'Raleway'">
             @flash.get("error")
         </div>
         }
     </div>
         }
-    <a href=@routes.RegistrationController.newCustomer><input type="submit" class="btn-primary" style="margin-left: 800px; top: -500px;" value='@Messages("REGISTER")'></a>
+
 </div>
 }

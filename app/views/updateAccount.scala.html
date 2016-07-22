@@ -10,13 +10,23 @@
 }
 
 @main(Messages("updateAccount.page"))(sidebar) {
-<div style="height : 1050px;">
-
-    <h2><center>Welcome @session.get("username")!</center></h2>
+<div style="height : 1200px;">
 
     <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Update your NB Gardens Account</div>
     @helper.form(action = routes.UpdateAccountController.saveChanges()) {
-    <fieldset id="contactform" style="margin-left: 700px;">
+
+    <div id="existingDetails">
+        <div id="detailsheader">@Messages("Existing Details", Messages("details.request"))<br></div><br>
+        <div id="detailsusername">Username:  <b>@session.get("username")</b><br></div><br>
+        First Name: <b>@session.get("firstName")</b><br>
+        Last Name:  <b>@session.get("lastName")</b><br>
+        Email:  <b>@session.get("email")</b><br>
+        Telephone: <b>@session.get("telephone")</b><br>
+        Password: <b>********</b>
+
+    </div>
+
+    <fieldset id="contactform" style="margin-left: 250px;">
       <legend>
             @Messages("Update Details", Messages("details.request"))
         </legend>
@@ -38,7 +48,7 @@
         }
     </div>
     <p>
-        <input type="submit" class="btn-primary" value='@Messages("details.update")'>
+        <input type="submit" class="btn-primary" value='UPDATE DETAILS' style="width: 230px; margin-left: 270px;">
     </p>
     }
 </div>
