@@ -40,17 +40,17 @@
 
             <div class="fontTypeB" style="padding: 30px 0px;">
 
-                @product.price
+                £@product.price
 
             </div>
             <div class="title" name="get">
+                @helper.form(routes.CartController.updateFromPL) {
 
-                Quantity <input class="productQuantity" type="text" maxlength="2" value="1" name="Qty"
-                       onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}">
+                <input type="hidden" name="Product" value="@product.name">
+                Quantity <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
+                <input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/>
 
-                <div style="display: inline-block;">
-                <a href="@routes.CartController.add(product.name, product.need)"><input type="submit" class="btn-primary" value="ADD TO CART" style="width:130px;"/></a>
-                </div>
+                }
             </div>
         </div>
 
