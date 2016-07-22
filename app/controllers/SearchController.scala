@@ -33,7 +33,7 @@ class SearchController @Inject() extends Controller {
     implicit request =>
       Product.findByNameS(Searched).map {
         search =>
-          val searchedProduct = Product.findByNameOB(Searched)
+          val searchedProduct = Product.findByNameS(Searched).toList
           Ok(views.html.listResult(searchedProduct))
       }.getOrElse(NotFound)
   }
@@ -50,7 +50,7 @@ class SearchController @Inject() extends Controller {
         form =>
           println("Faillllllllllll")
           Redirect(routes.HomeController.home()).flashing(Flash(form.data) +
-            ("error" -> Messages("product.error")))
+            ("error" -> Messages("Product not found, please try upper case first letter")))
       }, success = {
         newSearch =>
           println("Successfullllllllllll" )
