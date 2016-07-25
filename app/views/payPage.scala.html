@@ -1,4 +1,4 @@
-@(products: List[Product], total:Double, CardForm: Form[cardDetails])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: String, total:Double, CardForm: Form[cardDetails])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -31,7 +31,7 @@
             <br>
 
             <div id="payform">
-                @helper.form(routes.PayController.save(products.toString)) {
+                @helper.form(routes.PayController.save(products)) {
                     @helper.select(
                     field = CardForm("Payment Method"),
                     options = Seq(
@@ -50,7 +50,7 @@
                     @helper.inputText(CardForm("Issue No."))
                     Total: £@total
                     <input type="submit" class="btn-primary" value="PAY" style="width:110px; margin-left: 160px;"/>
-                }
+                 }
             </div>
         </div>
     </div>

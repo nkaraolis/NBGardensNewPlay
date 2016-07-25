@@ -7,6 +7,7 @@ case class Product(productId: String, name: String, description: String, price: 
 
 object Product {
   var products = Set(
+
     Product("0001","Paperclips Large","Large Plain Pack of 1000", "100", "images/page3_img1.jpg", "images/big1.jpg", "", "Lawnmower"),
     Product("0002","Giant Paperclips","Giant Plain 51mm 100 pack", "100", "images/page3_img2.jpg", "images/big2.jpg", "", "Lawnmower"),
     Product("0003","Paperclip Giant Plain", "Giant Plain Pack of 10000", "100", "images/page3_img3.jpg", "images/big3.jpg", "", "Lawnmower"),
@@ -16,6 +17,7 @@ object Product {
     Product("0008","CC", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture"),
     Product("0009","DD", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture"),
     Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "10", "Furniture")
+
   )
 
   def getPrice(qty:String, price:String): Double ={
@@ -76,7 +78,7 @@ object Product {
       if (products.isEmpty)
         results
       else {
-        if (products.head.name contains(name))
+        if (products.head.name.toLowerCase().contains(name.toLowerCase()))
           filter(products.tail, results + products.head)
         else
           filter(products.tail, results)
@@ -85,6 +87,6 @@ object Product {
     filter(products, Set.empty[Product]).toList
   }
 
-  def findByNameS(name: String) = products.toList.find(_.name contains(name.toUpperCase()))
-
+  //def findByNameS(name: String) = products.toList.find(_.name contains(name.toUpperCase()))
+  def findByNameS(name: String) = products.toList.find(_.name.toLowerCase().contains(name.toLowerCase()))
 }
