@@ -1,4 +1,4 @@
-@(products: List[Product], total:Double, CardForm: Form[cardDetails])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: String, total:Double, CardForm: Form[cardDetails])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -30,9 +30,9 @@
             </div>
             <br>
 
-            <div class="Pay">
-                @helper.form(routes.PayController.save(products.toString)) {
-                    Payment Information<br/><br/>
+            <div class="Pay" >
+                @helper.form(routes.PayController.save(products)) {
+                    Payment Information<br/>
                     @helper.inputRadioGroup(
                         CardForm("method"),
                         options = options("Card online Now" -> "Card online Now", "Card online Later" -> "Card online Later", "Paypal" -> "Paypal"),
