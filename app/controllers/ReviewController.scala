@@ -19,12 +19,6 @@ import views.html.helper.form
 class ReviewController @Inject() extends Controller {
 
 
-
-  def leaveReview = Action {
-
-  }
-
-
   def sessionReviewCheck = Action {
     implicit request =>
       if (request.session.get("username").isEmpty) {
