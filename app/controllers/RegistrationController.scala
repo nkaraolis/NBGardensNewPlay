@@ -41,7 +41,6 @@ class RegistrationController  @Inject() extends Controller{
       )
   }
 
-
   def newCustomer = Action {
     implicit request =>
       val form = if(request2flash.get("error").isDefined)
@@ -51,9 +50,12 @@ class RegistrationController  @Inject() extends Controller{
        Ok(views.html.registration(form))
   }
 
-def show = Action {
-  implicit request => val customers = Customer.findAllCustomer
-    Ok(views.html.customerall(customers))
-}
+  def show = Action {
+    implicit request => val customers = Customer.findAllCustomer
+      Ok(views.html.customerall(customers))
+  }
+
+
+
 
 }

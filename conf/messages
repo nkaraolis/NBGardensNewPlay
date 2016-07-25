@@ -64,3 +64,6 @@ search.page = Search Results
 listResult.page = List Results
 
 userAccount.page = User Account
+
+#Orders messages
+orders.new.submit = Your order has been placed
