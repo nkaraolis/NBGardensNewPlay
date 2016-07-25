@@ -18,6 +18,12 @@
 
 @main(Messages("productList.page"))(sidebar) {
 
+<script language="JavaScript">
+function popupAddMsg(msg) {
+  alert(msg);
+}
+</script>
+
 
 <div style="margin-left: 0px;">
     <div id="homeBanner">
@@ -52,7 +58,7 @@
                             <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@product.price</dt>
                             <input type="hidden" name="Product" value="@product.name">
                             <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
-                            <input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/>
+                            <input type="submit" class="btn-primary" value="ADD TO CART" onclick="popupAddMsg('This item has been added to your cart')" style="width:110px;"/>
                         }
                     </div>
                 </div>
