@@ -1,12 +1,22 @@
 package controllers
 
 import play.api.mvc._
-import models.{Cart, Product}
+import models.{Cart, Product, Review}
 import play.api.mvc.{Action, Controller}
-import models.Product
+import play.api.data.Form
+import play.api.data.Forms._
 
 
 class ProductPageController extends Controller {
+
+  /**val NewForm = routes.ReviewController.reviewForm
+  private val reviewForm : Form[Review] =
+    Form(mapping(
+      "Customer Name" -> text,
+      "Product ID" -> text,
+      "Review" -> nonEmptyText
+
+    )(Review.apply)(Review.unapply))**/
 
   def goToProduct(product: String) = Action {
     implicit request =>  //controller action
