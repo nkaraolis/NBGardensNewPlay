@@ -68,3 +68,5 @@ search.page = Search Results
 listResult.page = List Results
 
 userAccount.page = User Account
+
+review.validation.errors = Reviews bad n that

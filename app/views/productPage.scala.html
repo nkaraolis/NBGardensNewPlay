@@ -5,6 +5,8 @@
 @import play.api.mvc.Flash
 @import models.{Cart}
 
+<!--, ReviewForm : Form[Review]-->
+
 @sidebar = {
 <ul>
     <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
@@ -69,12 +71,15 @@
         <div class="productDivs">
             <div class="fontTypeA" >Leave A Review</div>
 
+
+
             <fieldset id="reviewForm">
                 <div class="formtext">Your Review: </div><br>
                 <textarea name="review" placeholder="Leave a review.."></textarea><br>
             </fieldset>
 
-            <a href="@routes.ProductPageController.goToProduct(product.name)"><input type="submit" class="btn-primary" value="SUBMIT" style="width:100px;"/></a>
+
+            <a href=""><input type="submit" class="btn-primary" value="SUBMIT" style="width:100px;"/></a>
         </div>
 
     </div>

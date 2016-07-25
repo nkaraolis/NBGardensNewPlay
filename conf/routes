@@ -63,3 +63,5 @@ GET     /toCheckout                 controllers.CartController.checkout()
 
 GET     /toPay                      controllers.PayController.readyToPay(total:Double)
 GET     /Pay                        controllers.PayController.save(products:String)
+
+#GET     /sessionReviewCheck         controllers.ReviewController.sessionReviewCheck
