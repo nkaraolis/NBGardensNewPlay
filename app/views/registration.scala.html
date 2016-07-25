@@ -10,16 +10,13 @@
 }
 
 @main(Messages("registration.page"))(sidebar) {
-<br>
-<br>
-<br>
-<br>
-<div id="content" style="height: 1330px; margin-left: 200px;">
 
-    <div id="contactheader" style="margin-top: -270px; margin-left: -800px;">@Messages("registration.form")</div>
+<div id="content" style="height: 1530px;">
+
+    <div id="contactheader" style="margin-top: -180px; margin-left: -580px;">@Messages("registration.form")</div>
     @helper.form(action = routes.RegistrationController.saveCustomer()) {
-    <fieldset id="contactform">
-        <legend style="margin-left: -90px;">
+    <fieldset id="contactform" style="padding-left: 200px;">
+        <legend>
             @Messages("Register your account details.", Messages("customer.new"))
         </legend>
         @helper.inputText(registrationForm("First Name"))
@@ -36,15 +33,15 @@
             @flash.get("success")
         </div>
         }@if(flash.get("error").isDefined){
-        <div class="alert alert-error">
+        <div class="alert alert-error" style="width: 300px; padding-left: 105px; color: #FF0000; font-family: 'Raleway'">
             @flash.get("error")
         </div>
         }
     </div>
-    <p  style="margin-left: -750px;">
+    <p style="margin-left: -410px;">
         <a href="@routes.PoliciesController.policies">By signing in you agree to NB Gardens' Terms & Conditions.</a>
         <br>
-        <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")' style="margin-top: 50px;">
+        <input type="submit" class="btn-primary" value='@Messages("customer.new.submit")' style="margin-top: 30px;">
     </p>
     }
 </div>

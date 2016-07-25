@@ -15,6 +15,7 @@ productList.page = Products List Page
 registration.page = Registration Page
 updateAccount.page = Update Account
 browseCategory.page = Category List Page
+payment.page = Payment
 
 #Validation messages for registration
 validation.email.duplicate = A user with that email already exists
@@ -33,6 +34,9 @@ customer.login = Login
 login.form = Login Form
 login.success = You have successfully logged in
 login.form.success = Form filled in correctly
+
+#Validation messages for update accounts
+updateAccount.validation.errors = Please fix the errors in the form before resubmitting
 
 #Individual page messages
 about.page = About Us Page

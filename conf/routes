@@ -6,7 +6,7 @@
 GET     /                           controllers.HomeController.home
 
 GET     /browse                     controllers.BrowseController.categoryList
-GET     /browseAnCat                controllers.BrowseController.productList
+GET     /browseAnCat                controllers.BrowseController.productList(cart:String)
 
 
 # An example controller showing how to use dependency injection
@@ -29,8 +29,6 @@ GET     /allCustomers               controllers.RegistrationController.show
 GET     /login                      controllers.LoginController.newLogin
 
 POST    /login                      controllers.LoginController.save
-
-GET     /login/:Email               controllers.LoginController.login3(Email:String)
 
 GET     /logout                     controllers.LoginController.logout
 
@@ -62,3 +60,6 @@ GET     /Search/:Result             controllers.SearchController.listResult(Resu
 GET     /userAccount                controllers.UserAccountController.userAccount
 
 GET     /toCheckout                 controllers.CartController.checkout()
+
+GET     /toPay                      controllers.PayController.readyToPay(total:Double)
+POST    /Pay                        controllers.PayController.save(products:String)

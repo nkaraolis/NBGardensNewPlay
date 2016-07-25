@@ -20,32 +20,9 @@ import play.api.mvc.Session
 @Singleton
 class UserAccountController  @Inject() extends Controller{
 
-  var currentCustomer = new CustomerDetails("", "", "", "", "", "")
-
-  val updateForm: Form[CustomerDetails] =
-    Form(mapping(
-      "First Name" -> text,
-      "Last Name" -> text,
-      "Email" -> text.verifying("validation.email.duplicate", Customer.findByEmail(_).isEmpty),
-      "Telephone" -> text,
-      "Username" -> default(text, currentCustomer.username),
-      "Password" -> text
-    )(CustomerDetails.apply)(CustomerDetails.unapply))
-
   def userAccount = Action {
     implicit request =>
-      if (request.session.get("username").isEmpty) {
-        Redirect(routes.LoginController.newLogin())
-      } else {
-        currentCustomer = Customer.findCustomer(request.session.get("username").get)
-        val formMapping = Map("firstName" -> currentCustomer.firstName,
-          "lastName" -> currentCustomer.lastName,
-          "email" -> currentCustomer.email,
-          "telephone" -> currentCustomer.telephone,
-          "password" -> currentCustomer.password
-        )
-        val userData = updateForm.bind(formMapping)
-        Ok(views.html.userAccount(userData))
-      }
+      Ok(views.html.userAccount())
   }
+
 }

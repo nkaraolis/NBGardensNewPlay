@@ -19,12 +19,7 @@ object datadump{
 
   def getCart: Array[Product] = {
 
-  Array{Product("0001","Paperclips Large","Large Plain Pack of 1000", "£100", "images/page3_img1.jpg", "images/big1.jpg"),
-                     Product("0002","Giant Paperclips","Giant Plain 51mm 100 pack", "£100", "images/page3_img2.jpg", "images/big2.jpg"),
-                     Product("0003","Paperclip Giant Plain", "Giant Plain Pack of 10000", "£100", "images/page3_img3.jpg", "images/big3.jpg")}
-
-
-  }
+    }
   }
 
 
@@ -33,5 +28,3 @@ object datadump{
 
 
 
-
-}

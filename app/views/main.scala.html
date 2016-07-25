@@ -66,21 +66,13 @@
         <form action="routes.SearchController.saveSearch">
             <input type="text" name="SearchIN" class="mytext" style="width: 300px;" placeholder="Search.."><br>
         </form>
+        <span>
+        <div id="searchBarImg"><a href= "@routes.SearchController.saveSearch"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
+        </span>
     </div>
 
-    <div class="container">
-        @if(flash.get("success").isDefined){
-        <div class="alert alert-success">
-            @flash.get("success")
-        </div>
-        }@if(flash.get("error").isDefined){
-        <div class="alert alert-error">
-            @flash.get("error")
-        </div>
-        }
-    </div>
     }
-    <div id="searchBarImg"><a href= "@routes.SearchController.saveSearch"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
+
 
     <div id="icons" style="float:right; margin-right:20px; font-size:0px; margin-top: -167px;">
         @if(session.get("username").isEmpty) {
@@ -91,6 +83,20 @@
         <a href= "@routes.LoginController.logout"><div id="icon2"></div></a>
         }
         <a href= "@routes.CartController.list"><div id="trolley"></div></a>
+    </div>
+
+    <div class="container" style="float: left; display: inline-block; margin-top: -112px; margin-left: 980px; width: 180px; height: 20px; font-family: 'Raleway'; font-size: 16px; font-weight: 600;">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @if(flash.get("error").contains("0 Results Found..")){
+            @flash.get("error")
+            }
+        </div>
+        }
     </div>
 </div>
 
@@ -104,7 +110,7 @@
 <div id="footer">
     <a href="@routes.ContactController.contact" style="padding-right: 15px; padding-left: 0px"><div id="contactUs"></div></a>
     <a href="@routes.HelpController.help" style="padding-right: 30px; padding-left: 0px"><div id="helpSupport"></div></a>
-    <a href= "https://www.facebook.com"><div id="facebook"></div></a>
+    <a href= "https://www.youtube.com/watch?v=2ymHs5pmypk"><div id="facebook"></div></a>
     <a href= "@routes.HomeController.home"><div id="nbFooter"></div></a>
     <a href= "https://twitter.com/"><div id="twitter"></div></a>
     <a href= "@routes.AboutController.about" style="padding-right: 0px; padding-left: 30px"><div id="aboutUs"></div></a>

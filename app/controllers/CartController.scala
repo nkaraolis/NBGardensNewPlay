@@ -34,13 +34,12 @@ class CartController extends Controller {
     implicit request =>  //controller action
       val p = Product.findByName(product).get
       def np : Product = {
-        Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, Qty)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, Qty, p.carId)
         val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
       products = Cart.addToCart(np) //get product from model
-      Redirect(routes.BrowseController.productList) //render view template
+      Redirect(routes.BrowseController.productList(p.carId)) //render view template
   }
 
   def remove(product: String) = Action {
@@ -55,11 +54,11 @@ class CartController extends Controller {
       val p = Product.findByName(CartForm.bindFromRequest().data("Product")).get
       val q:String = CartForm.bindFromRequest().data("Qty")
       val subTot = (CartForm.bindFromRequest().data("Qty").toDouble) * (p.price.toDouble)
-      removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
       renewTotalPrice(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
+      removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId)
         val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
@@ -71,8 +70,12 @@ class CartController extends Controller {
 
   def checkout() = Action {
     implicit request =>  //controller action
-      Ok(views.html.checkout(products.toList, totalT))//render view template
-  }
+      if (request.session.get("username").isEmpty) {
+        Redirect(routes.LoginController.newLogin())
+      } else {
+        Ok(views.html.checkout(products.toList, totalT)) //render view template
+      }
+      }
 
   def updateFromPL() = Action {
     implicit request =>  //controller action
@@ -82,17 +85,20 @@ class CartController extends Controller {
       removeO(Product.findByName(CartForm.bindFromRequest().data("Product")).get.name)
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q)
-        val t = Product.findByName(p.name).toArray.apply(0)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId)
+        val t = Product.findByName(p.name).toArray.apply(0)//
         t
       }
       val cp = Cart.addToCart(np)
       products =  cp //get product from model
       totalT += subTot
-      Redirect(routes.BrowseController.productList)//render view template
+      Redirect(routes.BrowseController.productList(p.carId))//render view template
   }
 
   def removeO(product: String) : Array[Product] ={
+//    if(totalT>0){
+//      renewTotalPrice(product)
+//    }
     products = Cart.removeFromCart(Product.findByName(product).get)   //get product from model
     products
   }

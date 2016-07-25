@@ -383,16 +383,14 @@ input[type = "submit"] {
 }
 
 #contactform label{
-
     margin-left: -50px;
     text-align: left;
 }
 
 
 #contactform dd.info{
-
-    margin-left: -370px;
-    color: #ff6759;
+    margin-left: -405px;
+    color: #FF0000;
 }
 
 
@@ -902,4 +900,35 @@ light green - RGB 0 153 51 - #009933
     resize: none;
     border-radius: 3px;
 
+}
+
+.checkoutDiv{
+
+    margin-left: 540px;
+    margin-top: -20px;
+    margin-bottom: 50px;
+    width: 900px;
+    padding: 20px;
+
+    text-align: left;
+
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    border-radius: 3px;
+
+}
+
+#loginform dd.error{
+    text-align: left;
+    margin-left: 70px;
+    padding-bottom: 10px;
+    color: #FF0000;
+}
+
+#contactform dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 10px;
+    color: #FF0000;
 }

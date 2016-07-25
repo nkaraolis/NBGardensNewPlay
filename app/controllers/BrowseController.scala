@@ -9,9 +9,9 @@ import models.{Category, Product}
   */
 class BrowseController extends Controller{
 
-  def productList = Action {
+  def productList(cart: String) = Action {
     implicit request =>  //controller action
-      val products = Product.findAll  //get product from model
+      val products = Product.findByCart(cart)  //get product from model
       Ok(views.html.ProductList(products)) //render view template
   }
 
