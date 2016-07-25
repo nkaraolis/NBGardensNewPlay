@@ -35,16 +35,46 @@
                     Payment Information<br/><br/>
                     @helper.inputRadioGroup(
                         CardForm("method"),
-                        options = Seq("Card online Now" -> "Card online Now", "Card online Later" -> "Card online Later", "Paypal" -> "Paypal"),
+                        options = options("Card online Now" -> "Card online Now", "Card online Later" -> "Card online Later", "Paypal" -> "Paypal"),
                         '_label -> ""
                     )
-                    @helper.inputText(CardForm("name"))
-                    @helper.inputText(CardForm("cardNu"))
-                    @helper.inputText(CardForm("exp"))
-                    @helper.inputText(CardForm("securityCode"))
-                    @helper.inputText(CardForm("issueNu"))
-                    @helper.inputText(CardForm("start"))
-                    <h3>Total: £@total</h3>
+
+                    <table>
+                        <tr>
+                            <td>Name on the card: </td>
+                            <td><input name="name" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+                        </tr>
+                        <tr>
+                            <td>Card Number: </td>
+                            <td><input name="cardNu" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+                        </tr>
+                        <tr>
+                            <td>Exp Date: </td>
+                            <td><input name="exp" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+                        </tr>
+                        <tr>
+                            <td>Security Code: </td>
+                            <td><input name="securityCode" class="Pay" maxlength="3" type="text" value="" placeholder=""/></td>
+                        </tr>
+                        <tr>
+                            <td>Issue Number:</td>
+                            <td><input name="issueNu" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+                        </tr>
+                        <tr>
+                            <td>Start Date: </td>
+                            <td><input name="start" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+                        </tr>
+                    </table>
+
+                        <!--@helper.inputText(CardForm("name"))-->
+                        <!--@helper.inputText(CardForm("cardNu"))-->
+                        <!--@helper.inputText(CardForm("exp"))-->
+                        <!--@helper.inputText(CardForm("securityCode"))-->
+                        <!--@helper.inputText(CardForm("issueNu"))-->
+                        <!--@helper.inputText(CardForm("start"))-->
+
+
+                    <h3>Total: £@total</h3><br />
                     <input type="submit" class="btn-primary" value="Pay" style="width:110px;"/>
                 }
             </div>
