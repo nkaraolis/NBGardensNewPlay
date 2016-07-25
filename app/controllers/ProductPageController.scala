@@ -1,7 +1,7 @@
 package controllers
 
+import models.{Product}
 import play.api.mvc.{Action, Controller}
-import models.Product
 
 /**
   * Created by Administrator on 08/07/2016.
