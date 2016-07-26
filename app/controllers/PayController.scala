@@ -18,12 +18,12 @@ class PayController extends Controller {
   val CardForm: Form[cardDetails] = Form(
     mapping(
       "method" -> nonEmptyText,
-      "name" -> nonEmptyText,
-      "cardNu" -> nonEmptyText,
-      "exp" -> nonEmptyText,
-      "securityCode" -> nonEmptyText,
-      "issueNu" -> of[String],
-      "start" -> of[String]
+      "Name_on_card" -> nonEmptyText,
+      "Card_No" -> nonEmptyText,
+      "Start_Date" -> nonEmptyText,
+      "Expiry_Date" -> nonEmptyText,
+      "Security_Code" -> of[String],
+      "Issue_No" -> of[String]
     )
     (cardDetails.apply)
     (cardDetails.unapply)
@@ -70,7 +70,7 @@ class PayController extends Controller {
   def save (products: String) = Action {
     implicit request =>
       val newCardForm = CardForm.bindFromRequest()
-      val newCard = cardDetails(newCardForm.get.method, newCardForm.get.name, newCardForm.get.cardNu, newCardForm.get.exp, newCardForm.get.securityCode, newCardForm.get.issueNu, newCardForm.get.start)
+      val newCard = cardDetails(newCardForm.get.method, newCardForm.get.Name_on_card, newCardForm.get.Card_No, newCardForm.get.Start_Date, newCardForm.get.Expiry_Date, newCardForm.get.Security_Code, newCardForm.get.Issue_No)
       saveOrder(products)
       cardDetails.add(newCard)
       Redirect(routes.BrowseController.categoryList)

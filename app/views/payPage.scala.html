@@ -17,29 +17,8 @@
 }
 
 @main(Messages("payment.page"))(sidebar) {
+    <div id="content" style="height: 1300px;">
 
-<script language="JavaScript">
-window.onload = function(){
-    var method = document.getElementsByName("method");
-    for (var i = 0; i < method.length; i++) {
-          method[i].indexs = i + 1;
-        method[i].onchange = function () {
-            if (this.checked) {
-                document.getElementsByValue("CardOnlineNow").<a href="@routes.PayController.payByPaypal(products, total)" target="mainframe"</a>
-                document.getElementsByValue("CardOnlineLater").style.display="blue";
-                document.getElementsByValue("id" + this.indexs).style.display="block";
-            }
-        }
-    }
-}
-
-function MM_jumpMenu(){
-    href="@routes.PayController.payByPaypal(products, total)" target="mainframe"
-}
-
-</script>
-
-    <div id="content">
         <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 670)px;">
 
             <div class="title">
@@ -52,27 +31,38 @@ function MM_jumpMenu(){
             </div>
             <br>
 
-            <br class="Pay" id="payTop">
-                Payment method<br>
+                <!--<div class="Pay" id="payTop">-->
+                    <!--Payment method<br>-->
 
-                <input type="submit" class="btn-primary" value="ADD TO CART" onclick="popupAddMsg('This item has been added to your cart')" style="width:110px;"/>
-                <input type="submit" class="btn-primary" value="ADD TO CART" onclick="popupAddMsg('This item has been added to your cart')" style="width:110px;"/>
+                <!--&lt;!&ndash;<a href="@routes.PayController.payByCard(products, total)" target="mainframe"><input type="radio" name="method" value="CardOnlineNow" checked="checked" onclick="href='@routes.PayController.payByCard(products, total)'" target="mainframe"/>Card online Now</a><br>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="@routes.PayController.payByCard(products, total)" target="mainframe"><input type="radio" name="method" value="CardOnlineLater" onclick="href='@routes.PayController.payByCard(products, total)'" target="mainframe"/>Card online Later</a><br>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="@routes.PayController.payByPaypal(products, total)" target="mainframe"><input type="radio" name="method" value="Paypal" onclick="href='@routes.PayController.payByPaypal(products, total)'" target="mainframe"/></a>Paypal&ndash;&gt;-->
+                <!--</div>-->
 
-                <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu()">
-                    <option value="@routes.PayController.payByCard(products, total)" target="mainframe" selected="selected">Card online Now</option>
-                    <option value="@routes.PayController.payByCard(products, total)" target="mainframe">Card online Later</option>
-                    <option value="@routes.PayController.payByPaypal(products, total)" target="mainframe">Paypal</option>
-                </select>
+                <!--<div class="Pay" id="payBot">-->
+                    <!--<iframe src="@routes.PayController.payByCard(products, total)" name="mainframe"  width="800" height="780"></iframe>-->
 
-                <br>
-
-            <a href="@routes.PayController.payByCard(products, total)" target="mainframe"><input type="radio" name="method" value="CardOnlineNow" checked="checked" onclick="href='@routes.PayController.payByCard(products, total)'" target="mainframe"/>Card online Now</a>><br>
-            <a href="@routes.PayController.payByCard(products, total)" target="mainframe"><input type="radio" name="method" value="CardOnlineLater" onclick="href='@routes.PayController.payByCard(products, total)'" target="mainframe"/>Card online Later</a>><br>
-            <a href="@routes.PayController.payByPaypal(products, total)" target="mainframe"><input type="radio" name="method" value="Paypal" onclick="href='@routes.PayController.payByPaypal(products, total)'" target="mainframe"/></a>>Paypal
-            </div>
-
-            <div class="Pay" id="payBot">
-                <iframe src="@routes.PayController.payByCard(products, total)" name="mainframe"  width="800" height="780"></iframe>
+            <div id="payform">
+                @helper.form(routes.PayController.save(products)) {
+                    @helper.select(
+                        field = CardForm("method"),
+                        options = Seq(
+                        "Card online Now" -> "Card online Now",
+                        "Card online Later" -> "Card online Later",
+                        "Paypal" -> "Paypal"
+                        ),
+                        '_default -> "Choose One",
+                        '_disabled -> Seq("FooKey", "BazKey")
+                    )
+                    @helper.inputText(CardForm("Name_on_card"))
+                    @helper.inputText(CardForm("Card_No"))
+                    @helper.inputText(CardForm("Start_Date"))
+                    @helper.inputText(CardForm("Expiry_Date"))
+                    @helper.inputText(CardForm("Security_Code"))
+                    @helper.inputText(CardForm("Issue_No"))
+                    Total: £@total
+                    <input type="submit" class="btn-primary" value="PAY" style="width:110px; margin-left: 160px;"/>
+                 }
             </div>
         </div>
     </div>
