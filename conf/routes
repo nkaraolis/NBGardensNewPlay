@@ -67,3 +67,4 @@ GET     /toPay                      controllers.PayController.readyToPay(items:S
 
 POST    /Pay                        controllers.PayController.save(products:String)
 
+GET     /catalogue                  controllers.CatalogueController.catalogue

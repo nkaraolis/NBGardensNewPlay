@@ -16,6 +16,7 @@ registration.page = Registration Page
 updateAccount.page = Update Account
 browseCategory.page = Category List Page
 payment.page = Payment
+catalogue.page = Catalogue
 
 #Validation messages for registration
 validation.email.duplicate = A user with that email already exists

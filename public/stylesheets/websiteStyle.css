@@ -941,3 +941,14 @@ light green - RGB 0 153 51 - #009933
     margin: 10px 0 20px -250px;
     height: 35px;
 }
+
+#payform input[type="date"] {
+    margin: 15px 0 20px -350px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    width: 150px;
+    height: 32px;
+    border-radius: 3px;
+}
