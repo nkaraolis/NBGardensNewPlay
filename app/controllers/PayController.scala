@@ -41,6 +41,23 @@ class PayController extends Controller {
       }
   }
 
+  def payByCard(items: String, total:Double) = Action {
+    implicit request =>  //controller action
+      if (request.session.get("username").isEmpty) {//check the user has logged in or not
+        Redirect(routes.LoginController.newLogin())
+      }
+      Ok(views.html.payByCard(items, total, CardForm)) //render view template
+  }
+
+  def payByPaypal(items: String, total:Double) = Action {
+    implicit request =>  //controller action
+      if (request.session.get("username").isEmpty) {//check the user has logged in or not
+        Redirect(routes.LoginController.newLogin())
+      }
+      Ok(views.html.payByPaypal(items, total, CardForm)) //render view template
+  }
+
+
   def readyToPay(items: String, total:Double) = Action {
     implicit request =>  //controller action
       if (request.session.get("username").isEmpty) {//check the user has logged in or not
