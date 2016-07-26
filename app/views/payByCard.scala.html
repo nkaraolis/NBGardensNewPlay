@@ -1,0 +1,48 @@
+@(products: String, total:Double, CardForm: Form[cardDetails])(implicit flash: Flash, lang: Lang, session : Session)
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import models.{Cart}
+@import helper._
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ByCard</title>
+</head>
+<body>
+    @helper.form(routes.PayController.save(products)) {
+        <table>
+            <tr>
+                <td>Name on the card: </td>
+                <td><input name="name" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+            </tr>
+            <tr>
+                <td>Card Number: </td>
+                <td><input name="cardNu" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+            </tr>
+            <tr>
+                <td>Exp Date: </td>
+                <td><input name="exp" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+            </tr>
+            <tr>
+                <td>Security Code: </td>
+                <td><input name="securityCode" class="Pay" maxlength="3" type="text" value="" placeholder=""/></td>
+            </tr>
+            <tr>
+                <td>Issue Number:</td>
+                <td><input name="issueNu" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+            </tr>
+            <tr>
+                <td>Start Date: </td>
+                <td><input name="start" class="Pay" maxlength="" type="text" value="" placeholder=""/></td>
+            </tr>
+        </table>
+        <h3>Total: £@total</h3><br />
+        <input type="submit" class="btn-primary" value="Pay" style="width:110px;"/>
+    }
+</body>
+</html>

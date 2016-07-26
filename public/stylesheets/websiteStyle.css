@@ -679,7 +679,6 @@ ul {
     padding-right: 0px;
     width: 192px;
     background-color: #f1f1f1;
-
 }
 
 li a {
@@ -746,11 +745,9 @@ light green - RGB 0 153 51 - #009933
     text-align: left;
     background-color: #FFF;
     display: inline;
-
 }
 
 .productImg{
-
     display: inline;
     float: left;
     width: 420px;
@@ -759,12 +756,10 @@ light green - RGB 0 153 51 - #009933
 }
 
 .productQuantity{
-
     text-align: center;
     width: 30px;
     height: 30px;
     margin: 0 20px;
-
     background-color: white;
     background: #fafafa;
     border: 1px solid #ccc;
@@ -775,19 +770,16 @@ light green - RGB 0 153 51 - #009933
 }
 
 .productQuantity :hover{
-
     background-color: none;
     background: none;
 }
 
 .productQuantity :focus{
-
     background-color: white;
     background: white;
 }
 
 .fontTypeA{
-
     margin-bottom: 20px;
     font-family: 'Raleway', sans-serif;
     color: #006633;
@@ -796,7 +788,6 @@ light green - RGB 0 153 51 - #009933
 }
 
 .fontTypeB{
-
     font-family: "Arial", sans-serif;
     font-size: 30px;
 }
@@ -815,7 +806,6 @@ light green - RGB 0 153 51 - #009933
 }
 
 .fontTypeF{
-
     font-family: 'Raleway', sans-serif;
     color: #006633;
     font-weight: 600;
@@ -823,7 +813,6 @@ light green - RGB 0 153 51 - #009933
 }
 
 .productDivs{
-
     margin-left: 50px;
     margin-bottom: 100px;
     font-family: 'Raleway', sans-serif;
@@ -832,19 +821,16 @@ light green - RGB 0 153 51 - #009933
 }
 
 .borderGrid {
-
     display: inline;
     float: left;
     margin: 0px;
 }
 
 .borderGrid :hover{
-
     background-color: #F0F0F0;
 }
 
 .nbBtn{
-
     height: 31px;
     width: 100px;
     background-color: #009933;
@@ -872,26 +858,20 @@ light green - RGB 0 153 51 - #009933
 #detailsheader{
     font-size: 21px;
     color: #333;
-
-
 }
 
 #detailsusername{
     font-size: 19px;
-
 }
 
 .accountInfo{
-
     margin-left: 540px;
     margin-top: 50px;
     margin-bottom: 50px;
     width: 900px;
     height: 100px;
     padding: 20px;
-
     text-align: left;
-
     background-color: white;
     background: #fafafa;
     border: 1px solid #ccc;
@@ -899,24 +879,19 @@ light green - RGB 0 153 51 - #009933
     font-family: 'Raleway', sans-serif;
     resize: none;
     border-radius: 3px;
-
 }
 
 .checkoutDiv{
-
     margin-left: 540px;
     margin-top: -20px;
     margin-bottom: 50px;
     width: 900px;
     padding: 20px;
-
     text-align: left;
-
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
     resize: none;
     border-radius: 3px;
-
 }
 
 #loginform dd.error{
@@ -936,6 +911,14 @@ light green - RGB 0 153 51 - #009933
 .usernameInput {
     margin-top: 100px;
     margin-left: 400px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+#payform{
+    margin-top: 100px;
+    margin-left: 160px;
     float: left;
     border: none;
     font-family: 'Raleway', sans-serif;
@@ -994,4 +977,30 @@ light green - RGB 0 153 51 - #009933
 .detailsusername{
     font-size: 19px;
 
+}
+
+#payform input[type="text"] {
+    margin: 15px 0 20px -95px;
+    overflow: hidden;
+    padding: 5px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 32px;
+    border-radius: 3px;
+}
+
+#payform label{
+    margin-left: -50px;
+    text-align: left;
+}
+
+#payform select{
+    font-family: 'Raleway', sans-serif;
+    width: 250px;
+    margin: 10px 0 20px -250px;
+    height: 35px;
 }

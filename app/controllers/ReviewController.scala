@@ -18,8 +18,6 @@ import views.html.helper.form
 @Singleton
 class ReviewController @Inject() extends Controller {
 
-
-
   private val reviewForm : Form[Review] =
     Form(mapping(
       "Customer Name" -> text,
@@ -81,6 +79,7 @@ class ReviewController @Inject() extends Controller {
   }**/
 
   /**def sessionReviewCheck(product: String) = Action {
+
     implicit request =>
       if (request.session.get("username").isEmpty) {
         Redirect(routes.LoginController.newLogin())
