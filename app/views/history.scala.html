@@ -4,7 +4,7 @@
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
-@import models.{Cart}
+
 
 @sidebar = {
 <ul>
@@ -44,8 +44,12 @@ value
         <div class="title">
             <div class="fontTypeD" style="padding-bottom: 50px;">Order History</div>
         </div>
-        @for (order <- Orders) {
-        <dt style="font-size: 14px;">Description: @order.product</dt>
+        <h1> hi </h1>
+        @for(order <- Orders) {
+        <div style="height: 130px; margin-top:400px;">
+            <h1 style="font-size: 14px;">Order: @order.product</h1>
+        </div>
         }
     </div>
 </div><br>
+}
