@@ -29,18 +29,6 @@
                 </div>
 
             </div>
-            <br>
-
-                <!--<div class="Pay" id="payTop">-->
-                    <!--Payment method<br>-->
-
-                <!--&lt;!&ndash;<a href="@routes.PayController.payByCard(products, total)" target="mainframe"><input type="radio" name="method" value="CardOnlineNow" checked="checked" onclick="href='@routes.PayController.payByCard(products, total)'" target="mainframe"/>Card online Now</a><br>&ndash;&gt;-->
-                <!--&lt;!&ndash;<a href="@routes.PayController.payByCard(products, total)" target="mainframe"><input type="radio" name="method" value="CardOnlineLater" onclick="href='@routes.PayController.payByCard(products, total)'" target="mainframe"/>Card online Later</a><br>&ndash;&gt;-->
-                <!--&lt;!&ndash;<a href="@routes.PayController.payByPaypal(products, total)" target="mainframe"><input type="radio" name="method" value="Paypal" onclick="href='@routes.PayController.payByPaypal(products, total)'" target="mainframe"/></a>Paypal&ndash;&gt;-->
-                <!--</div>-->
-
-                <!--<div class="Pay" id="payBot">-->
-                    <!--<iframe src="@routes.PayController.payByCard(products, total)" name="mainframe"  width="800" height="780"></iframe>-->
 
             <div id="payform">
                 @helper.form(routes.PayController.save(products)) {
@@ -51,7 +39,7 @@
                         "Card online Later" -> "Card online Later",
                         "Paypal" -> "Paypal"
                         ),
-                        '_default -> "Choose One",
+                        '_default -> "Card online Now",
                         '_disabled -> Seq("FooKey", "BazKey")
                     )
                     @helper.inputText(CardForm("Name_on_card"))
