@@ -21,14 +21,14 @@
         <input type="submit" class="btn-primary" value='VIEW ORDERS' style=" display: inline-block; float: right; width: 160px; margin-left: 20px;">
         <div class="fontTypeE" style="float: right;">View, Track or Cancel an Order</div>
 
-        <div class="fontTypeE" style=""><a href="#"><br>View Order History</a></div>
+        <div class="fontTypeE" style=""><a href="@routes.OrderHistoryController.findOrders"><br>View Order History</a></div>
     </div>
 
     <div class="accountInfo">
         <div class="fontTypeF">Update your Account</div>
         <div class="fontTypeE" style="display: inline-block;">Customer Details: Email, Password, Addresses etc.</div>
 
-        <div class="fontTypeE" style="float: right;"><a href="@routes.UpdateAccountController.updateAccount">Account Settings</a></div><br>
+        <div class="fontTypeE" style="float: right;"><a href="@routes.UpdateAccountController.newPage">Account Settings</a></div><br>
         <div class="fontTypeE" style="float: right; padding-top:10px;"><a href="#">Manage Your Addresses</a></div>
 
     </div>

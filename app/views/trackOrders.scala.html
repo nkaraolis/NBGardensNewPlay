@@ -53,19 +53,15 @@
                         <td style="">
                             <div class="gallery">
                                 <div class="grid_3" style="width: 110px; height: 110px; margin-top: 25px; margin-bottom: 0px;">
-                                    <a href="@routes.Assets.versioned(product.imgL)" class="gal" style="width: 110px; height: 110px;">
-                                        <div class="img_block" style="width: 110px; height: 110px;">
-                                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner" style="width:110px; height: 110px;">
-                                        </div>
-                                    </a>
+
                                 </div>
                             </div>
                         </td>
 
-                        <td style="">@product.name</td>
-                        <td style="text-align: right;">@product.need</td>
-                        <td style="text-align: right;">£@product.price</td>
-                        <td style="text-align: right;">£@Product.getPrice(product.price, product.need)</td>
+                        <td style="">@order.ordId</td>
+                        <td style="text-align: right;">@order.carts</td>
+                        <td style="text-align: right;">@order.datetime</td>
+                        <td style="text-align: right;">@order.status</td>
 
                     </tr>
 
@@ -85,25 +81,21 @@
                         <th style="width: 100px; text-align: right;">Item Price</th>
                         <th style="width: 100px; text-align: right;">Subtotal</th>
                     </tr>
-                    @for(product <- products) {
+                    @for(order <- orders) {
 
                     <tr>
                         <td style="">
                             <div class="gallery">
                                 <div class="grid_3" style="width: 110px; height: 110px; margin-top: 25px; margin-bottom: 0px;">
-                                    <a href="@routes.Assets.versioned(product.imgL)" class="gal" style="width: 110px; height: 110px;">
-                                        <div class="img_block" style="width: 110px; height: 110px;">
-                                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner" style="width:110px; height: 110px;">
-                                        </div>
-                                    </a>
+
                                 </div>
                             </div>
                         </td>
 
-                        <td style="">@product.name</td>
-                        <td style="text-align: right;">@product.need</td>
-                        <td style="text-align: right;">£@product.price</td>
-                        <td style="text-align: right;">£@Product.getPrice(product.price, product.need)</td>
+                        <td style="">@order.ordId</td>
+                        <td style="text-align: right;">@order.carts</td>
+                        <td style="text-align: right;">@order.datetime</td>
+                        <td style="text-align: right;">@order.status</td>
 
                     </tr>
 
@@ -124,25 +116,21 @@
                         <th style="width: 100px; text-align: right;">Item Price</th>
                         <th style="width: 100px; text-align: right;">Subtotal</th>
                     </tr>
-                    @for(product <- products) {
+                    @for(order <- orders) {
 
                     <tr>
                         <td style="">
                             <div class="gallery">
                                 <div class="grid_3" style="width: 110px; height: 110px; margin-top: 25px; margin-bottom: 0px;">
-                                    <a href="@routes.Assets.versioned(product.imgL)" class="gal" style="width: 110px; height: 110px;">
-                                        <div class="img_block" style="width: 110px; height: 110px;">
-                                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner" style="width:110px; height: 110px;">
-                                        </div>
-                                    </a>
+
                                 </div>
                             </div>
                         </td>
 
-                        <td style="">@product.name</td>
-                        <td style="text-align: right;">@product.need</td>
-                        <td style="text-align: right;">£@product.price</td>
-                        <td style="text-align: right;">£@Product.getPrice(product.price, product.need)</td>
+                        <td style="">@order.ordId</td>
+                        <td style="text-align: right;">@order.carts</td>
+                        <td style="text-align: right;">@order.datetime</td>
+                        <td style="text-align: right;">@order.status</td>
 
                     </tr>
 

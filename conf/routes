@@ -67,5 +67,10 @@ GET     /toPay                      controllers.PayController.readyToPay(items:S
 
 POST    /Pay                        controllers.PayController.save(products:String)
 
+
 GET     /toPayByCard                controllers.PayController.payByCard(items:String, total:Double)
 GET     /toPayByPaypal              controllers.PayController.payByPaypal(items:String, total:Double)
+
+GET     /history                    controllers.OrderHistoryController.newPage
+
+

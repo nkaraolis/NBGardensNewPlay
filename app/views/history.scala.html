@@ -5,13 +5,14 @@
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 
+
 @sidebar = {
 <ul>
-    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    <li><a href= browse >Categories</a></li>
+    <li><a href="news.asp">Gnomes</a></li>
+    <li><a href="contact.asp">Tools</a></li>
+    <li><a href="about.asp">Gardening Supplies</a></li>
+    <li><a href="about.asp">Outdoor Equipment</a></li>
 </ul>
 }
 
@@ -30,9 +31,9 @@ value
 
 <div style="margin-left: 150px;">
     <div id="homeBanner">
-        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style="padding-bottom: 20px; padding-right: 40px; margin-left:200px;"/></a>
-        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style="padding-bottom: 20px; padding-right: 40px;"/></a>
-        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style="padding-bottom: 20px; padding-right: 40px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     </div>
 </div>
 
@@ -43,10 +44,13 @@ value
         <div class="title">
             <div class="fontTypeD" style="padding-bottom: 50px;">Order History</div>
         </div>
-        @for (order <- Orders) {
-        <dt style="font-size:14px;">Description: @order.product</dt>
+        <h1> hi </h1>
+        @for(order <- Orders) {
+        <div style="height: 130px; margin-top:400px;">
+            <h1 style="font-size: 14px;">Order: @order.product</h1>
+        </div>
         }
     </div>
 </div><br>
-
 }
+
