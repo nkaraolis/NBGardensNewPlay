@@ -6,141 +6,40 @@
 @import models.{Order}
 @import helper._
 
+
 @sidebar = {
-<ul>
-    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
-</ul>
 }
 
-@main(Messages("checkout.page"))(sidebar) {
+@main(Messages("trackOrders.page"))(sidebar) {
+<div style="height : 900px;">
 
-<div style="margin-left: 0px;">
-    <div id="homeBanner">
-        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
-        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
-        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+    <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Orders</div>
+
+    <div class="accountInfo">
+        <div class="fontTypeF">Current Orders</div>
+        <div class="fontTypeE" style="display: inline-block;">See & Modify Recent Orders</div>
+
+        <input type="submit" class="btn-primary" value='VIEW ORDERS' style=" display: inline-block; float: right; width: 160px; margin-left: 20px;">
+        <div class="fontTypeE" style="float: right;">View, Track or Cancel an Order</div>
+
+        <div class="fontTypeE" style=""><a href="@routes.OrderHistoryController.newPage"><br>View Order History</a></div>
     </div>
-</div>
 
-<div class ="line"></div>
+    <div class="accountInfo">
+        <div class="fontTypeF">Dispatched Orders</div>
+        <div class="fontTypeE" style="display: inline-block;">Customer Details: Email, Password, Addresses etc.</div>
 
-<div id="content">
-    <div class="container_12" style="width: 1300px; height: @(orders.length*110 + 670)px;">
+        <div class="fontTypeE" style="float: right;"><a href="@routes.UpdateAccountController.updateAccount">Account Settings</a></div><br>
+        <div class="fontTypeE" style="float: right; padding-top:10px;"><a href="@routes.UserAddressesController.userAddresses">Manage Your Addresses</a></div>
 
-        <div class="title">
-            <div class="fontTypeD" style="margin-left: 30px; display: inline;">Track Orders</div>
-            <div style="display: inline-block; margin-left: 650px;"></div>
-        </div>
+    </div>
 
-        <div class="accountInfo" style="margin-left:200px; height: @(orders.length*135 + 100)px;">
+    <div class="accountInfo">
+        <div class="fontTypeF">Closed Orders</div>
+        <div class="fontTypeE" style="display: inline-block;">Card & Payment Plan Information</div>
 
-            <div class="fontTypeE">
-                <table>
-                    <tr>
-                        <th style="width: 150px">Your Order</th>
-                        <th style="width: 300px"></th>
-                        <th style="width: 90px; text-align: right;">Quantity</th>
-                        <th style="width: 100px; text-align: right;">Item Price</th>
-                        <th style="width: 100px; text-align: right;">Subtotal</th>
-                    </tr>
-                    @for(order <- orders) {
-
-                    <tr>
-                        <td style="">
-                            <div class="gallery">
-                                <div class="grid_3" style="width: 110px; height: 110px; margin-top: 25px; margin-bottom: 0px;">
-
-                                </div>
-                            </div>
-                        </td>
-
-                        <td style="">@order.ordId</td>
-                        <td style="text-align: right;">@order.carts</td>
-                        <td style="text-align: right;">@order.datetime</td>
-                        <td style="text-align: right;">@order.status</td>
-
-                    </tr>
-
-                    }
-                </table>
-
-            </div>
-
-
-
-            <div class="fontTypeE">
-                <table>
-                    <tr>
-                        <th style="width: 150px">Your Order</th>
-                        <th style="width: 300px"></th>
-                        <th style="width: 90px; text-align: right;">Quantity</th>
-                        <th style="width: 100px; text-align: right;">Item Price</th>
-                        <th style="width: 100px; text-align: right;">Subtotal</th>
-                    </tr>
-                    @for(order <- orders) {
-
-                    <tr>
-                        <td style="">
-                            <div class="gallery">
-                                <div class="grid_3" style="width: 110px; height: 110px; margin-top: 25px; margin-bottom: 0px;">
-
-                                </div>
-                            </div>
-                        </td>
-
-                        <td style="">@order.ordId</td>
-                        <td style="text-align: right;">@order.carts</td>
-                        <td style="text-align: right;">@order.datetime</td>
-                        <td style="text-align: right;">@order.status</td>
-
-                    </tr>
-
-                    }
-                </table>
-
-            </div>
-
-
-
-
-            <div class="fontTypeE">
-                <table>
-                    <tr>
-                        <th style="width: 150px">Your Order</th>
-                        <th style="width: 300px"></th>
-                        <th style="width: 90px; text-align: right;">Quantity</th>
-                        <th style="width: 100px; text-align: right;">Item Price</th>
-                        <th style="width: 100px; text-align: right;">Subtotal</th>
-                    </tr>
-                    @for(order <- orders) {
-
-                    <tr>
-                        <td style="">
-                            <div class="gallery">
-                                <div class="grid_3" style="width: 110px; height: 110px; margin-top: 25px; margin-bottom: 0px;">
-
-                                </div>
-                            </div>
-                        </td>
-
-                        <td style="">@order.ordId</td>
-                        <td style="text-align: right;">@order.carts</td>
-                        <td style="text-align: right;">@order.datetime</td>
-                        <td style="text-align: right;">@order.status</td>
-
-                    </tr>
-
-                    }
-                </table>
-
-            </div>
-        </div>
-
-
+        <div class="fontTypeE" style="float: right;"><a href="@routes.UpdateAccountController.updateAccount">Payment Methods</a></div><br>
+        <div class="fontTypeE" style="float: right; padding-top:10px;"><a href="#">Payment Plans</a></div>
 
     </div>
 
