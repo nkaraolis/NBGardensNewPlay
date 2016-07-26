@@ -1,0 +1,55 @@
+@(products: String, total:Double, CardForm: Form[cardDetails])(implicit flash: Flash, lang: Lang, session : Session)
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import models.{Cart}
+@import helper._
+
+@sidebar = {
+    <ul>
+        <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+        <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
+        <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
+        <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
+        <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    </ul>
+}
+
+@main(Messages("payment.page"))(sidebar) {
+    <div id="content" style="height: 1300px;">
+
+        <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 670)px;">
+
+            <div class="title">
+                <div class="fontTypeD" style="margin-left: 30px; display: inline;">Payment Details</div>
+
+                <div style="display: inline-block; margin-left: 650px;">
+                    <a href="@routes.BrowseController.categoryList"><input type="submit" class="btn-cont" value="CONTINUE SHOPPING" style="width:180px; margin-right: 30px;"/></a>
+                </div>
+
+            </div>
+
+            <div id="payform">
+                @helper.form(routes.PayController.save(products)) {
+                    @helper.select(
+                        field = CardForm("method"),
+                        options = Seq(
+                        "Pay Now" -> "Pay Now",
+                        "Pay Later" -> "Pay Later"
+                        ),
+                        '_disabled -> Seq("FooKey", "BazKey")
+                    )
+                    @helper.inputText(CardForm("Name_on_card"))
+                    @helper.inputText(CardForm("Card_No"))
+                    @helper.inputText(CardForm("Start_Date"))
+                    @helper.inputText(CardForm("Expiry_Date"))
+                    @helper.inputText(CardForm("Security_Code"))
+                    @helper.inputText(CardForm("Issue_No"))
+                    Total: £@total
+                    <input type="submit" class="btn-primary" value="PAY" style="width:110px; margin-left: 160px;"/>
+                 }
+            </div>
+        </div>
+    </div>
+}
