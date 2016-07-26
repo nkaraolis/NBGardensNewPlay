@@ -71,3 +71,6 @@ userAccount.page = User Account
 
 #Orders messages
 orders.new.submit = Your order has been placed
+
+review.validation.errors = Reviews bad n that
+

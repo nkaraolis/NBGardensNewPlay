@@ -13,6 +13,11 @@ class PayController extends Controller {
 
   val items = Cart.findAllInCart  //get product from model
 
+  val PayMethodForm: Form = Form(
+    mapping("paymentMethod" -> nonEmptyText )
+   )
+
+  // a form contents information about a card for the user to pay
   val CardForm: Form[cardDetails] = Form(
     mapping(
       "method" -> nonEmptyText,
@@ -29,15 +34,15 @@ class PayController extends Controller {
 
   def readyToPay(total:Double) = Action {
     implicit request =>  //controller action
-      if (request.session.get("username").isEmpty) {
+      if (request.session.get("username").isEmpty) {//check the user has logged in or not
         Redirect(routes.LoginController.newLogin())
       }
       Ok(views.html.payPage(items, total, CardForm)) //render view template
   }
 
+  // save the card details to CVS
   def save (products: String) = Action {
     implicit request =>
-
       val newCardForm = CardForm.bindFromRequest()
       val newCard = cardDetails(newCardForm.get.method, newCardForm.get.name, newCardForm.get.cardNu, newCardForm.get.exp, newCardForm.get.securityCode, newCardForm.get.issueNu, newCardForm.get.start)
       cardDetails.add(newCard)
