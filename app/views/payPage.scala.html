@@ -18,6 +18,7 @@
 
 @main(Messages("payment.page"))(sidebar) {
     <div id="content" style="height: 1300px;">
+
         <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 670)px;">
 
             <div class="title">
@@ -30,24 +31,35 @@
             </div>
             <br>
 
+                <!--<div class="Pay" id="payTop">-->
+                    <!--Payment method<br>-->
+
+                <!--&lt;!&ndash;<a href="@routes.PayController.payByCard(products, total)" target="mainframe"><input type="radio" name="method" value="CardOnlineNow" checked="checked" onclick="href='@routes.PayController.payByCard(products, total)'" target="mainframe"/>Card online Now</a><br>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="@routes.PayController.payByCard(products, total)" target="mainframe"><input type="radio" name="method" value="CardOnlineLater" onclick="href='@routes.PayController.payByCard(products, total)'" target="mainframe"/>Card online Later</a><br>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="@routes.PayController.payByPaypal(products, total)" target="mainframe"><input type="radio" name="method" value="Paypal" onclick="href='@routes.PayController.payByPaypal(products, total)'" target="mainframe"/></a>Paypal&ndash;&gt;-->
+                <!--</div>-->
+
+                <!--<div class="Pay" id="payBot">-->
+                    <!--<iframe src="@routes.PayController.payByCard(products, total)" name="mainframe"  width="800" height="780"></iframe>-->
+
             <div id="payform">
                 @helper.form(routes.PayController.save(products)) {
                     @helper.select(
-                    field = CardForm("Payment Method"),
-                    options = Seq(
-                    "Foo" -> "foo text",
-                    "Bar" -> "bar text",
-                    "Paypal" -> "Paypal"
-                    ),
-                    '_default -> "Choose One",
-                    '_disabled -> Seq("FooKey", "BazKey")
+                        field = CardForm("method"),
+                        options = Seq(
+                        "Card online Now" -> "Card online Now",
+                        "Card online Later" -> "Card online Later",
+                        "Paypal" -> "Paypal"
+                        ),
+                        '_default -> "Choose One",
+                        '_disabled -> Seq("FooKey", "BazKey")
                     )
-                    @helper.inputText(CardForm("Name on card"))
-                    @helper.inputText(CardForm("Card No."))
-                    @helper.inputText(CardForm("Start Date"))
-                    @helper.inputText(CardForm("Expiry Date"))
-                    @helper.inputText(CardForm("Security Code"))
-                    @helper.inputText(CardForm("Issue No."))
+                    @helper.inputText(CardForm("Name_on_card"))
+                    @helper.inputText(CardForm("Card_No"))
+                    @helper.inputText(CardForm("Start_Date"))
+                    @helper.inputText(CardForm("Expiry_Date"))
+                    @helper.inputText(CardForm("Security_Code"))
+                    @helper.inputText(CardForm("Issue_No"))
                     Total: £@total
                     <input type="submit" class="btn-primary" value="PAY" style="width:110px; margin-left: 160px;"/>
                  }
