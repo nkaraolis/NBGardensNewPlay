@@ -35,11 +35,9 @@
                     @helper.select(
                         field = CardForm("method"),
                         options = Seq(
-                        "Card online Now" -> "Card online Now",
-                        "Card online Later" -> "Card online Later",
-                        "Paypal" -> "Paypal"
+                        "Pay Now" -> "Pay Now",
+                        "Pay Later" -> "Pay Later"
                         ),
-                        '_default -> "Card online Now",
                         '_disabled -> Seq("FooKey", "BazKey")
                     )
                     @helper.inputText(CardForm("Name_on_card"))

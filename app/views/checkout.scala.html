@@ -80,13 +80,6 @@
 
         <div class="checkoutDiv" style="margin-left:200px; height: 40px;">
 
-            <tr>
-                <input type="checkbox" name="pay-now" value="Pay Now" style="margin-left: 400px; margin-right: 8px;">Pay Now</input>
-            </tr>
-            <tr>
-                <input type="checkbox" name="pay-later" value="Pay Later" style="margin-left: 20px; margin-right: 8px;">Pay Later</input>
-            </tr>
-
             <a href="@routes.PayController.readyToPay(products.toList.mkString, total)"><input type="submit" class="btn-primary" value="PAY" style="width:190px; float: right;"/></a>
         </div>
 
