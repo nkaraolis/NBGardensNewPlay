@@ -932,3 +932,66 @@ light green - RGB 0 153 51 - #009933
     padding-bottom: 10px;
     color: #FF0000;
 }
+
+.usernameInput {
+    margin-top: 100px;
+    margin-left: 400px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.usernameInput input[type="text"] {
+    margin: 15px 0px 0px -100px;
+    overflow: hidden;
+    padding: 0px;
+    background: #fff;
+    border: 1px solid #fff;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.usernameInput label{
+    margin-left: -50px;
+    text-align: left;
+    color: fff;
+}
+
+
+.usernameInput dd.info{
+    margin-left: -405px;
+    color: #FF0000;
+    font-size: 0px;
+}
+
+.usernameInput dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 10px;
+    color: #fff;
+}
+
+.existingDetails{
+    float: left;
+    margin: 115px 0 100px 500px;
+    font-family: 'Raleway', sans-serif;
+    text-align: left;
+    color: #333;
+    font-size: 17px;
+}
+
+.detailsheader{
+    font-size: 21px;
+    color: #333;
+
+
+}
+
+.detailsusername{
+    font-size: 19px;
+
+}

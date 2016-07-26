@@ -67,3 +67,6 @@ GET     /toPay                      controllers.PayController.readyToPay(total:D
 
 POST    /Pay                        controllers.PayController.save(products:String)
 
+GET     /userAddresses              controllers.UserAddressesController.userAddresses
+
+POST    /userAddresses              controllers.UserAddressesController.saveChanges
