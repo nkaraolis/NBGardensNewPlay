@@ -28,4 +28,13 @@ object writeOrders {
     writer.close()
   }
 
+//  def main(args: Array[String]) {
+//    for (d <- orders)
+//    {
+//      println(d)
+//    }
+//  }
+
+  def findOrders = orders.toList
+
 }

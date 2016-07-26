@@ -18,6 +18,7 @@
 
 @main(Messages("payment.page"))(sidebar) {
     <div id="content" style="height: 1300px;">
+
         <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 670)px;">
 
             <div class="title">
@@ -28,26 +29,25 @@
                 </div>
 
             </div>
-            <br>
 
             <div id="payform">
                 @helper.form(routes.PayController.save(products)) {
                     @helper.select(
-                    field = CardForm("Payment Method"),
-                    options = Seq(
-                    "Foo" -> "foo text",
-                    "Bar" -> "bar text",
-                    "Paypal" -> "Paypal"
-                    ),
-                    '_default -> "Choose One",
-                    '_disabled -> Seq("FooKey", "BazKey")
+                        field = CardForm("method"),
+                        options = Seq(
+                        "Pay Now" -> "Pay Now",
+                        "Pay Later" -> "Pay Later"
+                        ),
+                        '_disabled -> Seq("FooKey", "BazKey")
                     )
-                    @helper.inputText(CardForm("Name on card"))
-                    @helper.inputText(CardForm("Card No."))
-                    @helper.inputDate(CardForm("Start Date"))
-                    @helper.inputDate(CardForm("Expiry Date"))
-                    @helper.inputText(CardForm("Security Code"))
-                    @helper.inputText(CardForm("Issue No."))
+
+                    @helper.inputText(CardForm("Name_on_card"))
+                    @helper.inputText(CardForm("Card_No"))
+                    @helper.inputText(CardForm("Start_Date"))
+                    @helper.inputText(CardForm("Expiry_Date"))
+                    @helper.inputText(CardForm("Security_Code"))
+                    @helper.inputText(CardForm("Issue_No"))
+
                     Total: £@total
                     <input type="submit" class="btn-primary" value="PAY" style="width:110px; margin-left: 160px;"/>
                  }
