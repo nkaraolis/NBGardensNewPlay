@@ -20,21 +20,12 @@ import models.{Order}
   */
 class OrderHistoryController @Inject() extends Controller {
 
-  //point of entry to History page
+  //point of entry to History page, this gets the logged in customer's orders
   def newPage(cid:String) = Action {
     implicit request =>
       Ok(views.html.history(Order.getOrdersByCusId(cid)))
 
   }
-
-
-
-  //point of entry to History page
-  def newPage2(cid:String) = Action {
-    implicit request =>
-      Ok(views.html.history(Order.getOrdersByCusId(cid)))
-  }
-
 
 
 

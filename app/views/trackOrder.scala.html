@@ -13,17 +13,16 @@
 @main(Messages("trackOrders.page"))(sidebar) {
 <div style="height : 900px;">
 
-    <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Orders</div>
+    <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Selected Order</div>
 
     <div class="accountInfo">
-        <div class="fontTypeF">Current Orders</div>
-        <div class="fontTypeE" style="display: inline-block;">See & Modify Recent Orders</div>
+        <div class="fontTypeF">Track Order Info</div>
 
 
         <tr>
-            <td style="">Date/Time of Order: @order.datetime</td>
-            <td style="text-align: right;">Order Id: @order.ordId</td>
-            <td style="text-align: right;">Order Status: @order.status</td>
+            <td style="">Date and Time of Order: @order.datetime </td><br/>
+            <td style="text-align: right;">Order Id: @order.ordId </td><br/>
+            <td style="text-align: right;">Order Status: @order.status </td>
         </tr>
 
 
@@ -32,17 +31,6 @@
 
 
 
-
-    <div class="accountInfo">
-        <div class="fontTypeF">Dispatched Orders</div>
-        <div class="fontTypeE" style="display: inline-block;">Customer Details: Email, Password, Addresses etc.</div>
-    </div>
-
-
-    <div class="accountInfo">
-        <div class="fontTypeF">Closed Orders</div>
-        <div class="fontTypeE" style="display: inline-block;">Card & Payment Plan Information</div>
-    </div>
 
 
 </div>

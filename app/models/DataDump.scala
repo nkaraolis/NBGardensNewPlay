@@ -21,13 +21,20 @@ object DataDump {
   c1(0) = cart1
 
 
+  //another cart
+  var cart2: Cart = new Cart(prods)
+  var c2: Array[Cart] = new Array[Cart](1)
+  c2(0) = cart2
 
-  //an order
+
+
+  //orders
   var o1 = Order(1, "punks", c1, "26 JUL 16, 15:23", "Order Made", "Pay Now")
+  var o2 = Order(2, "bigNoob", c2, "26 JUL 16, 15:23", "Order Made", "Pay Now")
 
 
   //set of orders
-  var orders = List(o1)
+  var orders = List(o1, o2)
 
 
 
