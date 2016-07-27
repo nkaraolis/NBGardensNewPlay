@@ -10,7 +10,7 @@
 }
 
 @main(Messages("userAddresses.page"))(sidebar) {
-<div style="height : 900px;">
+<div style="height : 1600px;">
 
     <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Addresses</div>
 
@@ -40,7 +40,7 @@
 
     <fieldset class="usernameInput" style="margin-left: 250px;">
         <legend>
-            @Messages("Update Shipping Address", Messages("details.request"))
+            @Messages("Update Address", Messages("details.request"))
         </legend>
 
         @helper.inputText(addressForm("Username").copy(value=Some(session.get("username").get)))
@@ -50,14 +50,26 @@
 
     <fieldset id="contactform" style="margin-left: 250px; margin-top: -30px;">
 
-        @helper.inputText(addressForm("Address Type"))
+
+        @helper.select(
+        field = addressForm("Address Type"),
+        options = Seq(
+        "Shipping" -> "Shipping",
+        "Billing" -> "Billing"
+        ),
+        '_default -> "Address Type.."
+        )
+
         @helper.inputText(addressForm("Full Name"))
         @helper.inputText(addressForm("Address Line 1"))
         @helper.inputText(addressForm("Address Line 2"))
+
+    </fieldset>
+
+    <fieldset class="postcodeform" style="margin-left: 1046px;">
         @helper.inputText(addressForm("Town/City"))
         @helper.inputText(addressForm("County"))
         @helper.inputText(addressForm("Postcode"))
-
     </fieldset>
 
     <div class="container">
@@ -72,9 +84,7 @@
         }
     </div>
 
-    <p>
-        <input type="submit" class="btn-primary" value='UPDATE DETAILS' style="width: 230px; margin-left: 270px;">
-    </p>
+    <input type="submit" class="btn-primary" value='UPDATE DETAILS' style="width: 230px; margin-left: 600px; margin-top: 70px;">
     }
 </div>
 }

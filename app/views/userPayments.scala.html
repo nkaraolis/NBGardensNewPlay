@@ -1,0 +1,92 @@
+@(paymentForm: Form[CustomerPayment])(implicit flash: Flash, lang: Lang, session : Session)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import helper._
+
+@sidebar = {
+}
+
+@main(Messages("userPayments.page"))(sidebar) {
+<div style="height : 1600px;">
+
+    <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Payments</div>
+
+    @helper.form(action = routes.UserPaymentController.saveChanges()) {
+
+    <div class="existingDetails">
+        <div class="detailsheader">@Messages("Existing Debit Card Details", Messages("details.request"))<br></div><br>
+
+        <div class="detailsusername">Name on Card: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.nameOnCard</b><br></div><br>
+        Card Number: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.cardNumber</b><br>
+        Start Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.startDate</b><br>
+        Expiry Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.expiryDate</b><br>
+        Security Code: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.securityCode</b><br>
+        Issue No: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.issueNo</b>
+
+        <br><br><br><br>
+        <div class="detailsheader">@Messages("Existing Credit Card Details", Messages("details.request"))<br></div><br>
+
+        <div class="detailsusername">Name on Card: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.nameOnCard</b><br></div><br>
+        Card Number: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.cardNumber</b><br>
+        Start Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.startDate</b><br>
+        Expiry Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.expiryDate</b><br>
+        Security Code: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.securityCode</b><br>
+        Issue No: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.issueNo</b>
+
+    </div>
+
+    <fieldset class="usernameInput" style="margin-left: 250px;">
+        <legend>
+            @Messages("Update Payment Details", Messages("details.request"))
+        </legend>
+
+        @helper.inputText(paymentForm("Username").copy(value=Some(session.get("username").get)))
+
+        <img src="@routes.Assets.versioned("images/textblock.png")" style=" width: 430px; height: 30px; margin-top: -71px; margin-left: -80px;"/>
+    </fieldset>
+
+    <fieldset id="contactform" style="margin-left: 250px; margin-top: -30px;">
+
+
+        @helper.select(
+        field = paymentForm("Payment Method"),
+        options = Seq(
+        "Debit" -> "Debit",
+        "Credit" -> "Credit",
+        "Paypal" -> "Paypal"
+        ),
+        '_default -> "Payment Method.."
+        )
+
+        @helper.inputText(paymentForm("Name on Card"))
+        @helper.inputText(paymentForm("Card Number"))
+        @helper.inputText(paymentForm("Start Date"), 'placeholder -> "dd/mm/yyyy")
+        @helper.inputText(paymentForm("Expiry Date"), 'placeholder -> "dd/mm/yyyy")
+        @helper.inputText(paymentForm("Security Code"), 'placeholder -> "123")
+        @helper.inputText(paymentForm("Issue No"))
+
+    </fieldset>
+
+    <fieldset class="postcodeform" style="margin-left: 1046px;">
+
+    </fieldset>
+
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+        }
+    </div>
+
+    <input type="submit" class="btn-primary" value='UPDATE DETAILS' style="width: 230px; margin-left: 600px; margin-top: 70px;">
+    }
+</div>
+}

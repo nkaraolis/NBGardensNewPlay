@@ -78,3 +78,6 @@ GET     /toPayByPaypal              controllers.PayController.payByPaypal(items:
 
 GET     /history                    controllers.OrderHistoryController.newPage
 
+GET     /userPayments               controllers.UserPaymentController.userPayments
+
+POST    /userPayments               controllers.UserPaymentController.saveChanges
