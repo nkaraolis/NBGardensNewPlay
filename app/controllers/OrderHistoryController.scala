@@ -21,9 +21,10 @@ import models.{Order}
 class OrderHistoryController @Inject() extends Controller {
 
   //point of entry to History page
-  def newPage() = Action {
+  def newPage(cid:String) = Action {
     implicit request =>
       Ok(views.html.history(Order.getOrdersByCusId(cid)))
+
   }
 
 

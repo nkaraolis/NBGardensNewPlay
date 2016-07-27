@@ -21,7 +21,8 @@
         <input type="submit" class="btn-primary" value='VIEW ORDERS' style=" display: inline-block; float: right; width: 160px; margin-left: 20px;">
         <div class="fontTypeE" style="float: right;">View, Track or Cancel an Order</div>
 
-        <div class="fontTypeE" style=""><a href="@routes.OrderHistoryController.newPage"><br>View Order History</a></div>
+        <div class="fontTypeE" style=""><a href="@routes.OrderHistoryController.newPage(session.get("username").get)"><br>View Order History</a></div>
+
     </div>
 
     <div class="accountInfo">
