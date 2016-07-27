@@ -1,0 +1,37 @@
+@(order: Order)(implicit flash: Flash, lang: Lang, session : Session)
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import models.{Order}
+@import helper._
+
+
+@sidebar = {
+}
+
+@main(Messages("trackOrders.page"))(sidebar) {
+<div style="height : 900px;">
+
+    <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Selected Order</div>
+
+    <div class="accountInfo">
+        <div class="fontTypeF">Track Order Info</div>
+
+
+        <tr>
+            <td style="">Date and Time of Order: @order.datetime </td><br/>
+            <td style="text-align: right;">Order Id: @order.ordId </td><br/>
+            <td style="text-align: right;">Order Status: @order.status </td>
+        </tr>
+
+
+
+    </div>
+
+
+
+
+
+</div>
+}
