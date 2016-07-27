@@ -33,7 +33,7 @@
             <div id="payform">
                 @helper.form(routes.PayController.save(products)) {
                     @helper.select(
-                        field = CardForm("method"),
+                        field = CardForm("Payment Method"),
                         options = Seq(
                         "Pay Now" -> "Pay Now",
                         "Pay Later" -> "Pay Later"
@@ -41,12 +41,12 @@
                         '_disabled -> Seq("FooKey", "BazKey")
                     )
 
-                    @helper.inputText(CardForm("Name_on_card"))
-                    @helper.inputText(CardForm("Card_No"))
-                    @helper.inputText(CardForm("Start_Date"))
-                    @helper.inputText(CardForm("Expiry_Date"))
-                    @helper.inputText(CardForm("Security_Code"))
-                    @helper.inputText(CardForm("Issue_No"))
+                    @helper.inputText(CardForm("Name on Card"))
+                    @helper.inputText(CardForm("Card No"))
+                    @helper.inputText(CardForm("Start Date"))
+                    @helper.inputText(CardForm("Expiry Date"))
+                    @helper.inputText(CardForm("Security Code"))
+                    @helper.inputText(CardForm("Issue No"))
 
                     Total: £@total
                     <input type="submit" class="btn-primary" value="PAY" style="width:110px; margin-left: 160px;"/>
