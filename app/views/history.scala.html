@@ -1,4 +1,4 @@
-@(Orders: List[Orders])(implicit flash: Flash, lang: Lang, session : Session)
+@(Orders: List[Order])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -47,10 +47,19 @@ value
         <h1> hi </h1>
         @for(order <- Orders) {
         <div style="height: 130px; margin-top:400px;">
-            <h1 style="font-size: 14px;">Order: @order.product</h1>
+            <h1 style="font-size: 14px;">Date/Time: @order.datetime</h1>
+            <h1 style="font-size: 14px;">Order Id: @order.ordId</h1>
+            <h1 style="font-size: 14px;">Order Contents: @order.carts</h1>
+            <h1 style="font-size: 14px;">Status: @order.status</h1>
         </div>
+
+        <div class="fontTypeE" style=""><a href="@routes.OrderHistoryController.track(order.ordId)"><br>Track Order</a></div>
         }
+
+
     </div>
-</div><br>
+</div>
+
+<br>
 }
 

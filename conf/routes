@@ -75,3 +75,5 @@ GET     /toPayByCard                controllers.PayController.payByCard(items:St
 GET     /toPayByPaypal              controllers.PayController.payByPaypal(items:String, total:Double)
 
 GET     /history                    controllers.OrderHistoryController.newPage
+
+GET     /track/:id                  controllers.OrderHistoryController.track(id: Int)

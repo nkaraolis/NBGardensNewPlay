@@ -1,4 +1,4 @@
-@(orders: List[Order], total:Double)(implicit flash: Flash, lang: Lang, session : Session)
+@(order: Order)(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -19,18 +19,15 @@
         <div class="fontTypeF">Current Orders</div>
         <div class="fontTypeE" style="display: inline-block;">See & Modify Recent Orders</div>
 
-        @for(order <- orders) {
+
         <tr>
-            <td style="">@order.datetime</td>
-            <td style="text-align: right;">@order.ordId</td>
-            <td style="text-align: right;">@order.status</td>
+            <td style="">Date/Time of Order: @order.datetime</td>
+            <td style="text-align: right;">Order Id: @order.ordId</td>
+            <td style="text-align: right;">Order Status: @order.status</td>
         </tr>
-        }
 
-        <input type="submit" class="btn-primary" value='Track' style=" display: inline-block; float: right; width: 160px; margin-left: 20px;">
-        <div class="fontTypeE" style="float: right;">View, Track or Cancel an Order</div>
 
-        <div class="fontTypeE" style=""><a href="@routes.OrderHistoryController.Track"><br>Track</a></div>
+
     </div>
 
 
