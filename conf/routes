@@ -67,6 +67,8 @@ GET     /toPay                      controllers.PayController.readyToPay(items:S
 
 POST    /Pay                        controllers.PayController.save(products:String)
 
+GET     /catalogue                  controllers.CatalogueController.catalogue
+
 GET     /userAddresses              controllers.UserAddressesController.userAddresses
 
 POST    /userAddresses              controllers.UserAddressesController.saveChanges
@@ -77,3 +79,8 @@ GET     /toPayByPaypal              controllers.PayController.payByPaypal(items:
 GET     /history/:cid               controllers.OrderHistoryController.newPage(cid: String)
 
 GET     /track/:id                  controllers.OrderHistoryController.track(id: Int)
+
+GET     /userPayments               controllers.UserPaymentController.userPayments
+
+POST    /userPayments               controllers.UserPaymentController.saveChanges
+

@@ -8,11 +8,11 @@
 
 @sidebar = {
 <ul>
-    <li><a href= browse >Categories</a></li>
-    <li><a href="news.asp">Gnomes</a></li>
-    <li><a href="contact.asp">Tools</a></li>
-    <li><a href="about.asp">Gardening Supplies</a></li>
-    <li><a href="about.asp">Outdoor Equipment</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
@@ -25,14 +25,10 @@ value
 }
 </script>
 
-
-<div id = "pageStart">
-</div>
-
 <div style="margin-left: 150px;">
     <div id="homeBanner">
         <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
-        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+        <a href= ""><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
         <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     </div>
 </div>
@@ -58,13 +54,13 @@ value
                             <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
                             <dt style="font-size: 14px;">Description: @product.description</dt>
                         </div>
-                        <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">@product.price</dt>
+                        <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@product.price</dt>
 
                         <input class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty." name="Qty"
                                onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >
 
                         <a href="@routes.CartController.add(product.name, "1")">
-                        <input type="submit" calss="btn-primary" value="ADD TO CART" style="width:110px;"/>
+                        <input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/>
                         </a>
 
                     </div>
