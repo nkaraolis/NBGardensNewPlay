@@ -19,29 +19,34 @@
         <div class="fontTypeF">Current Orders</div>
         <div class="fontTypeE" style="display: inline-block;">See & Modify Recent Orders</div>
 
-        <input type="submit" class="btn-primary" value='VIEW ORDERS' style=" display: inline-block; float: right; width: 160px; margin-left: 20px;">
+        @for(order <- orders) {
+        <tr>
+            <td style="">@order.datetime</td>
+            <td style="text-align: right;">@order.ordId</td>
+            <td style="text-align: right;">@order.status</td>
+        </tr>
+        }
+
+        <input type="submit" class="btn-primary" value='Track' style=" display: inline-block; float: right; width: 160px; margin-left: 20px;">
         <div class="fontTypeE" style="float: right;">View, Track or Cancel an Order</div>
 
-        <div class="fontTypeE" style=""><a href="@routes.OrderHistoryController.newPage"><br>View Order History</a></div>
+        <div class="fontTypeE" style=""><a href="@routes.OrderHistoryController.Track"><br>Track</a></div>
     </div>
+
+
+
 
     <div class="accountInfo">
         <div class="fontTypeF">Dispatched Orders</div>
         <div class="fontTypeE" style="display: inline-block;">Customer Details: Email, Password, Addresses etc.</div>
-
-        <div class="fontTypeE" style="float: right;"><a href="@routes.UpdateAccountController.updateAccount">Account Settings</a></div><br>
-        <div class="fontTypeE" style="float: right; padding-top:10px;"><a href="@routes.UserAddressesController.userAddresses">Manage Your Addresses</a></div>
-
     </div>
+
 
     <div class="accountInfo">
         <div class="fontTypeF">Closed Orders</div>
         <div class="fontTypeE" style="display: inline-block;">Card & Payment Plan Information</div>
-
-        <div class="fontTypeE" style="float: right;"><a href="@routes.UpdateAccountController.updateAccount">Payment Methods</a></div><br>
-        <div class="fontTypeE" style="float: right; padding-top:10px;"><a href="#">Payment Plans</a></div>
-
     </div>
+
 
 </div>
 }
