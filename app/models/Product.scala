@@ -34,8 +34,14 @@ object Product{
 
   var products: Set[Product]  = Set.empty
 
+  val condition = BSONDocument(
+    (null, null)
+    //("carId", "Furniture")
+  )
+
   val key = BSONDocument(
-    ("_Id" -> BSONDocument("$exists" -> "1"))
+    ("_id" -> false)
+    //("carId", "Furniture")
   )
 
 //  val key = new BasicDBObject()
@@ -50,7 +56,7 @@ object Product{
 //  key.put("carId", true)
 
   //val productsInDB = coll.find(null, key).cursor[BSONDocument]().collect[List]()
-  val productsInDB = coll.find(key).cursor[BSONDocument]().collect[List]()
+  val productsInDB = coll.find(condition,key).cursor[BSONDocument]().collect[List]()
 
   productsInDB.onComplete {
     case Failure(e) => throw e
