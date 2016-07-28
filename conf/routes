@@ -83,3 +83,5 @@ GET     /track/:id                  controllers.OrderHistoryController.track(id:
 GET     /userPayments               controllers.UserPaymentController.userPayments
 
 POST    /userPayments               controllers.UserPaymentController.saveChanges
+
+POST    /submitReview               controllers.ProductPageController.submitReview

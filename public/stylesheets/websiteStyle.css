@@ -932,7 +932,7 @@ light green - RGB 0 153 51 - #009933
 }
 
 .usernameInput input[type="text"] {
-    margin: 15px 0px 0px -95px;
+    margin: 15px 0px 0px -92px;
     overflow: hidden;
     padding: 0px;
     background: #fff;
@@ -1062,3 +1062,229 @@ light green - RGB 0 153 51 - #009933
     border-radius: 3px;
 }
 
+#reviewform{
+    margin-top: 100px;
+    margin-left: 400px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+#reviewform label{
+    margin-left: -50px;
+    text-align: left;
+}
+
+
+#reviewform dd.info{
+    margin-left: 0px;
+    color: #FFF;
+    font-size:0px;
+}
+
+
+#reviewform input[type="text"] {
+    margin: 15px 0 20px -92px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+
+#reviewform input[type="password"] {
+    margin: 15px 0 20px -100px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+#reviewform select{
+    font-family: 'Raleway', sans-serif;
+    width: 250px;
+    margin: 10px 0 20px -260px;
+    height: 35px;
+}
+
+#reviewform textarea{
+    margin: 15px 0 20px -92px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 800px;
+    height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+#reviewform dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    color: #FF0000;
+}
+
+.reviewHiddenData {
+    margin-top: 100px;
+    margin-left: 400px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.reviewHiddenData input[type="text"] {
+    margin: 15px 0px 0px -92px;
+    overflow: hidden;
+    padding: 0px;
+    background: #fff;
+    border: 1px solid #fff;
+    font-size: 0px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 0px;
+}
+
+.reviewHiddenData label{
+    margin-left: -50px;
+    text-align: left;
+    color: fff;
+    font-size: 0px;
+}
+
+
+.reviewHiddenData dd.info{
+    margin-left: -405px;
+    color: #FF0000;
+    font-size: 0px;
+}
+
+.reviewHiddenData dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 0px;
+    color: #fff;
+}
+
+.reviewHiddenData textarea{
+    margin: 15px 0px 0px -92px;
+    overflow: hidden;
+    padding: 0px;
+    background: #fff;
+    border: 1px solid #fff;
+    font-size: 0px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 0px;
+}
+
+.wrapper {
+    padding: 0px;
+    margin: 0;
+    width: 370px;
+    min-height: 80px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.rating {
+  overflow: hidden;
+  vertical-align: bottom;
+  display: inline-block;
+  width: auto;
+  height: 24px;
+}
+
+.rating input{
+  opacity: 0;
+  margin-right: 0;
+}
+
+.rating label{
+  position: relative;
+  display: block;
+  float: right;
+  background-image:url(../images/star-off-big.png);
+  background-size: 24px 24px;
+}
+
+.rating label:before {
+  display: block;
+  opacity: 0;
+  content: '';
+  width: 24px;
+  height: 24px;
+  background-image:url(../images/star-on-big.png);
+  background-size: 24px 24px;
+  transition: opacity 0.2s linear;
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before,
+.rating:not(:hover) > :checked ~ label:before {
+    opacity: 1;
+}
+
+.rating2 {
+  overflow: hidden;
+  vertical-align: bottom;
+  display: inline-block;
+  width: auto;
+  height: 30px;
+}
+
+.rating2 input{
+  opacity: 0;
+  margin-right: 0;
+}
+
+.rating2 label{
+  position: relative;
+  display: block;
+  float: right;
+  background-image:url(../images/star-off-big.png);
+  background-size: 30px 30px;
+}
+
+.rating2 label:before {
+  display: block;
+  opacity: 0;
+  content: '';
+  width: 30px;
+  height: 30px;
+  background-image:url(../images/star-on-big.png);
+  background-size: 30px 30px;
+  transition: opacity 0.2s linear;
+}
+
+.rating2 > label:hover:before,
+.rating2 > label:hover ~ label:before,
+.rating2:not(:hover) > :checked ~ label:before {
+    opacity: 1;
+}
+
+.starImage{
+    background-image:url(../images/i22.png);
+    background-size: 100px 100px;
+    opacity: 1;
+}

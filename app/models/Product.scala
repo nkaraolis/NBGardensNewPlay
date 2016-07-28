@@ -29,6 +29,8 @@ object Product {
 
   def findByName(user: String) = products.find(_.name == user)
 
+  def findById(user: String) = products.find(_.productId == user)
+
 //  def findByCart(cart: String) = products.find(_.carId == cart).toList.sortBy(_.name)
 
   def findByCart(cart: String): List[Product] = {
