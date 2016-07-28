@@ -17,25 +17,37 @@
     @helper.form(action = routes.UserPaymentController.saveChanges()) {
 
     <div class="existingDetails">
-        <div class="detailsheader">@Messages("Existing Debit Card Details", Messages("details.request"))<br></div><br>
 
-        <div class="detailsusername">Name on Card: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.nameOnCard</b><br></div><br>
-        Card Number: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.cardNumber</b><br>
-        Start Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.startDate</b><br>
-        Expiry Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.expiryDate</b><br>
-        Security Code: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.securityCode</b><br>
-        Issue No: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.issueNo</b>
+        @if(CustPayment.findPaymentsByUsername(session.get("username").get).isEmpty){
 
-        <br><br><br><br>
-        <div class="detailsheader">@Messages("Existing Credit Card Details", Messages("details.request"))<br></div><br>
+        <div class="detailsheader">No Existing Payment Details<br></div><br>
+        Enter your details to save<br> your payment information.
 
-        <div class="detailsusername">Name on Card: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.nameOnCard</b><br></div><br>
-        Card Number: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.cardNumber</b><br>
-        Start Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.startDate</b><br>
-        Expiry Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.expiryDate</b><br>
-        Security Code: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.securityCode</b><br>
-        Issue No: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.issueNo</b>
+        }
+        @if(!CustPayment.findPaymentsByUsername(session.get("username").get).isEmpty){
 
+            @if(!CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").isEmpty){
+                <div class="detailsheader">@Messages("Existing Debit Card Details", Messages("details.request"))<br></div><br>
+
+                <div class="detailsusername">Name on Card: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.nameOnCard</b><br></div><br>
+                Card Number: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.cardNumber</b><br>
+                Start Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.startDate</b><br>
+                Expiry Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.expiryDate</b><br>
+                Security Code: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.securityCode</b><br>
+                Issue No: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.issueNo</b>
+            }
+            @if(!CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").isEmpty){
+                <br><br><br><br>
+                <div class="detailsheader">@Messages("Existing Credit Card Details", Messages("details.request"))<br></div><br>
+
+                <div class="detailsusername">Name on Card: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.nameOnCard</b><br></div><br>
+                Card Number: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.cardNumber</b><br>
+                Start Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.startDate</b><br>
+                Expiry Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.expiryDate</b><br>
+                Security Code: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.securityCode</b><br>
+                Issue No: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.issueNo</b>
+            }
+        }
     </div>
 
     <fieldset class="usernameInput" style="margin-left: 250px;">

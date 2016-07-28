@@ -17,24 +17,39 @@
     @helper.form(action = routes.UserAddressesController.saveChanges()) {
 
     <div class="existingDetails">
-        <div class="detailsheader">@Messages("Existing Shipping Address", Messages("details.request"))<br></div><br>
 
-        <div class="detailsusername">Full Name: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.fullName</b><br></div><br>
-        Address Line 1: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.addressLine1</b><br>
-        Address Line 2:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.addressLine2</b><br>
-        Town/City:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.townCity</b><br>
-        County: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.county</b><br>
-        Postcode: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.postCode</b>
+        @if(CustAddress.findAddressesByUsername(session.get("username").get).isEmpty){
 
-        <br><br><br><br>
-        <div class="detailsheader">@Messages("Existing Billing Address", Messages("details.request"))<br></div><br>
+        <div class="detailsheader">No Existing Addresses<br></div><br>
+            Enter your details to<br>save your address.
 
-        <div class="detailsusername">Full Name: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.fullName</b><br></div><br>
-        Address Line 1: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.addressLine1</b><br>
-        Address Line 2:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.addressLine2</b><br>
-        Town/City:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.townCity</b><br>
-        County: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.county</b><br>
-        Postcode: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.postCode</b>
+        }
+        @if(!CustAddress.findAddressesByUsername(session.get("username").get).isEmpty){
+
+            @if(!CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").isEmpty){
+
+                <div class="detailsheader">@Messages("Existing Shipping Address", Messages("details.request"))<br></div><br>
+
+                <div class="detailsusername">Full Name: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.fullName</b><br></div><br>
+                Address Line 1: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.addressLine1</b><br>
+                Address Line 2:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.addressLine2</b><br>
+                Town/City:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.townCity</b><br>
+                County: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.county</b><br>
+                Postcode: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.postCode</b>
+            }
+
+            @if(!CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").isEmpty){
+                <br><br><br><br>
+                <div class="detailsheader">@Messages("Existing Billing Address", Messages("details.request"))<br></div><br>
+
+                <div class="detailsusername">Full Name: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.fullName</b><br></div><br>
+                Address Line 1: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.addressLine1</b><br>
+                Address Line 2:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.addressLine2</b><br>
+                Town/City:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.townCity</b><br>
+                County: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.county</b><br>
+                Postcode: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.postCode</b>
+            }
+        }
 
     </div>
 
