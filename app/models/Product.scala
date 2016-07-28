@@ -1,23 +1,122 @@
 package models
 
+
+
+import com.typesafe.config.ConfigFactory
+import reactivemongo.api.{FailoverStrategy, MongoDriver}
+import reactivemongo.api.collections.bson.BSONCollection
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID, Macros}
+import reactivemongo.core.nodeset.Authenticate
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.util.{Failure, Success}
+
+
 /**
   * Created by Administrator on 08/07/2016.
   */
-case class Product(productId: String, name: String, description: String, price: String, imgS: String, imgL: String, need: String, carId: String)
+case class Product (productId: String, name: String, description: String, price: String, imgS: String, imgL: String, qty: String, carId: String)
 
-object Product {
-  var products = Set(
+object Product{
 
-    Product("0001","Paperclips Large","Large Plain Pack of 1000", "100", "images/page3_img1.jpg", "images/big1.jpg", "", "Lawnmower"),
-    Product("0002","Giant Paperclips","Giant Plain 51mm 100 pack", "100", "images/page3_img2.jpg", "images/big2.jpg", "", "Lawnmower"),
-    Product("0003","Paperclip Giant Plain", "Giant Plain Pack of 10000", "100", "images/page3_img3.jpg", "images/big3.jpg", "", "Lawnmower"),
-    Product("0004","No Tear Paper Clip", "No Tear Extra Large Pack of 1000", "100", "images/page3_img4.jpg", "images/big4.jpg", "", "Barbecues"),
-    Product("0005","Zebra Paperclips", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img5.jpg", "images/big5.jpg", "", "Barbecues"),
-    Product("0006","AA", "No Tear Extra Large Pack of 1000", "100", "images/page3_img7.jpg", "images/big7.jpg", "", "Furniture"),
-    Product("0008","CC", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture"),
-    Product("0009","DD", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture"),
-    Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "10", "Furniture")
+  //DB Connection
+  val dbn = "NBGardensProducts"
+  val user = "user2"
+  val pass = "password"
+  val creds = List(Authenticate(dbn,user,pass))
+  val servs: List[String] = List("192.168.1.42:27017")
+  val config = ConfigFactory.load()
+  val driver = new MongoDriver(Some(config))
+  val conn = driver.connection(servs, authentications=creds)
+  val strat = FailoverStrategy()
+  val db = conn.db(dbn, strat)
+  val coll = db.collection[BSONCollection]("product")
 
+  var products: Set[Product]  = Set.empty
+
+  val condition = BSONDocument(
+    (null, null)
+    //("carId", "Furniture")
+  )
+
+  val key = BSONDocument(
+    ("_id" -> false)
+    //("carId", "Furniture")
+  )
+
+//  val key = new BasicDBObject()
+//  key.put("_id", false)
+//  key.put("productId", true)
+//  key.put("name", true)
+//  key.put("description", true)
+//  key.put("price", true)
+//  key.put("imgS", true)
+//  key.put("imgL", true)
+//  key.put("need", true)
+//  key.put("carId", true)
+
+  //val productsInDB = coll.find(null, key).cursor[BSONDocument]().collect[List]()
+  val productsInDB = coll.find(condition,key).cursor[BSONDocument]().collect[List]()
+
+  productsInDB.onComplete {
+    case Failure(e) => throw e
+    case Success(readResult) =>
+      for (prod <- readResult) {
+        //for (p <- prod){
+          products += productReader.read(prod)
+        println("Product ID" + prod.get("productId").get)
+        //}
+      }
+      println("Size: " + products.size)
+      println(products.tail.head.name)
+  }
+
+  implicit object productReader extends BSONDocumentReader[Product]{
+    def read(doc: BSONDocument):Product = Product(
+      doc.getAs[String]("productId").get,
+      doc.getAs[String]("name").get,
+      doc.getAs[String]("description").get,
+      doc.getAs[String]("price").get,
+      doc.getAs[String]("imgS").get,
+      doc.getAs[String]("imgL").get,
+      doc.getAs[String]("qty").get,
+      doc.getAs[String]("carId").get)
+  }
+
+  implicit object ProductWriter extends BSONDocumentWriter[Product] {
+    def write(product: Product) : BSONDocument = BSONDocument(
+      "productId" -> product.productId,
+      "name" -> product.name,
+      "description" -> product.description,
+      "price" -> product.price,
+      "imgS" -> product.imgS,
+      "imgL" -> product.imgL,
+      "qty" -> product.qty,
+      "carId" -> product.carId
+    )
+  }
+//  for (p <- productsInDB){
+//    getDetail(p.head)
+//    def getDetail(coll: BSONCollection): List ={
+//
+//    }
+
+//    Product(p.head.productId, p.name, p.description, p.price, p.imgS, p.imgL, p.need, p.carId)
+    //products += p
+    //println(products)
+
+
+
+  products += (
+    Product("0001","Paperclips Large","Large Plain Pack of 1000", "100", "images/page3_img1.jpg", "images/big1.jpg", "", "Lawnmower")
+//    Product("0002","Giant Paperclips","Giant Plain 51mm 100 pack", "100", "images/page3_img2.jpg", "images/big2.jpg", "", "Lawnmower"),
+//    Product("0003","Paperclip Giant Plain", "Giant Plain Pack of 10000", "100", "images/page3_img3.jpg", "images/big3.jpg", "", "Lawnmower"),
+//    Product("0004","No Tear Paper Clip", "No Tear Extra Large Pack of 1000", "100", "images/page3_img4.jpg", "images/big4.jpg", "", "Barbecues"),
+//    Product("0005","Zebra Paperclips", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img5.jpg", "images/big5.jpg", "", "Barbecues"),
+//    Product("0006","AA", "No Tear Extra Large Pack of 1000", "100", "images/page3_img7.jpg", "images/big7.jpg", "", "Furniture"),
+//    Product("0008","CC", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture"),
+//    Product("0009","DD", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture"),
+//    Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "10", "Furniture")
   )
 
   def getPrice(qty:String, price:String): Double ={
@@ -37,7 +136,7 @@ object Product {
     var tl: Set[Product]  = Set.empty
     for (product <- products){
       if (product.carId == cart){
-        tl += Product(product.productId, product.name, product.description,product.price, product.imgS, product.imgL, product.need, product.carId)
+        tl += Product(product.productId, product.name, product.description,product.price, product.imgS, product.imgL, product.qty, product.carId)
       }
     }
     tl.toList
