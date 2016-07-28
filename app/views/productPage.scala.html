@@ -1,9 +1,18 @@
-@(product: Product)(implicit flash: Flash, lang: Lang, session : Session)
+@(product: Product, productReview: Form[Review])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import models.{Cart}
+
+@currentTime = @{
+import java.util.Calendar
+import java.text.SimpleDateFormat
+
+val today = Calendar.getInstance.getTime
+val curTimeFormat = new SimpleDateFormat("dd/MM/yyyy")
+curTimeFormat.format(today)
+}
 
 <!--, ReviewForm : Form[Review]-->
 
@@ -18,7 +27,7 @@
 }
 
 @main(Messages("productPage.page"))(sidebar) {
-<div id="content" style="height: 1200px;">
+<div id="content" style="height: 2500px;">
 
     <div id="productInfo">
 
@@ -62,26 +71,169 @@
             @product.description
         </div>
 
-        <div class="productDivs">
+        @helper.form(action = routes.ProductPageController.submitReview()) {
+        <div class="productDivs" style="width: 1300px; margin-bottom: 60px;">
             <div class="fontTypeA" >Customer Reviews</div>
 
-            No reviews available for this product.
+            @if(Review.findReviewsByProductId(product.productId).isEmpty){
+                No reviews available for this product.
+            }
+
+            @for(review <- Review.findReviewsByProductId(product.productId)){
+
+            <div class="fontTypeA" style="font-size: 20px; float:right;">@review.username</div>
+            <div style="float:right; margin-top:25px; margin-right: @(-review.username.length*11)px;">@review.reviewDate</div>
+
+            <!--height: (products.length*110 + 670)px; -110-->
+
+            <!--<input type="text" id="ratingBox" value="@review.rating" onclick="getRating()" onload="">-->
+
+            @if(review.rating == "1"){
+            <div style="display: inline-block;">
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"  />
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+            </div>
+            }@if(review.rating == "2"){
+            <div style="display: inline-block;">
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"  />
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+            </div>
+            }@if(review.rating == "3"){
+            <div style="display: inline-block;">
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"  />
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+            </div>
+            }@if(review.rating == "4"){
+            <div style="display: inline-block;">
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"  />
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-off-big.png")"/>
+            </div>
+            }@if(review.rating == "5"){
+            <div style="display: inline-block;">
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"  />
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+                <img style="height: 24px; width: 24px; margin-right: -4px;" src="@routes.Assets.versioned("images/star-on-big.png")"/>
+            </div>
+            }
+
+
+            <script type="text/javascript">
+            function getRatingTemp()
+            {
+                var customerRating = document.getElementById("ratingBox");
+
+                var values = customerRating.value;
+
+                var filename = "../images/t1.png";
+
+                switch (values) {
+                    case 1:
+                        filename = filename;
+                        break;
+                    case 2:
+                        filename = filename;
+                        break;
+                    case 3:
+                        filename = filename;
+                        break;
+                    case 4:
+                        filename = filename;
+                        break;
+                    case 5:
+                        filename = filename;
+                        break;
+                }
+                document.getElementById('starImage').style.background = "url(" + filename + ")";
+
+
+            }
+            </script>
+
+
+            <!--<b><div class="fontTypeE" style="font-size: 19px; padding-right: 200px;">@review.rating<br><br></div></b>-->
+
+            <b><div class="fontTypeE" style="font-size: 19px; padding-right: 200px; padding-top: 15px;">@review.reviewTitle<br><br></div></b>
+                <div style="padding-right: 200px;">@review.review<br><br></div>
+            <div style="height: 1px; margin: 3px; background-color: #444444; opacity: 0.5"></div>
+            <br>
+            }
+
         </div>
 
         <div class="productDivs">
             <div class="fontTypeA" >Leave A Review</div>
 
+            <div class="fontTypeE" >@product.name</div>
 
+            <fieldset class="reviewHiddenData" style="margin-left: 40px; margin-top: 0px; height: 10px;">
+                @helper.inputText(productReview("Product ID").copy(value=Some(product.productId)))
 
-            <fieldset id="reviewForm">
-                <div class="formtext">Your Review: </div><br>
-                <textarea name="review" placeholder="Leave a review.."></textarea><br>
+                @if(session.get("username").isDefined){
+                @helper.inputText(productReview("Username").copy(value=Some(session.get("username").get)))
+                }
+                @if(session.get("username").isEmpty){
+                @helper.inputText(productReview("Username").copy(value=Some("")))
+                }
+                @helper.inputText(productReview("Review Date").copy(value=Some(currentTime)))
+                @helper.textarea(productReview("Rating").copy(value=Some("2")), 'id -> "demo")
             </fieldset>
 
+            <div class="wrapper" style="margin-left: -70px;">
+                <span class="rating">
+                    <input id="rating5" type="radio" onclick = "rate()" name="rating" value="5">
+                    <label for="rating5">5</label>
+                    <input id="rating4" type="radio" onclick = "rate()" name="rating" value="4">
+                    <label for="rating4">4</label>
+                    <input id="rating3" type="radio" onclick = "rate()" name="rating" value="3">
+                    <label for="rating3">3</label>
+                    <input id="rating2" type="radio" onclick = "rate()" name="rating" value="2" checked>
+                    <label for="rating2">2</label>
+                    <input id="rating1" type="radio" onclick = "rate()" name="rating" value="1">
+                    <label for="rating1">1</label>
+                    Your Rating        
+                </span>
+            </div>
+            <br>
 
-            <a href=""><input type="submit" class="btn-primary" value="SUBMIT" style="width:100px;"/></a>
+            <script type="text/javascript">
+            function rate()
+            {
+                var selectedRating;
+                var ratings = document.getElementsByName("rating");
+                for(var i = 0; i < ratings.length; i++) {
+                if(ratings[i].checked == true) {
+                selectedRating = ratings[i].value;
+                break;}
+                }
+                document.getElementById("demo").innerHTML = selectedRating;
+            }
+            </script>
+
+            <fieldset id="reviewform" style="margin-left: 40px; margin-top: -30px;">
+
+                @helper.inputText(productReview("Review Title"), 'maxlength -> 80)
+                @helper.textarea(productReview("Review"), 'placeholder -> "Leave a review..")
+
+                <a href=""><input type="submit" class="btn-primary" value="SUBMIT" style="margin-left: 320px; width:100px;"/></a>
+
+            </fieldset>
+
         </div>
-
+        }
     </div>
 </div>
 }
