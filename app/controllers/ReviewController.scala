@@ -18,7 +18,7 @@ import views.html.helper.form
 @Singleton
 class ReviewController @Inject() extends Controller {
 
-  private val reviewForm : Form[Review] =
+  /**private val reviewForm : Form[Review] =
     Form(mapping(
       "Customer Name" -> text,
       "Product ID" -> text,
@@ -26,7 +26,7 @@ class ReviewController @Inject() extends Controller {
 
     )(Review.apply)(Review.unapply))
 
-  /**def saveCustomer = Action {
+  def saveCustomer = Action {
     implicit request =>
       val newCustomerForm = userForm.bindFromRequest()
       newCustomerForm.fold(hasErrors = {

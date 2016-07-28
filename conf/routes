@@ -81,3 +81,5 @@ GET     /history                    controllers.OrderHistoryController.newPage
 GET     /userPayments               controllers.UserPaymentController.userPayments
 
 POST    /userPayments               controllers.UserPaymentController.saveChanges
+
+POST    /submitReview               controllers.ProductPageController.submitReview
