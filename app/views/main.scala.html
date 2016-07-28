@@ -65,10 +65,9 @@
     <div id = "searchBar">
         <form action="routes.SearchController.saveSearch">
             <input type="text" name="SearchIN" class="mytext" style="width: 300px;" placeholder="Search.."><br>
+            <div id="searchBarImg"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></div>
         </form>
-        <span>
-        <div id="searchBarImg"><a href= "@routes.SearchController.saveSearch"><img src="@routes.Assets.versioned("images/search.png")" alt="Search Icon" /></a></div>
-        </span>
+
     </div>
 
     }

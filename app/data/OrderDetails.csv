@@ -1,1 +1,5 @@
-Product(0008,CC,Zebra Length 28mm Assorted 150 Pack,100,images/page3_img8.jpg,images/big8.jpg,1,Furniture)
+<<<<<<< HEAD
+Product(0004,No Tear Paper Clip,No Tear Extra Large Pack of 1000,100,images/page3_img4.jpg,images/big4.jpg,1,Barbecues)
+=======
+Product(0005,Zebra Paperclips,Zebra Length 28mm Assorted 150 Pack,100,images/page3_img5.jpg,images/big5.jpg,1,Barbecues)
+>>>>>>> 9d098bcabe517f21b1446922a466fd8c651ffb65

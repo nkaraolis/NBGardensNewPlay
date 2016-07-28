@@ -17,13 +17,13 @@ class PayController extends Controller {
   // a form contents information about a card for the user to pay
   val CardForm: Form[cardDetails] = Form(
     mapping(
-      "method" -> nonEmptyText,
-      "Name_on_card" -> nonEmptyText,
-      "Card_No" -> nonEmptyText,
-      "Start_Date" -> nonEmptyText,
-      "Expiry_Date" -> nonEmptyText,
-      "Security_Code" -> of[String],
-      "Issue_No" -> of[String]
+      "Payment Method" -> nonEmptyText,
+      "Name on Card" -> nonEmptyText,
+      "Card No" -> nonEmptyText,
+      "Start Date" -> nonEmptyText,
+      "Expiry Date" -> nonEmptyText,
+      "Security Code" -> of[String],
+      "Issue No" -> of[String]
     )
     (cardDetails.apply)
     (cardDetails.unapply)
@@ -31,7 +31,7 @@ class PayController extends Controller {
 
   def options = Action{
     implicit request =>
-      val value = CardForm.bindFromRequest.get.method
+      val value = CardForm.bindFromRequest.data("Payment Method")
       if(value.equals("Paypal")) {
         val categories = Category.findAll
         Ok(views.html.browseCat(categories))
@@ -70,7 +70,7 @@ class PayController extends Controller {
   def save (products: String) = Action {
     implicit request =>
       val newCardForm = CardForm.bindFromRequest()
-      val newCard = cardDetails(newCardForm.get.method, newCardForm.get.Name_on_card, newCardForm.get.Card_No, newCardForm.get.Start_Date, newCardForm.get.Expiry_Date, newCardForm.get.Security_Code, newCardForm.get.Issue_No)
+      val newCard = cardDetails(newCardForm.get.method, newCardForm.data("Name on Card"), newCardForm.data("Card No"), newCardForm.data("Start Date"), newCardForm.data("Expiry Date"), newCardForm.data("Security Code"), newCardForm.data("Issue No"))
       saveOrder(products)
       cardDetails.add(newCard)
       Redirect(routes.BrowseController.categoryList)
