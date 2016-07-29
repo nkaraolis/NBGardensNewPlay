@@ -932,11 +932,7 @@ light green - RGB 0 153 51 - #009933
 }
 
 .usernameInput input[type="text"] {
-<<<<<<< HEAD
-    margin: 15px 0px 0px -95px;
-=======
     margin: 15px 0px 0px -92px;
->>>>>>> 4681d512be258210c8675d1ed0c054f92b1cedb1
     overflow: hidden;
     padding: 0px;
     background: #fff;
@@ -1066,8 +1062,6 @@ light green - RGB 0 153 51 - #009933
     border-radius: 3px;
 }
 
-<<<<<<< HEAD
-=======
 #reviewform{
     margin-top: 100px;
     margin-left: 400px;
@@ -1294,4 +1288,3 @@ light green - RGB 0 153 51 - #009933
     background-size: 100px 100px;
     opacity: 1;
 }
->>>>>>> 4681d512be258210c8675d1ed0c054f92b1cedb1
