@@ -30,7 +30,7 @@ object Product{
   val conn = driver.connection(servs, authentications=creds)
   val strat = FailoverStrategy()
   val db = conn.db(dbn, strat)
-  val coll = db.collection[BSONCollection]("product")
+  var coll = db.collection[BSONCollection]("product")
 
   var products: Set[Product]  = Set.empty
 
@@ -90,6 +90,8 @@ object Product{
       }
     }
 
+    val coll = db.collection[BSONCollection]("productsInOrders")
+
     /**Write to DB*/
     for (p<-productsForAnOrder){
       val key = BSONDocument(
@@ -107,7 +109,7 @@ object Product{
       futIns.onComplete {
             case Failure(e) => throw e
             case Success(writeResult) =>
-              println ("success: $ writeResult "
+              println ("success writeResult "
             )
       }
     }
@@ -119,15 +121,15 @@ object Product{
   }
 
 //  products += (
-//    Product("0001","Paperclips Large","Large Plain Pack of 1000", "100", "images/page3_img1.jpg", "images/big1.jpg", "", "Lawnmower")
-//    Product("0002","Giant Paperclips","Giant Plain 51mm 100 pack", "100", "images/page3_img2.jpg", "images/big2.jpg", "", "Lawnmower"),
-//    Product("0003","Paperclip Giant Plain", "Giant Plain Pack of 10000", "100", "images/page3_img3.jpg", "images/big3.jpg", "", "Lawnmower"),
-//    Product("0004","No Tear Paper Clip", "No Tear Extra Large Pack of 1000", "100", "images/page3_img4.jpg", "images/big4.jpg", "", "Barbecues"),
-//    Product("0005","Zebra Paperclips", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img5.jpg", "images/big5.jpg", "", "Barbecues"),
-//    Product("0006","AA", "No Tear Extra Large Pack of 1000", "100", "images/page3_img7.jpg", "images/big7.jpg", "", "Furniture"),
-//    Product("0008","CC", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture"),
-//    Product("0009","DD", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture"),
-//    Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "10", "Furniture")
+//    Product("0001","Paperclips Large","Large Plain Pack of 1000", "100", "images/page3_img1.jpg", "images/big1.jpg", "", "Lawnmower","")
+//    Product("0002","Giant Paperclips","Giant Plain 51mm 100 pack", "100", "images/page3_img2.jpg", "images/big2.jpg", "", "Lawnmower",""),
+//    Product("0003","Paperclip Giant Plain", "Giant Plain Pack of 10000", "100", "images/page3_img3.jpg", "images/big3.jpg", "", "Lawnmower",""),
+//    Product("0004","No Tear Paper Clip", "No Tear Extra Large Pack of 1000", "100", "images/page3_img4.jpg", "images/big4.jpg", "", "Barbecues",""),
+//    Product("0005","Zebra Paperclips", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img5.jpg", "images/big5.jpg", "", "Barbecues",""),
+//    Product("0006","AA", "No Tear Extra Large Pack of 1000", "100", "images/page3_img7.jpg", "images/big7.jpg", "", "Furniture",""),
+//    Product("0008","CC", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture",""),
+//    Product("0009","DD", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "", "Furniture",""),
+//    Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "10", "Furniture","")
 //  )
 
   def getPrice(qty:String, price:String): Double ={
