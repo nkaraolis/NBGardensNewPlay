@@ -44,7 +44,7 @@ class CartController extends Controller {
 
       // create a new product, the new product is the found product but with Qty, and add the product to the cart
       def np : Product = {
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, Qty, p.carId)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, Qty, p.carId, p.reviews)
         val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
@@ -83,7 +83,7 @@ class CartController extends Controller {
       // create a new product, the new product is the found product but with new Qty, and add the product to the cart
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId, p.reviews)
         val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
@@ -107,7 +107,7 @@ class CartController extends Controller {
       removeO(p.name)
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId)
+        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId, p.reviews)
         val t = Product.findByName(p.name).toArray.apply(0)//
         t
       }
