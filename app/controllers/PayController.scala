@@ -72,7 +72,9 @@ class PayController extends Controller {
       val newCardForm = CardForm.bindFromRequest()
       val newCard = cardDetails(newCardForm.get.method, newCardForm.data("Name on Card"), newCardForm.data("Card No"), newCardForm.data("Start Date"), newCardForm.data("Expiry Date"), newCardForm.data("Security Code"), newCardForm.data("Issue No"))
       saveOrder(products)
+      Product.saveProductsForAnOrder(products)
       cardDetails.add(newCard)
+
       Redirect(routes.BrowseController.categoryList)
   }
 
