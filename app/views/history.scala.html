@@ -16,7 +16,7 @@
 </ul>
 }
 
-@main(Messages("listResult.page.page"))(sidebar) {
+@main(Messages("Order History"))(sidebar) {
 
 <div style="margin-left: 150px;">
     <div id="homeBanner">
@@ -33,17 +33,18 @@
     <div class="container_12">
         <div class="title"></div>
 
-        <div class="fontTypeD" style="padding-bottom: 50px;">Order History</div>
+        <div class="fontTypeD" style="padding-bottom: 10px;">Order History</div>
 
-        <div class="accountInfo" style="margin-left: 475px; height: 150px;">
+        <div class="accountInfo" style="margin-left: 0px; height: 145px;">
                 @for(order <- Orders) {
-                    <div class="fontTypeE" style="margin-top: -20px; color: #006633;"><a href="@routes.OrderHistoryController.track(order.ordId)"><br><b>Track Order</b></a></div>
                     <tr>
                         <td>Date and Time of Order: <div style="margin-left:101px; display: inline;"><b>@order.datetime</b> </div></td><br>
                         <td>Order ID: <div style="margin-left:199px; display: inline;"><b>@order.ordId</b> </div></td><br>
                         <td>Order Contents: <div style="margin-left:154px; display: inline;"><b>@order.carts</b></div></td><br>
-                        <td>Order Status: <div style="margin-left:172px; display: inline;"><b>@order.status</b> </div></td>
+                        <td>Order Status: <div style="margin-left:172px; display: inline;"><b>@order.status</b> </div></td><br>
                     </tr>
+
+                    <a href="@routes.OrderHistoryController.track(order.ordId)"> <input type="submit" class="btn-primary" value="TRACK ORDER" style="margin-top: 30px; float: left; width: 130px;"/></a>
                 }
          </div>
         
