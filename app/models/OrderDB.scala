@@ -21,6 +21,7 @@ case class OrderDB (ordId:Int, cusId:String, carts: Array[Product], totalPrice: 
 
 object OrderDB {
 
+var orderset = Set.empty(OrderReader)
 
   //DB Connection
   val dbn = "NBGardensOrders"
@@ -81,7 +82,8 @@ object OrderDB {
 //    )
 //  }
 
-  def createDoc ( orderd : OrderDB) : Unit = {
+
+  def createDoc ( orderd : OrderDB) : BSONDocument = {
     val document = BSONDocument(
       "ordId" -> orderd.ordId,
       "cusId" -> orderd.cusId,
@@ -91,6 +93,7 @@ object OrderDB {
       "status" -> orderd.status,
       "payMethod" -> orderd.payMethod
     )
+    document
   }
 
   def insertDoc(collection: BSONCollection, doc: BSONDocument) : Future[Unit] = {
@@ -102,13 +105,19 @@ object OrderDB {
       case Success(writeResult) =>
         println("SUCCESS")
     }
-
+    writeResult.map(_ => {})
   }
 
 def writer (ordercol: BSONCollection, order: Order)(implicit ec: ExecutionContext): Future[Unit] = {
   val result = ordercol.insert(order)
   result.map(_ => {})
 }
+
+  def getDateTime(): String = {
+    val now = Calendar.getInstance().toString
+
+    now
+  }
 
 
   def createNewOrder(id:Int, cId:String, carts:Array[Product], payMethod:String){

@@ -29,8 +29,8 @@ object DataDump {
 
 
   //orders
-  var o1 = Order(1, "punks", c1, "26 JUL 16, 15:23", "Order Made", "Pay Now")
-  var o2 = Order(2, "bigNoob", c2, "26 JUL 16, 15:23", "Order Made", "Pay Now")
+  var o1 = Order(1, "punks", c1, 20.00, "26 JUL 16, 15:23", "Order Made", "Pay Now")
+  var o2 = Order(2, "bigNoob", c2, 20.00, "26 JUL 16, 15:23", "Order Made", "Pay Now")
 
 
   //set of orders
