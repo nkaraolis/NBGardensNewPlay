@@ -28,7 +28,6 @@ class SearchController @Inject() extends Controller {
     )(SearchProduct.apply)(SearchProduct.unapply)
   )
 
-
   def listResult(Searched: String) = Action {
     implicit request =>
       Product.findByNameS(Searched).map {
