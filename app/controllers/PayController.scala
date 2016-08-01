@@ -58,6 +58,7 @@ class PayController extends Controller {
   }
 
 
+
   def readyToPay(items: String, total:Double) = Action {
     implicit request =>  //controller action
       if (request.session.get("username").isEmpty) {//check the user has logged in or not
@@ -66,15 +67,29 @@ class PayController extends Controller {
       Ok(views.html.payPage(items, total, CardForm)) //render view template
   }
 
+
+
+
   // save the card details to CVS
+  //This method is called from payPage.scala.html
   def save (products: String) = Action {
     implicit request =>
       val newCardForm = CardForm.bindFromRequest()
       val newCard = cardDetails(newCardForm.get.method, newCardForm.data("Name on Card"), newCardForm.data("Card No"), newCardForm.data("Start Date"), newCardForm.data("Expiry Date"), newCardForm.data("Security Code"), newCardForm.data("Issue No"))
       saveOrder(products)
+      Product.saveProductsForAnOrder(products)
       cardDetails.add(newCard)
       Redirect(routes.BrowseController.categoryList)
   }
+
+
+  //save order to the MongoDB
+  def saveToDB(){
+
+
+  }
+
+
 
   def saveOrder (products: String) {
     writeOrders.add(products)

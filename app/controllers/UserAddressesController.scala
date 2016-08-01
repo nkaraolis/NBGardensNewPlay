@@ -52,11 +52,12 @@ class UserAddressesController  @Inject() extends Controller{
 
           val currentCustomer = Customer.findCustomer(request.session.get("username").get)
 
-          val currentAddresses = CustAddress.findAddressesByUsername(currentCustomer.username)
+          if(CustAddress.findAddressesByUsername(request.session.get("username").get).isEmpty) { //if theres no addresses
 
-          if ((!(editAddressForm.data("Address Type").length == 0)) && ((editAddressForm.data("Address Type") == "Shipping") || (editAddressForm.data("Address Type") == "Billing"))) {
+            val currentAddress = new CustomerAddress("","","","","","","","")
 
-            val currentAddress = CustAddress.getAddressByType(currentAddresses, editAddressForm.data("Address Type")).get
+            currentAddress.username = currentCustomer.username
+            currentAddress.addressType = editAddressForm.data("Address Type")
 
             if (!(editAddressForm.data("Full Name").length == 0)) {
               currentAddress.fullName = editAddressForm.data("Full Name")
@@ -77,25 +78,91 @@ class UserAddressesController  @Inject() extends Controller{
               currentAddress.postCode = editAddressForm.data("Postcode")
             }
 
-            val updateAddress = currentAddress
-            val addressSession = request.session +
-              ("fullName" -> updateAddress.fullName) +
-              ("addressLine1" -> updateAddress.addressLine1) +
-              ("addressLine2" -> updateAddress.addressLine2) +
-              ("townCity" -> updateAddress.townCity) +
-              ("county" -> updateAddress.county) +
-              ("postcode" -> updateAddress.postCode)
-            Redirect(routes.UserAddressesController.userAddresses()).withSession(addressSession)
-          }
-          else{
-            val addressSession = request.session +
-              ("fullName" -> editAddressForm.data("Full Name")) +
-              ("addressLine1" -> editAddressForm.data("Address Line 1")) +
-              ("addressLine2" -> editAddressForm.data("Address Line 2")) +
-              ("townCity" -> editAddressForm.data("Town/City")) +
-              ("county" -> editAddressForm.data("County")) +
-              ("postcode" -> editAddressForm.data("Postcode"))
-            Redirect(routes.UserAddressesController.userAddresses()).withSession(addressSession)
+            CustAddress.add(currentAddress)
+
+            Redirect(routes.UserAddressesController.userAddresses())
+
+          }else{
+
+            val currentAddresses = CustAddress.findAddressesByUsername(currentCustomer.username)
+
+            if(CustAddress.getAddressByType(currentAddresses,editAddressForm.data("Address Type")).isEmpty){ //if the exisiting address but isn't the same type submitted.
+
+              val currentAddress = new CustomerAddress("","","","","","","","")
+
+              currentAddress.username = currentCustomer.username
+              currentAddress.addressType = editAddressForm.data("Address Type")
+
+              if (!(editAddressForm.data("Full Name").length == 0)) {
+                currentAddress.fullName = editAddressForm.data("Full Name")
+              }
+              if (!(editAddressForm.data("Address Line 1").length == 0)) {
+                currentAddress.addressLine1 = editAddressForm.data("Address Line 1")
+              }
+              if (!(editAddressForm.data("Address Line 2").length == 0)) {
+                currentAddress.addressLine2 = editAddressForm.data("Address Line 2")
+              }
+              if (!(editAddressForm.data("Town/City").length == 0)) {
+                currentAddress.townCity = editAddressForm.data("Town/City")
+              }
+              if (!(editAddressForm.data("County").length == 0)) {
+                currentAddress.county = editAddressForm.data("County")
+              }
+              if (!(editAddressForm.data("Postcode").length == 0)) {
+                currentAddress.postCode = editAddressForm.data("Postcode")
+              }
+
+              CustAddress.add(currentAddress)
+
+              Redirect(routes.UserAddressesController.userAddresses())
+
+            }else{    //if existing address
+
+              if ((!(editAddressForm.data("Address Type").length == 0)) && ((editAddressForm.data("Address Type") == "Shipping") || (editAddressForm.data("Address Type") == "Billing"))) {
+
+                val currentAddress = CustAddress.getAddressByType(currentAddresses, editAddressForm.data("Address Type")).get
+
+                if (!(editAddressForm.data("Full Name").length == 0)) {
+                  currentAddress.fullName = editAddressForm.data("Full Name")
+                }
+                if (!(editAddressForm.data("Address Line 1").length == 0)) {
+                  currentAddress.addressLine1 = editAddressForm.data("Address Line 1")
+                }
+                if (!(editAddressForm.data("Address Line 2").length == 0)) {
+                  currentAddress.addressLine2 = editAddressForm.data("Address Line 2")
+                }
+                if (!(editAddressForm.data("Town/City").length == 0)) {
+                  currentAddress.townCity = editAddressForm.data("Town/City")
+                }
+                if (!(editAddressForm.data("County").length == 0)) {
+                  currentAddress.county = editAddressForm.data("County")
+                }
+                if (!(editAddressForm.data("Postcode").length == 0)) {
+                  currentAddress.postCode = editAddressForm.data("Postcode")
+                }
+
+                val updateAddress = currentAddress
+                val addressSession = request.session +
+                  ("fullName" -> updateAddress.fullName) +
+                  ("addressLine1" -> updateAddress.addressLine1) +
+                  ("addressLine2" -> updateAddress.addressLine2) +
+                  ("townCity" -> updateAddress.townCity) +
+                  ("county" -> updateAddress.county) +
+                  ("postcode" -> updateAddress.postCode)
+                Redirect(routes.UserAddressesController.userAddresses()).withSession(addressSession)
+              }
+              else{
+                val addressSession = request.session +
+                  ("fullName" -> editAddressForm.data("Full Name")) +
+                  ("addressLine1" -> editAddressForm.data("Address Line 1")) +
+                  ("addressLine2" -> editAddressForm.data("Address Line 2")) +
+                  ("townCity" -> editAddressForm.data("Town/City")) +
+                  ("county" -> editAddressForm.data("County")) +
+                  ("postcode" -> editAddressForm.data("Postcode"))
+                Redirect(routes.UserAddressesController.userAddresses()).withSession(addressSession)
+              }
+            }
+            //Fuck bitches get money
           }
       })
   }

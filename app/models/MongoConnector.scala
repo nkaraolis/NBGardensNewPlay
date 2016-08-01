@@ -16,7 +16,6 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 
 
-
 /**
   * Created by Administrator on 25/07/2016.
   */
@@ -52,10 +51,6 @@ object MongoConnector {
   val collectionCustomer = dbCustomersCon.collection[BSONCollection]("customer")
 
 
-  def updateAddress(): Unit = {
-
-  }
-
 
   //setting up connection to the NBGardensOrders database
   val connectOrder = driver.connection(servers, authentications = credsOrder)
@@ -66,6 +61,5 @@ object MongoConnector {
 
 
 
-
-
 }
+
