@@ -30,6 +30,11 @@ object MongoConnector {
   val passCustomer = "1234"
   val credsCustomer = List(Authenticate(dbCustomers, userCustomer, passCustomer))
 
+  /** Setup username and password required for DB connection **/
+  val userOrder = "orderAdmin"
+  val passOrder = "1234"
+  val credsOrder = List(Authenticate(dbOrders, userOrder, passOrder))
+
   def servers: List[String] = List("192.168.1.42:27017")
 
   def config = ConfigFactory.load()
@@ -43,6 +48,15 @@ object MongoConnector {
   def dbCustomersCon = connectCustomer.db(dbCustomers, errorStrategy)
 
   val collectionCustomer = dbCustomersCon.collection[BSONCollection]("customer")
+
+
+
+  val connectOrder = driver.connection(servers, authentications = credsOrder)
+
+  def dbOrdersCon = connectOrder.db(dbOrders, errorStrategy)
+
+  val collectionOrder = dbOrdersCon.collection[BSONCollection]("order")
+
 
   def updateAddress(): Unit = {
 
