@@ -10,14 +10,14 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 28/07/2016.
   */
-case class CustomerDB(id: BSONObjectID, customerID: Int, fName: String, lName: String, email: String, telephone: String, username: String, password: String, addresses: List[CustomerAddressDB], cardDetails: List[CustomerCardDB])
+case class CustomerDB(customerID: Int, fName: String, lName: String, email: String, telephone: String, username: String, password: String, addresses: List[CustomerAddressDB], cardDetails: List[CustomerCardDB])
 
 object CustomerDB {
   var userList: List[BSONDocument] = List(BSONDocument())
 
   implicit object CustomerDBReader extends BSONDocumentReader[CustomerDB] {
     def read(doc: BSONDocument): CustomerDB =
-      CustomerDB(doc.getAs[BSONObjectID]("_id").get,
+      CustomerDB(
         doc.getAs[Int]("customerID").get,
         doc.getAs[String]("fName").get,
         doc.getAs[String]("lName").get,
@@ -30,7 +30,7 @@ object CustomerDB {
       )
   }
 
-  implicit object CustomerWriter extends BSONDocumentWriter[CustomerDB] {
+  implicit object CustomerDBWriter extends BSONDocumentWriter[CustomerDB] {
     def write(customer: CustomerDB): BSONDocument = {
       BSONDocument(
         "customerID" -> customer.customerID,
@@ -85,16 +85,34 @@ object CustomerDB {
   }
 
   /** Send recovery email **/
-  def findByEmail(collection: BSONCollection, query: BSONDocument): Unit = {
-    val foundUserEmail = collection.find(query).cursor[BSONDocument]().collect[List]()
-    foundUserEmail.onComplete {
+  def findByEmail(email : String): List[BSONDocument] = {
+    val findQuery = BSONDocument(
+      "email" -> email
+    )
+    val foundUser = MongoConnector.collectionCustomer.find(findQuery).cursor[BSONDocument]().collect[List]()
+    foundUser.onComplete {
       case Failure(e) => throw e
       case Success(readResult) =>
-        for (user <- readResult) {
-          println("Recovery email sent")
-        }
+        userList = readResult
     }
+    userList
   }
 
+  def findNextID(): Int = {
+    var nextID = 0
 
+    val findAll = BSONDocument(
+      (null, null)
+    )
+
+    val foundID = MongoConnector.collectionCustomer.find(findAll).cursor[BSONDocument]().collect[List]()
+
+    foundID onComplete {
+      case Failure(e) => throw e
+      case Success(readResult) =>
+        nextID = readResult.size + 1
+    }
+    Thread.sleep(250)
+    nextID
+  }
 }

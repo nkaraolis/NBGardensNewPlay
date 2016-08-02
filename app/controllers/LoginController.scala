@@ -97,7 +97,6 @@ class LoginController @Inject() extends Controller {
             ("error" -> Messages("password.error")))
       }, success = {
         newLogin =>
-          println("Logged in user: " + newLogin._1)
           val currentCustomer = CustomerDB.findByUsername(newLogin._1).head
           val customerSession = request.session +
             ("customerID" -> currentCustomer.getAs[Int]("customerID").get.toString) +
@@ -109,6 +108,7 @@ class LoginController @Inject() extends Controller {
           Redirect(routes.HomeController.home()).withSession(customerSession)
       })
   }
+
 
   def newLogin = Action {
     implicit request =>
