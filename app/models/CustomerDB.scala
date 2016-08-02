@@ -79,7 +79,7 @@ object CustomerDB {
           status = false
         }
     }
-    Thread.sleep(250)
+    Thread.sleep(500)
     println("End of the method status: " + status)
     status
   }
