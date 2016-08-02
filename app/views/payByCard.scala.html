@@ -14,7 +14,7 @@
     <title>ByCard</title>
 </head>
 <body>
-    @helper.form(routes.PayController.save(products)) {
+    @helper.form(routes.PayController.save(products, session.get("username").toString)) {
         <table>
             <tr>
                 <td>Name on the card: </td>

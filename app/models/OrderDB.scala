@@ -1,14 +1,12 @@
 package models
 
 import java.util.Calendar
-
 import com.typesafe.config.ConfigFactory
 import reactivemongo.api.{FailoverStrategy, MongoDriver}
 import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.api.commands.WriteResult
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 import reactivemongo.core.nodeset.Authenticate
-
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
@@ -108,10 +106,10 @@ var orderset = Set.empty(OrderReader)
     writeResult.map(_ => {})
   }
 
-def writer (ordercol: BSONCollection, order: Order)(implicit ec: ExecutionContext): Future[Unit] = {
-  val result = ordercol.insert(order)
-  result.map(_ => {})
-}
+//def create (ordercol: BSONCollection, order: OrderDB)(implicit ec: ExecutionContext): Future[Unit] = {
+//  val result = ordercol.insert(order)
+//  result.map(_ => {})
+//}
 
   def getDateTime(): String = {
     val now = Calendar.getInstance().toString
