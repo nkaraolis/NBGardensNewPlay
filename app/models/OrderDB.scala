@@ -19,7 +19,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 29/07/2016.
   */
-case class OrderDB (ordId:Int, cusId:String, carts: Array[Product], totalPrice: Double, datetime: String, status: String, payMethod:String)
+case class OrderDB (ordId:Int, cusId:String, carts: Array[CartItem], totalPrice: Double, datetime: String, status: String, payMethod:String)
 
 object OrderDB {
 
@@ -52,7 +52,7 @@ object OrderDB {
 
       doc.getAs[Int]("ordId").get,
       doc.getAs[String]("cusId").get,
-      doc.getAs[Array[Product]]("carts").get,
+      doc.getAs[Array[CartItem]]("carts").get,
       doc.getAs[Double]("totalPrice").get,
       doc.getAs[String]("datetime").get,
       doc.getAs[String]("status").get,
@@ -86,19 +86,19 @@ object OrderDB {
     )
     document
   }
-//
-//
-//  def insertDoc(collection: BSONCollection, doc: BSONDocument): Future[Unit] = {
-//    val writeResult: Future[WriteResult] = collection.insert(doc)
-//    Thread.sleep(2000)
-//
-//    writeResult.onComplete {
-//      case Failure(e) => e.printStackTrace()
-//      case Success(writeResult) =>
-//        println("SUCCESS")
-//    }
-//    writeResult.map(_ => {})
-//  }
+
+
+  def insertDoc(collection: BSONCollection, doc: BSONDocument): Future[Unit] = {
+    val writeResult: Future[WriteResult] = collection.insert(doc)
+    Thread.sleep(2000)
+
+    writeResult.onComplete {
+      case Failure(e) => e.printStackTrace()
+      case Success(writeResult) =>
+        println("SUCCESS")
+    }
+    writeResult.map(_ => {})
+  }
 
 
 
@@ -133,11 +133,9 @@ object OrderDB {
 
   def findNextID(): Int = {
     var nextID = 0
-
     val findAll = BSONDocument(
       (null, null)
     )
-
     val foundID = MongoConnector.collectionOrder.find(findAll).cursor[BSONDocument]().collect[List]()
 
     foundID onComplete {

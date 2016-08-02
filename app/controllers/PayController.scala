@@ -98,7 +98,9 @@ class PayController extends Controller {
           Redirect(routes.PayController.newCheckout(products, total)).flashing(Flash(form.data))
       })
 
+      //session trolley needs to be cleared here
   }
+
 
   def newCheckout(products: String, total:Double) = Action {
     implicit request =>
