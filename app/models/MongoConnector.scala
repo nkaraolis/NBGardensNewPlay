@@ -15,6 +15,7 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 
+
 /**
   * Created by Administrator on 25/07/2016.
   */
@@ -30,6 +31,11 @@ object MongoConnector {
   val passCustomer = "1234"
   val credsCustomer = List(Authenticate(dbCustomers, userCustomer, passCustomer))
 
+  /** Setup username and password required for orders DB connection **/
+  val userOrder = "ordersAdmin"
+  val passOrder = "1234"
+  val credsOrder = List(Authenticate(dbOrders, userOrder, passOrder))
+
   def servers: List[String] = List("192.168.1.42:27017")
 
   def config = ConfigFactory.load()
@@ -44,8 +50,10 @@ object MongoConnector {
 
   val collectionCustomer = dbCustomersCon.collection[BSONCollection]("customer")
 
-  def updateAddress(): Unit = {
+  def dbOrdersCon = connectOrder.db(dbOrders, errorStrategy)
 
-  }
+  //setting up connection to the NBGardensOrders database
+  val connectOrder = driver.connection(servers, authentications = credsOrder)
 
+  val collectionOrder = dbOrdersCon.collection[BSONCollection]("order")
 }

@@ -65,7 +65,7 @@ GET     /toPay                      controllers.PayController.readyToPay(items:S
 
 #GET     /sessionReviewCheck        controllers.ReviewController.sessionReviewCheck
 
-POST    /Pay                        controllers.PayController.save(products:String)
+POST    /Pay                        controllers.PayController.save(products:String, username: String)
 
 GET     /catalogue                  controllers.CatalogueController.catalogue
 
