@@ -47,6 +47,7 @@ object CustomerDB {
     }
   }
 
+
   /** Finds customer by username and returns CustomerDB object **/
   def findCustomer(username: String)(implicit ec: ExecutionContext): CustomerDB = {
     val findQuery = BSONDocument(
