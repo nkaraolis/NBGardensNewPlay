@@ -110,54 +110,16 @@ object OrderDB {
     val hourFormat = new SimpleDateFormat("hh")
     val amPmFormat = new SimpleDateFormat("a")
 
-   // val cHour = hourFormat.format(now)
-   // val cMin = minuteFormat.format(now)
-    //val amOrPm = amPmFormat.format(now)
-
     val cDay = MonthDay.now()
     val cMonth = YearMonth.now()
     val cYear = Year.now()
     val time = LocalTime.now()
-
-    //val datetime = cDay + " " + cMonth + " " + cYear + " " + cHour + ":" + cMin + " " + amOrPm
 
     val datetime = cDay + " " + cMonth + " " + cYear + " " + time
     datetime
   }
 
 
-//  def createOrder (sortedOrders: List[OrderDB] ,cart : Array[Product], total: Double,status : String,  username: String, payMethod : String) = {
-//    if (sortedOrders.isEmpty)
-//      {
-//       new OrderDB(1, username, cart, total, this.getDateTime(), status, payMethod)
-//      }else
-//    {
-//      new OrderDB(sortedOrders.last.ordId + 1, username, cart, total, this.getDateTime(), status, payMethod)
-//    }
-//
-//  }
-//
-//
-//
-//  def createNewOrder(id: Int, cId: String, carts: Array[Product], payMethod: String) {
-//    val now = Calendar.getInstance()
-//    val status = "Order Made"
-//    val total: Double = Cart.calculateCartTotal(carts)
-//    var doc = BSONDocument("orderID" -> id, "customerID" -> cId, "items" -> carts, "totalprice" -> total, "datetime" -> now.toString(), "status" -> status, "payMethod" -> payMethod)
-//    val futIns: Future[WriteResult] = MongoConnector.collectionOrder.insert[BSONDocument](doc)
-//
-//    futIns.onComplete {
-//      case Failure(e) => throw e
-//      case Success(writeResult) => println(s"success: $writeResult")
-//    }
-//
-//    val end: Future[Unit] = futIns.map {
-//      case writeResult if (writeResult.code contains 11000) => println("Warning 11000: Duplicate")
-//      case _ => ()
-//    }
-//    //need to trigger decrement stock
-//
-//  }
 
 
   def findOrderById(id: Int) = DataDump.orders.find(_.ordId == id)
@@ -165,7 +127,6 @@ object OrderDB {
   def getOrders = orders.toList
 
   //Method to get all orders with the logged in Customer's ID
-
   def getOrdersByCusId(cid: String): List[Order] = DataDump.orders.filter(_.cusId == cid)
 
 
