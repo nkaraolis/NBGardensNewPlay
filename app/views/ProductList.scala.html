@@ -43,16 +43,21 @@ function popupAddMsg(msg) {
             @for(product <- products) {
             <div class="borderGrid">
                 <div class="grid_3" style="">
-                    <a href="@routes.Assets.versioned(product.imgL)" class="gal">
+                    <a href="@routes.Assets.versioned(product.mainImage)" class="gal">
                         <div class="img_block" style="padding: 5px 5px 20px 5px;">
-                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
+                            <img src="@routes.Assets.versioned(product.mainImage)" style="height:210px; width:210px;" alt="" class="img_inner">
                         </div>
                     </a>
                     <div class="title" name="get" style="text-align: left;">
                         @helper.form(routes.CartController.updateFromPL) {
-                            <div style="height: 130px;">
+                            <div style="height: 130px; font-size: 19px;">
                                 <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
-                                <dt style="font-size: 14px;">Description: @product.description</dt>
+                                <dt style="font-size: 14px;">Description:
+
+                                    @Product.preview(product.description, 35)
+                                    ...
+
+                                </dt>
                             </div>
                             <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@product.price</dt>
                             <input type="hidden" name="Product" value="@product.name">
