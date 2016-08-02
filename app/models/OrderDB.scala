@@ -19,22 +19,28 @@ case class OrderDB (ordId:Int, cusId:String, carts: Array[Product], totalPrice: 
 
 object OrderDB {
 
+
   var orderset = Set.empty(OrderReader)
+
 
   //DB Connection
   val dbn = "NBGardensOrders"
   val user = "user2"
   val pass = "password"
+
   val creds = List(Authenticate(dbn, user, pass))
   val servs: List[String] = List("192.168.1.42:27017")
   val config = ConfigFactory.load()
   val driver = new MongoDriver(Some(config))
   val conn = driver.connection(servs, authentications = creds)
+
   val strat = FailoverStrategy()
   val db = conn.db(dbn, strat)
   val coll = db.collection[BSONCollection]("order")
 
-  var orders: Set[OrderDB] = Set.empty
+
+  var orders: Set[OrderDB]  = Set.empty
+
 
   val condition = BSONDocument(
     (null, null)
@@ -56,8 +62,10 @@ object OrderDB {
   }
 
 
-  implicit object OrderReader extends BSONDocumentReader[OrderDB] {
-    def read(doc: BSONDocument): OrderDB = OrderDB(
+
+  implicit object OrderReader extends BSONDocumentReader[OrderDB]{
+    def read(doc: BSONDocument):OrderDB = OrderDB(
+
       doc.getAs[Int]("ordId").get,
       doc.getAs[String]("cusId").get,
       doc.getAs[Array[Product]]("carts").get,
@@ -66,6 +74,7 @@ object OrderDB {
       doc.getAs[String]("status").get,
       doc.getAs[String]("payMethod").get)
   }
+
 
 
   //  implicit object OrderWriter extends BSONDocumentWriter[OrderDB] {
@@ -86,6 +95,7 @@ object OrderDB {
       "ordId" -> orderd.ordId,
       "cusId" -> orderd.cusId,
       "carts" -> orderd.carts, //Array - cant do this
+
       "totalprice" -> orderd.totalPrice,
       "datetime" -> orderd.datetime,
       "status" -> orderd.status,
@@ -94,11 +104,13 @@ object OrderDB {
     document
   }
 
+
   def insertDoc(collection: BSONCollection, doc: BSONDocument): Future[Unit] = {
     val writeResult: Future[WriteResult] = collection.insert(doc)
     Thread.sleep(2000)
 
     writeResult.onComplete {
+
       case Failure(e) => e.printStackTrace()
       case Success(writeResult) =>
         println("SUCCESS")
@@ -106,16 +118,19 @@ object OrderDB {
     writeResult.map(_ => {})
   }
 
+
   //def create (ordercol: BSONCollection, order: OrderDB)(implicit ec: ExecutionContext): Future[Unit] = {
   //  val result = ordercol.insert(order)
   //  result.map(_ => {})
   //}
+
 
   def getDateTime(): String = {
     val now = Calendar.getInstance().toString
 
     now
   }
+
 
 
   def createNewOrder(id: Int, cId: String, carts: Array[Product], payMethod: String) {
@@ -126,12 +141,15 @@ object OrderDB {
     var doc = BSONDocument("orderID" -> id, "customerID" -> cId, "items" -> carts, "totalprice" -> total, "datetime" -> now.toString(), "status" -> status, "payMethod" -> payMethod)
     val futIns: Future[WriteResult] = MongoConnector.collectionOrder.insert[BSONDocument](doc)
 
+
     futIns.onComplete {
       case Failure(e) => throw e
       case Success(writeResult) => println(s"success: $writeResult")
     }
 
+
     val end: Future[Unit] = futIns.map {
+
       case writeResult if (writeResult.code contains 11000) => println("Warning 11000: Duplicate")
       case _ => ()
     }
@@ -143,10 +161,11 @@ object OrderDB {
 
   def findOrderById(id: Int) = DataDump.orders.find(_.ordId == id)
 
-
   def getOrders = orders.toList
 
   //Method to get all orders with the logged in Customer's ID
+
   def getOrdersByCusId(cid: String): List[Order] = DataDump.orders.filter(_.cusId == cid)
+
 
 }

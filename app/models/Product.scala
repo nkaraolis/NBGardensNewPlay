@@ -6,7 +6,6 @@ import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.api.commands.WriteResult
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 import reactivemongo.core.nodeset.Authenticate
-
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
@@ -16,6 +15,7 @@ import scala.util.{Failure, Success}
   * Created by Administrator on 08/07/2016.
   */
 case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: String)
+
 
 object Product{
 
@@ -34,15 +34,19 @@ object Product{
 
   var products: Set[Product]  = Set.empty
 
+  //empty condition so that all items in this database are returned and not one in particular
   val condition = BSONDocument(
     (null, null)
   )
+
 
   val key = BSONDocument(
     ("_id" -> false)
   )
 
-  val productsInDB = coll.find(condition,key).cursor[BSONDocument]().collect[List]()
+
+  val productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
+
 
   productsInDB.onComplete {
     case Failure(e) => throw e
@@ -66,9 +70,11 @@ object Product{
       doc.getAs[String]("reviews").get)
   }
 
+
   //Review(var productId: String, var username: String,var reviewTitle: String, var review: String, var reviewDate: String, var rating: String) {
 
   //(productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: Set[Review])
+
 
   implicit object ProductWriter extends BSONDocumentWriter[Product] {
     def write(product: Product) : BSONDocument = BSONDocument(
@@ -84,6 +90,7 @@ object Product{
       "reviews" -> product.reviews
     )
   }
+
 
   def saveProductsForAnOrder(products: String): Unit ={
     /**String to Product*/
@@ -140,19 +147,26 @@ object Product{
   //    Product("0010","EE", "Zebra Length 28mm Assorted 150 Pack", "100", "images/page3_img8.jpg", "images/big8.jpg", "10", "Furniture","")
   //  )
 
+
   def getPrice(qty:String, price:String): Double ={
     val tPrice = (qty.toDouble) * (price.toDouble)
     tPrice
   }
 
+
   def findAll = products.toList.sortBy(_.name)
+
 
   def findByName(user: String) = products.find(_.name == user)
 
+
   def findById(user: String) = products.find(_.productId == user)
+
 
   //  def findByCart(cart: String) = products.find(_.category == cart).toList.sortBy(_.name)
 
+
+  //find products by Category
   def findByCart(cart: String): List[Product] = {
     var tl: Set[Product]  = Set.empty
     for (product <- products){
@@ -163,17 +177,20 @@ object Product{
     tl.toList
   }
 
+
   def preview(s: String, n: Int) = if (s.length <= n) { //takes a string to shorten and shortens up to length n, when there is a space.
     s
   } else {
     s.take(s.lastIndexWhere(_.isSpaceChar, n + 1)).trim
   }
 
+
   def findProductByName(name: String) = products.find(_.name == name)
 
 
   def add(Id: String, Name: String, description: String, price: String, mainImage: String, secondaryImages: String, need: String, category: String, porousAllowed: String, reviews: String): Unit ={
     products += Product(Id,Name,description,price,mainImage,secondaryImages, need, category, porousAllowed, reviews)
+
   }
 
   def removeFromProduct(product: Product): Set[Product] ={
@@ -192,6 +209,7 @@ object Product{
     products
   }
 
+
   def setQTY (name: String, need: String): Unit ={
     def findByName(name: String) = {
       val tp = products.toList.find(_.name == name).get
@@ -200,6 +218,7 @@ object Product{
     }
     findByName(name)
   }
+
 
   def findByNameOB(name: String) ={
     def filter(products: Set[Product], results: Set[Product]) : Set[Product] ={
@@ -215,6 +234,10 @@ object Product{
     filter(products, Set.empty[Product]).toList
   }
 
+
   //def findByNameS(name: String) = products.toList.find(_.name contains(name.toUpperCase()))
   def findByNameS(name: String) = products.toList.find(_.name.toLowerCase().contains(name.toLowerCase()))
 }
+
+
+

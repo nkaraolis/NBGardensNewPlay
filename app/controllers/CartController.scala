@@ -25,9 +25,11 @@ class CartController extends Controller {
     (aFormForCart.unapply)
   )
 
+
   // products in the cart for the user
   var products: Array[Product] = Array.empty
   var totalT = 0.00
+
 
   // return products in the cart
   def list = Action {
@@ -35,6 +37,7 @@ class CartController extends Controller {
       products = Cart.productsInCart  //get product from model
       Ok(views.html.cartpage(products.toList, CartForm)) //render view template
   }
+
 
   def add(product: String, Qty: String) = Action {
     implicit request =>  //controller action
@@ -54,12 +57,14 @@ class CartController extends Controller {
       Redirect(routes.BrowseController.productList(p.category)) //render view template
   }
 
+
   def remove(product: String) = Action {
     implicit request =>  //controller action
-      products = Cart.removeFromCart(Product.findByName(product).get)   //get product from model
+      products = Cart.removeFromCart(Product.findByName(product).get)   //get product via Product class
       removeOldPrice(Product.findByName(product).get.name)
       Ok(views.html.cartpage(products.toList, CartForm)) //render view template
   }
+
 
   // update qty from the cart page
   def update() = Action {
@@ -95,6 +100,8 @@ class CartController extends Controller {
       Ok(views.html.cartpage(products.toList, CartForm))//render view template
   }
 
+
+
   // update qty from the products page, the same with above function
   def updateFromPL() = Action {
     implicit request =>  //controller action
@@ -117,6 +124,9 @@ class CartController extends Controller {
       Redirect(routes.BrowseController.productList(p.category))//render view template
   }
 
+
+
+
   def checkout() = Action {
     implicit request =>  //controller action
       if (request.session.get("username").isEmpty) {//check the user has logged in or not
@@ -130,10 +140,13 @@ class CartController extends Controller {
       }
   }
 
+
+
   def removeO(product: String) : Array[Product] ={
     products = Cart.removeFromCart(Product.findByName(product).get)   //get product from model
     products
   }
+
 
   def removeOldPrice(product: String) : Double ={
     totalT = totalT - (Product.findByName(product).get.price.toDouble * Product.findByName(product).get.qty.toDouble)

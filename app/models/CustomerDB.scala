@@ -74,7 +74,6 @@ object CustomerDB {
     }
     Thread.sleep(500)
     userList
-
   }
 
   def findNextID(): Int = {
