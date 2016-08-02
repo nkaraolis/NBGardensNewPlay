@@ -46,6 +46,7 @@ object CustomerDB {
     }
   }
 
+
   /** Find customer by username **/
   def findByUsername(username: String): List[BSONDocument] = {
     val findQuery = BSONDocument(
@@ -61,6 +62,7 @@ object CustomerDB {
     userList
   }
 
+
   /** Find customer by email **/
   def findByEmail(email : String): List[BSONDocument] = {
     val findQuery = BSONDocument(
@@ -75,6 +77,7 @@ object CustomerDB {
     Thread.sleep(500)
     userList
   }
+
 
   def findNextID(): Int = {
     var nextID = 0
@@ -93,4 +96,6 @@ object CustomerDB {
     Thread.sleep(500)
     nextID
   }
+
+
 }
