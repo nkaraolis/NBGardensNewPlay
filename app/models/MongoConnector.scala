@@ -15,20 +15,26 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 
+
 /**
   * Created by Administrator on 25/07/2016.
   */
 object MongoConnector {
 
-  /** Specify database names to connect to **/
+  /** Database names to connect to **/
   val dbCustomers = "NBGardensCustomers"
   val dbProducts = "NBGardensProducts"
   val dbOrders = "NBGardensOrders"
 
-  /** Setup username and password required for DB connection **/
+  /** Setup username and password required for customers DB connection **/
   val userCustomer = "customerAdmin"
   val passCustomer = "1234"
   val credsCustomer = List(Authenticate(dbCustomers, userCustomer, passCustomer))
+
+  /** Setup username and password required for orders DB connection **/
+  val userOrder = "ordersAdmin"
+  val passOrder = "1234"
+  val credsOrder = List(Authenticate(dbOrders, userOrder, passOrder))
 
   def servers: List[String] = List("192.168.1.42:27017")
 
@@ -36,16 +42,15 @@ object MongoConnector {
 
   def driver = new MongoDriver(Some(config))
 
-  val connectCustomer = driver.connection(servers, authentications = credsCustomer)
-
   val errorStrategy = FailoverStrategy()
 
+  /** Customer database collection  **/
+  val connectCustomer = driver.connection(servers, authentications = credsCustomer)
   def dbCustomersCon = connectCustomer.db(dbCustomers, errorStrategy)
-
   val collectionCustomer = dbCustomersCon.collection[BSONCollection]("customer")
 
-  def updateAddress(): Unit = {
-
-  }
-
+  /** Orders database collection **/
+  def dbOrdersCon = connectOrder.db(dbOrders, errorStrategy)
+  val connectOrder = driver.connection(servers, authentications = credsOrder)
+  val collectionOrder = dbOrdersCon.collection[BSONCollection]("order")
 }

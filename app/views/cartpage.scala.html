@@ -47,6 +47,7 @@
                             @helper.form(routes.CartController.update) {
                                 <div style="height: 130px;">
                                     <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
+
                                     <dt style="font-size: 14px;">Description:
 
                                         @Product.preview(product.description, 35)
