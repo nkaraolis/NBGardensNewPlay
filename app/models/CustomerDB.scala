@@ -1,11 +1,10 @@
 package models
 
 import reactivemongo.api.collections.bson.BSONCollection
-import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
-
 import scala.util.{Failure, Success}
+import reactivemongo.bson._
 
 /**
   * Created by Administrator on 28/07/2016.
@@ -13,7 +12,9 @@ import scala.util.{Failure, Success}
 case class CustomerDB(customerID: Int, fName: String, lName: String, email: String, phone: String, username: String, password: String, addresses: List[CustomerAddressDB], cardDetails: List[CustomerCardDB])
 
 object CustomerDB {
-  var userList: List[BSONDocument] = List(BSONDocument())
+  var userList: List[BSONDocument] = List[BSONDocument]()
+
+  var currentCustomer = new CustomerDB(0, "", "", "", "", "", "", List(), List())
 
   implicit object CustomerDBReader extends BSONDocumentReader[CustomerDB] {
     def read(doc: BSONDocument): CustomerDB =
@@ -46,6 +47,22 @@ object CustomerDB {
     }
   }
 
+  /** Finds customer by username and returns CustomerDB object **/
+  def findCustomer(username: String)(implicit ec: ExecutionContext): CustomerDB = {
+    val findQuery = BSONDocument(
+      "username" -> username
+    )
+    val foundUser = MongoConnector.collectionCustomer.find(findQuery).one[CustomerDB]
+    foundUser onComplete {
+      case Failure(e) => throw e
+      case Success(readResult) =>
+        println(readResult.get.username)
+        currentCustomer = readResult.get
+    }
+    Thread.sleep(500)
+    currentCustomer
+  }
+
   /** Find customer by username **/
   def findByUsername(username: String): List[BSONDocument] = {
     val findQuery = BSONDocument(
@@ -62,7 +79,7 @@ object CustomerDB {
   }
 
   /** Find customer by email **/
-  def findByEmail(email : String): List[BSONDocument] = {
+  def findByEmail(email: String): List[BSONDocument] = {
     val findQuery = BSONDocument(
       "email" -> email
     )
@@ -76,15 +93,13 @@ object CustomerDB {
     userList
   }
 
+  /** Finds the next customer ID to add in **/
   def findNextID(): Int = {
     var nextID = 0
-
     val findAll = BSONDocument(
       (null, null)
     )
-
     val foundID = MongoConnector.collectionCustomer.find(findAll).cursor[BSONDocument]().collect[List]()
-
     foundID onComplete {
       case Failure(e) => throw e
       case Success(readResult) =>
@@ -92,5 +107,16 @@ object CustomerDB {
     }
     Thread.sleep(500)
     nextID
+  }
+
+  /** Updates the customer's field in the database **/
+  def updateUserField(username: String, updateField: String, value: String): Unit = {
+    val selector = BSONDocument("username" -> username)
+    val modifier = BSONDocument(
+      "$set" -> BSONDocument(
+        updateField -> value))
+
+    val runUpdate = MongoConnector.collectionCustomer.update(selector, modifier)
+    Thread.sleep(500)
   }
 }

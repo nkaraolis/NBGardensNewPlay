@@ -21,12 +21,12 @@ import scala.util.{Failure, Success}
   */
 object MongoConnector {
 
-  /** Specify database names to connect to **/
+  /** Database names to connect to **/
   val dbCustomers = "NBGardensCustomers"
   val dbProducts = "NBGardensProducts"
   val dbOrders = "NBGardensOrders"
 
-  /** Setup username and password required for DB connection **/
+  /** Setup username and password required for customers DB connection **/
   val userCustomer = "customerAdmin"
   val passCustomer = "1234"
   val credsCustomer = List(Authenticate(dbCustomers, userCustomer, passCustomer))
@@ -42,18 +42,15 @@ object MongoConnector {
 
   def driver = new MongoDriver(Some(config))
 
-  val connectCustomer = driver.connection(servers, authentications = credsCustomer)
-
   val errorStrategy = FailoverStrategy()
 
+  /** Customer database collection  **/
+  val connectCustomer = driver.connection(servers, authentications = credsCustomer)
   def dbCustomersCon = connectCustomer.db(dbCustomers, errorStrategy)
-
   val collectionCustomer = dbCustomersCon.collection[BSONCollection]("customer")
 
+  /** Orders database collection **/
   def dbOrdersCon = connectOrder.db(dbOrders, errorStrategy)
-
-  //setting up connection to the NBGardensOrders database
   val connectOrder = driver.connection(servers, authentications = credsOrder)
-
   val collectionOrder = dbOrdersCon.collection[BSONCollection]("order")
 }

@@ -1,7 +1,6 @@
 package controllers
 
 import javax.inject._
-
 import models._
 import play.api._
 import play.api.data.Form
@@ -16,7 +15,6 @@ import play.api.i18n.Messages.Implicits._
 import reactivemongo.bson.BSONDocument
 import views.html.helper.form
 import scala.concurrent.ExecutionContext.Implicits.global
-
 import scala.util.{Failure, Success}
 
 /**
@@ -24,40 +22,12 @@ import scala.util.{Failure, Success}
   */
 @Singleton
 class LoginController @Inject() extends Controller {
-/*
-  def save = Action {
-    implicit request =>
-      val newLoginForm = LoginForm.bindFromRequest()
-      newLoginForm.fold(hasErrors = {
-        form =>
-          Redirect(routes.LoginController.newLogin()).flashing(Flash(form.data) +
-            ("error" -> Messages("password.error")))
-      }, success = {
-        newLogin =>
-          val currentCustomer = Customer.findCustomer(newLogin.username)
-          val customerSession = request.session +
-            ("firstName" -> currentCustomer.firstName) +
-            ("lastName" -> currentCustomer.lastName) +
-            ("email" -> currentCustomer.email) +
-            ("telephone" -> currentCustomer.telephone.toString) +
-            ("username" -> currentCustomer.username) +
-            ("password" -> currentCustomer.password)
-          Redirect(routes.HomeController.home()).withSession(customerSession)
-      })
-  }
-*/
-
- /* private val LoginForm: Form[CustomerLogin] = Form(mapping(
-    "Username" -> nonEmptyText.verifying("Username not found!", !Customer.findByUsername(_).isEmpty),
-    "Password" -> nonEmptyText)(CustomerLogin.apply)(CustomerLogin.unapply)
-    verifying("user not registered", f => checkUserCredentials(f.username, f.password))
-  )*/
-
   /** Creates the form and verifies the data **/
-   val LoginForm = Form(tuple(
+  val LoginForm = Form(tuple(
     "Username" -> nonEmptyText.verifying("Username not found!", CustomerDB.findByUsername(_).nonEmpty),
     "Password" -> nonEmptyText).verifying("user not registered", f => checkUserCredentials(f._1, f._2)))
 
+  /** Checks the form for errors and if successful logs in and creates session **/
   def save = Action {
     implicit request =>
       val loginFormDB = LoginForm.bindFromRequest()
@@ -108,14 +78,11 @@ class LoginController @Inject() extends Controller {
       case Success(readResult) =>
         if (readResult.nonEmpty) {
           status = true
-          println("Status = " + status)
-          println("Current user: " + readResult.head.getAs[String]("username").get)
         } else {
           status = false
         }
     }
     Thread.sleep(500)
-    println("End of the method status: " + status)
     status
   }
 }

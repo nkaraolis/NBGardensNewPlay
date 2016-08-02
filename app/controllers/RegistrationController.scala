@@ -1,7 +1,6 @@
 package controllers
 
 import javax.inject._
-
 import models.{CustomerCardDB, _}
 import play.api._
 import play.api.data.Form
@@ -30,7 +29,6 @@ class RegistrationController @Inject() extends Controller {
     "Password" -> nonEmptyText))
 
   /** Save the new customer into the database **/
-  //TODO - Forms always run with errors on first submit
   def saveCustomer = Action {
     implicit request =>
       val newCustomerForm = newUserForm.bindFromRequest()
@@ -40,9 +38,7 @@ class RegistrationController @Inject() extends Controller {
           val newID = CustomerDB.findNextID()
           val newerCustomer = new CustomerDB(newID, newCustomer._1, newCustomer._2, newCustomer._3, newCustomer._4, newCustomer._5, newCustomer._6, List[CustomerAddressDB](), List[CustomerCardDB]())
           MongoConnector.collectionCustomer.insert(newerCustomer)
-          println(newerCustomer.username)
-          println("Does it run")
-          Redirect(routes.LoginController.newLogin()).flashing("success" -> Messages("customers.new.success"))
+          Redirect(routes.LoginController.newLogin())
       }, hasErrors = {
         form =>
           println("runs if errors in registration form")
@@ -50,6 +46,7 @@ class RegistrationController @Inject() extends Controller {
       })
   }
 
+  /** Loads up the registration page with errors if any **/
   def newCustomer = Action {
     implicit request =>
       val form = if (request2flash.get("error").isDefined)
@@ -57,10 +54,5 @@ class RegistrationController @Inject() extends Controller {
       else
         newUserForm
       Ok(views.html.registration(form))
-  }
-
-  def show = Action {
-    implicit request => val customers = Customer.findAllCustomer
-      Ok(views.html.customerall(customers))
   }
 }

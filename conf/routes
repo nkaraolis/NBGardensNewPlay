@@ -2,15 +2,15 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Route to show the homepage
+# Routes for homepage
 GET     /                           controllers.HomeController.home
 
+# Routes for browsing products
 GET     /browse                     controllers.BrowseController.categoryList
 GET     /browseAnCat                controllers.BrowseController.productList(cart:String)
-
+GET     /catalogue                  controllers.CatalogueController.catalogue
 
 # An example controller showing how to use dependency injection
-
 GET     /count                      controllers.CountController.count
 
 # An example controller showing how to write asynchronous code
@@ -19,69 +19,56 @@ GET     /message                    controllers.AsyncController.message
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-# Route to show the registration page
+# Routes for registration
 GET     /registration               controllers.RegistrationController.newCustomer
-
 POST    /registration               controllers.RegistrationController.saveCustomer
 
-GET     /allCustomers               controllers.RegistrationController.show
-
+# Routes for login
 GET     /login                      controllers.LoginController.newLogin
-
 POST    /login                      controllers.LoginController.save
 
+# Routes for logout
 GET     /logout                     controllers.LoginController.logout
 
+# Routes for updating account
 GET     /updateAccount              controllers.UpdateAccountController.updateAccount
-
 POST    /updateAccount              controllers.UpdateAccountController.saveChanges
+GET     /userAccount                controllers.UserAccountController.userAccount
+GET     /userAddresses              controllers.UserAddressesController.userAddresses
+POST    /userAddresses              controllers.UserAddressesController.saveChanges
+GET     /userPayments               controllers.UserPaymentController.userPayments
+POST    /userPayments               controllers.UserPaymentController.saveChanges
 
+# Routes for tracking customer orders
+GET     /history/:cid               controllers.OrderHistoryController.newPage(cid: String)
+GET     /track/:id                  controllers.OrderHistoryController.track(id: Int)
+
+# Routes for company information
 GET     /about                      controllers.AboutController.about
-
 GET     /contact                    controllers.ContactController.contact
-
 GET     /policies                   controllers.PoliciesController.policies
-
 GET     /help                       controllers.HelpController.help
 
+# Routes for individual product
 GET     /productPage                controllers.ProductPageController.goToProduct(product:String)
+POST    /submitReview               controllers.ProductPageController.submitReview
 
-GET     /updateAccount              controllers.UpdateAccountController.updateAccount
-
+# Routes for updating cart
 GET     /Cart                       controllers.CartController.list
 GET     /addCart                    controllers.CartController.add(product:String, Qty: String)
 GET     /removeCart                 controllers.CartController.remove(product:String)
 GET     /updateCart                 controllers.CartController.update()
 GET     /updateCartFromPL           controllers.CartController.updateFromPL()
 
+# Routes for searching
 POST    /Search                     controllers.SearchController.saveSearch
 GET     /Search/:Result             controllers.SearchController.listResult(Result:String)
 
-GET     /userAccount                controllers.UserAccountController.userAccount
-
+# Routes for checkout
 GET     /toCheckout                 controllers.CartController.checkout()
 
+# Routes for payment
 GET     /toPay                      controllers.PayController.readyToPay(items:String, total:Double)
-
-#GET     /sessionReviewCheck        controllers.ReviewController.sessionReviewCheck
-
 POST    /Pay                        controllers.PayController.save(products:String, username: String)
-
-GET     /catalogue                  controllers.CatalogueController.catalogue
-
-GET     /userAddresses              controllers.UserAddressesController.userAddresses
-
-POST    /userAddresses              controllers.UserAddressesController.saveChanges
-
 GET     /toPayByCard                controllers.PayController.payByCard(items:String, total:Double)
 GET     /toPayByPaypal              controllers.PayController.payByPaypal(items:String, total:Double)
-
-GET     /history/:cid               controllers.OrderHistoryController.newPage(cid: String)
-
-GET     /track/:id                  controllers.OrderHistoryController.track(id: Int)
-
-GET     /userPayments               controllers.UserPaymentController.userPayments
-
-POST    /userPayments               controllers.UserPaymentController.saveChanges
-
-POST    /submitReview               controllers.ProductPageController.submitReview
