@@ -67,6 +67,8 @@ GET     /toPay                      controllers.PayController.readyToPay(items:S
 
 POST    /Pay                        controllers.PayController.save(products:String, username: String)
 
+POST    /Pay                        controllers.PayController.newCheckout(products:String, total:Double)
+
 GET     /catalogue                  controllers.CatalogueController.catalogue
 
 GET     /userAddresses              controllers.UserAddressesController.userAddresses
