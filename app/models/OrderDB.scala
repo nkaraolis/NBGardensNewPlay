@@ -19,22 +19,28 @@ case class OrderDB (ordId:Int, cusId:String, carts: Array[Product], totalPrice: 
 
 object OrderDB {
 
-var orderset = Set.empty(OrderReader)
+
+  var orderset = Set.empty(OrderReader)
+
 
   //DB Connection
   val dbn = "NBGardensOrders"
   val user = "user2"
   val pass = "password"
-  val creds = List(Authenticate(dbn,user,pass))
+
+  val creds = List(Authenticate(dbn, user, pass))
   val servs: List[String] = List("192.168.1.42:27017")
   val config = ConfigFactory.load()
   val driver = new MongoDriver(Some(config))
-  val conn = driver.connection(servs, authentications=creds)
+  val conn = driver.connection(servs, authentications = creds)
+
   val strat = FailoverStrategy()
   val db = conn.db(dbn, strat)
   val coll = db.collection[BSONCollection]("order")
 
+
   var orders: Set[OrderDB]  = Set.empty
+
 
   val condition = BSONDocument(
     (null, null)
@@ -56,8 +62,10 @@ var orderset = Set.empty(OrderReader)
   }
 
 
+
   implicit object OrderReader extends BSONDocumentReader[OrderDB]{
     def read(doc: BSONDocument):OrderDB = OrderDB(
+
       doc.getAs[Int]("ordId").get,
       doc.getAs[String]("cusId").get,
       doc.getAs[Array[Product]]("carts").get,
@@ -68,24 +76,26 @@ var orderset = Set.empty(OrderReader)
   }
 
 
-//  implicit object OrderWriter extends BSONDocumentWriter[OrderDB] {
-//    def write(order: OrderDB) : BSONDocument = BSONDocument(
-//      "ordId" -> order.ordId,
-//      "cusId" -> order.cusId,
-//      "carts" -> order.carts,
-//      "totalprice" -> order.totalPrice,
-//      "datetime" -> order.datetime,
-//      "status" -> order.status,
-//      "payMethod" -> order.payMethod
-//    )
-//  }
+
+  //  implicit object OrderWriter extends BSONDocumentWriter[OrderDB] {
+  //    def write(order: OrderDB) : BSONDocument = BSONDocument(
+  //      "ordId" -> order.ordId,
+  //      "cusId" -> order.cusId,
+  //      "carts" -> order.carts,
+  //      "totalprice" -> order.totalPrice,
+  //      "datetime" -> order.datetime,
+  //      "status" -> order.status,
+  //      "payMethod" -> order.payMethod
+  //    )
+  //  }
 
 
-  def createDoc ( orderd : OrderDB) : BSONDocument = {
+  def createDoc(orderd: OrderDB): BSONDocument = {
     val document = BSONDocument(
       "ordId" -> orderd.ordId,
       "cusId" -> orderd.cusId,
-      "carts" -> orderd.carts,//Array - cant do this
+      "carts" -> orderd.carts, //Array - cant do this
+
       "totalprice" -> orderd.totalPrice,
       "datetime" -> orderd.datetime,
       "status" -> orderd.status,
@@ -94,11 +104,13 @@ var orderset = Set.empty(OrderReader)
     document
   }
 
-  def insertDoc(collection: BSONCollection, doc: BSONDocument) : Future[Unit] = {
+
+  def insertDoc(collection: BSONCollection, doc: BSONDocument): Future[Unit] = {
     val writeResult: Future[WriteResult] = collection.insert(doc)
     Thread.sleep(2000)
 
-    writeResult.onComplete{
+    writeResult.onComplete {
+
       case Failure(e) => e.printStackTrace()
       case Success(writeResult) =>
         println("SUCCESS")
@@ -106,10 +118,12 @@ var orderset = Set.empty(OrderReader)
     writeResult.map(_ => {})
   }
 
-//def create (ordercol: BSONCollection, order: OrderDB)(implicit ec: ExecutionContext): Future[Unit] = {
-//  val result = ordercol.insert(order)
-//  result.map(_ => {})
-//}
+
+  //def create (ordercol: BSONCollection, order: OrderDB)(implicit ec: ExecutionContext): Future[Unit] = {
+  //  val result = ordercol.insert(order)
+  //  result.map(_ => {})
+  //}
+
 
   def getDateTime(): String = {
     val now = Calendar.getInstance().toString
@@ -118,20 +132,24 @@ var orderset = Set.empty(OrderReader)
   }
 
 
-  def createNewOrder(id:Int, cId:String, carts:Array[Product], payMethod:String){
+
+  def createNewOrder(id: Int, cId: String, carts: Array[Product], payMethod: String) {
 
     val now = Calendar.getInstance()
     val status = "Order Made"
-    val total:Double = Cart.calculateCartTotal(carts)
+    val total: Double = Cart.calculateCartTotal(carts)
     var doc = BSONDocument("orderID" -> id, "customerID" -> cId, "items" -> carts, "totalprice" -> total, "datetime" -> now.toString(), "status" -> status, "payMethod" -> payMethod)
-    val futIns : Future[WriteResult] = MongoConnector.collectionOrder.insert[BSONDocument](doc)
+    val futIns: Future[WriteResult] = MongoConnector.collectionOrder.insert[BSONDocument](doc)
+
 
     futIns.onComplete {
       case Failure(e) => throw e
       case Success(writeResult) => println(s"success: $writeResult")
     }
 
-    val end : Future[Unit] = futIns.map {
+
+    val end: Future[Unit] = futIns.map {
+
       case writeResult if (writeResult.code contains 11000) => println("Warning 11000: Duplicate")
       case _ => ()
     }
@@ -141,14 +159,13 @@ var orderset = Set.empty(OrderReader)
   }
 
 
-
-  def findOrderById(id:Int) = DataDump.orders.find(_.ordId == id)
-
+  def findOrderById(id: Int) = DataDump.orders.find(_.ordId == id)
 
   def getOrders = orders.toList
 
   //Method to get all orders with the logged in Customer's ID
-  def getOrdersByCusId(cid: String):List[Order] = DataDump.orders.filter(_.cusId == cid)
+
+  def getOrdersByCusId(cid: String): List[Order] = DataDump.orders.filter(_.cusId == cid)
 
 
 }

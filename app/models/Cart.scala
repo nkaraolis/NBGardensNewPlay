@@ -5,6 +5,7 @@ package models
   */
 case class Cart (products: Array[Product])
 
+
 object Cart{
 
   var productsInCart: Array[Product] = Array.empty
@@ -31,6 +32,31 @@ object Cart{
   }
 
   def findAllInCart = productsInCart.toList.sortBy(_.name)
+
+
+
+  def calculateCartTotal(products: Array[Product]): Double = {
+    var total:Double = 0.00
+    for(pro <- products){
+      var qty = pro.qty.toDouble
+      var price = pro.price.toDouble
+      total += qty * price
+    }
+    total
+  }
+
+
+  def calculateCartTotal(products: Array[Product]): Double = {
+    var total:Double = 0.00
+    for(pro <- products){
+      var qty = pro.qty.toDouble
+      var price = pro.price.toDouble
+      total += qty * price
+    }
+    total
+  }
+
+
 
 
 
