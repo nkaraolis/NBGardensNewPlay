@@ -19,7 +19,7 @@
 <div style="margin-left: 150px;">
     <div id="homeBanner">
         <a href= "@routes.HomeController.home"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 50px;"/></a>
-        <a href= "@routes.HomeController.home"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+        <a href= "@routes.CatalogueController.catalogue"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
         <a href= "@routes.HomeController.home"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
     </div>
 
@@ -50,15 +50,24 @@
             Get our exclusive offers in your inbox!
 
             <form style="width: 300px; margin-left: 30px; display: inline-block;" action="\entity.CustomerDetails">
-                <input type="text" name="Search" class="mytext" style="width: 300px; display: inline-block;" placeholder="Enter your email address">
+                <input type="text" name="Search" id="success" style="width: 300px; display: inline-block;" placeholder="Enter your email address">
             </form>
 
-            <input type = "submit" class="btn-primary" value = "SUBMIT">
+            <input type = "submit" class="btn-primary" value = "SUBMIT" onclick="successMessage()">
         </div>
         <br>
         <br>
         <br>
         <br>
+
+        <script>
+            function successMessage() {
+                document.getElementById("success").value = "You'll be hearing from us soon!";
+                document.getElementById("success").style.color = "#006633";
+                document.getElementById("success").style.fontFamily = "Raleway";
+                document.getElementById("success").style.fontWeight = "600";
+            }
+        </script>
 
     </div>
 </div>

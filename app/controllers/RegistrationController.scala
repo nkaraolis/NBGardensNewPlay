@@ -1,7 +1,8 @@
 package controllers
 
 import javax.inject._
-import models.{Customer, CustomerDetails, CustomerLogin}
+
+import models.{CustomerCardDB, _}
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -16,9 +17,22 @@ import play.api.Play.current
   * Created by Administrator on 06/07/2016.
   */
 @Singleton
-class RegistrationController  @Inject() extends Controller{
+class RegistrationController @Inject() extends Controller {
 
-  private val userForm : Form[CustomerDetails] =
+ /* private newUserForm: Form[CustomerDB] =
+  Form(mapping(
+    "customerID" -> nonEmptyText,
+    "fName" -> nonEmptyText,
+    "lName" -> nonEmptyText,
+    "email" -> nonEmptyText,
+    "telephone" -> nonEmptyText,
+    "username" -> nonEmptyText,
+    "password" -> nonEmptyText,
+    "addresses" -> nonEmptyText,
+    "cardDetails" -> nonEmptyText
+  )(CustomerDB.apply)(CustomerDB.unapply))*/
+
+  private val userForm: Form[CustomerDetails] =
     Form(mapping(
       "First Name" -> nonEmptyText,
       "Last Name" -> nonEmptyText,
@@ -35,24 +49,24 @@ class RegistrationController  @Inject() extends Controller{
         form =>
           Redirect(routes.RegistrationController.newCustomer()).flashing(Flash(form.data) + ("error" -> Messages("register.validation.errors")))
       }, success = {
-          newCustomer =>
-            Customer.add(newCustomer)
-            Redirect(routes.LoginController.newLogin()).flashing("success" -> Messages("customers.new.success", newCustomer.firstName))}
+        newCustomer =>
+          Customer.add(newCustomer)
+          Redirect(routes.LoginController.newLogin()).flashing("success" -> Messages("customers.new.success", newCustomer.firstName))
+      }
       )
   }
 
   def newCustomer = Action {
     implicit request =>
-      val form = if(request2flash.get("error").isDefined)
-          userForm.bind(request2flash.data)
+      val form = if (request2flash.get("error").isDefined)
+        userForm.bind(request2flash.data)
       else
-          userForm
-       Ok(views.html.registration(form))
+        userForm
+      Ok(views.html.registration(form))
   }
 
-def show = Action {
-  implicit request => val customers = Customer.findAllCustomer
-    Ok(views.html.customerall(customers))
-}
-
+  def show = Action {
+    implicit request => val customers = Customer.findAllCustomer
+      Ok(views.html.customerall(customers))
+  }
 }

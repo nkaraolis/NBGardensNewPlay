@@ -1,0 +1,49 @@
+@()(implicit flash: Flash, lang: Lang, session : Session)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+
+
+@sidebar = {
+<ul>
+    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+</ul>
+}
+
+@main(Messages("catalogue.page"))(sidebar) {
+<div id="content" style="height: 1300px;">
+    <div id="contactheader" style="padding-top: 20px; margin-left: -770px;">Order Our Catalogue</div>
+    <fieldset id="contactform" style="margin-top:50px;">
+        <legend></legend>
+        <div class="formtext">Name: </div><br>
+        <input type="text" placeholder="John Doe"><br>
+
+        <div class="formtext">Email: </div><br>
+        <input type="text" placeholder="person&#64example.com"><br>
+
+        <div class="formtext">Address Line 1: </div><br>
+        <input type="text"><br>
+
+        <div class="formtext">Address Line 2: </div><br>
+        <input type="text"><br>
+
+        <div class="formtext">Town/City: </div><br>
+        <input type="text" style="width: 100px; margin-left: -400px;"><br>
+
+        <div class="formtext">Postcode: </div><br>
+        <input type="text" style="width: 100px; margin-left: -400px;"><br>
+
+        <div class="formtext">Delivery instructions: </div><br>
+        <textarea name="message" placeholder="ie. Leave with neighbour"></textarea><br>
+
+        <a href="@routes.HomeController.home()"> <input type="submit" class="btn-primary" value="SEND" style="margin-top: 20px; float: left;"/></a>
+    </fieldset>
+
+</div>
+}

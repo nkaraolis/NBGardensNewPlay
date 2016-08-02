@@ -16,6 +16,7 @@ registration.page = Registration Page
 updateAccount.page = Update Account
 browseCategory.page = Category List Page
 payment.page = Payment
+catalogue.page = Catalogue
 
 #Validation messages for registration
 validation.email.duplicate = A user with that email already exists
@@ -68,3 +69,10 @@ search.page = Search Results
 listResult.page = List Results
 
 userAccount.page = User Account
+
+#Orders messages
+orders.new.submit = Your order has been placed
+
+review.validation.errors = Reviews bad n that
+
+trackOrders.page = Track Orders

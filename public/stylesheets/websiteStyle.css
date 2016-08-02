@@ -128,7 +128,7 @@ a.icon3:hover:before {
     width: 800px;
     position: fixed;
     top: 34px;
-    padding-left: 1215px;
+    padding-left: 313px;
 }
 
 #emailBar {
@@ -395,7 +395,7 @@ input[type = "submit"] {
 
 
 #contactform input[type="text"] {
-    margin: 15px 0 20px -100px;
+    margin: 15px 0 20px -92px;
     overflow: hidden;
     padding: 10px;
     background: #fafafa;
@@ -421,6 +421,13 @@ input[type = "submit"] {
     width: 400px;
     height: 30px;
     border-radius: 3px;
+}
+
+#contactform select{
+    font-family: 'Raleway', sans-serif;
+    width: 250px;
+    margin: 10px 0 20px -260px;
+    height: 35px;
 }
 
 .formtext{
@@ -679,7 +686,6 @@ ul {
     padding-right: 0px;
     width: 192px;
     background-color: #f1f1f1;
-
 }
 
 li a {
@@ -746,11 +752,9 @@ light green - RGB 0 153 51 - #009933
     text-align: left;
     background-color: #FFF;
     display: inline;
-
 }
 
 .productImg{
-
     display: inline;
     float: left;
     width: 420px;
@@ -759,12 +763,10 @@ light green - RGB 0 153 51 - #009933
 }
 
 .productQuantity{
-
     text-align: center;
     width: 30px;
     height: 30px;
     margin: 0 20px;
-
     background-color: white;
     background: #fafafa;
     border: 1px solid #ccc;
@@ -775,19 +777,16 @@ light green - RGB 0 153 51 - #009933
 }
 
 .productQuantity :hover{
-
     background-color: none;
     background: none;
 }
 
 .productQuantity :focus{
-
     background-color: white;
     background: white;
 }
 
 .fontTypeA{
-
     margin-bottom: 20px;
     font-family: 'Raleway', sans-serif;
     color: #006633;
@@ -796,7 +795,6 @@ light green - RGB 0 153 51 - #009933
 }
 
 .fontTypeB{
-
     font-family: "Arial", sans-serif;
     font-size: 30px;
 }
@@ -815,7 +813,6 @@ light green - RGB 0 153 51 - #009933
 }
 
 .fontTypeF{
-
     font-family: 'Raleway', sans-serif;
     color: #006633;
     font-weight: 600;
@@ -823,7 +820,6 @@ light green - RGB 0 153 51 - #009933
 }
 
 .productDivs{
-
     margin-left: 50px;
     margin-bottom: 100px;
     font-family: 'Raleway', sans-serif;
@@ -832,19 +828,16 @@ light green - RGB 0 153 51 - #009933
 }
 
 .borderGrid {
-
     display: inline;
     float: left;
     margin: 0px;
 }
 
 .borderGrid :hover{
-
     background-color: #F0F0F0;
 }
 
 .nbBtn{
-
     height: 31px;
     width: 100px;
     background-color: #009933;
@@ -872,26 +865,20 @@ light green - RGB 0 153 51 - #009933
 #detailsheader{
     font-size: 21px;
     color: #333;
-
-
 }
 
 #detailsusername{
     font-size: 19px;
-
 }
 
 .accountInfo{
-
     margin-left: 540px;
     margin-top: 50px;
     margin-bottom: 50px;
     width: 900px;
     height: 100px;
     padding: 20px;
-
     text-align: left;
-
     background-color: white;
     background: #fafafa;
     border: 1px solid #ccc;
@@ -899,24 +886,19 @@ light green - RGB 0 153 51 - #009933
     font-family: 'Raleway', sans-serif;
     resize: none;
     border-radius: 3px;
-
 }
 
 .checkoutDiv{
-
     margin-left: 540px;
     margin-top: -20px;
     margin-bottom: 50px;
     width: 900px;
     padding: 20px;
-
     text-align: left;
-
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
     resize: none;
     border-radius: 3px;
-
 }
 
 #loginform dd.error{
@@ -931,4 +913,378 @@ light green - RGB 0 153 51 - #009933
     margin-left: -50px;
     padding-bottom: 10px;
     color: #FF0000;
+}
+
+.usernameInput {
+    margin-top: 100px;
+    margin-left: 400px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+#payform{
+    margin-top: 100px;
+    margin-left: 160px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.usernameInput input[type="text"] {
+    margin: 15px 0px 0px -92px;
+    overflow: hidden;
+    padding: 0px;
+    background: #fff;
+    border: 1px solid #fff;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.usernameInput label{
+    margin-left: -50px;
+    text-align: left;
+    color: fff;
+}
+
+
+.usernameInput dd.info{
+    margin-left: -405px;
+    color: #FF0000;
+    font-size: 0px;
+}
+
+.usernameInput dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 10px;
+    color: #fff;
+}
+
+.existingDetails{
+    float: left;
+    margin: 115px 0 100px 500px;
+    font-family: 'Raleway', sans-serif;
+    text-align: left;
+    color: #333;
+    font-size: 17px;
+}
+
+.detailsheader{
+    font-size: 21px;
+    color: #333;
+
+
+}
+
+.detailsusername{
+    font-size: 19px;
+
+}
+
+#payform input[type="text"] {
+    margin: 15px 0 20px -95px;
+    overflow: hidden;
+    padding: 5px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 32px;
+    border-radius: 3px;
+}
+
+#payform label{
+    margin-left: -50px;
+    text-align: left;
+}
+
+#payform select{
+    font-family: 'Raleway', sans-serif;
+    width: 250px;
+    margin: 10px 0 20px -250px;
+    height: 35px;
+}
+
+.postcodeform {
+    width:400px;
+    margin-top: 0px;
+    margin-left: 160px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+.postcodeform input[type="text"] {
+    margin: 15px 0 20px -362px;
+    overflow: hidden;
+    padding: 5px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 170px;
+    height: 32px;
+    border-radius: 3px;
+}
+
+.postcodeform label{
+    margin-left: -50px;
+    text-align: left;
+}
+
+.postcodeform dd.info{
+    margin-left: -431px;
+    color: #FF0000;
+}
+
+.postcodeform dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 10px;
+    color: #FF0000;
+}
+
+#payform input[type="date"] {
+    margin: 15px 0 20px -350px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    width: 150px;
+    height: 32px;
+    border-radius: 3px;
+}
+
+#reviewform{
+    margin-top: 100px;
+    margin-left: 400px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+#reviewform label{
+    margin-left: -50px;
+    text-align: left;
+}
+
+
+#reviewform dd.info{
+    margin-left: 0px;
+    color: #FFF;
+    font-size:0px;
+}
+
+
+#reviewform input[type="text"] {
+    margin: 15px 0 20px -92px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+
+#reviewform input[type="password"] {
+    margin: 15px 0 20px -100px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 400px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+#reviewform select{
+    font-family: 'Raleway', sans-serif;
+    width: 250px;
+    margin: 10px 0 20px -260px;
+    height: 35px;
+}
+
+#reviewform textarea{
+    margin: 15px 0 20px -92px;
+    overflow: hidden;
+    padding: 10px;
+    background: #fafafa;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 800px;
+    height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+#reviewform dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    color: #FF0000;
+}
+
+.reviewHiddenData {
+    margin-top: 100px;
+    margin-left: 400px;
+    float: left;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.reviewHiddenData input[type="text"] {
+    margin: 15px 0px 0px -92px;
+    overflow: hidden;
+    padding: 0px;
+    background: #fff;
+    border: 1px solid #fff;
+    font-size: 0px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 0px;
+}
+
+.reviewHiddenData label{
+    margin-left: -50px;
+    text-align: left;
+    color: fff;
+    font-size: 0px;
+}
+
+
+.reviewHiddenData dd.info{
+    margin-left: -405px;
+    color: #FF0000;
+    font-size: 0px;
+}
+
+.reviewHiddenData dd.error{
+    text-align: left;
+    margin-left: -50px;
+    padding-bottom: 0px;
+    color: #fff;
+}
+
+.reviewHiddenData textarea{
+    margin: 15px 0px 0px -92px;
+    overflow: hidden;
+    padding: 0px;
+    background: #fff;
+    border: 1px solid #fff;
+    font-size: 0px;
+    font-family: 'Raleway', sans-serif;
+    resize: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 0px;
+}
+
+.wrapper {
+    padding: 0px;
+    margin: 0;
+    width: 370px;
+    min-height: 80px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.rating {
+  overflow: hidden;
+  vertical-align: bottom;
+  display: inline-block;
+  width: auto;
+  height: 24px;
+}
+
+.rating input{
+  opacity: 0;
+  margin-right: 0;
+}
+
+.rating label{
+  position: relative;
+  display: block;
+  float: right;
+  background-image:url(../images/star-off-big.png);
+  background-size: 24px 24px;
+}
+
+.rating label:before {
+  display: block;
+  opacity: 0;
+  content: '';
+  width: 24px;
+  height: 24px;
+  background-image:url(../images/star-on-big.png);
+  background-size: 24px 24px;
+  transition: opacity 0.2s linear;
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before,
+.rating:not(:hover) > :checked ~ label:before {
+    opacity: 1;
+}
+
+.rating2 {
+  overflow: hidden;
+  vertical-align: bottom;
+  display: inline-block;
+  width: auto;
+  height: 30px;
+}
+
+.rating2 input{
+  opacity: 0;
+  margin-right: 0;
+}
+
+.rating2 label{
+  position: relative;
+  display: block;
+  float: right;
+  background-image:url(../images/star-off-big.png);
+  background-size: 30px 30px;
+}
+
+.rating2 label:before {
+  display: block;
+  opacity: 0;
+  content: '';
+  width: 30px;
+  height: 30px;
+  background-image:url(../images/star-on-big.png);
+  background-size: 30px 30px;
+  transition: opacity 0.2s linear;
+}
+
+.rating2 > label:hover:before,
+.rating2 > label:hover ~ label:before,
+.rating2:not(:hover) > :checked ~ label:before {
+    opacity: 1;
+}
+
+.starImage{
+    background-image:url(../images/i22.png);
+    background-size: 100px 100px;
+    opacity: 1;
 }

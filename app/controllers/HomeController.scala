@@ -6,7 +6,7 @@ package controllers
 
 import javax.inject._
 
-import models.CustomerLogin
+import models.{CustomerLogin, Product}
 import play.api._
 import play.api.mvc._
 import play.api.mvc.{Action, Controller, Flash}

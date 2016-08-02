@@ -1,0 +1,105 @@
+@(addressForm: Form[CustomerAddress])(implicit flash: Flash, lang: Lang, session : Session)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import helper._
+
+@sidebar = {
+}
+
+@main(Messages("userAddresses.page"))(sidebar) {
+<div style="height : 1600px;">
+
+    <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Addresses</div>
+
+    @helper.form(action = routes.UserAddressesController.saveChanges()) {
+
+    <div class="existingDetails">
+
+        @if(CustAddress.findAddressesByUsername(session.get("username").get).isEmpty){
+
+        <div class="detailsheader">No Existing Addresses<br></div><br>
+            Enter your details to<br>save your address.
+
+        }
+        @if(!CustAddress.findAddressesByUsername(session.get("username").get).isEmpty){
+
+            @if(!CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").isEmpty){
+
+                <div class="detailsheader">@Messages("Existing Shipping Address", Messages("details.request"))<br></div><br>
+
+                <div class="detailsusername">Full Name: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.fullName</b><br></div><br>
+                Address Line 1: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.addressLine1</b><br>
+                Address Line 2:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.addressLine2</b><br>
+                Town/City:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.townCity</b><br>
+                County: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.county</b><br>
+                Postcode: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.postCode</b>
+            }
+
+            @if(!CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").isEmpty){
+                <br><br><br><br>
+                <div class="detailsheader">@Messages("Existing Billing Address", Messages("details.request"))<br></div><br>
+
+                <div class="detailsusername">Full Name: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.fullName</b><br></div><br>
+                Address Line 1: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.addressLine1</b><br>
+                Address Line 2:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.addressLine2</b><br>
+                Town/City:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.townCity</b><br>
+                County: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.county</b><br>
+                Postcode: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.postCode</b>
+            }
+        }
+
+    </div>
+
+    <fieldset class="usernameInput" style="margin-left: 250px;">
+        <legend>
+            @Messages("Update Address", Messages("details.request"))
+        </legend>
+
+        @helper.inputText(addressForm("Username").copy(value=Some(session.get("username").get)))
+
+        <img src="@routes.Assets.versioned("images/textblock.png")" style=" width: 430px; height: 30px; margin-top: -71px; margin-left: -80px;"/>
+    </fieldset>
+
+    <fieldset id="contactform" style="margin-left: 250px; margin-top: -30px;">
+
+
+        @helper.select(
+        field = addressForm("Address Type"),
+        options = Seq(
+        "Shipping" -> "Shipping",
+        "Billing" -> "Billing"
+        ),
+        '_default -> "Address Type.."
+        )
+
+        @helper.inputText(addressForm("Full Name"))
+        @helper.inputText(addressForm("Address Line 1"))
+        @helper.inputText(addressForm("Address Line 2"))
+
+    </fieldset>
+
+    <fieldset class="postcodeform" style="margin-left: 1046px;">
+        @helper.inputText(addressForm("Town/City"))
+        @helper.inputText(addressForm("County"))
+        @helper.inputText(addressForm("Postcode"))
+    </fieldset>
+
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+        }
+    </div>
+
+    <input type="submit" class="btn-primary" value='UPDATE DETAILS' style="width: 230px; margin-left: 600px; margin-top: 70px;">
+    }
+</div>
+}

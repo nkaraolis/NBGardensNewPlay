@@ -31,4 +31,8 @@ object Cart{
   }
 
   def findAllInCart = productsInCart.toList.sortBy(_.name)
+
+
+
+
 }

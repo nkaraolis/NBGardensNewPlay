@@ -1,0 +1,55 @@
+@(Orders: List[Order])(implicit flash: Flash, lang: Lang, session : Session)
+
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+
+
+@sidebar = {
+<ul>
+    <li><a href="">Categories</a></li>
+    <li><a href="news.asp">Gnomes</a></li>
+    <li><a href="contact.asp">Tools</a></li>
+    <li><a href="about.asp">Gardening<br>Supplies</a></li>
+    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+</ul>
+}
+
+@main(Messages("Order History"))(sidebar) {
+
+<div style="margin-left: 150px;">
+    <div id="homeBanner">
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner1.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px; margin-left: 200px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner2.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+        <a href= "home.scala.html"><img src="@routes.Assets.versioned("images/banner3.png")" alt="Delivery" style=" padding-bottom: 20px; padding-right: 40px;"/></a>
+    </div>
+</div>
+
+<div class ="line"></div>
+
+<div id="content" style="height: 1950px;">
+
+    <div class="container_12">
+        <div class="title"></div>
+
+        <div class="fontTypeD" style="padding-bottom: 10px;">Order History</div>
+
+        <div class="accountInfo" style="margin-left: 0px; height: 145px;">
+                @for(order <- Orders) {
+                    <tr>
+                        <td>Date and Time of Order: <div style="margin-left:101px; display: inline;"><b>@order.datetime</b> </div></td><br>
+                        <td>Order ID: <div style="margin-left:199px; display: inline;"><b>@order.ordId</b> </div></td><br>
+                        <td>Order Contents: <div style="margin-left:154px; display: inline;"><b>@order.carts</b></div></td><br>
+                        <td>Order Status: <div style="margin-left:172px; display: inline;"><b>@order.status</b> </div></td><br>
+                    </tr>
+
+                    <a href="@routes.OrderHistoryController.track(order.ordId)"> <input type="submit" class="btn-primary" value="TRACK ORDER" style="margin-top: 30px; float: left; width: 130px;"/></a>
+                }
+         </div>
+
+    </div>
+</div>
+
+}
+
