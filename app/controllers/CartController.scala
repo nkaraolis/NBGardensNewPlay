@@ -44,14 +44,14 @@ class CartController extends Controller {
 
       // create a new product, the new product is the found product but with Qty, and add the product to the cart
       def np : Product = {
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, Qty, p.carId, p.reviews)
+        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, Qty, p.category, p.porousAllowed, p.reviews)
         val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
 
       // update products in cart
       products = Cart.addToCart(np) //get product from model
-      Redirect(routes.BrowseController.productList(p.carId)) //render view template
+      Redirect(routes.BrowseController.productList(p.category)) //render view template
   }
 
   def remove(product: String) = Action {
@@ -83,7 +83,7 @@ class CartController extends Controller {
       // create a new product, the new product is the found product but with new Qty, and add the product to the cart
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId, p.reviews)
+        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, q, p.category, p.porousAllowed, p.reviews)
         val t = Product.findByName(p.name).toArray.apply(0)
         t
       }
@@ -107,14 +107,14 @@ class CartController extends Controller {
       removeO(p.name)
       def np : Product = {
         Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.imgS, p.imgL, q, p.carId, p.reviews)
+        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, q, p.category, p.porousAllowed, p.reviews)
         val t = Product.findByName(p.name).toArray.apply(0)//
         t
       }
       val cp = Cart.addToCart(np)
       products =  cp //get product from model
       totalT += subTot
-      Redirect(routes.BrowseController.productList(p.carId))//render view template
+      Redirect(routes.BrowseController.productList(p.category))//render view template
   }
 
   def checkout() = Action {
