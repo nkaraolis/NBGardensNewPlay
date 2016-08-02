@@ -12,6 +12,7 @@ import play.api.i18n.Messages.Implicits._
 import play.api.mvc._
 import play.api.mvc.{Action, Controller, Flash, Request}
 import play.api.Play.current
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by Administrator on 06/07/2016.
@@ -19,49 +20,42 @@ import play.api.Play.current
 @Singleton
 class RegistrationController @Inject() extends Controller {
 
- /* private newUserForm: Form[CustomerDB] =
-  Form(mapping(
-    "customerID" -> nonEmptyText,
-    "fName" -> nonEmptyText,
-    "lName" -> nonEmptyText,
-    "email" -> nonEmptyText,
-    "telephone" -> nonEmptyText,
-    "username" -> nonEmptyText,
-    "password" -> nonEmptyText,
-    "addresses" -> nonEmptyText,
-    "cardDetails" -> nonEmptyText
-  )(CustomerDB.apply)(CustomerDB.unapply))*/
+  /** Registration form **/
+  val newUserForm = Form(tuple(
+    "First Name" -> nonEmptyText,
+    "Last Name" -> nonEmptyText,
+    "Email" -> nonEmptyText.verifying("Email already exists!", CustomerDB.findByEmail(_).isEmpty),
+    "Telephone" -> nonEmptyText,
+    "Username" -> nonEmptyText.verifying("Username already exists!", CustomerDB.findByUsername(_).isEmpty),
+    "Password" -> nonEmptyText))
 
-  private val userForm: Form[CustomerDetails] =
-    Form(mapping(
-      "First Name" -> nonEmptyText,
-      "Last Name" -> nonEmptyText,
-      "Email" -> nonEmptyText.verifying("validation.email.duplicate", Customer.findByEmail(_).isEmpty),
-      "Telephone" -> nonEmptyText,
-      "Username" -> nonEmptyText.verifying("validation.username.duplicate", Customer.findByUsername(_).isEmpty),
-      "Password" -> nonEmptyText
-    )(CustomerDetails.apply)(CustomerDetails.unapply))
-
+  /** Save the new customer into the database **/
+  //TODO - Forms always run with errors on first submit
   def saveCustomer = Action {
     implicit request =>
-      val newCustomerForm = userForm.bindFromRequest()
-      newCustomerForm.fold(hasErrors = {
-        form =>
-          Redirect(routes.RegistrationController.newCustomer()).flashing(Flash(form.data) + ("error" -> Messages("register.validation.errors")))
-      }, success = {
+      val newCustomerForm = newUserForm.bindFromRequest()
+      newCustomerForm.fold(success = {
         newCustomer =>
-          Customer.add(newCustomer)
-          Redirect(routes.LoginController.newLogin()).flashing("success" -> Messages("customers.new.success", newCustomer.firstName))
-      }
-      )
+          //Finds the next customer ID from the database
+          val newID = CustomerDB.findNextID()
+          val newerCustomer = new CustomerDB(newID, newCustomer._1, newCustomer._2, newCustomer._3, newCustomer._4, newCustomer._5, newCustomer._6, List[CustomerAddressDB](), List[CustomerCardDB]())
+          MongoConnector.collectionCustomer.insert(newerCustomer)
+          println(newerCustomer.username)
+          println("Does it run")
+          Redirect(routes.LoginController.newLogin()).flashing("success" -> Messages("customers.new.success"))
+      }, hasErrors = {
+        form =>
+          println("runs if errors in registration form")
+          Redirect(routes.RegistrationController.newCustomer()).flashing(Flash(form.data) + ("error" -> Messages("register.validation.errors")))
+      })
   }
 
   def newCustomer = Action {
     implicit request =>
       val form = if (request2flash.get("error").isDefined)
-        userForm.bind(request2flash.data)
+        newUserForm.bind(request2flash.data)
       else
-        userForm
+        newUserForm
       Ok(views.html.registration(form))
   }
 
