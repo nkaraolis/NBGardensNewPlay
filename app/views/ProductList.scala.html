@@ -9,10 +9,10 @@
 @sidebar = {
 <ul>
     <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    <li><a href="@routes.BrowseController.productList("Gnomes")">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.productList("Garden Tools")">Tools</a></li>
+    <li><a href="@routes.BrowseController.productList("Gardening Supplies")">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
@@ -37,7 +37,7 @@ function popupAddMsg(msg) {
 <div id="content" style="height: 1950px;">
     <div class="container_12">
         <div class="title">
-            <div class="fontTypeD" style="padding-bottom: 50px;">All Products</div>
+            <div class="fontTypeD" style="padding-bottom: 50px;">@products.head.category</div>
         </div>
         <div class="gallery">
             @for(product <- products) {

@@ -8,10 +8,10 @@
 @sidebar = {
 <ul>
     <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    <li><a href="@routes.BrowseController.productList("Gnomes")">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.productList("Garden Tools")">Tools</a></li>
+    <li><a href="@routes.BrowseController.productList("Gardening Supplies")">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
@@ -28,17 +28,17 @@
 
     <div id="content">
 
-        <a href="@routes.BrowseController.categoryList"><img src="@routes.Assets.versioned("images/gnomeBanner.png")" alt="Fresh Gnomes Str8 from the block." style="width: 1200px; display:block; margin-left: auto; margin-right: auto;"/></a>
-        <a href="@routes.BrowseController.categoryList"><img src="@routes.Assets.versioned("images/special2.jpg")" alt="InitialD" style=" width: 474px; display:inline-block; padding: 50px 0px 0px 0px; "/></a>
-        <a href="@routes.BrowseController.categoryList"><img src="@routes.Assets.versioned("images/special3.jpg")" alt="Deals" style="width: 474px; display:inline-block; padding: 50px 0px 0px 0px; margin-left: 20px;"/></a>
+        <a href="@routes.BrowseController.productList("Gnomes")"><img src="@routes.Assets.versioned("images/gnomeBanner.png")" alt="Fresh Gnomes Str8 from the block." style="width: 1200px; display:block; margin-left: auto; margin-right: auto;"/></a>
+        <a href="@routes.BrowseController.productList("Garden Tools")"><img src="@routes.Assets.versioned("images/special2.jpg")" alt="InitialD" style=" width: 474px; display:inline-block; padding: 50px 0px 0px 0px; "/></a>
+        <a href="@routes.BrowseController.productList("Furniture")"><img src="@routes.Assets.versioned("images/special3.jpg")" alt="Deals" style="width: 474px; display:inline-block; padding: 50px 0px 0px 0px; margin-left: 20px;"/></a>
 
         <br>
 
         <div style="padding: 30px 0px 0px 0px;">
-            <a href="@routes.BrowseController.categoryList"><div id="deal1"></div></a>
-            <a href="@routes.BrowseController.categoryList"><div id="deal2"></div></a>
-            <a href="@routes.BrowseController.categoryList"><div id="deal3"></div></a>
-            <a href="@routes.BrowseController.categoryList"><div id="deal4"></div></a>
+            <a href="@routes.ProductPageController.goToProduct("Bosch Rotak 40-17 Ergoflex Electric Rotary Lawnmower")"><div id="deal1"></div></a>
+            <a href="@routes.ProductPageController.goToProduct("Keter Store It Out Max")"><div id="deal2"></div></a>
+            <a href="@routes.BrowseController.productList("Gnomes")"><div id="deal3"></div></a>
+            <a href="@routes.ProductPageController.goToProduct("Terracotta Soldier")"><div id="deal4"></div></a>
         </div>
 
         <br>

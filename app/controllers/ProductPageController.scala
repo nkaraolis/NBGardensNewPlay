@@ -67,7 +67,7 @@ class ProductPageController extends Controller {
       }, success = {
         submitReview =>
 
-          if(Customer.findByUsername(submitReviewForm.data("Username")).isEmpty)
+          if(CustomerDB.findByUsername(submitReviewForm.data("Username")).isEmpty)
           {
             Redirect(routes.LoginController.newLogin())
           }
