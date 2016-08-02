@@ -44,9 +44,9 @@ value
             @for(product <- chosenProducts) {
             <div class="borderGrid">
                 <div class="grid_3" style="">
-                    <a href="@routes.Assets.versioned(product.imgL)" class="gal">
+                    <a href="@routes.Assets.versioned(product.mainImage)" class="gal">
                         <div class="img_block" style="padding: 5px 5px 20px 5px;">
-                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
+                            <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner">
                         </div>
                     </a>
                     <div class="title" name="get" style="text-align: left;">
