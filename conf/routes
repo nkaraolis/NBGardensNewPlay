@@ -69,6 +69,7 @@ GET     /toCheckout                 controllers.CartController.checkout()
 
 # Routes for payment
 GET     /toPay                      controllers.PayController.readyToPay(items:String, total:Double)
+GET     /Pay                        controllers.PayController.newCheckout(products:String, total:Double)
 POST    /Pay                        controllers.PayController.save(products:String, username: String)
 GET     /toPayByCard                controllers.PayController.payByCard(items:String, total:Double)
 GET     /toPayByPaypal              controllers.PayController.payByPaypal(items:String, total:Double)
