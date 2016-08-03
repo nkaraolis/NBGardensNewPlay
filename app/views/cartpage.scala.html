@@ -9,17 +9,17 @@
 @sidebar = {
 <ul>
     <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    <li><a href="@routes.BrowseController.productList("Gnomes")">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.productList("Garden Tools")">Tools</a></li>
+    <li><a href="@routes.BrowseController.productList("Gardening Supplies")">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
 @main(Messages("cartpage.page"))(sidebar) {
 
 <div id="content">
-    <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 700)px;">
+    <div class="container_12" style="width: 1300px; height: @(products.length/5*650 + 750)px;">
 
         <div class="title">
             <div class="fontTypeD" style="margin-left: 30px; display: inline;">Your Trolley</div>
@@ -40,16 +40,24 @@
 
                         <a href="@routes.Assets.versioned(product.mainImage)" class="gal">
                             <div class="img_block" style="padding: 5px 5px 20px 5px;">
-                                <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner">
+                                <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner" style="border: 0px solid #717262;">
                             </div>
                         </a>
                         <div class="title" name="get" style="text-align: left;">
                             @helper.form(routes.CartController.update) {
                                 <div style="height: 130px;">
                                     <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
-                                    <br>
-                                    <dt style="font-size: 14px;">Quantity: @product.qty</dt>
+
+                                    <dt style="font-size: 14px;">Description:
+
+                                        @Product.preview(product.description, 35)
+                                        ...
+                                    </dt>
                                 </div>
+                                <br>
+                                <br>
+                                <dt style="font-size: 14px;">Quantity: @product.qty</dt>
+
                                 <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@Product.getPrice(product.price, product.qty)</dt>
 
                                 <input type="hidden" name="Product" value="@product.name">

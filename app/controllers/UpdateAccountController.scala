@@ -1,8 +1,7 @@
 package controllers
 
 import javax.inject._
-
-import models.{Customer, CustomerDetails, CustomerLogin}
+import models._
 import play.api._
 import play.api.data.Forms._
 import play.api.data.Forms.{longNumber, mapping, nonEmptyText}
@@ -13,6 +12,7 @@ import play.api.mvc.{Action, Controller, Flash, Request}
 import play.api.Play.current
 import play.api.data.Form
 import play.api.mvc.Session
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by Administrator on 06/07/2016.
@@ -20,27 +20,16 @@ import play.api.mvc.Session
 @Singleton
 class UpdateAccountController @Inject() extends Controller {
 
-  var currentCustomer = new CustomerDetails("", "", "", "", "", "")
+  /** Registration form **/
+  val updateForm = Form(tuple(
+    "First Name" -> text,
+    "Last Name" -> text,
+    "Email" -> text.verifying("Email already exists!", CustomerDB.findByEmail(_).isEmpty),
+    "Telephone" -> text,
+    "Username" -> text.verifying("Username already exists!", CustomerDB.findByUsername(_).isEmpty),
+    "Password" -> text))
 
-  def index = Action {
-    request => request.session.get("connected").map {
-      user => Ok("Hello " + user)
-    }.getOrElse {
-      Unauthorized(" hhggh")
-    }
-  }
-
-  val updateForm: Form[CustomerDetails] =
-    Form(mapping(
-      "First Name" -> text,
-      "Last Name" -> text,
-      "Email" -> text.verifying("validation.email.duplicate", Customer.findByEmail(_).isEmpty),
-      "Telephone" -> text,
-      "Username" -> text.verifying("validation.username.duplicate", Customer.findByUsername(_).isEmpty),
-      "Password" -> text
-    )(CustomerDetails.apply)(CustomerDetails.unapply))
-
-
+  /** Checks a user is logged in and then loads the form **/
   def updateAccount = Action {
     implicit request =>
       if (request.session.get("username").isEmpty) {
@@ -54,6 +43,7 @@ class UpdateAccountController @Inject() extends Controller {
       }
   }
 
+  /** Checks the form for errors and then updates customer details if required **/
   def saveChanges = Action {
     implicit request =>
       val editCustomerForm = updateForm.bindFromRequest()
@@ -62,33 +52,33 @@ class UpdateAccountController @Inject() extends Controller {
           Redirect(routes.UpdateAccountController.updateAccount()).flashing(Flash(form.data) + ("error" -> Messages("updateAccount.validation.errors")))
       }, success = {
         editCustomer =>
-          val currentCustomer = Customer.findCustomer(request.session.get("username").get)
+          val currentUsername = CustomerDB.findByUsername(request.session.get("username").get).head.getAs[String]("username").get
           if (!(editCustomerForm.data("First Name").length == 0)) {
-            currentCustomer.firstName = editCustomerForm.data("First Name")
+            CustomerDB.updateUserField(currentUsername, "fName", editCustomerForm.data("First Name"))
           }
           if (!(editCustomerForm.data("Last Name").length == 0)) {
-            currentCustomer.lastName = editCustomerForm.data("Last Name")
+            CustomerDB.updateUserField(currentUsername, "lName", editCustomerForm.data("Last Name"))
           }
           if (!(editCustomerForm.data("Email").length == 0)) {
-            currentCustomer.email = editCustomerForm.data("Email")
+            CustomerDB.updateUserField(currentUsername, "email", editCustomerForm.data("Email"))
           }
           if (!(editCustomerForm.data("Telephone").length == 0)) {
-            currentCustomer.telephone = editCustomerForm.data("Telephone")
+            CustomerDB.updateUserField(currentUsername, "phone", editCustomerForm.data("Telephone"))
           }
           if (!(editCustomerForm.data("Username").length == 0)) {
-            currentCustomer.username = editCustomerForm.data("Username")
+            CustomerDB.updateUserField(currentUsername, "username", editCustomerForm.data("Username"))
           }
           if (!(editCustomerForm.data("Password").length == 0)) {
-            currentCustomer.password = editCustomerForm.data("Password")
+            CustomerDB.updateUserField(currentUsername, "password", editCustomerForm.data("Password"))
           }
-          val updateCustomer = Customer.findCustomer(currentCustomer.username)
+          val currentCustomer = CustomerDB.findByUsername(currentUsername).head
           val customerSession = request.session +
-            ("firstName" -> updateCustomer.firstName) +
-            ("lastName" -> updateCustomer.lastName) +
-            ("email" -> updateCustomer.email) +
-            ("telephone" -> updateCustomer.telephone.toString) +
-            ("username" -> updateCustomer.username) +
-            ("password" -> updateCustomer.password)
+            ("customerID" -> currentCustomer.getAs[Int]("customerID").get.toString) +
+            ("firstName" -> currentCustomer.getAs[String]("fName").get) +
+            ("lastName" -> currentCustomer.getAs[String]("lName").get) +
+            ("email" -> currentCustomer.getAs[String]("email").get) +
+            ("phone" -> currentCustomer.getAs[String]("phone").get) +
+            ("username" -> currentCustomer.getAs[String]("username").get)
           Redirect(routes.UserAccountController.userAccount()).withSession(customerSession)
       })
   }

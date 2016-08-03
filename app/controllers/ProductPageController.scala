@@ -69,20 +69,20 @@ class ProductPageController extends Controller {
       }, success = {
         submitReview =>
 
-          if(Customer.findByUsername(submitReviewForm.data("Username")).isEmpty)
+          if(CustomerDB.findByUsername(submitReviewForm.data("Username")).isEmpty)
           {
             Redirect(routes.LoginController.newLogin())
           }
           else{
 
-          val currentCustomer = Customer.findCustomer(request.session.get("username").get)
+          val currentCustomer = CustomerDB.findByUsername(request.session.get("username").get).head
 
           var newReview = new Review("","","","","","")
 
           if ((!(submitReviewForm.data("Review Title").length == 0)) && (!(submitReviewForm.data("Review").length == 0))) {
 
             newReview.productId = submitReviewForm.data("Product ID")
-            newReview.username = currentCustomer.username
+            newReview.username = currentCustomer.getAs[String]("username").get
 
             if (!(submitReviewForm.data("Review Title").length == 0)) {
               newReview.reviewTitle = submitReviewForm.data("Review Title")

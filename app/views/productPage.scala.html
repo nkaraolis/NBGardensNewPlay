@@ -19,10 +19,10 @@ curTimeFormat.format(today)
 @sidebar = {
 <ul>
     <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    <li><a href="@routes.BrowseController.productList("Gnomes")">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.productList("Garden Tools")">Tools</a></li>
+    <li><a href="@routes.BrowseController.productList("Gardening Supplies")">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
@@ -35,7 +35,7 @@ curTimeFormat.format(today)
             <div class="grid_3">
                 <a href="@routes.Assets.versioned(product.mainImage)" class="gal">
                     <div class="img_block" style="width: 350px; height: 350px;">
-                        <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner" style="width:350px; height: 350px;">
+                        <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner" style="width:350px; height: 350px; border: 0px solid #717262;">
                     </div>
                 </a>
             </div>
