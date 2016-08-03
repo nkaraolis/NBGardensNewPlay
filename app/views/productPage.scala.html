@@ -35,9 +35,13 @@ curTimeFormat.format(today)
             <div class="grid_3">
                 <a href="@routes.Assets.versioned(product.mainImage)" class="gal">
                     <div class="img_block" style="width: 350px; height: 350px;">
-                        <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner" style="width:350px; height: 350px; border: 0px solid #717262;">
+                        <img src="@routes.Assets.versioned(product.mainImage)" alt="" id="mainImage" class="img_inner" style="width:350px; height: 350px; border: 0px solid #717262;">
                     </div>
                 </a>
+                @if(product.mainImage != product.secondaryImages){
+                <a href="@routes.Assets.versioned(product.secondaryImages)" class="gal">
+                </a>
+                }
             </div>
         </div>
 
@@ -63,7 +67,29 @@ curTimeFormat.format(today)
 
                 }
             </div>
+
+            @if(product.mainImage != product.secondaryImages){
+            <img src="@routes.Assets.versioned(product.mainImage)" id="icon2" style="width:90px; height: 90px; border: 1px solid #717262; margin-top:30px;">
+            <img src="@routes.Assets.versioned(product.secondaryImages)" id="icon3" style="width:90px; height: 90px; border: 1px solid #717262; margin-top:30px;">
+            }
+
         </div>
+
+        <script type="text/javascript">
+            document.getElementById("icon2").onmouseover = function() {
+                document.getElementById("mainImage").src = "@routes.Assets.versioned(product.mainImage)";
+            }
+            document.getElementById("icon2").onmouseout = function() {
+                document.getElementById("mainImage").src = "@routes.Assets.versioned(product.mainImage)";
+            }
+
+            document.getElementById("icon3").onmouseover = function() {
+                document.getElementById("mainImage").src = "@routes.Assets.versioned(product.secondaryImages)";
+            }
+            document.getElementById("icon3").onmouseout = function() {
+                document.getElementById("mainImage").src = "@routes.Assets.versioned(product.mainImage)";
+            }
+        </script>
 
         <div class="productDivs">
             <div class="fontTypeA" >Product Description</div>
