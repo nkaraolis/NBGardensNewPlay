@@ -2,6 +2,7 @@ package models
 
 import play.api.data.Forms._
 import play.api.data._
+import reactivemongo.bson.BSONDocument
 
 /**
   * Created by Administrator on 06/07/2016.

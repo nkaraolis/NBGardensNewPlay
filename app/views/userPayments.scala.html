@@ -1,4 +1,4 @@
-@(paymentForm: Form[CustomerPayment])(implicit flash: Flash, lang: Lang, session : Session)
+@(paymentForm: Form[CustomerCardDB])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -14,7 +14,7 @@
 
     <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Payments</div>
 
-    @helper.form(action = routes.UserPaymentController.saveChanges()) {
+    @helper.form(action = routes.UserPaymentController.updatePayment()) {
 
     <div class="existingDetails">
 
@@ -55,8 +55,6 @@
             @Messages("Update Payment Details", Messages("details.request"))
         </legend>
 
-        @helper.inputText(paymentForm("Username").copy(value=Some(session.get("username").get)))
-
         <img src="@routes.Assets.versioned("images/textblock.png")" style=" width: 430px; height: 30px; margin-top: -71px; margin-left: -80px;"/>
     </fieldset>
 
@@ -64,21 +62,15 @@
 
 
         @helper.select(
-        field = paymentForm("Payment Method"),
+        field = paymentForm("Card Type"),
         options = Seq(
         "Debit" -> "Debit",
-        "Credit" -> "Credit",
-        "Paypal" -> "Paypal"
-        ),
-        '_default -> "Payment Method.."
-        )
+        "Credit" -> "Credit"),
+        '_default -> "Payment Method..")
 
-        @helper.inputText(paymentForm("Name on Card"))
         @helper.inputText(paymentForm("Card Number"))
-        @helper.inputText(paymentForm("Start Date"), 'placeholder -> "dd/mm/yyyy")
-        @helper.inputText(paymentForm("Expiry Date"), 'placeholder -> "dd/mm/yyyy")
-        @helper.inputText(paymentForm("Security Code"), 'placeholder -> "123")
-        @helper.inputText(paymentForm("Issue No"))
+        @helper.inputText(paymentForm("Expiry"), 'placeholder -> "dd/mm/yyyy")
+        @helper.inputText(paymentForm("Name on Card"))
 
     </fieldset>
 

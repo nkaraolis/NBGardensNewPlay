@@ -22,18 +22,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 @Singleton
 class UserAddressesController @Inject() extends Controller {
 
-  /*private val addressForm : Form[CustomerAddress] =
-    Form(mapping(
-      "Username" -> nonEmptyText,
-      "Address Type" -> nonEmptyText,
-      "Full Name" -> nonEmptyText,
-      "Address Line 1" -> nonEmptyText,
-      "Address Line 2" -> nonEmptyText,
-      "Town/City" -> nonEmptyText,
-      "County" -> nonEmptyText,
-      "Postcode" -> nonEmptyText
-    )(CustomerAddress.apply)(CustomerAddress.unapply))*/
-
   val newAddressForm: Form[CustomerAddressDB] =
     Form(mapping(
       "Full Name" -> nonEmptyText,
@@ -54,6 +42,7 @@ class UserAddressesController @Inject() extends Controller {
       Ok(views.html.userAddresses(form))
   }
 
+  /** Checks form for errors and then adds new address to user if correct **/
   def updateAddress = Action {
     implicit request =>
       val updateAddressForm = newAddressForm.bindFromRequest()

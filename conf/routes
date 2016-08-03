@@ -37,7 +37,7 @@ GET     /userAccount                controllers.UserAccountController.userAccoun
 GET     /userAddresses              controllers.UserAddressesController.userAddresses
 POST    /userAddresses              controllers.UserAddressesController.updateAddress
 GET     /userPayments               controllers.UserPaymentController.userPayments
-POST    /userPayments               controllers.UserPaymentController.saveChanges
+POST    /userPayments               controllers.UserPaymentController.updatePayment
 
 # Routes for tracking customer orders
 GET     /history/:cid               controllers.OrderHistoryController.newPage(cid: String)
@@ -74,7 +74,6 @@ GET     /toCheckout                 controllers.CartController.checkout()
 GET     /toPay                      controllers.PayController.readyToPay(items:String, total:Double)
 GET     /toPayByCard                controllers.PayController.payByCard(items:String, total:Double)
 GET     /toPayByPaypal              controllers.PayController.payByPaypal(items:String, total:Double)
-GET     /userPayments               controllers.UserPaymentController.userPayments
-POST    /userPayments               controllers.UserPaymentController.saveChanges
+
 GET     /Pay                        controllers.PayController.newCheckout(products:String, total:Double)
 POST    /Pay                        controllers.PayController.save(products:String, username: String)
