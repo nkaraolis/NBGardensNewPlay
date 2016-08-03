@@ -14,7 +14,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 08/07/2016.
   */
-case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: String)
+case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: List[Review])
 
 
 object Product{
@@ -67,7 +67,7 @@ object Product{
       doc.getAs[String]("qty").get,
       doc.getAs[String]("category").get,
       doc.getAs[String]("porousAllowed").get,
-      doc.getAs[String]("reviews").get)
+      doc.getAs[List[Review]]("reviews").get)
   }
 
 
@@ -100,7 +100,7 @@ object Product{
     for(p<-newOrder){
       val pro: Array[String] = p.split(",")
       if (pro.length == 9){
-        productsForAnOrder += Product("","","","","","","","","","") //Product(pro.apply(0), pro.apply(1), pro.apply(2), pro.apply(3), pro.apply(4), pro.apply(5), pro.apply(6), pro.apply(7), pro.apply(8), pro.apply(9))
+        productsForAnOrder += Product("","","","","","","","","",List[Review]()) //Product(pro.apply(0), pro.apply(1), pro.apply(2), pro.apply(3), pro.apply(4), pro.apply(5), pro.apply(6), pro.apply(7), pro.apply(8), pro.apply(9))
       }
     }
 
@@ -188,7 +188,7 @@ object Product{
   def findProductByName(name: String) = products.find(_.name == name)
 
 
-  def add(Id: String, Name: String, description: String, price: String, mainImage: String, secondaryImages: String, need: String, category: String, porousAllowed: String, reviews: String): Unit ={
+  def add(Id: String, Name: String, description: String, price: String, mainImage: String, secondaryImages: String, need: String, category: String, porousAllowed: String, reviews: List[Review]): Unit ={
     products += Product(Id,Name,description,price,mainImage,secondaryImages, need, category, porousAllowed, reviews)
 
   }
