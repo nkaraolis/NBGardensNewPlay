@@ -23,7 +23,6 @@ class ProductPageController extends Controller {
 
   private val reviewForm : Form[Review] =
     Form(mapping(
-      "Product ID" -> nonEmptyText,
       "Username" -> text,
       "Review Title" -> nonEmptyText,
       "Review" -> nonEmptyText,
@@ -58,14 +57,16 @@ class ProductPageController extends Controller {
       }
   }
 
-  def submitReview = Action {
+  def submitReview(product: String) = Action {
     implicit request =>
       val submitReviewForm = reviewForm.bindFromRequest()
       submitReviewForm.fold(hasErrors = {
         form =>
-          Redirect(routes.ProductPageController.goToProduct(submitReviewForm.data("Product ID"))).flashing(Flash(form.data) + ("error" -> Messages("Error in review form")))
+          Redirect(routes.ProductPageController.goToProduct(product)).flashing(Flash(form.data) + ("error" -> Messages("Error in review form")))
       }, success = {
         submitReview =>
+
+          Product.findById(product).get.reviews.isEmpty
 
           if(CustomerDB.findByUsername(submitReviewForm.data("Username")).isEmpty)
           {
@@ -73,49 +74,11 @@ class ProductPageController extends Controller {
           }
           else{
 
-          val currentCustomer = CustomerDB.findByUsername(request.session.get("username").get).head
+          //val currentCustomer = CustomerDB.findByUsername(request.session.get("username").get).head
 
-          var newReview = new Review("","","","","","")
-
-          if ((!(submitReviewForm.data("Review Title").length == 0)) && (!(submitReviewForm.data("Review").length == 0))) {
-
-            newReview.productId = submitReviewForm.data("Product ID")
-            newReview.username = currentCustomer.getAs[String]("username").get
-
-            if (!(submitReviewForm.data("Review Title").length == 0)) {
-              newReview.reviewTitle = submitReviewForm.data("Review Title")
-            }
-            if (!(submitReviewForm.data("Review").length == 0)) {
-              newReview.review = submitReviewForm.data("Review")
-            }
-            if (!(submitReviewForm.data("Review Date").length == 0)) {
-              newReview.reviewDate = submitReviewForm.data("Review Date")
-            }
-            if (!(submitReviewForm.data("Rating").length == 0)) {
-              newReview.rating = submitReviewForm.data("Rating")
-            }
-
-            Review.add(newReview)
-
-            val reviewSession = request.session +
-              ("Product ID" -> newReview.productId) +
-              ("Username" -> newReview.username) +
-              ("Review Title" -> newReview.reviewTitle) +
-              ("Review" -> newReview.review) +
-              ("Review Date" -> newReview.reviewDate) +
-              ("Rating" -> newReview.rating)
-            Redirect(routes.ProductPageController.goToProduct(newReview.productId)).withSession(reviewSession)
-          }
-          else{
-            val reviewSession = request.session +
-              ("Product ID" -> submitReviewForm.data("Product ID")) +
-              ("Username" -> submitReviewForm.data("Username")) +
-              ("Review Title" -> submitReviewForm.data("Review Title")) +
-              ("Review" -> submitReviewForm.data("Review")) +
-              ("Review Date" -> submitReviewForm.data("Review Date")) +
-              ("Rating" -> submitReviewForm.data("Rating"))
-            Redirect(routes.ProductPageController.goToProduct(newReview.productId)).withSession(reviewSession)
-          }
+          Review.add(product,submitReview,"$addToSet")
+            Product.productsInDB
+            Redirect(routes.ProductPageController.goToProduct(product))
       }})
   }
 }

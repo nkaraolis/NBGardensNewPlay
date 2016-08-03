@@ -54,7 +54,7 @@ POST    /catalogue                  controllers.CatalogueController.saveCatalogu
 
 # Routes for individual product
 GET     /productPage                controllers.ProductPageController.goToProduct(product:String)
-POST    /submitReview               controllers.ProductPageController.submitReview
+POST    /submitReview               controllers.ProductPageController.submitReview(product:String)
 
 # Routes for updating cart
 GET     /Cart                       controllers.CartController.list

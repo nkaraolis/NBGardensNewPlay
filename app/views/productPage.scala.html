@@ -39,8 +39,8 @@ curTimeFormat.format(today)
                     </div>
                 </a>
                 @if(product.mainImage != product.secondaryImages){
-                <a href="@routes.Assets.versioned(product.secondaryImages)" class="gal">
-                </a>
+                    <a href="@routes.Assets.versioned(product.secondaryImages)" class="gal">
+                    </a>
                 }
             </div>
         </div>
@@ -75,6 +75,7 @@ curTimeFormat.format(today)
 
         </div>
 
+
         <script type="text/javascript">
             document.getElementById("icon2").onmouseover = function() {
                 document.getElementById("mainImage").src = "@routes.Assets.versioned(product.mainImage)";
@@ -97,22 +98,21 @@ curTimeFormat.format(today)
             @product.description
         </div>
 
-        @helper.form(action = routes.ProductPageController.submitReview()) {
+        @helper.form(action = routes.ProductPageController.submitReview(product.productId)) {
         <div class="productDivs" style="width: 1300px; margin-bottom: 60px;">
             <div class="fontTypeA" >Customer Reviews</div>
 
-            @if(Review.findReviewsByProductId(product.productId).isEmpty){
+            @if(product.reviews.isEmpty){
+
                 No reviews available for this product.
             }
 
-            @for(review <- Review.findReviewsByProductId(product.productId)){
+            @for(review <- product.reviews){
 
             <div class="fontTypeA" style="font-size: 20px; float:right;">@review.username</div>
             <div style="float:right; margin-top:25px; margin-right: @(-review.username.length*11)px;">@review.reviewDate</div>
 
-            <!--height: (products.length*110 + 670)px; -110-->
 
-            <!--<input type="text" id="ratingBox" value="@review.rating" onclick="getRating()" onload="">-->
 
             @if(review.rating == "1"){
             <div style="display: inline-block;">
@@ -206,7 +206,6 @@ curTimeFormat.format(today)
             <div class="fontTypeE" >@product.name</div>
 
             <fieldset class="reviewHiddenData" style="margin-left: 40px; margin-top: 0px; height: 10px;">
-                @helper.inputText(productReview("Product ID").copy(value=Some(product.productId)))
 
                 @if(session.get("username").isDefined){
                 @helper.inputText(productReview("Username").copy(value=Some(session.get("username").get)))
