@@ -19,7 +19,7 @@
 @main(Messages("cartpage.page"))(sidebar) {
 
 <div id="content">
-    <div class="container_12" style="width: 1300px; height: @(products.length/5*600 + 700)px;">
+    <div class="container_12" style="width: 1300px; height: @(products.length/5*650 + 750)px;">
 
         <div class="title">
             <div class="fontTypeD" style="margin-left: 30px; display: inline;">Your Trolley</div>
@@ -40,7 +40,7 @@
 
                         <a href="@routes.Assets.versioned(product.mainImage)" class="gal">
                             <div class="img_block" style="padding: 5px 5px 20px 5px;">
-                                <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner">
+                                <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner" style="border: 0px solid #717262;">
                             </div>
                         </a>
                         <div class="title" name="get" style="text-align: left;">
@@ -53,9 +53,11 @@
                                         @Product.preview(product.description, 35)
                                         ...
                                     </dt>
-                                    <br>
-                                    <dt style="font-size: 14px;">Quantity: @product.qty</dt>
                                 </div>
+                                <br>
+                                <br>
+                                <dt style="font-size: 14px;">Quantity: @product.qty</dt>
+
                                 <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@Product.getPrice(product.price, product.qty)</dt>
 
                                 <input type="hidden" name="Product" value="@product.name">
