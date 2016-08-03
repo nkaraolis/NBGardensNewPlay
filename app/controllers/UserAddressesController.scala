@@ -13,14 +13,16 @@ import play.api.mvc.{Action, Controller, Flash, Request}
 import play.api.Play.current
 import play.api.data.Form
 import play.api.mvc.Session
+import views.html.helper.form
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by Administrator on 06/07/2016.
   */
 @Singleton
-class UserAddressesController  @Inject() extends Controller{
+class UserAddressesController @Inject() extends Controller {
 
-  private val addressForm : Form[CustomerAddress] =
+  /*private val addressForm : Form[CustomerAddress] =
     Form(mapping(
       "Username" -> nonEmptyText,
       "Address Type" -> nonEmptyText,
@@ -30,17 +32,45 @@ class UserAddressesController  @Inject() extends Controller{
       "Town/City" -> nonEmptyText,
       "County" -> nonEmptyText,
       "Postcode" -> nonEmptyText
-    )(CustomerAddress.apply)(CustomerAddress.unapply))
+    )(CustomerAddress.apply)(CustomerAddress.unapply))*/
+
+  val newAddressForm: Form[CustomerAddressDB] =
+    Form(mapping(
+      "Full Name" -> nonEmptyText,
+      "Address Type" -> nonEmptyText,
+      "Line 1" -> nonEmptyText,
+      "Line 2" -> nonEmptyText,
+      "Town/City" -> nonEmptyText,
+      "County" -> nonEmptyText,
+      "Postcode" -> nonEmptyText
+    )(CustomerAddressDB.apply)(CustomerAddressDB.unapply))
 
   def userAddresses = Action {
     implicit request =>
-      val form = if(request2flash.get("error").isDefined)
-        addressForm.bind(request2flash.data)
+      val form = if (request2flash.get("error").isDefined)
+        newAddressForm.bind(request2flash.data)
       else
-        addressForm
+        newAddressForm
       Ok(views.html.userAddresses(form))
   }
 
+  def updateAddress = Action {
+    implicit request =>
+      val updateAddressForm = newAddressForm.bindFromRequest()
+      updateAddressForm.fold(success = {
+        newAddress =>
+          val currentUsername = request.session.get("username").get
+          println("Adding a new address")
+          // Adds a new address to the current user
+          CustomerAddressDB.updateAddress(currentUsername, newAddress, "$addToSet")
+          Redirect(routes.UserAccountController.userAccount())
+      }, hasErrors = {
+        form =>
+          Redirect(routes.UserAddressesController.userAddresses()).flashing(Flash(form.data) + ("error" -> Messages("Error in address")))
+      })
+  }
+
+  /*
   def saveChanges = Action {
     implicit request =>
       val editAddressForm = addressForm.bindFromRequest()
@@ -162,13 +192,7 @@ class UserAddressesController  @Inject() extends Controller{
                 Redirect(routes.UserAddressesController.userAddresses()).withSession(addressSession)
               }
             }
-            //Fuck bitches get money
           }
       })
-  }
-
-
-
-
-
+  }*/
 }

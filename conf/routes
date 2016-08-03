@@ -35,7 +35,7 @@ GET     /updateAccount              controllers.UpdateAccountController.updateAc
 POST    /updateAccount              controllers.UpdateAccountController.saveChanges
 GET     /userAccount                controllers.UserAccountController.userAccount
 GET     /userAddresses              controllers.UserAddressesController.userAddresses
-POST    /userAddresses              controllers.UserAddressesController.saveChanges
+POST    /userAddresses              controllers.UserAddressesController.updateAddress
 GET     /userPayments               controllers.UserPaymentController.userPayments
 POST    /userPayments               controllers.UserPaymentController.saveChanges
 
