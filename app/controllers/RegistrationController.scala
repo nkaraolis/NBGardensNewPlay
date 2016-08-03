@@ -29,6 +29,7 @@ class RegistrationController @Inject() extends Controller {
     "Username" -> nonEmptyText.verifying("Username already exists!", CustomerDB.findByUsername(_).isEmpty),
     "Password" -> nonEmptyText))
 
+
   /** Save the new customer into the database **/
   //TODO - Forms always run with errors on first submit
   def saveCustomer = Action {
@@ -50,6 +51,7 @@ class RegistrationController @Inject() extends Controller {
       })
   }
 
+
   def newCustomer = Action {
     implicit request =>
       val form = if (request2flash.get("error").isDefined)
@@ -58,6 +60,7 @@ class RegistrationController @Inject() extends Controller {
         newUserForm
       Ok(views.html.registration(form))
   }
+
 
   def show = Action {
     implicit request => val customers = Customer.findAllCustomer

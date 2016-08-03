@@ -82,10 +82,11 @@ class PayController extends Controller {
       val newCard = cardDetails(newCardForm.get.method, newCardForm.data("Name on Card"), newCardForm.data("Card No"), newCardForm.data("Start Date"), newCardForm.data("Expiry Date"), newCardForm.data("Security Code"), newCardForm.data("Issue No"))
       val payMethod = newCardForm.get.method
       val newID = OrderDB.findNextID()
-      val cart = Cart.productsInCart
+      val cart = Cart.convertToCartItems()
       val status = "Order Made"
       val total = Cart.calculateCartTotal(cart)
       val datetime = OrderDB.getDateTime()
+
       var order = new OrderDB(newID,username, cart,total, datetime, status, payMethod)
       MongoConnector.collectionOrder.insert(order)
       cardDetails.add(newCard)
@@ -93,7 +94,7 @@ class PayController extends Controller {
 
       }, hasErrors = {
         form =>
-          val cart = Cart.productsInCart
+          val cart = Cart.convertToCartItems()
           val total = Cart.calculateCartTotal(cart)
           Redirect(routes.PayController.newCheckout(products, total)).flashing(Flash(form.data))
       })

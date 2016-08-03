@@ -1,4 +1,4 @@
-@(products: List[CartItem], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -48,13 +48,13 @@
                                 <div style="height: 130px;">
                                     <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
                                     <br>
-                                    <dt style="font-size: 14px;">Quantity: @product.quantity</dt>
+                                    <dt style="font-size: 14px;">Quantity: @product.qty</dt>
                                 </div>
-                                <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@Product.getPrice(product.unitPrice, product.quantity)</dt>
+                                <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@Product.getPrice(product.price, product.qty)</dt>
 
                                 <input type="hidden" name="Product" value="@product.name">
                                 <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
-                                <input type="hidden" name="sTotal" value="@Product.getPrice(product.price, product.quantity)">
+                                <input type="hidden" name="sTotal" value="@Product.getPrice(product.price, product.qty)">
 
                                 <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
                             }

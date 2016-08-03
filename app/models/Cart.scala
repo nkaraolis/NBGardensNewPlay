@@ -5,25 +5,25 @@ package models
   */
 //case class Cart (products: Array[Product])
 
-case class Cart (cartItems: Array[CartItem])
+case class Cart (cartItems: Array[Product])
 
 
 object Cart {
 
-  var productsInCart: Array[CartItem] = Array.empty
+  var productsInCart: Array[Product] = Array.empty
 
-  def addToCart(product: CartItem): Array[CartItem] = {
+  def addToCart(product: Product): Array[Product] = {
     productsInCart = productsInCart :+ product
     productsInCart
   }
 
 
-  def removeFromCart(product: CartItem): Array[CartItem] = {
-    def checkCart(productsIn: Array[CartItem], product: CartItem): Array[CartItem] = {
+  def removeFromCart(product: Product): Array[Product] = {
+    def checkCart(productsIn: Array[Product], product: Product): Array[Product] = {
       if (productsIn.isEmpty) {
         productsIn
       }
-      else if (product.proId == productsIn.head.proId) {
+      else if (product.productId == productsIn.head.productId) {
         checkCart(productsIn.tail, product)
       }
       else {
@@ -35,7 +35,7 @@ object Cart {
   }
 
 
-  def findAllInCart = productsInCart.toList.sortBy(_.proName)
+  def findAllInCart = productsInCart.toList.sortBy(_.name)
 
 
 //  def calculateCartTotal(products: Array[Product]): Double = {
@@ -53,11 +53,28 @@ object Cart {
     var total: Double = 0.00
     for (pro <- cartItems) {
       var qty = pro.quantity.toDouble
-      var price = pro.unitPrice.toDouble
+      var price = pro.unitPrice
       total += qty * price
     }
     total
   }
+
+
+  def convertToCartItems(): Array[CartItem] = {
+    val listOfItems = this.findAllInCart
+    var cartItems: Array[CartItem] = new Array[CartItem](listOfItems.length)
+    var counter = 0
+    for (i <- listOfItems){
+
+      val ci = CartItem(i.productId.toInt, i.name, i.qty.toInt, i.price.toDouble)
+      cartItems(counter) = ci
+      counter+1
+    }
+    cartItems
+
+  }
+
+
 
 
 

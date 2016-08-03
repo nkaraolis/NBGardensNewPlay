@@ -6,6 +6,8 @@ import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.api.commands.WriteResult
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 import reactivemongo.core.nodeset.Authenticate
+
+import scala.collection.SortedSet
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
@@ -45,6 +47,8 @@ object Product{
   )
 
 
+  //val productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
+
   val productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
 
 
@@ -55,6 +59,16 @@ object Product{
         products += productReader.read(prod)
       }
   }
+
+
+  def findById(user: String) = products.find(_.productId == user)
+
+
+  def getImage(id: String): String ={
+    val imageStr = findById(id).get.mainImage
+    imageStr
+  }
+
 
   implicit object productReader extends BSONDocumentReader[Product]{
     def read(doc: BSONDocument):Product = Product(
@@ -154,13 +168,15 @@ object Product{
   }
 
 
+
+
   def findAll = products.toList.sortBy(_.name)
 
 
   def findByName(user: String) = products.find(_.name == user)
 
 
-  def findById(user: String) = products.find(_.productId == user)
+
 
 
   //  def findByCart(cart: String) = products.find(_.category == cart).toList.sortBy(_.name)

@@ -31,6 +31,7 @@ class ProductPageController extends Controller {
       "Rating" -> nonEmptyText
     )(Review.apply)(Review.unapply))
 
+
   def goToProduct(product: String) = Action {
     implicit request => //controller action
 
@@ -57,6 +58,7 @@ class ProductPageController extends Controller {
         Ok(views.html.productPage(clickedProduct, form))
       }
   }
+
 
   def submitReview = Action {
     implicit request =>
