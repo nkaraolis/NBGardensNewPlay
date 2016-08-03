@@ -38,7 +38,6 @@ POST    /updateAccount              controllers.UpdateAccountController.saveChan
 
 GET     /about                      controllers.AboutController.about
 
-GET     /contact                    controllers.ContactController.contact
 
 GET     /policies                   controllers.PoliciesController.policies
 
@@ -63,11 +62,9 @@ GET     /toCheckout                 controllers.CartController.checkout()
 
 GET     /toPay                      controllers.PayController.readyToPay(items:String, total:Double)
 
-#GET     /sessionReviewCheck        controllers.ReviewController.sessionReviewCheck
+#GET    /sessionReviewCheck        controllers.ReviewController.sessionReviewCheck
 
 POST    /Pay                        controllers.PayController.save(products:String)
-
-GET     /catalogue                  controllers.CatalogueController.catalogue
 
 GET     /userAddresses              controllers.UserAddressesController.userAddresses
 
@@ -85,3 +82,11 @@ GET     /userPayments               controllers.UserPaymentController.userPaymen
 POST    /userPayments               controllers.UserPaymentController.saveChanges
 
 POST    /submitReview               controllers.ProductPageController.submitReview
+
+GET    /contact                     controllers.ContactController.contact
+
+POST   /contact                     controllers.ContactController.saveContact
+
+GET    /catalogue                   controllers.CatalogueController.catalogue
+
+POST   /catalogue                   controllers.CatalogueController.saveCatalogue

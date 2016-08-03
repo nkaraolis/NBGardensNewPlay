@@ -1,4 +1,4 @@
-@()(implicit flash: Flash, lang: Lang, session : Session)
+@(contactForm: Form[(String, String, String)])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -19,19 +19,29 @@
 @main(Messages("contact.page"))(sidebar) {
 <div id="content" style="height: 800px;">
     <div id="contactheader" style="padding-top: 20px;">Contact NB Gardens</div>
+
+    @helper.form(action = routes.ContactController.saveContact) {
     <fieldset id="contactform">
-        <legend></legend>
-        <div class="formtext">Name: </div><br>
-        <input type="text" placeholder="Keisuke Takahashi"><br>
-
-        <div class="formtext">Email: </div><br>
-        <input type="text" placeholder="mazdarx7fan&#64gmail.com"><br>
-
-        <div class="formtext">Your Message: </div><br>
-        <textarea name="message" placeholder="Leave a message.."></textarea><br>
-
-        <input type="submit" class="btn-primary" value="SEND" style="margin-top: 20px; float: left;"/>
+        @helper.inputText(contactForm("Name"))
+        @helper.inputText(contactForm("Email"))
+        @helper.textarea(contactForm("Message"))
+        <input type="submit" class="btn-primary" style="margin-left: -375px;" value='@Messages("SEND")'>
     </fieldset>
 
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error" style="width: 300px; padding-left: 100px; color: #FF0000; font-family: 'Raleway'">
+            @flash.get("error")
+        </div>
+        }
+    </div>
+    }
+
+
 </div>
+
 }
