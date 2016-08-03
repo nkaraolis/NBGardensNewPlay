@@ -35,7 +35,7 @@ GET     /updateAccount              controllers.UpdateAccountController.updateAc
 POST    /updateAccount              controllers.UpdateAccountController.saveChanges
 GET     /userAccount                controllers.UserAccountController.userAccount
 GET     /userAddresses              controllers.UserAddressesController.userAddresses
-POST    /userAddresses              controllers.UserAddressesController.saveChanges
+POST    /userAddresses              controllers.UserAddressesController.updateAddress
 GET     /userPayments               controllers.UserPaymentController.userPayments
 POST    /userPayments               controllers.UserPaymentController.saveChanges
 
@@ -45,9 +45,12 @@ GET     /track/:id                  controllers.OrderHistoryController.track(id:
 
 # Routes for company information
 GET     /about                      controllers.AboutController.about
-GET     /contact                    controllers.ContactController.contact
 GET     /policies                   controllers.PoliciesController.policies
 GET     /help                       controllers.HelpController.help
+GET     /contact                    controllers.ContactController.contact
+POST    /contact                    controllers.ContactController.saveContact
+GET     /catalogue                  controllers.CatalogueController.catalogue
+POST    /catalogue                  controllers.CatalogueController.saveCatalogue
 
 # Routes for individual product
 GET     /productPage                controllers.ProductPageController.goToProduct(product:String)
@@ -69,7 +72,9 @@ GET     /toCheckout                 controllers.CartController.checkout()
 
 # Routes for payment
 GET     /toPay                      controllers.PayController.readyToPay(items:String, total:Double)
-GET     /Pay                        controllers.PayController.newCheckout(products:String, total:Double)
-POST    /Pay                        controllers.PayController.save(products:String, username: String)
 GET     /toPayByCard                controllers.PayController.payByCard(items:String, total:Double)
 GET     /toPayByPaypal              controllers.PayController.payByPaypal(items:String, total:Double)
+GET     /userPayments               controllers.UserPaymentController.userPayments
+POST    /userPayments               controllers.UserPaymentController.saveChanges
+GET     /Pay                        controllers.PayController.newCheckout(products:String, total:Double)
+POST    /Pay                        controllers.PayController.save(products:String, username: String)

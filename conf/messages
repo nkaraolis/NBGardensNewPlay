@@ -64,6 +64,12 @@ details.update = Account details updated
 details.request = Update form loaded
 details.update = Account details updated
 
+#Validation errors for contact us page
+contact.validation.errors = Contact not working
+
+#Validation errors for catalogue page
+catalogue.validation.errors = Catalogue not working
+
 #Search messages
 search.page = Search Results
 listResult.page = List Results

@@ -1,4 +1,4 @@
-@(addressForm: Form[CustomerAddress])(implicit flash: Flash, lang: Lang, session : Session)
+@(addressForm: Form[CustomerAddressDB])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -14,7 +14,7 @@
 
     <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Addresses</div>
 
-    @helper.form(action = routes.UserAddressesController.saveChanges()) {
+    @helper.form(action = routes.UserAddressesController.updateAddress()) {
 
     <div class="existingDetails">
 
@@ -58,26 +58,20 @@
             @Messages("Update Address", Messages("details.request"))
         </legend>
 
-        @helper.inputText(addressForm("Username").copy(value=Some(session.get("username").get)))
-
         <img src="@routes.Assets.versioned("images/textblock.png")" style=" width: 430px; height: 30px; margin-top: -71px; margin-left: -80px;"/>
     </fieldset>
 
     <fieldset id="contactform" style="margin-left: 250px; margin-top: -30px;">
 
-
+        @helper.inputText(addressForm("Full Name"))
         @helper.select(
         field = addressForm("Address Type"),
         options = Seq(
         "Shipping" -> "Shipping",
-        "Billing" -> "Billing"
-        ),
-        '_default -> "Address Type.."
-        )
-
-        @helper.inputText(addressForm("Full Name"))
-        @helper.inputText(addressForm("Address Line 1"))
-        @helper.inputText(addressForm("Address Line 2"))
+        "Billing" -> "Billing"),
+        '_default -> "Address Type..")
+        @helper.inputText(addressForm("Line 1"))
+        @helper.inputText(addressForm("Line 2"))
 
     </fieldset>
 
