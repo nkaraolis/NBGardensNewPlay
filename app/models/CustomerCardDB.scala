@@ -31,7 +31,7 @@ object CustomerCardDB {
     )
   }*/
 
-  /** Creates the reader and writer for the CustomerDB case class, ONE LINE FUCK ME */
+  /** Creates the reader and writer for the CustomerCardDB case class */
   implicit val cardBSONHandler = Macros.handler[CustomerCardDB]
 
   /** Update customer card details **/
