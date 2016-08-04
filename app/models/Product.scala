@@ -190,10 +190,10 @@ object Product{
 
 
   def getPrice(qty:String, price:String): Double ={
-    val tPrice = (qty.toDouble) * (price.toDouble)
-    tPrice
-  }
+    val tPrice = "%.2f".format(qty.toDouble * price.toDouble)
 
+    tPrice.toDouble
+  }
 
   def findAll = products.toList.sortBy(_.name)
 
