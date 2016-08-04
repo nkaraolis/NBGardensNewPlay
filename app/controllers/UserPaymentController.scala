@@ -20,17 +20,13 @@ import play.api.mvc.Session
 @Singleton
 class UserPaymentController @Inject() extends Controller{
 
-  private val paymentForm : Form[CustomerPayment] =
+  private val paymentForm : Form[CustomerCardDB] =
     Form(mapping(
-      "Username" -> nonEmptyText,
-      "Payment Method" -> nonEmptyText,
-      "Name on Card" -> nonEmptyText,
+      "Card Type" -> nonEmptyText,
       "Card Number" -> nonEmptyText,
-      "Start Date" -> nonEmptyText,
-      "Expiry Date" -> nonEmptyText,
-      "Security Code" -> nonEmptyText,
-      "Issue No" -> text
-    )(CustomerPayment.apply)(CustomerPayment.unapply))
+      "Expiry" -> nonEmptyText,
+      "Name on Card" -> nonEmptyText
+    )(CustomerCardDB.apply)(CustomerCardDB.unapply))
 
   def userPayments = Action {
     implicit request =>
@@ -41,7 +37,23 @@ class UserPaymentController @Inject() extends Controller{
       Ok(views.html.userPayments(form))
   }
 
-  def saveChanges = Action {
+  /** Checks form for errors and then adds new payment details to user if correct **/
+  def updatePayment = Action{
+    implicit request =>
+      val updatePaymentForm = paymentForm.bindFromRequest()
+      updatePaymentForm.fold(success = {
+        newPayment =>
+          val currentUsername = request.session.get("username").get
+          println("Payment added")
+          CustomerCardDB.updatePayment(currentUsername, newPayment, "$addToSet")
+          Redirect(routes.UserAccountController.userAccount())
+      }, hasErrors = {
+        form =>
+          Redirect(routes.UserPaymentController.userPayments()).flashing(Flash(form.data) + ("error" -> Messages("Error in payments")))
+      })
+  }
+
+  /*def saveChanges = Action {
     implicit request =>
       val editPaymentsForm = paymentForm.bindFromRequest()
       editPaymentsForm.fold(hasErrors = {
@@ -168,9 +180,5 @@ class UserPaymentController @Inject() extends Controller{
           }
       })
   }
-
-
-
-
-
+*/
 }

@@ -1,12 +1,12 @@
 package models
 
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID}
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by Administrator on 26/07/2016.
   */
 case class CustomerCardDB(cardType: String, cardNumber: String, expiry: String, NoC: String)
-
 
 object CustomerCardDB {
   implicit object CustomerCardReader extends BSONDocumentReader[CustomerCardDB]{
@@ -27,5 +27,22 @@ object CustomerCardDB {
       "expiry" -> card.expiry,
       "NoC" -> card.NoC
     )
+  }
+
+  /** Update customer card details **/
+  def updatePayment(username: String, value: CustomerCardDB, updater: String): Unit = {
+    // Finds the user to update
+    val selector = BSONDocument("username" -> username)
+    // Sets the field to update to be addresses
+    val modifier = BSONDocument(
+      updater -> BSONDocument(
+        "cardDetails" -> value))
+    // Runs the update query
+    val runUpdate = MongoConnector.collectionCustomer.update(selector, modifier)
+    runUpdate onComplete {
+      Success =>
+        println("Payment updated")
+    }
+    Thread.sleep(500)
   }
 }

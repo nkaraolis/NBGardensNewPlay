@@ -67,14 +67,16 @@ class PayController extends Controller {
       if (request.session.get("username").isEmpty) {//check the user has logged in or not
         Redirect(routes.LoginController.newLogin())
       }
+      println("inside the readyToPay method: " + items)
       Ok(views.html.payPage(items, total, CardForm)) //render view template
+
   }
 
 
 
   //This method saves the customer's order to the NBGardensOrders database
   // and also saves the card details to CVS
-  def save (products: String, username: String) = Action {
+  def save (products: String, username: String, total: Double) = Action {
     implicit request =>
       val newCardForm = CardForm.bindFromRequest()
       newCardForm.fold(success = {
@@ -82,18 +84,18 @@ class PayController extends Controller {
       val newCard = cardDetails(newCardForm.get.method, newCardForm.data("Name on Card"), newCardForm.data("Card No"), newCardForm.data("Start Date"), newCardForm.data("Expiry Date"), newCardForm.data("Security Code"), newCardForm.data("Issue No"))
       val payMethod = newCardForm.get.method
       val newID = OrderDB.findNextID()
-      val cart = Cart.convertToCartItems(products)
+     // val cart = Cart.convertToCartItems()
       val status = "Order Made"
-      val total = Cart.calculateCartTotal(cart)
+      //val total = Cart.calculateCartTotal(cart)
       val datetime = OrderDB.getDateTime()
-      var order = new OrderDB(newID, username, cart, total, datetime, status, payMethod)
+      var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, payMethod)
       MongoConnector.collectionOrder.insert(order)
       cardDetails.add(newCard)
       Redirect(routes.BrowseController.categoryList)
       }, hasErrors = {
         form =>
-          val cart = Cart.convertToCartItems(products)
-          val total = Cart.calculateCartTotal(cart)
+         // val cart = Cart.convertToCartItems()
+          //val total = Cart.calculateCartTotal(cart)
           Redirect(routes.PayController.newCheckout(products, total)).flashing(Flash(form.data))
       })
       //session trolley needs to be cleared here

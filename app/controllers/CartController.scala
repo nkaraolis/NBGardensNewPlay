@@ -27,7 +27,7 @@ class CartController extends Controller {
 
 
   // products in the cart for the user
-  var products: Array[Product] = Array.empty
+  var products: Array[CartItem] = Array.empty
   var totalT = 0.00
 
 
@@ -46,34 +46,34 @@ class CartController extends Controller {
       val p = Product.findByName(product).get
 
       // create a new product, the new product is the found product but with Qty, and add the product to the cart
-      def np : Product = {
-        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, Qty, p.category, p.porousAllowed, p.reviews)
-        val t = Product.findByName(p.name).toArray.apply(0)
-        t
-      }
-
-      // update products in cart
-      products = Cart.addToCart(np) //get product from model
-      Redirect(routes.BrowseController.productList(p.category)) //render view template
-
-
-//      //create a new CartItem for each product in cart
-//      def newCI : CartItem = {
-//        CartItem.add(p.productId.toInt, p.name, p.qty.toInt, p.price.toDouble)
-//        val t = CartItem.findByName(p.name).toArray.apply(0)
+//      def np : Product = {
+//        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, Qty, p.category, p.porousAllowed, p.reviews)
+//        val t = Product.findByName(p.name).toArray.apply(0)
 //        t
 //      }
-//      val cartItem = Cart.addToCart(newCI)
 //
 //      // update products in cart
-//      products =  Cart.addToCart(newCI) //get product from model
+//      products = Cart.addToCart(np) //get product from model
 //      Redirect(routes.BrowseController.productList(p.category)) //render view template
+
+
+      //create a new CartItem for each product in cart
+      def newCI : CartItem = {
+        CartItem.add(p.productId.toInt, p.name, p.qty.toInt, p.price.toDouble)
+        val t = CartItem.findByName(p.name).toArray.apply(0)
+        t
+      }
+      val cartItem = Cart.addToCart(newCI)
+
+      // update products in cart
+      products =  Cart.addToCart(newCI) //get product from model
+      Redirect(routes.BrowseController.productList(p.category)) //render view template
   }
 
 
   def remove(product: String) = Action {
     implicit request =>  //controller action
-      products = Cart.removeFromCart(Product.findByName(product).get)   //get product via Product class
+      products = Cart.removeFromCart(CartItem.findByName(product).get)   //get product via Product class
       removeOldPrice(Product.findByName(product).get.name)
       Ok(views.html.cartpage(products.toList, CartForm)) //render view template
   }
@@ -99,32 +99,32 @@ class CartController extends Controller {
       removeO(p.name)
 
       // create a new product, the new product is the found product but with new Qty, and add the product to the cart
-      def np : Product = {
-        Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, q, p.category, p.porousAllowed, p.reviews)
-        val t = Product.findByName(p.name).toArray.apply(0)
-        t
-      }
-      val cp = Cart.addToCart(np)
-
-       //update products in cart
-      products =  cp //get product from model
-      totalT += subTot
-      Ok(views.html.cartpage(products.toList, CartForm))//render view template
+//      def np : Product = {
+//        Product.removeFromProduct(p)
+//        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, q, p.category, p.porousAllowed, p.reviews)
+//        val t = Product.findByName(p.name).toArray.apply(0)
+//        t
+//      }
+//      val cp = Cart.addToCart(np)
+//
+//       //update products in cart
+//      products =  cp //get product from model
+//      totalT += subTot
+//      Ok(views.html.cartpage(products.toList, CartForm))//render view template
 
 
       //create a new CartItem for each product in cart
-//      def newCI : CartItem = {
-//        CartItem.add(p.productId.toInt, p.name, p.qty.toInt, p.price.toDouble)
-//        val t = CartItem.findByName(p.name).toArray.apply(0)
-//        t
-//      }
-//      val cartItem = Cart.addToCart(newCI)
-//
-//      // update products in cart
-//      products =  cartItem //get product from model
-//      totalT += subTot
-//      Ok(views.html.cartpage(products.toList, CartForm))//render view template
+      def newCI : CartItem = {
+        Cart.addToCart(CartItem(p.productId.toInt, p.name, q.toInt, p.price.toDouble))
+        val t = CartItem.findByName(p.name).toArray.apply(0)
+        t
+      }
+      val cartItem = Cart.addToCart(newCI)
+
+      // update products in cart
+      products =  cartItem //get product from model
+      totalT += subTot
+      Ok(views.html.cartpage(products.toList, CartForm))//render view template
 
   }
 
@@ -135,33 +135,38 @@ class CartController extends Controller {
     implicit request =>  //controller action
       val p = Product.findByName(CartForm.bindFromRequest().data("Product")).get
       val q:String = CartForm.bindFromRequest().data("Qty")
-      val subTot = (q.toDouble) * (p.price.toDouble)
+      //val subTot = (q.toDouble) * (p.price.toDouble)
+
+      var newCartItem = CartItem(p.productId.toInt, p.name, q.toInt, p.price.toDouble)
+      Cart.addToCart(newCartItem)
+
 //      if (totalT!=0){
 //        removeOldPrice(p.name)
 //         }
       removeO(p.name)
 
-      def np : Product = {
-        Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, q, p.category, p.porousAllowed, p.reviews)
-        val t = Product.findByName(p.name).toArray.apply(0)//
-        t
-      }
-      val cp = Cart.addToCart(np)
-
-//      def np : CartItem = {
-//        CartItem.removeFromProduct(p)
-//        CartItem.add(p.proId.toInt, p.proName, p.quantity.toInt, p.unitPrice.toDouble)
-//        val t = CartItem.findByName(p.proName).toArray.apply(0)//
+//      def np : Product = {
+//        Product.removeFromProduct(p)
+//        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, q, p.category, p.porousAllowed, p.reviews)
+//        val t = Product.findByName(p.name).toArray.apply(0)//
 //        t
 //      }
 //      val cp = Cart.addToCart(np)
 
+      def np : CartItem = {
+        Product.removeFromProduct(p)
+        CartItem.add(p.productId.toInt, p.name, q.toInt, p.price.toDouble)
+        val t = CartItem.findByName(p.name).toArray.apply(0)
+        t
+      }
 
-      products =  cp //get product from model
-      totalT += subTot
+      val cp = Cart.addToCart(np)
+
+      products = cp //get product from model
+      //totalT += subTot
       Redirect(routes.BrowseController.productList(p.category))//render view template
   }
+
 
 
 
@@ -173,7 +178,7 @@ class CartController extends Controller {
       } else {
         totalT = 0.00
         for (i<-products){
-          totalT += (i.qty.toDouble*i.price.toDouble)
+          totalT += (i.quantity.toDouble*i.unitPrice)
         }
         Ok(views.html.checkout(products.toList, totalT)) //render view template
       }
@@ -181,8 +186,10 @@ class CartController extends Controller {
 
 
 
-  def removeO(product: String) : Array[Product] ={
-    products = Cart.removeFromCart(Product.findByName(product).get)   //get product from model
+  def removeO(product: String) : Array[CartItem] ={
+    val p = Product.findByName(product).get
+    products = Cart.removeFromCart(CartItem(p.productId.toInt, p.name, p.qty.toInt, p.price.toDouble))  //get product from model
+
     products
   }
 

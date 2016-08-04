@@ -31,7 +31,7 @@
             </div>
 
             <div id="payform">
-                @helper.form(routes.PayController.save(products, session.get("username").toString)) {
+                @helper.form(routes.PayController.save(products, session.get("username").toString, total)) {
                     @helper.select(
                         field = CardForm("Payment Method"),
                         options = Seq(
