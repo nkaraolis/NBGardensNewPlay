@@ -16,7 +16,7 @@ object Cart {
 //    productsInCart = productsInCart :+ product
 //    productsInCart
 //  }
-
+//////////
 
   var productsInCart: Array[CartItem] = Array.empty
 
