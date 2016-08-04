@@ -14,7 +14,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 08/07/2016.
   */
-case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: List[Review])
+case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, var reviews: List[Review])
 
 
 object Product{
@@ -44,9 +44,7 @@ object Product{
     ("_id" -> false)
   )
 
-  val productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
-
-  productsInDB.onComplete {
+  /**productsInDB.onComplete {
     case Failure(e) => throw e
       println("not ready yet")
     case Success(readResult) =>
@@ -54,7 +52,7 @@ object Product{
         products += productReader.read(prod)
         println("ready")
       }
-  }
+  }**/
 
   var loadCheck = false
 
@@ -63,6 +61,8 @@ object Product{
   }
 
   def loadProducts(){
+
+    var productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
 
     productsInDB.onComplete {
       case Failure(e) => throw e
@@ -75,9 +75,27 @@ object Product{
           println(loadCheck)
         }
     }
-    Thread.sleep(500)
   }
 
+  def loadUpdatedProducts(): Unit ={
+
+    var productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
+
+    products = Set.empty
+    println(products.size)
+
+    productsInDB.onComplete {
+      case Failure(e) => throw e
+        println("not ready yet main")
+      case Success(readResult) =>
+        for (prod <- readResult) {
+          products += productReader.read(prod)
+          println("ready main")
+          loadedProducts()
+          println(loadCheck)
+        }
+    }
+  }
 
   implicit object productReader extends BSONDocumentReader[Product]{
     def read(doc: BSONDocument):Product = Product(
