@@ -34,7 +34,8 @@ class LoginController @Inject() extends Controller {
       loginFormDB.fold(success = {
         newLogin =>
           println("Successful login!")
-
+          val testingUser = CustomerDB.findCustomer(newLogin._1).head
+          println("Convert to CustomerDB from database user: " + testingUser.username, testingUser.addresses.head.addressType)
           val currentCustomer = CustomerDB.findByUsername(newLogin._1).head
           val customerSession = request.session +
             ("customerID" -> currentCustomer.getAs[Int]("customerID").get.toString) +

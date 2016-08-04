@@ -1,6 +1,6 @@
 package models
 
-import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID}
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID, Macros}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
@@ -12,7 +12,7 @@ case class CustomerAddressDB(fullName: String, addressType: String, line1: Strin
 
 object CustomerAddressDB {
   
-  implicit object CustomerAddressDBReader extends BSONDocumentReader[CustomerAddressDB] {
+  /*implicit object CustomerAddressDBReader extends BSONDocumentReader[CustomerAddressDB] {
     def read(doc: BSONDocument):
     CustomerAddressDB = CustomerAddressDB(
       doc.getAs[String]("fullName").get,
@@ -36,7 +36,10 @@ object CustomerAddressDB {
         "county" -> customerAddress.county,
         "postcode" -> customerAddress.postcode
       )
-  }
+  }*/
+
+  /** Creates the reader and writer for the CustomerDB case class, ONE LINE FUCK ME */
+  implicit val addressBSONHandler = Macros.handler[CustomerAddressDB]
 
   /** Update customer address **/
   def updateAddress(username: String, value: CustomerAddressDB, updater: String): Unit = {
