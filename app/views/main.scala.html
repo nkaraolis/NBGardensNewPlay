@@ -72,6 +72,9 @@
 
     }
 
+    @if(!Product.loadCheck){
+    @Product.loadProducts()
+    }
 
     <div id="icons" style="float:right; margin-right:20px; font-size:0px; margin-top: -167px;">
         @if(session.get("username").isEmpty) {

@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject._
 
-import models.{Product}
+import models.Product
 import models._
 import play.api._
 import play.api.data.Forms._
@@ -14,6 +14,8 @@ import play.api.mvc.{Action, Controller, Flash, Request}
 import play.api.Play.current
 import play.api.data.Form
 import play.api.mvc.Session
+
+import scala.util.{Failure, Success}
 
 /**
   * Created by Administrator on 08/07/2016.
@@ -33,22 +35,28 @@ class ProductPageController extends Controller {
   def goToProduct(product: String) = Action {
     implicit request => //controller action
 
-      if(Product.findByName(product).isDefined){
+      if(Product.loadCheck) {
+        println("loaded already")
+      } else {
+        Product.loadProducts()
+      }
+
+      if (Product.findByName(product).isDefined) {
 
         val clickedProduct = Product.findByName(product).get
 
-        val form = if(request2flash.get("error").isDefined)
+        val form = if (request2flash.get("error").isDefined)
           reviewForm.bind(request2flash.data)
         else
           reviewForm
 
         Ok(views.html.productPage(clickedProduct, form))
 
-      }else{
+      } else {
 
         val clickedProduct = Product.findById(product).get
 
-        val form = if(request2flash.get("error").isDefined)
+        val form = if (request2flash.get("error").isDefined)
           reviewForm.bind(request2flash.data)
         else
           reviewForm
@@ -77,7 +85,7 @@ class ProductPageController extends Controller {
           //val currentCustomer = CustomerDB.findByUsername(request.session.get("username").get).head
 
           Review.add(product,submitReview,"$addToSet")
-            Product.productsInDB
+            Product.loadProducts()
             Redirect(routes.ProductPageController.goToProduct(product))
       }})
   }
