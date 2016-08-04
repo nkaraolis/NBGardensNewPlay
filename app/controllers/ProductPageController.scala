@@ -38,7 +38,7 @@ class ProductPageController extends Controller {
       if(Product.loadCheck) {
         println("loaded already")
       } else {
-        Product.loadProducts()
+        Product.loadUpdatedProducts()
       }
 
       if (Product.findByName(product).isDefined) {
@@ -74,7 +74,7 @@ class ProductPageController extends Controller {
       }, success = {
         submitReview =>
 
-          Product.findById(product).get.reviews.isEmpty
+          //Product.findById(product).get.reviews.isEmpty
 
           if(CustomerDB.findByUsername(submitReviewForm.data("Username")).isEmpty)
           {
@@ -84,8 +84,15 @@ class ProductPageController extends Controller {
 
           //val currentCustomer = CustomerDB.findByUsername(request.session.get("username").get).head
 
+            println("Products length" + Product.products.size)
+            println("Old review size: " + Product.findById(product).get.reviews.length)
+
           Review.add(product,submitReview,"$addToSet")
-            Product.loadProducts()
+            Product.loadUpdatedProducts()
+
+            println("Products length" + Product.products.size)
+            println("New review size: " + Product.findById(product).get.reviews.length)
+
             Redirect(routes.ProductPageController.goToProduct(product))
       }})
   }
