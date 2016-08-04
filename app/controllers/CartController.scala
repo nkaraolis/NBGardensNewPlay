@@ -134,7 +134,6 @@ class CartController extends Controller {
   def updateFromPL() = Action {
     implicit request =>  //controller action
       val p = Product.findByName(CartForm.bindFromRequest().data("Product")).get
-     // val p2 = Product.findByName(CartForm.bindFromRequest().data("Product")).get
       val q:String = CartForm.bindFromRequest().data("Qty")
       val subTot = (q.toDouble) * (p.price.toDouble)
 //      if (totalT!=0){

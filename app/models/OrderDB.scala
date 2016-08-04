@@ -106,12 +106,12 @@ object OrderDB {
   }
 
 
-  def findOrderById(id: Int) = DataDump.orders.find(_.ordId == id)
+  def findOrderById(id: Int) = orders.find(_.ordId == id)
 
   def getOrders = orders.toList
 
   //Method to get all orders with the logged in Customer's ID
-  def getOrdersByCusId(cid: String): List[Order] = DataDump.orders.filter(_.cusId == cid)
+  def getOrdersByCusId(cid: String): List[OrderDB] = orders.filter(_.cusId == cid).toList
 
 
 

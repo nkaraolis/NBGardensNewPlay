@@ -6,7 +6,6 @@ import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.api.commands.WriteResult
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 import reactivemongo.core.nodeset.Authenticate
-
 import scala.collection.SortedSet
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -168,25 +167,20 @@ object Product{
   }
 
 
-
-
   def findAll = products.toList.sortBy(_.name)
 
 
   def findByName(user: String) = products.find(_.name == user)
 
 
-
-
-
   //  def findByCart(cart: String) = products.find(_.category == cart).toList.sortBy(_.name)
 
 
   //find products by Category
-  def findByCart(cart: String): List[Product] = {
+  def findByCat(cat: String): List[Product] = {
     var tl: Set[Product]  = Set.empty
     for (product <- products){
-      if (product.category == cart){
+      if (product.category == cat){
         tl += Product(product.productId, product.name, product.description,product.price, product.mainImage, product.secondaryImages, product.qty, product.category, product.porousAllowed, product.reviews)
       }
     }

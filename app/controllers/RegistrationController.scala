@@ -59,9 +59,9 @@ class RegistrationController @Inject() extends Controller {
   }
 
 
-  def show = Action {
-    implicit request => val customers = Customer.findAllCustomer
-      Ok(views.html.customerall(customers))
-  }
+//  def show = Action {
+//    implicit request => val customers = Customer.findAllCustomer
+//      Ok(views.html.customerall(customers))
+//  }
 
 }

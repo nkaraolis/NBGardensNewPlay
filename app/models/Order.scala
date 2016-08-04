@@ -10,13 +10,13 @@ object Order{
 
   var orders : Set[Order] = Set.empty
 
-  def findOrderById(id:Int) = DataDump.orders.find(_.ordId == id)
+  //def findOrderById(id:Int) = DataDump.orders.find(_.ordId == id)
   
 
   def getOrders = orders.toList
 
   //Method to get all orders with the logged in Customer's ID
-  def getOrdersByCusId(cid: String):List[Order] = DataDump.orders.filter(_.cusId == cid)
+ // def getOrdersByCusId(cid: String):List[Order] = DataDump.orders.filter(_.cusId == cid)
 
 
 
