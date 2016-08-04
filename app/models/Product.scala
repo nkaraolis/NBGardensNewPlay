@@ -44,17 +44,40 @@ object Product{
     ("_id" -> false)
   )
 
-
   val productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
-
 
   productsInDB.onComplete {
     case Failure(e) => throw e
+      println("not ready yet")
     case Success(readResult) =>
       for (prod <- readResult) {
         products += productReader.read(prod)
+        println("ready")
       }
   }
+
+  var loadCheck = false
+
+  def loadedProducts(): Unit ={
+    loadCheck = true
+  }
+
+  def loadProducts(){
+
+    productsInDB.onComplete {
+      case Failure(e) => throw e
+        println("not ready yet main")
+      case Success(readResult) =>
+        for (prod <- readResult) {
+          products += productReader.read(prod)
+          println("ready main")
+          loadedProducts()
+          println(loadCheck)
+        }
+    }
+    Thread.sleep(500)
+  }
+
 
   implicit object productReader extends BSONDocumentReader[Product]{
     def read(doc: BSONDocument):Product = Product(
@@ -168,6 +191,7 @@ object Product{
 
   //find products by Category
   def findByCart(cart: String): List[Product] = {
+
     var tl: Set[Product]  = Set.empty
     for (product <- products){
       if (product.category == cart){
