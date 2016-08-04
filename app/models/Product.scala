@@ -14,7 +14,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 08/07/2016.
   */
-case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: String)
+case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: List[Review])
 
 
 object Product{
@@ -44,17 +44,40 @@ object Product{
     ("_id" -> false)
   )
 
-
   val productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
-
 
   productsInDB.onComplete {
     case Failure(e) => throw e
+      println("not ready yet")
     case Success(readResult) =>
       for (prod <- readResult) {
         products += productReader.read(prod)
+        println("ready")
       }
   }
+
+  var loadCheck = false
+
+  def loadedProducts(): Unit ={
+    loadCheck = true
+  }
+
+  def loadProducts(){
+
+    productsInDB.onComplete {
+      case Failure(e) => throw e
+        println("not ready yet main")
+      case Success(readResult) =>
+        for (prod <- readResult) {
+          products += productReader.read(prod)
+          println("ready main")
+          loadedProducts()
+          println(loadCheck)
+        }
+    }
+    Thread.sleep(500)
+  }
+
 
   implicit object productReader extends BSONDocumentReader[Product]{
     def read(doc: BSONDocument):Product = Product(
@@ -67,7 +90,7 @@ object Product{
       doc.getAs[String]("qty").get,
       doc.getAs[String]("category").get,
       doc.getAs[String]("porousAllowed").get,
-      doc.getAs[String]("reviews").get)
+      doc.getAs[List[Review]]("reviews").get)
   }
 
 
@@ -100,7 +123,7 @@ object Product{
     for(p<-newOrder){
       val pro: Array[String] = p.split(",")
       if (pro.length == 9){
-        productsForAnOrder += Product("","","","","","","","","","") //Product(pro.apply(0), pro.apply(1), pro.apply(2), pro.apply(3), pro.apply(4), pro.apply(5), pro.apply(6), pro.apply(7), pro.apply(8), pro.apply(9))
+        productsForAnOrder += Product("","","","","","","","","",List[Review]()) //Product(pro.apply(0), pro.apply(1), pro.apply(2), pro.apply(3), pro.apply(4), pro.apply(5), pro.apply(6), pro.apply(7), pro.apply(8), pro.apply(9))
       }
     }
 
@@ -168,6 +191,7 @@ object Product{
 
   //find products by Category
   def findByCart(cart: String): List[Product] = {
+
     var tl: Set[Product]  = Set.empty
     for (product <- products){
       if (product.category == cart){
@@ -188,7 +212,7 @@ object Product{
   def findProductByName(name: String) = products.find(_.name == name)
 
 
-  def add(Id: String, Name: String, description: String, price: String, mainImage: String, secondaryImages: String, need: String, category: String, porousAllowed: String, reviews: String): Unit ={
+  def add(Id: String, Name: String, description: String, price: String, mainImage: String, secondaryImages: String, need: String, category: String, porousAllowed: String, reviews: List[Review]): Unit ={
     products += Product(Id,Name,description,price,mainImage,secondaryImages, need, category, porousAllowed, reviews)
 
   }
