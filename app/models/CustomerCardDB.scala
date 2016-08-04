@@ -1,6 +1,7 @@
 package models
 
-import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID}
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter, BSONObjectID, Macros}
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
@@ -9,6 +10,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 case class CustomerCardDB(cardType: String, cardNumber: String, expiry: String, NoC: String)
 
 object CustomerCardDB {
+  /*
   implicit object CustomerCardReader extends BSONDocumentReader[CustomerCardDB]{
     def read (doc : BSONDocument) :
     CustomerCardDB = CustomerCardDB (
@@ -27,7 +29,10 @@ object CustomerCardDB {
       "expiry" -> card.expiry,
       "NoC" -> card.NoC
     )
-  }
+  }*/
+
+  /** Creates the reader and writer for the CustomerDB case class, ONE LINE FUCK ME */
+  implicit val cardBSONHandler = Macros.handler[CustomerCardDB]
 
   /** Update customer card details **/
   def updatePayment(username: String, value: CustomerCardDB, updater: String): Unit = {

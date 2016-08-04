@@ -14,6 +14,8 @@ case class CustomerDB(customerID: Int, fName: String, lName: String, email: Stri
 object CustomerDB {
   var userList: List[BSONDocument] = List[BSONDocument]()
 
+  var testingList : Set[CustomerDB] = Set.empty
+/*
   implicit object CustomerDBReader extends BSONDocumentReader[CustomerDB] {
     def read(doc: BSONDocument): CustomerDB =
       CustomerDB(
@@ -27,8 +29,12 @@ object CustomerDB {
         doc.getAs[List[CustomerAddressDB]]("addresses").get,
         doc.getAs[List[CustomerCardDB]]("cardDetails").get
       )
-  }
+  }*/
 
+  /** Creates the reader and writer for the CustomerDB case class, ONE LINE FUCK ME */
+  implicit val customerBSONHandler = Macros.handler[CustomerDB]
+
+/*
   implicit object CustomerDBWriter extends BSONDocumentWriter[CustomerDB] {
     def write(customer: CustomerDB): BSONDocument = {
       BSONDocument(
@@ -43,22 +49,28 @@ object CustomerDB {
         "cardDetails" -> customer.cardDetails
       )
     }
-  }
+  }*/
 
- /* /** Finds customer by username and returns CustomerDB object **/
-  def findCustomer(username: String)(implicit ec: ExecutionContext): Unit = {
+  /** Finds customer by username and returns CustomerDB object **/
+  def findCustomer(username: String)(implicit ec: ExecutionContext): Set[CustomerDB] = {
     val findQuery = BSONDocument(
       "username" -> username
     )
-    val foundUser = MongoConnector.collectionCustomer.find(findQuery).one[CustomerDB]
+    val key = BSONDocument(
+      "_id" -> false
+    )
+    val foundUser = MongoConnector.collectionCustomer.find(findQuery, key).cursor[BSONDocument]().collect[List]()
 
-    foundUser onComplete {
+    foundUser.onComplete {
       case Failure(e) => throw e
       case Success(readResult) =>
-        println(readResult.get.username)
+        for(customer <- readResult){
+          testingList += customerBSONHandler.read(customer)
+        }
     }
-    Thread.sleep(500)
-  } */
+    Thread.sleep(1500)
+    testingList
+  }
 
   /** Find customer by username **/
   def findByUsername(username: String): List[BSONDocument] = {
@@ -71,7 +83,7 @@ object CustomerDB {
       case Success(readResult) =>
         userList = readResult
     }
-    Thread.sleep(2000)
+    Thread.sleep(500)
     userList
   }
 
