@@ -8,6 +8,7 @@ import play.api.data.format.Formats._
 import controllers._
 import play.api.i18n.Messages
 import scala.concurrent.ExecutionContext.Implicits.global
+import controllers.CartController
 
 
 /**
@@ -15,7 +16,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
   */
 class PayController extends Controller {
 
-  val items = Cart.findAllInCart  //get product from model
+  //val items = Cart.findAllInCart  //get product from model
 
   // a form contents information about a card for the user to pay
   val CardForm: Form[cardDetails] = Form(
@@ -84,23 +85,22 @@ class PayController extends Controller {
       val newCard = cardDetails(newCardForm.get.method, newCardForm.data("Name on Card"), newCardForm.data("Card No"), newCardForm.data("Start Date"), newCardForm.data("Expiry Date"), newCardForm.data("Security Code"), newCardForm.data("Issue No"))
       val payMethod = newCardForm.get.method
       val newID = OrderDB.findNextID()
-     // val cart = Cart.convertToCartItems()
       val status = "Order Made"
-      //val total = Cart.calculateCartTotal(cart)
       val datetime = OrderDB.getDateTime()
       var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, payMethod)
       MongoConnector.collectionOrder.insert(order)
       cardDetails.add(newCard)
-      Redirect(routes.BrowseController.categoryList)
+      //Empty Cart
+      Cart.clearCart()
+          Redirect(routes.BrowseController.categoryList)
       }, hasErrors = {
         form =>
          // val cart = Cart.convertToCartItems()
           //val total = Cart.calculateCartTotal(cart)
           Redirect(routes.PayController.newCheckout(products, total)).flashing(Flash(form.data))
       })
-      //session trolley needs to be cleared here
-  }
 
+  }
 
 
   def newCheckout(products: String, total:Double) = Action {
