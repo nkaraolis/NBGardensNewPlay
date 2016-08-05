@@ -98,7 +98,7 @@ curTimeFormat.format(today)
             @product.description
         </div>
 
-        @helper.form(action = routes.ProductPageController.submitReview(product.productId)) {
+        @helper.form(action = routes.ProductPageController.submitReview(product.productId.toString)) {
         <div class="productDivs" style="width: 1300px; margin-bottom: 60px;">
             <div class="fontTypeA" >Customer Reviews</div>
 

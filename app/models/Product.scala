@@ -14,7 +14,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 08/07/2016.
   */
-case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, var reviews: List[Review])
+case class Product (productId: Int, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: Int, category: String, porousAllowed: String, var reviews: List[Review])
 
 
 object Product{
@@ -38,7 +38,6 @@ object Product{
   val condition = BSONDocument(
     (null, null)
   )
-
 
   val key = BSONDocument(
     ("_id" -> false)
@@ -95,17 +94,18 @@ object Product{
           println(loadCheck)
         }
     }
+    Thread.sleep(200)
   }
 
   implicit object productReader extends BSONDocumentReader[Product]{
     def read(doc: BSONDocument):Product = Product(
-      doc.getAs[String]("productId").get,
+      doc.getAs[Int]("productId").get,
       doc.getAs[String]("name").get,
       doc.getAs[String]("description").get,
       doc.getAs[String]("price").get,
       doc.getAs[String]("mainImage").get,
       doc.getAs[String]("secondaryImages").get,
-      doc.getAs[String]("qty").get,
+      doc.getAs[Int]("qty").get,
       doc.getAs[String]("category").get,
       doc.getAs[String]("porousAllowed").get,
       doc.getAs[List[Review]]("reviews").get)
@@ -141,7 +141,7 @@ object Product{
     for(p<-newOrder){
       val pro: Array[String] = p.split(",")
       if (pro.length == 9){
-        productsForAnOrder += Product("","","","","","","","","",List[Review]()) //Product(pro.apply(0), pro.apply(1), pro.apply(2), pro.apply(3), pro.apply(4), pro.apply(5), pro.apply(6), pro.apply(7), pro.apply(8), pro.apply(9))
+        productsForAnOrder += Product(0,"","","","","",0,"","",List[Review]()) //Product(pro.apply(0), pro.apply(1), pro.apply(2), pro.apply(3), pro.apply(4), pro.apply(5), pro.apply(6), pro.apply(7), pro.apply(8), pro.apply(9))
       }
     }
 
@@ -189,7 +189,7 @@ object Product{
   //  )
 
 
-  def getPrice(qty:String, price:String): Double ={
+  def getPrice(price:String, qty:Int): Double ={
     val tPrice = "%.2f".format(qty.toDouble * price.toDouble)
 
     tPrice.toDouble
@@ -198,10 +198,10 @@ object Product{
   def findAll = products.toList.sortBy(_.name)
 
 
-  def findByName(user: String) = products.find(_.name == user)
+  def findByName(name: String) = products.find(_.name == name)
 
 
-  def findById(user: String) = products.find(_.productId == user)
+  def findById(productId: Int) = products.find(_.productId == productId)
 
 
   //  def findByCart(cart: String) = products.find(_.category == cart).toList.sortBy(_.name)
@@ -230,7 +230,7 @@ object Product{
   def findProductByName(name: String) = products.find(_.name == name)
 
 
-  def add(Id: String, Name: String, description: String, price: String, mainImage: String, secondaryImages: String, need: String, category: String, porousAllowed: String, reviews: List[Review]): Unit ={
+  def add(Id: Int, Name: String, description: String, price: String, mainImage: String, secondaryImages: String, need: Int, category: String, porousAllowed: String, reviews: List[Review]): Unit ={
     products += Product(Id,Name,description,price,mainImage,secondaryImages, need, category, porousAllowed, reviews)
 
   }
@@ -254,9 +254,10 @@ object Product{
 
   def setQTY (name: String, need: String): Unit ={
     def findByName(name: String) = {
+      val quantity = need.toInt
       val tp = products.toList.find(_.name == name).get
       removeFromProduct(tp)
-      add(tp.productId,tp.name,tp.description,tp.price,tp.mainImage,tp.secondaryImages,need,tp.category, tp.porousAllowed, tp.reviews)
+      add(tp.productId,tp.name,tp.description,tp.price,tp.mainImage,tp.secondaryImages,quantity,tp.category, tp.porousAllowed, tp.reviews)
     }
     findByName(name)
   }
