@@ -88,7 +88,8 @@ class ProductPageController extends Controller {
             println("Products length" + Product.products.size)
             println("Old review size: " + Product.findById(product.toInt).get.reviews.length)
 
-          Review.add(product,submitReview,"$addToSet")
+          Review.add(product.toInt,submitReview,"$addToSet")
+            Thread.sleep(200)
             Product.loadUpdatedProducts()
 
             println("Products length" + Product.products.size)
