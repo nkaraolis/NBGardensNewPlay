@@ -28,6 +28,7 @@ class RegistrationController @Inject() extends Controller {
     "Username" -> nonEmptyText.verifying("Username already exists!", CustomerDB.findByUsername(_).isEmpty),
     "Password" -> nonEmptyText))
 
+
   /** Save the new customer into the database **/
   def saveCustomer = Action {
     implicit request =>
@@ -46,6 +47,7 @@ class RegistrationController @Inject() extends Controller {
       })
   }
 
+
   /** Loads up the registration page with errors if any **/
   def newCustomer = Action {
     implicit request =>
@@ -55,4 +57,11 @@ class RegistrationController @Inject() extends Controller {
         newUserForm
       Ok(views.html.registration(form))
   }
+
+
+//  def show = Action {
+//    implicit request => val customers = Customer.findAllCustomer
+//      Ok(views.html.customerall(customers))
+//  }
+
 }

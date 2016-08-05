@@ -9,8 +9,9 @@ import models.{Category, Product}
 
 class BrowseController extends Controller{
 
+
   // call a products list in a category
-  def productList(cart: String) = Action {
+  def productList(cat: String) = Action {
     implicit request =>  //controller action
 
       if(Product.loadCheck) {
@@ -18,9 +19,10 @@ class BrowseController extends Controller{
       } else{
         Product.loadProducts()
       }
-      val products = Product.findByCart(cart)  //get product from model
+      val products = Product.findByCat(cat)  //get product from model
       Ok(views.html.ProductList(products)) //render view template
   }
+
 
   // call all categories
   def categoryList = Action {
@@ -34,4 +36,9 @@ class BrowseController extends Controller{
       val categories = Category.findAll  //get product from model
       Ok(views.html.browseCat(categories)) //render view template
   }
+
+
+
+
+
 }

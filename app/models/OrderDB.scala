@@ -3,14 +3,12 @@ package models
 import java.util.Calendar
 import java.text.SimpleDateFormat
 import java.time._
-
 import com.typesafe.config.ConfigFactory
 import reactivemongo.api.{FailoverStrategy, MongoDriver}
 import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.api.commands.WriteResult
 import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 import reactivemongo.core.nodeset.Authenticate
-
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
@@ -19,11 +17,11 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 29/07/2016.
   */
-case class OrderDB (ordId:Int, cusId:String, carts: Array[Product], totalPrice: Double, datetime: String, status: String, payMethod:String)
+case class OrderDB (ordId:Int, cusId:String, carts: Array[CartItem], totalPrice: Double, datetime: String, status: String, payMethod:String)
 
 object OrderDB {
 
-  var orderset = Set.empty(OrderReader)
+  var orderset = Set.empty(OrderDBReader)
   var orders: Set[OrderDB]  = Set.empty
 
   val condition = BSONDocument(
@@ -41,18 +39,18 @@ object OrderDB {
     case Failure(e) => throw e
     case Success(readResult) =>
       for (ord <- readResult) {
-        orders += OrderReader.read(ord)
+        orders += OrderDBReader.read(ord)
       }
   }
 
 
 
-  implicit object OrderReader extends BSONDocumentReader[OrderDB]{
-    def read(doc: BSONDocument):OrderDB = OrderDB(
-
+  implicit object OrderDBReader extends BSONDocumentReader[OrderDB]{
+    def read(doc: BSONDocument):OrderDB =
+      OrderDB(
       doc.getAs[Int]("ordId").get,
       doc.getAs[String]("cusId").get,
-      doc.getAs[Array[Product]]("carts").get,
+      doc.getAs[Array[CartItem]]("carts").get,
       doc.getAs[Double]("totalPrice").get,
       doc.getAs[String]("datetime").get,
       doc.getAs[String]("status").get,
@@ -61,33 +59,21 @@ object OrderDB {
 
 
 
-  implicit object OrderWriter extends BSONDocumentWriter[OrderDB] {
-      def write(order: OrderDB) : BSONDocument = BSONDocument(
-        "ordId" -> order.ordId,
-        "cusId" -> order.cusId,
-        "carts" -> order.carts,
-        "totalprice" -> order.totalPrice,
-        "datetime" -> order.datetime,
-        "status" -> order.status,
-        "payMethod" -> order.payMethod
-      )
+  implicit object OrderDBWriter extends BSONDocumentWriter[OrderDB] {
+      def write(order: OrderDB): BSONDocument = BSONDocument(
+          "ordId" -> order.ordId,
+          "cusId" -> order.cusId,
+          "carts" -> order.carts,
+          "totalPrice" -> order.totalPrice,
+          "datetime" -> order.datetime,
+          "status" -> order.status,
+          "payMethod" -> order.payMethod
+        )
   }
 
 
-  def createDoc(orderd: OrderDB): BSONDocument = {
-    val document = BSONDocument(
-      "ordId" -> orderd.ordId,
-      "cusId" -> orderd.cusId,
-      "carts" -> orderd.carts,
-      "totalprice" -> orderd.totalPrice,
-      "datetime" -> orderd.datetime,
-      "status" -> orderd.status,
-      "payMethod" -> orderd.payMethod
-    )
-    document
-  }
-//
-//
+
+
 //  def insertDoc(collection: BSONCollection, doc: BSONDocument): Future[Unit] = {
 //    val writeResult: Future[WriteResult] = collection.insert(doc)
 //    Thread.sleep(2000)
@@ -120,24 +106,20 @@ object OrderDB {
   }
 
 
-
-
-  def findOrderById(id: Int) = DataDump.orders.find(_.ordId == id)
+  def findOrderById(id: Int) = orders.find(_.ordId == id)
 
   def getOrders = orders.toList
 
   //Method to get all orders with the logged in Customer's ID
-  def getOrdersByCusId(cid: String): List[Order] = DataDump.orders.filter(_.cusId == cid)
+  def getOrdersByCusId(cid: String): List[OrderDB] = orders.filter(_.cusId == cid).toList
 
 
 
   def findNextID(): Int = {
     var nextID = 0
-
     val findAll = BSONDocument(
       (null, null)
     )
-
     val foundID = MongoConnector.collectionOrder.find(findAll).cursor[BSONDocument]().collect[List]()
 
     foundID onComplete {

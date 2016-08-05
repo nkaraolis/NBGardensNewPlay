@@ -27,6 +27,7 @@ object Category {
     Categories += Category(name,description,imgS,imgL)
   }
 
+
   def removeFromCategory(category: Category): Set[Category] ={
     def checkOldList(categoryOld: Array[Category], category: Category): Array[Category] = {
       if (categoryOld.isEmpty) {
@@ -42,4 +43,8 @@ object Category {
     Categories = checkOldList(Categories.toArray, category).toSet
     Categories
   }
+
+
+
+
 }
