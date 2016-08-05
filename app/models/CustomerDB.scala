@@ -31,7 +31,7 @@ object CustomerDB {
       )
   }*/
 
-  /** Creates the reader and writer for the CustomerDB case class, ONE LINE FUCK ME */
+  /** Creates the reader and writer for the CustomerDB case class */
   implicit val customerBSONHandler = Macros.handler[CustomerDB]
 
 /*
@@ -53,24 +53,23 @@ object CustomerDB {
 
 
   /** Finds customer by username and returns CustomerDB object **/
-  def findCustomer(username: String)(implicit ec: ExecutionContext): Set[CustomerDB] = {
+  def findCustomer(username: String)(implicit ec: ExecutionContext): CustomerDB = {
+    var currentUser = new CustomerDB(0, "", "", "", "", "", "", List[CustomerAddressDB](), List[CustomerCardDB]())
     val findQuery = BSONDocument(
       "username" -> username
     )
     val key = BSONDocument(
       "_id" -> false
     )
-    val foundUser = MongoConnector.collectionCustomer.find(findQuery, key).cursor[BSONDocument]().collect[List]()
+    val foundUser = MongoConnector.collectionCustomer.find(findQuery, key).one[CustomerDB]
 
     foundUser.onComplete {
       case Failure(e) => throw e
       case Success(readResult) =>
-        for(customer <- readResult){
-          testingList += customerBSONHandler.read(customer)
-        }
+        currentUser = readResult.get
     }
     Thread.sleep(1500)
-    testingList
+    currentUser
   }
 
 

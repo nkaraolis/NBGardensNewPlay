@@ -36,16 +36,15 @@ class LoginController @Inject() extends Controller {
       loginFormDB.fold(success = {
         newLogin =>
           println("Successful login!")
-          val testingUser = CustomerDB.findCustomer(newLogin._1).head
-          println("Convert to CustomerDB from database user: " + testingUser.username, testingUser.addresses.head.addressType)
+          val currentUser = CustomerDB.findCustomer(newLogin._1)
           val currentCustomer = CustomerDB.findByUsername(newLogin._1).head
           val customerSession = request.session +
-            ("customerID" -> currentCustomer.getAs[Int]("customerID").get.toString) +
-            ("firstName" -> currentCustomer.getAs[String]("fName").get) +
-            ("lastName" -> currentCustomer.getAs[String]("lName").get) +
-            ("email" -> currentCustomer.getAs[String]("email").get) +
-            ("phone" -> currentCustomer.getAs[String]("phone").get) +
-            ("username" -> currentCustomer.getAs[String]("username").get)
+            ("customerID" -> currentUser.customerID.toString) +
+            ("firstName" -> currentUser.fName) +
+            ("lastName" -> currentUser.lName) +
+            ("email" -> currentUser.email) +
+            ("phone" -> currentUser.phone) +
+            ("username" -> currentUser.username)
           Redirect(routes.HomeController.home()).withSession(customerSession)
       }, hasErrors = {
         form =>
