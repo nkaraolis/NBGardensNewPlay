@@ -13,6 +13,12 @@ class BrowseController extends Controller{
   // call a products list in a category
   def productList(cat: String) = Action {
     implicit request =>  //controller action
+
+      if(Product.loadCheck) {
+        println("loaded already")
+      } else{
+        Product.loadProducts()
+      }
       val products = Product.findByCat(cat)  //get product from model
       Ok(views.html.ProductList(products)) //render view template
   }
@@ -21,6 +27,12 @@ class BrowseController extends Controller{
   // call all categories
   def categoryList = Action {
     implicit request =>  //controller action
+
+      if(Product.loadCheck) {
+        println("loaded already")
+      }else{
+        Product.loadProducts()
+      }
       val categories = Category.findAll  //get product from model
       Ok(views.html.browseCat(categories)) //render view template
   }

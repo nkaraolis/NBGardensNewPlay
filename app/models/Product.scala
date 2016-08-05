@@ -15,15 +15,15 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 08/07/2016.
   */
-case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: List[Review])
+case class Product (productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, var reviews: List[Review])
 
 
 object Product{
 
   //DB Connection
   val dbn = "NBGardensProducts"
-  val user = "user2"
-  val pass = "password"
+  val user = "productAdmin"
+  val pass = "1234"
   val creds = List(Authenticate(dbn,user,pass))
   val servs: List[String] = List("192.168.1.42:27017")
   val config = ConfigFactory.load()
@@ -57,6 +57,49 @@ object Product{
       for (prod <- readResult) {
         products += productReader.read(prod)
       }
+  }
+
+
+
+  var loadCheck = false
+
+  def loadedProducts(): Unit ={
+    loadCheck = true
+  }
+
+  def loadProducts(){
+    var productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
+    productsInDB.onComplete {
+      case Failure(e) => throw e
+        println("not ready yet main")
+      case Success(readResult) =>
+        for (prod <- readResult) {
+          products += productReader.read(prod)
+          println("ready main")
+          loadedProducts()
+          println(loadCheck)
+        }
+    }
+  }
+
+  def loadUpdatedProducts(): Unit ={
+
+    var productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
+
+    products = Set.empty
+    println(products.size)
+
+    productsInDB.onComplete {
+      case Failure(e) => throw e
+        println("not ready yet main")
+      case Success(readResult) =>
+        for (prod <- readResult) {
+          products += productReader.read(prod)
+          println("ready main")
+          loadedProducts()
+          println(loadCheck)
+        }
+    }
   }
 
 
@@ -170,7 +213,7 @@ object Product{
   def findAll = products.toList.sortBy(_.name)
 
 
-  def findByName(user: String) = products.find(_.name == user)
+  def findByName(name: String) = products.find(_.name == name)
 
 
   //  def findByCart(cart: String) = products.find(_.category == cart).toList.sortBy(_.name)
@@ -178,6 +221,7 @@ object Product{
 
   //find products by Category
   def findByCat(cat: String): List[Product] = {
+
     var tl: Set[Product]  = Set.empty
     for (product <- products){
       if (product.category == cat){

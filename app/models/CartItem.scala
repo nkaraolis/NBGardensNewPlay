@@ -18,7 +18,7 @@ case class CartItem (proId: Int, proName: String, quantity: Int, unitPrice:Doubl
 
 object CartItem {
 
-  def findByName(name: String) = Cart.productsInCart.find(_.proName == name)
+//  def findByName(name: String) = Cart.productsInCart.find(_.proName == name)
 //
 //
 //  //DB Connection
@@ -59,11 +59,20 @@ object CartItem {
 ////  }
 //
 //
-  var cartitems: Set[CartItem]  = Set.empty
 
-  def add(id: Int, name: String, quantity: Int, price: Double): Unit ={
-    cartitems += CartItem(id,name,quantity,price)
-  }
+
+
+
+
+//  var cartitems: Set[CartItem]  = Set.empty
+//
+//  def add(id: Int, name: String, quantity: Int, price: Double): Unit ={
+//    cartitems += CartItem(id,name,quantity,price)
+//  }
+
+
+
+
 
 
 //
@@ -90,8 +99,6 @@ object CartItem {
 //}
 
 
-
-
   implicit object CartItemReader extends BSONDocumentReader[CartItem]{
     def read(doc: BSONDocument):CartItem = CartItem(
       doc.getAs[Int]("proId").get,
@@ -108,6 +115,8 @@ object CartItem {
       "unitPrice" -> product.unitPrice
     )
   }
+
+
 //
 //
 //  def saveProductsForAnOrder(products: String): Unit = {

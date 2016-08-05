@@ -10,14 +10,6 @@ case class Cart (cartItems: Array[Product])
 
 object Cart {
 
-//  var productsInCart: Array[Product] = Array.empty
-//
-//  def addToCart(product: Product): Array[Product] = {
-//    productsInCart = productsInCart :+ product
-//    productsInCart
-//  }
-//////////
-
   var productsInCart: Array[CartItem] = Array.empty
 
 
@@ -25,6 +17,8 @@ object Cart {
     productsInCart = productsInCart :+ product
     productsInCart
   }
+
+  def findByName(name: String) = productsInCart.find(_.proName == name)
 
 
   def removeFromCart(product: CartItem): Array[CartItem] = {

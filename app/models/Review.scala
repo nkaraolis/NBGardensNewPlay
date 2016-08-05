@@ -77,7 +77,7 @@ case class Review(username: String, reviewTitle: String, review: String, reviewD
         case Success(readResult) =>
           reviewList = readResult
       }
-      Thread.sleep(2000)
+      Thread.sleep(500)
       reviewList
     }
   }
