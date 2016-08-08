@@ -35,7 +35,6 @@ class LoginController @Inject() extends Controller {
         newLogin =>
           println("Successful login!")
           val currentUser = CustomerDB.findCustomer(newLogin._1)
-          val currentCustomer = CustomerDB.findByUsername(newLogin._1).head
           val customerSession = request.session +
             ("customerID" -> currentUser.customerID.toString) +
             ("firstName" -> currentUser.fName) +
