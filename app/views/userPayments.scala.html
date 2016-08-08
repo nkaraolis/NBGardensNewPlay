@@ -1,10 +1,11 @@
-@(paymentForm: Form[CustomerCardDB])(implicit flash: Flash, lang: Lang, session : Session)
+@(paymentForm: Form[(String, String, String, String)])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import helper._
+@import scala.concurrent.ExecutionContext.Implicits.global
 
 @sidebar = {
 }
@@ -14,52 +15,44 @@
 
     <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Payments</div>
 
-    @helper.form(action = routes.UserPaymentController.updatePayment()) {
-
     <div class="existingDetails">
 
-        @if(CustPayment.findPaymentsByUsername(session.get("username").get).isEmpty){
+        @if(CustomerDB.findCustomer(session.get("username").get).cardDetails.isEmpty){
 
-        <div class="detailsheader">No Existing Payment Details<br></div><br>
+        <div class="detailsheader">No Existing Payment Details<br></div>
+        <br>
         Enter your details to save<br> your payment information.
 
-        }
-        @if(!CustPayment.findPaymentsByUsername(session.get("username").get).isEmpty){
+        } else {
+        <div class="detailsheader">@Messages("Existing Card Details", Messages("details.request"))<br></div><br>
+            @for(payment <- CustomerDB.findCustomer(session.get("username").get).cardDetails){
 
-            @if(!CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").isEmpty){
-                <div class="detailsheader">@Messages("Existing Debit Card Details", Messages("details.request"))<br></div><br>
+                @helper.form(action = routes.UserPaymentController.deleteCardDetails(session.get("username").get, payment.cardID)) {
 
-                <div class="detailsusername">Name on Card: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.nameOnCard</b><br></div><br>
-                Card Number: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.cardNumber</b><br>
-                Start Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.startDate</b><br>
-                Expiry Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.expiryDate</b><br>
-                Security Code: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.securityCode</b><br>
-                Issue No: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Debit").get.issueNo</b>
-            }
-            @if(!CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").isEmpty){
-                <br><br><br><br>
-                <div class="detailsheader">@Messages("Existing Credit Card Details", Messages("details.request"))<br></div><br>
+                <div class="detailsusername">Name on Card: <b>@payment.NoC</b><br></div>
+                Card Number: <b>@payment.cardType</b><br>
+                Card Number: <b>**** **** **** ****</b><br>
+                Expiry Date: <b>@payment.expiry</b><br>
 
-                <div class="detailsusername">Name on Card: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.nameOnCard</b><br></div><br>
-                Card Number: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.cardNumber</b><br>
-                Start Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.startDate</b><br>
-                Expiry Date:  <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.expiryDate</b><br>
-                Security Code: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.securityCode</b><br>
-                Issue No: <b>@CustPayment.getPaymentByMethod(CustPayment.findPaymentsByUsername(session.get("username").get), "Credit").get.issueNo</b>
+                <input type="submit" class="btn-primary" value="DELETE" style="width: 70px; margin-top:40px; margin-bottom:40px;">
+                <br>
+                }
             }
         }
     </div>
+
+    @helper.form(action = routes.UserPaymentController.updatePayment()) {
 
     <fieldset class="usernameInput" style="margin-left: 250px;">
         <legend>
             @Messages("Update Payment Details", Messages("details.request"))
         </legend>
 
-        <img src="@routes.Assets.versioned("images/textblock.png")" style=" width: 430px; height: 30px; margin-top: -71px; margin-left: -80px;"/>
+        <img src="@routes.Assets.versioned("images/textblock.png")" style=" width: 430px; height: 30px; margin-top:
+        -71px; margin-left: -80px;"/>
     </fieldset>
 
     <fieldset id="contactform" style="margin-left: 250px; margin-top: -30px;">
-
 
         @helper.select(
         field = paymentForm("Card Type"),
@@ -89,7 +82,6 @@
         </div>
         }
     </div>
-
     <input type="submit" class="btn-primary" value='UPDATE DETAILS' style="width: 230px; margin-left: 600px; margin-top: 70px;">
     }
 </div>

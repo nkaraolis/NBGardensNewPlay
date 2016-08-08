@@ -38,6 +38,8 @@ GET     /userAddresses              controllers.UserAddressesController.userAddr
 POST    /userAddresses              controllers.UserAddressesController.updateAddress
 GET     /userPayments               controllers.UserPaymentController.userPayments
 POST    /userPayments               controllers.UserPaymentController.updatePayment
+GET     /removeAddress/:user:adPos  controllers.UserAddressesController.deleteAddress(user: String, adPos: Int)
+GET     /removeCard/:user:cardPos   controllers.UserPaymentController.deleteCardDetails(user: String, cardPos: Int)
 
 # Routes for tracking customer orders
 GET     /history/:cid               controllers.OrderHistoryController.newPage(cid: String)
