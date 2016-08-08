@@ -1,4 +1,4 @@
-@(products: List[Product], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: List[CartItem], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -38,36 +38,32 @@
                 <div class="borderGrid">
                     <div class="grid_3" style="">
 
-                        <a href="@routes.Assets.versioned(product.mainImage)" class="gal">
+                        <a href="@routes.Assets.versioned(Product.getImage(product.proId))" class="gal">
                             <div class="img_block" style="padding: 5px 5px 20px 5px;">
-                                <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner" style="border: 0px solid #717262;">
+                                <img src="@routes.Assets.versioned(Product.getImage(product.proId))" alt="" class="img_inner" style="border: 0px solid #717262;">
                             </div>
                         </a>
                         <div class="title" name="get" style="text-align: left;">
                             @helper.form(routes.CartController.update) {
                                 <div style="height: 130px;">
-                                    <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
+                                    <a href="@routes.ProductPageController.goToProduct(product.proName)"><dt>@product.proName</dt></a>
 
-                                    <dt style="font-size: 14px;">Description:
 
-                                        @Product.preview(product.description, 35)
-                                        ...
-                                    </dt>
                                 </div>
                                 <br>
                                 <br>
-                                <dt style="font-size: 14px;">Quantity: @product.qty</dt>
+                                <dt style="font-size: 14px;">Quantity: @product.quantity</dt>
 
-                                <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@Product.getPrice(product.price, product.qty)</dt>
+                                <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@Product.getPrice(product.quantity, product.unitPrice)</dt>
 
-                                <input type="hidden" name="Product" value="@product.name">
+                                <input type="hidden" name="Product" value="@product.proName">
                                 <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
-                                <input type="hidden" name="sTotal" value="@Product.getPrice(product.price, product.qty)">
+                                <input type="hidden" name="sTotal" value="@Product.getPrice(product.quantity, product.unitPrice)">
 
                                 <input type="submit" class="btn-primary" value="Update Qty" style="width:110px;"/>
                             }
                             <br>
-                            <a href="@routes.CartController.remove(product.name)" style="padding-left: 80px;">
+                            <a href="@routes.CartController.remove(product.proName)" style="padding-left: 80px;">
                                 <input type="submit" class="btn-primary" value="REMOVE ITEM" style="width:110px;"/>
                             </a>
                         </div>

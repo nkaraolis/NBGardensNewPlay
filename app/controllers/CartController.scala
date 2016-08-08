@@ -3,7 +3,7 @@ package controllers
 import java.util.Calendar
 
 import play.api.mvc._
-import models.{Cart, Order, Product, aFormForCart}
+import models._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
@@ -27,7 +27,7 @@ class CartController extends Controller {
 
 
   // products in the cart for the user
-  var products: Array[Product] = Array.empty
+  var products: Array[CartItem] = Array.empty
   var totalT = 0.00
 
 
@@ -39,28 +39,26 @@ class CartController extends Controller {
   }
 
 
-  def add(product: String, Qty: String) = Action {
+  def add(product: String, qty: String) = Action {
     implicit request =>  //controller action
 
       // find the product in all products
       val p = Product.findByName(product).get
 
-      // create a new product, the new product is the found product but with Qty, and add the product to the cart
-      def np : Product = {
-        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, Qty, p.category, p.porousAllowed, p.reviews)
-        val t = Product.findByName(p.name).toArray.apply(0)
-        t
-      }
+      val quantity = qty.toInt
+
+      //create a new cart item
+      var cartItem = CartItem(p.productId.toInt, p.name, qty.toInt, p.price.toDouble)
 
       // update products in cart
-      products = Cart.addToCart(np) //get product from model
+      products =  Cart.addToCart(cartItem) //get product from model
       Redirect(routes.BrowseController.productList(p.category)) //render view template
   }
 
 
   def remove(product: String) = Action {
     implicit request =>  //controller action
-      products = Cart.removeFromCart(Product.findByName(product).get)   //get product via Product class
+      products = Cart.removeFromCart(Cart.findByName(product).get)   //get product via Product class
       removeOldPrice(Product.findByName(product).get.name)
       Ok(views.html.cartpage(products.toList, CartForm)) //render view template
   }
@@ -76,6 +74,8 @@ class CartController extends Controller {
       // get the new qty for the product
       val q:String = CartForm.bindFromRequest().data("Qty")
 
+      val quantity = q.toInt
+
       // calculate the new total for the product
       val subTot = (q.toDouble) * (p.price.toDouble)
 
@@ -85,19 +85,15 @@ class CartController extends Controller {
       // remove the out of date product from the cart list
       removeO(p.name)
 
-      // create a new product, the new product is the found product but with new Qty, and add the product to the cart
-      def np : Product = {
-        Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, q, p.category, p.porousAllowed, p.reviews)
-        val t = Product.findByName(p.name).toArray.apply(0)
-        t
-      }
-      val cp = Cart.addToCart(np)
+      //create a new cart item and add to cart
+      var newCartItem = CartItem(p.productId.toInt, p.name, q.toInt, p.price.toDouble)
+      Cart.addToCart(newCartItem)
 
       // update products in cart
-      products =  cp //get product from model
+      products =  products :+ newCartItem //get product from model
       totalT += subTot
       Ok(views.html.cartpage(products.toList, CartForm))//render view template
+
   }
 
 
@@ -107,22 +103,21 @@ class CartController extends Controller {
     implicit request =>  //controller action
       val p = Product.findByName(CartForm.bindFromRequest().data("Product")).get
       val q:String = CartForm.bindFromRequest().data("Qty")
+
+      val quantity = q.toInt
+
       val subTot = (q.toDouble) * (p.price.toDouble)
-//      if (totalT!=0){
-//        removeOldPrice(p.name)
-//         }
-      removeO(p.name)
-      def np : Product = {
-        Product.removeFromProduct(p)
-        Product.add(p.productId, p.name, p.description, p.price, p.mainImage, p.secondaryImages, q, p.category, p.porousAllowed, p.reviews)
-        val t = Product.findByName(p.name).toArray.apply(0)//
-        t
-      }
-      val cp = Cart.addToCart(np)
-      products =  cp //get product from model
+
+      //create a new cart item and add to cart
+      var newCartItem = CartItem(p.productId.toInt, p.name, q.toInt, p.price.toDouble)
+      Cart.addToCart(newCartItem)
+
+      //products = cp //get product from model
+      products =  products :+ newCartItem
       totalT += subTot
       Redirect(routes.BrowseController.productList(p.category))//render view template
   }
+
 
 
 
@@ -134,7 +129,7 @@ class CartController extends Controller {
       } else {
         totalT = 0.00
         for (i<-products){
-          totalT += (i.qty.toDouble*i.price.toDouble)
+          totalT += (i.quantity.toDouble*i.unitPrice)
         }
         Ok(views.html.checkout(products.toList, totalT)) //render view template
       }
@@ -142,8 +137,10 @@ class CartController extends Controller {
 
 
 
-  def removeO(product: String) : Array[Product] ={
-    products = Cart.removeFromCart(Product.findByName(product).get)   //get product from model
+  def removeO(product: String) : Array[CartItem] ={
+    val p = Product.findByName(product).get
+    products = Cart.removeFromCart(CartItem(p.productId.toInt, p.name, p.qty.toInt, p.price.toDouble))  //get product from model
+
     products
   }
 

@@ -22,6 +22,7 @@ import scala.util.{Failure, Success}
   */
 @Singleton
 class LoginController @Inject() extends Controller {
+
   /** Creates the form and verifies the data **/
   val LoginForm = Form(tuple(
     "Username" -> nonEmptyText.verifying("Username not found!", CustomerDB.findByUsername(_).nonEmpty),
@@ -51,6 +52,7 @@ class LoginController @Inject() extends Controller {
       })
   }
 
+  /** Loads the login form **/
   def newLogin = Action {
     implicit request =>
       val form = if (request2flash.get("error").isDefined)
@@ -60,6 +62,7 @@ class LoginController @Inject() extends Controller {
       Ok(views.html.loginOurs(form))
   }
 
+  /** Logs out a user and clears the session **/
   def logout = Action {
     implicit request =>
       Redirect(routes.HomeController.home()).withNewSession

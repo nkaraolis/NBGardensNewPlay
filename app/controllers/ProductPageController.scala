@@ -32,12 +32,14 @@ class ProductPageController extends Controller {
       "Rating" -> nonEmptyText
     )(Review.apply)(Review.unapply))
 
+
   def goToProduct(product: String) = Action {
     implicit request => //controller action
 
       if(Product.loadCheck) {
         println("loaded already")
       } else {
+        println("loading products")
         Product.loadUpdatedProducts()
       }
 
@@ -54,7 +56,7 @@ class ProductPageController extends Controller {
 
       } else {
 
-        val clickedProduct = Product.findById(product).get
+        val clickedProduct = Product.findById(product.toInt).get
 
         val form = if (request2flash.get("error").isDefined)
           reviewForm.bind(request2flash.data)
@@ -64,6 +66,7 @@ class ProductPageController extends Controller {
         Ok(views.html.productPage(clickedProduct, form))
       }
   }
+
 
   def submitReview(product: String) = Action {
     implicit request =>
@@ -85,13 +88,13 @@ class ProductPageController extends Controller {
           //val currentCustomer = CustomerDB.findByUsername(request.session.get("username").get).head
 
             println("Products length" + Product.products.size)
-            println("Old review size: " + Product.findById(product).get.reviews.length)
+            println("Old review size: " + Product.findById(product.toInt).get.reviews.length)
 
           Review.add(product,submitReview,"$addToSet")
             Product.loadUpdatedProducts()
 
             println("Products length" + Product.products.size)
-            println("New review size: " + Product.findById(product).get.reviews.length)
+            println("New review size: " + Product.findById(product.toInt).get.reviews.length)
 
             Redirect(routes.ProductPageController.goToProduct(product))
       }})

@@ -32,6 +32,7 @@ class UserAddressesController @Inject() extends Controller {
     "County" -> nonEmptyText,
     "Postcode" -> nonEmptyText))
 
+  /** Loads the address form **/
   def userAddresses = Action {
     implicit request =>
       val form = if (request2flash.get("error").isDefined)
@@ -48,7 +49,7 @@ class UserAddressesController @Inject() extends Controller {
       addAddress.fold(success = {
         newAddress =>
           val currentUser = CustomerDB.findCustomer(request.session.get("username").get)
-          val newCustomerAddress = new CustomerAddressDB(currentUser.addresses.size, newAddress._1, newAddress._2, newAddress._3,newAddress._4,newAddress._5,newAddress._6, newAddress._7)
+          val newCustomerAddress = new CustomerAddressDB(currentUser.addresses.size, newAddress._1, newAddress._2, newAddress._3, newAddress._4, newAddress._5, newAddress._6, newAddress._7)
           // Adds a new address to the current user
           CustomerAddressDB.updateAddress(currentUser.username, newCustomerAddress, "$addToSet")
           Redirect(routes.UserAccountController.userAccount())

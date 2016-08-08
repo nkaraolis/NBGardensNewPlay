@@ -28,7 +28,7 @@ class UserPaymentController @Inject() extends Controller{
     "Expiry" -> nonEmptyText,
     "Name on Card" -> nonEmptyText))
 
-  /**  **/
+  /** Loads the card details form **/
   def userPayments = Action {
     implicit request =>
       val form = if(request2flash.get("error").isDefined)

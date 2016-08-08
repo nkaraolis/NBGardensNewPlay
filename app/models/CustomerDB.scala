@@ -51,6 +51,7 @@ object CustomerDB {
     }
   }*/
 
+
   /** Finds customer by username and returns CustomerDB object **/
   def findCustomer(username: String)(implicit ec: ExecutionContext): CustomerDB = {
     var currentUser = new CustomerDB(0, "", "", "", "", "", "", List[CustomerAddressDB](), List[CustomerCardDB]())
@@ -71,6 +72,7 @@ object CustomerDB {
     currentUser
   }
 
+
   /** Find customer by username **/
   def findByUsername(username: String): List[BSONDocument] = {
     val findQuery = BSONDocument(
@@ -86,6 +88,7 @@ object CustomerDB {
     userList
   }
 
+
   /** Find customer by email **/
   def findByEmail(email: String): List[BSONDocument] = {
     val findQuery = BSONDocument(
@@ -100,6 +103,7 @@ object CustomerDB {
     Thread.sleep(500)
     userList
   }
+
 
   /** Finds the next customer ID to add in **/
   def findNextID(): Int = {
@@ -118,6 +122,7 @@ object CustomerDB {
     Thread.sleep(500)
     nextID
   }
+
 
   /** Updates the customer's field in the database **/
   def updateUserField(username: String, updateField: String, value: String): Unit = {

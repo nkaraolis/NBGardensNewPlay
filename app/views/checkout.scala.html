@@ -1,4 +1,4 @@
-@(products: List[Product], total:Double)(implicit flash: Flash, lang: Lang, session : Session)
+@(products: List[CartItem], total:Double)(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -56,19 +56,19 @@
                         <td style="">
                             <div class="gallery">
                                 <div class="grid_3" style="width: 110px; height: 110px; margin-top: 25px; margin-bottom: 0px;">
-                                    <a href="@routes.Assets.versioned(product.mainImage)" class="gal" style="width: 110px; height: 110px;">
+                                    <a href="@routes.Assets.versioned(Product.getImage(product.proId))" class="gal" style="width: 110px; height: 110px;">
                                         <div class="img_block" style="width: 110px; height: 110px;">
-                                            <img src="@routes.Assets.versioned(product.mainImage)" alt="" class="img_inner" style="width:110px; height: 110px;">
+                                            <img src="@routes.Assets.versioned(Product.getImage(product.proId))" alt="" class="img_inner" style="width:110px; height: 110px;">
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </td>
 
-                        <td style="">@product.name</td>
-                        <td style="text-align: right;">@product.qty</td>
-                        <td style="text-align: right;">£@product.price</td>
-                        <td style="text-align: right;">£@Product.getPrice(product.price, product.qty)</td>
+                        <td style="">@product.proName</td>
+                        <td style="text-align: right;">@product.quantity</td>
+                        <td style="text-align: right;">£@product.unitPrice</td>
+                        <td style="text-align: right;">£@Product.getPrice(product.quantity, product.unitPrice)</td>
 
                     </tr>
 
