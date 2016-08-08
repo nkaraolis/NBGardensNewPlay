@@ -45,8 +45,6 @@ object Product{
   )
 
 
-  //val productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
-
   val productsInDB = coll.find(condition, key).cursor[BSONDocument]().collect[List]()
 
 

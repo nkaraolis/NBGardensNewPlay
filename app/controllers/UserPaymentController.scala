@@ -20,6 +20,7 @@ import play.api.mvc.Session
 @Singleton
 class UserPaymentController @Inject() extends Controller{
 
+
   private val paymentForm : Form[CustomerCardDB] =
     Form(mapping(
       "Card Type" -> nonEmptyText,
@@ -27,6 +28,7 @@ class UserPaymentController @Inject() extends Controller{
       "Expiry" -> nonEmptyText,
       "Name on Card" -> nonEmptyText
     )(CustomerCardDB.apply)(CustomerCardDB.unapply))
+
 
   def userPayments = Action {
     implicit request =>
@@ -37,8 +39,9 @@ class UserPaymentController @Inject() extends Controller{
       Ok(views.html.userPayments(form))
   }
 
+
   /** Checks form for errors and then adds new payment details to user if correct **/
-  def updatePayment = Action{
+  def updatePayment = Action {
     implicit request =>
       val updatePaymentForm = paymentForm.bindFromRequest()
       updatePaymentForm.fold(success = {
@@ -52,6 +55,10 @@ class UserPaymentController @Inject() extends Controller{
           Redirect(routes.UserPaymentController.userPayments()).flashing(Flash(form.data) + ("error" -> Messages("Error in payments")))
       })
   }
+
+
+
+
 
   /*def saveChanges = Action {
     implicit request =>
@@ -181,4 +188,5 @@ class UserPaymentController @Inject() extends Controller{
       })
   }
 */
+
 }

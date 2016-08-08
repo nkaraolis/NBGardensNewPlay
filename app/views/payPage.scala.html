@@ -1,9 +1,9 @@
-@(products: String, total:Double, CardForm: Form[cardDetails])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: String, total:Double, cards: Set[CustomerCardDB], payForm: Form[PaymentDetails])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
-@import models.{Cart}
+@import models.{Cart, CustomerCardDB, PaymentDetails}
 @import helper._
 
 @sidebar = {
@@ -33,7 +33,7 @@
             <div id="payform">
                 @helper.form(routes.PayController.save(products, session.get("username").toString, total)) {
                     @helper.select(
-                        field = CardForm("Payment Method"),
+                        field = payForm("Method"),
                         options = Seq(
                         "Pay Now" -> "Pay Now",
                         "Pay Later" -> "Pay Later"
@@ -41,16 +41,28 @@
                         '_disabled -> Seq("FooKey", "BazKey")
                     )
 
-                    @helper.inputText(CardForm("Name on Card"))
-                    @helper.inputText(CardForm("Card No"))
-                    @helper.inputText(CardForm("Start Date"))
-                    @helper.inputText(CardForm("Expiry Date"))
-                    @helper.inputText(CardForm("Security Code"))
-                    @helper.inputText(CardForm("Issue No"))
+                }
+
+                            <div class="fontTypeF" style="font-size: 20px; margin-top: 5px;">Your Saved Payment Cards</div>
+                             @for(card <- cards) {
+
+
+                            <tr>
+                                <td>Card Type: <div style="margin-left:100px; display: inline;"><b>@card.cardType</b> </div></td><br/>
+                                <td>Card Number: <div style="margin-left:198px; display: inline;"><b>@card.cardNumber</b> </div></td><br/>
+                                <td>Expiry Date: <div style="margin-left:171px; display: inline;"><b>@card.expiry</b> </div></td>
+                                <td>Name on Card: <div style="margin-left:171px; display: inline;"><b>@card.name</b> </div></td>
+                                <td>Select this card: <input type="checkbox" name="cardNumber" value="card"></td>
+                            </tr>
+
+
+
+            }
+            </div>
 
                     Total: £@total
                     <input type="submit" class="btn-primary" value="PAY" onclick="popupAddMsg('You have successfully placed your order. Please check your emails for confirmation')" style="width:110px; margin-left: 160px;"/>
-                 }
+
             </div>
         </div>
     </div>

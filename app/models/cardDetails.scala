@@ -1,28 +1,63 @@
 package models
 import java.io.{BufferedWriter, File, FileWriter}
+
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
 /**
   * Created by Administrator on 21/07/2016.
   */
-case class cardDetails (method:String, Name_on_card:String, Card_No:String, Start_Date: String, Expiry_Date: String, Security_Code:String, Issue_No:String)
+case class CardDetails (cardName:String, nameOnCard:String, cardNo:String, startDate: String, expiryDate: String, securityCode:String, issueNo:String)
 
-object cardDetails {
+//case class CardDetails (method:String)
 
-  var cards : Set[cardDetails] = Set.empty
+object CardDetails {
+
+  var cards : Set[CardDetails] = Set.empty
 
   val fileName = "app\\data\\cardDetails.csv"
   val file = new File(fileName)
 
-  def add(card: cardDetails): Unit = {
+
+  def add(card: CardDetails): Unit = {
     cards += card
-    saveToCSV(cards)
+    //saveToCSV(cards)
   }
 
-  def saveToCSV(cards: Set[cardDetails]): Unit ={
+
+
+  def saveToCSV(cards: Set[CardDetails]): Unit ={
     val writer = new BufferedWriter(new FileWriter(file))
     for (detail <- cards){
-      val text = detail.method + ", " + detail.Name_on_card + ", " + detail.Card_No + ", " + detail.Start_Date + ", " + detail.Expiry_Date + ", " + detail.Security_Code + ", " + detail.Issue_No + "\n"
+      val text = detail.nameOnCard + ", " + detail.cardNo + ", " + detail.startDate + ", " + detail.expiryDate + ", " + detail.securityCode + ", " + detail.issueNo + "\n"
       writer.write(text)
     }
     writer.close()
   }
+
+
+  implicit object CardDetailsReader extends BSONDocumentReader[CardDetails]{
+    def read(doc: BSONDocument):CardDetails = CardDetails(
+      doc.getAs[String]("cardName").get,
+      doc.getAs[String]("nameOnCard").get,
+      doc.getAs[String]("cardNo").get,
+      doc.getAs[String]("startDate").get,
+      doc.getAs[String]("expiryDate").get,
+      doc.getAs[String]("securityCode").get,
+      doc.getAs[String]("issueNo").get
+    )
+  }
+
+  implicit object CardDetailsWriter extends BSONDocumentWriter[CardDetails] {
+    def write(card: CardDetails) : BSONDocument = BSONDocument(
+      "cardName" -> card.cardName,
+      "nameOnCard" -> card.nameOnCard,
+      "cardNo" -> card.cardNo,
+      "startDate" -> card.startDate,
+      "expiryDate" -> card.expiryDate,
+      "securityCode" -> card.securityCode,
+      "issueNo" -> card.issueNo
+    )
+  }
+
+
+
 }
