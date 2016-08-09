@@ -73,14 +73,15 @@
 
                         <td style="text-align: right; font-size: 14px;">
 
-                            @if(product.porousAllowed == "true"){
-
-                            Apply PorousWare? <input type="checkbox" name="pwCheck" value="">
-
+                            @if(Product.findById(product.proId).get.porousAllowed == "true") {
+                                @if(product.porousRequired == true){
+                                    PorousWare : Added
+                                }else{
+                                    PorousWare : None
+                                }
                             }
 
                         </td>
-
                     </tr>
 
                     }
