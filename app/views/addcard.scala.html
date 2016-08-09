@@ -1,0 +1,60 @@
+@(total:Double)(implicit flash: Flash, lang: Lang, session : Session)
+@import play.api.Play.current
+@import play.api.i18n.Messages
+@import play.api.i18n.Messages.Implicits._
+@import play.api.mvc.Flash
+@import models.{Cart, CustomerCardDB, PaymentDetails, CustomerDB}
+@import helper._
+@import scala.concurrent.ExecutionContext.Implicits.global
+
+@sidebar = {
+<ul>
+    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+    <li><a href="@routes.BrowseController.productList("Gnomes")">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.productList("Garden Tools")">Tools</a></li>
+    <li><a href="@routes.BrowseController.productList("Gardening Supplies")">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
+</ul>
+}
+
+@main(Messages("addcard.page"))(sidebar) {
+<div id="content">
+
+    <div class="container_12" style="width: 800px;">
+
+        <div class="title">
+            <div class="fontTypeD" style="margin-left: 30px; display: inline;">Add Card</div>
+
+            <div style="display: inline-block; margin-left: 650px;">
+                <a href="@routes.BrowseController.categoryList"><input type="submit" class="btn-cont" value="CONTINUE SHOPPING" style="width:180px; margin-right: 30px;"/></a>
+            </div>
+
+        </div>
+
+
+        <div class="fontTypeF" style="font-size: 20px; margin-top: 5px;">Your Saved Payment Cards</div>
+        @for(payment <- CustomerDB.findCustomer(session.get("username").get).cardDetails){
+
+            @helper.form(action = routes.CartController.addCard(total, payment.cardNumber)) {
+
+            <tr>
+                <td><b>Name on Card:</b> @payment.NoC<br></td>
+                <td><b>Card Type:</b> @payment.cardType<br></td>
+                <td><b>Card Number: </b>**** **** **** ****<br></td>
+                <td><b>Expiry Date: </b>@payment.expiry<br></td>
+            </tr>
+            <br>
+
+
+            <input type="submit" class="btn-primary" value="Select Card" style="width: 90px; margin-top:40px; margin-bottom:40px;">
+            <br>
+            }
+        }
+
+        <b>Total: £@total</b>
+
+
+    </div>
+</div>
+</div>
+}

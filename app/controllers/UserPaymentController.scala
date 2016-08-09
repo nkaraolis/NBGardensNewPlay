@@ -69,4 +69,7 @@ class UserPaymentController @Inject() extends Controller{
       Redirect(routes.UserAccountController.userAccount())
   }
 
+
+
+
 }

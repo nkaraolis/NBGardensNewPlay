@@ -82,3 +82,5 @@ orders.new.submit = Your order has been placed
 review.validation.errors = Reviews bad n that
 
 trackOrders.page = Track Orders
+
+addcard = Add a payment card to your order

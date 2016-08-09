@@ -1,4 +1,4 @@
-@(products: String, total:Double, payForm: Form[PaymentDetails], cardNo:String)(implicit flash: Flash, lang: Lang, session : Session)
+@(total:Double, payForm: Form[(String, String)], cardNo:String)(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -17,19 +17,6 @@
     </ul>
 }
 
-<script>
-    function selectOnlyOne(current_clicked) {
-        var checkedValue = null;
-        var inputElements = document.getElementsByClassName('messageCheckbox');
-        for(var i=0; inputElements[i]; ++i){
-            if(inputElements[i].checked){
-                return checkedValue = inputElements[i].value;
-                break;
-            }
-        }
-    }
-</script>
-
 @main(Messages("payment.page"))(sidebar) {
     <div id="content">
 
@@ -44,48 +31,29 @@
 
             </div>
 
-
-            <div class="fontTypeF" style="font-size: 20px; margin-top: 5px;">Your Saved Payment Cards</div>
-            @for(payment <- CustomerDB.findCustomer(session.get("username").get).cardDetails){
-
-                @helper.form(action = routes.PayController.addCard(products, total, payment.cardNumber)) {
-
-
-                    <tr>
-                        <td>Name on Card: <b>@payment.NoC</b><br></td>
-                        <td>Card Number: <b>@payment.cardType</b><br></td>
-                        <td>Card Number: <b>**** **** **** ****</b><br></td>
-                        <td>Expiry Date: <b>@payment.expiry</b><br></td>
-                        <td>Select this card: <input type="checkbox" name="card" value="@payment.cardID"></td>
-                    </tr>
-                    <br>
-
-                    <input type="submit" class="btn-primary" value="Select" style="width: 70px; margin-top:40px; margin-bottom:40px;">
-                    <br>
-                }
-            }
-
-
+            @helper.form(routes.PayController.save(session.get("username").toString, total, cardNo)) {
             <div id="payform">
-                @helper.form(routes.PayController.save(products, session.get("username").toString, total, cardNo)) {
-                    @helper.select(
-                        field = payForm("Method"),
-                        options = Seq(
-                        "Pay Now" -> "Pay Now",
-                        "Pay Later" -> "Pay Later"
-                        ),
-                        '_disabled -> Seq("FooKey", "BazKey")
+                @helper.select(
+                    field = payForm("Method"),
+                    options = Seq(
+                    "Pay Now" -> "Pay Now",
+                    "Pay Later" -> "Pay Later"
+                    ),
+                    '_disabled -> Seq("FooKey", "BazKey")
                     )
-
-
-            </div>
+                @helper.inputText(payForm("Card"))
 
             Total: £@total
             <input type="submit" class="btn-primary" value="PAY" onclick="popupAddMsg('You have successfully placed your order. Please check your emails for confirmation')" style="width:110px; margin-left: 160px;"/>
-
+            </div>
             }
+
+
+
+
 
             </div>
         </div>
     </div>
 }
+
