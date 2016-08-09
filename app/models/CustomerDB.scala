@@ -73,6 +73,7 @@ object CustomerDB {
   }
 
 
+
   /** Find customer by username **/
   def findByUsername(username: String): List[BSONDocument] = {
     val findQuery = BSONDocument(

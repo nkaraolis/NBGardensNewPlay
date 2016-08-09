@@ -214,6 +214,18 @@ class CartController extends Controller {
   }
 
 
+  val PayDetailsForm = Form(tuple(
+    "Method" -> of[String],
+    "Card" -> of[String]
+
+  ))
+
+
+  //This method is to add a customer's payment card to their order
+  def addCard(total:Double, cardNo:String) = Action {
+    implicit request =>
+      Ok(views.html.payPage(total, PayDetailsForm, cardNo)) //render the payPage view
+  }
 
 
 

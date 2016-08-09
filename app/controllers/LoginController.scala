@@ -65,6 +65,7 @@ class LoginController @Inject() extends Controller {
   /** Logs out a user and clears the session **/
   def logout = Action {
     implicit request =>
+      Cart.clearCart()
       Redirect(routes.HomeController.home()).withNewSession
   }
 
