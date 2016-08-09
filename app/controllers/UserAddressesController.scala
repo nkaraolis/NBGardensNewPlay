@@ -22,18 +22,17 @@ import scala.concurrent.ExecutionContext.Implicits.global
 @Singleton
 class UserAddressesController @Inject() extends Controller {
 
-  val newAddressForm: Form[CustomerAddressDB] =
-    Form(mapping(
-      "Full Name" -> nonEmptyText,
-      "Address Type" -> nonEmptyText,
-      "Line 1" -> nonEmptyText,
-      "Line 2" -> nonEmptyText,
-      "Town/City" -> nonEmptyText,
-      "County" -> nonEmptyText,
-      "Postcode" -> nonEmptyText
-    )(CustomerAddressDB.apply)(CustomerAddressDB.unapply))
+  /** New Address form **/
+  val newAddressForm = Form(tuple(
+    "Full Name" -> nonEmptyText,
+    "Address Type" -> nonEmptyText,
+    "Line 1" -> nonEmptyText,
+    "Line 1" -> nonEmptyText,
+    "Town/City" -> nonEmptyText,
+    "County" -> nonEmptyText,
+    "Postcode" -> nonEmptyText))
 
-
+  /** Loads the address form **/
   def userAddresses = Action {
     implicit request =>
       val form = if (request2flash.get("error").isDefined)
@@ -43,17 +42,16 @@ class UserAddressesController @Inject() extends Controller {
       Ok(views.html.userAddresses(form))
   }
 
-
   /** Checks form for errors and then adds new address to user if correct **/
   def updateAddress = Action {
     implicit request =>
-      val updateAddressForm = newAddressForm.bindFromRequest()
-      updateAddressForm.fold(success = {
+      val addAddress = newAddressForm.bindFromRequest()
+      addAddress.fold(success = {
         newAddress =>
-          val currentUsername = request.session.get("username").get
-          println("Adding a new address")
+          val currentUser = CustomerDB.findCustomer(request.session.get("username").get)
+          val newCustomerAddress = new CustomerAddressDB(currentUser.addresses.size, newAddress._1, newAddress._2, newAddress._3, newAddress._4, newAddress._5, newAddress._6, newAddress._7)
           // Adds a new address to the current user
-          CustomerAddressDB.updateAddress(currentUsername, newAddress, "$addToSet")
+          CustomerAddressDB.updateAddress(currentUser.username, newCustomerAddress, "$addToSet")
           Redirect(routes.UserAccountController.userAccount())
       }, hasErrors = {
         form =>
@@ -61,5 +59,13 @@ class UserAddressesController @Inject() extends Controller {
       })
   }
 
+  /** Runs the method to delete an address from the database **/
+  def deleteAddress(username: String, addressID: Int) = Action {
+    implicit request =>
+      val currentUser = CustomerDB.findCustomer(username)
+      val findAddress = CustomerAddressDB.findAddress(currentUser, addressID)
+      CustomerAddressDB.removeAddress(username, findAddress)
 
+      Redirect(routes.UserAccountController.userAccount())
+  }
 }

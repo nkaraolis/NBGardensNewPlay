@@ -1,10 +1,11 @@
-@(products: String, total:Double, cards: Set[CustomerCardDB], payForm: Form[PaymentDetails])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: String, total:Double, payForm: Form[PaymentDetails], cardNo:String)(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
-@import models.{Cart, CustomerCardDB, PaymentDetails}
+@import models.{Cart, CustomerCardDB, PaymentDetails, CustomerDB}
 @import helper._
+@import scala.concurrent.ExecutionContext.Implicits.global
 
 @sidebar = {
     <ul>
@@ -15,6 +16,19 @@
         <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
     </ul>
 }
+
+<script>
+    function selectOnlyOne(current_clicked) {
+        var checkedValue = null;
+        var inputElements = document.getElementsByClassName('messageCheckbox');
+        for(var i=0; inputElements[i]; ++i){
+            if(inputElements[i].checked){
+                return checkedValue = inputElements[i].value;
+                break;
+            }
+        }
+    }
+</script>
 
 @main(Messages("payment.page"))(sidebar) {
     <div id="content">
@@ -30,8 +44,30 @@
 
             </div>
 
+
+            <div class="fontTypeF" style="font-size: 20px; margin-top: 5px;">Your Saved Payment Cards</div>
+            @for(payment <- CustomerDB.findCustomer(session.get("username").get).cardDetails){
+
+                @helper.form(action = routes.PayController.addCard(products, total, payment.cardNumber)) {
+
+
+                    <tr>
+                        <td>Name on Card: <b>@payment.NoC</b><br></td>
+                        <td>Card Number: <b>@payment.cardType</b><br></td>
+                        <td>Card Number: <b>**** **** **** ****</b><br></td>
+                        <td>Expiry Date: <b>@payment.expiry</b><br></td>
+                        <td>Select this card: <input type="checkbox" name="card" value="@payment.cardID"></td>
+                    </tr>
+                    <br>
+
+                    <input type="submit" class="btn-primary" value="Select" style="width: 70px; margin-top:40px; margin-bottom:40px;">
+                    <br>
+                }
+            }
+
+
             <div id="payform">
-                @helper.form(routes.PayController.save(products, session.get("username").toString, total)) {
+                @helper.form(routes.PayController.save(products, session.get("username").toString, total, cardNo)) {
                     @helper.select(
                         field = payForm("Method"),
                         options = Seq(
@@ -41,27 +77,13 @@
                         '_disabled -> Seq("FooKey", "BazKey")
                     )
 
-                }
 
-                            <div class="fontTypeF" style="font-size: 20px; margin-top: 5px;">Your Saved Payment Cards</div>
-                             @for(card <- cards) {
-
-
-                            <tr>
-                                <td>Card Type: <div style="margin-left:100px; display: inline;"><b>@card.cardType</b> </div></td><br/>
-                                <td>Card Number: <div style="margin-left:198px; display: inline;"><b>@card.cardNumber</b> </div></td><br/>
-                                <td>Expiry Date: <div style="margin-left:171px; display: inline;"><b>@card.expiry</b> </div></td>
-                                <td>Name on Card: <div style="margin-left:171px; display: inline;"><b>@card.name</b> </div></td>
-                                <td>Select this card: <input type="checkbox" name="cardNumber" value="card"></td>
-                            </tr>
-
-
-
-            }
             </div>
 
-                    Total: £@total
-                    <input type="submit" class="btn-primary" value="PAY" onclick="popupAddMsg('You have successfully placed your order. Please check your emails for confirmation')" style="width:110px; margin-left: 160px;"/>
+            Total: £@total
+            <input type="submit" class="btn-primary" value="PAY" onclick="popupAddMsg('You have successfully placed your order. Please check your emails for confirmation')" style="width:110px; margin-left: 160px;"/>
+
+            }
 
             </div>
         </div>

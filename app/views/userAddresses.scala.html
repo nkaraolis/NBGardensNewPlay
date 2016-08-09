@@ -1,10 +1,11 @@
-@(addressForm: Form[CustomerAddressDB])(implicit flash: Flash, lang: Lang, session : Session)
+@(addressForm : Form[(String, String, String, String, String, String, String)])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import helper._
+@import scala.concurrent.ExecutionContext.Implicits.global
 
 @sidebar = {
 }
@@ -14,44 +15,36 @@
 
     <div id="contactheader" style=" padding-top: 50px; margin-left: 100px;">Your Addresses</div>
 
-    @helper.form(action = routes.UserAddressesController.updateAddress()) {
-
     <div class="existingDetails">
 
-        @if(CustAddress.findAddressesByUsername(session.get("username").get).isEmpty){
+        @if(CustomerDB.findCustomer(session.get("username").get).addresses.isEmpty){
 
         <div class="detailsheader">No Existing Addresses<br></div><br>
             Enter your details to<br>save your address.
 
-        }
-        @if(!CustAddress.findAddressesByUsername(session.get("username").get).isEmpty){
+        } else {
+        <div class="detailsheader">@Messages("Existing Addresses", Messages("details.request"))<br></div><br>
+            @for(address <- CustomerDB.findCustomer(session.get("username").get).addresses){
 
-            @if(!CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").isEmpty){
+                @helper.form(action = routes.UserAddressesController.deleteAddress(session.get("username").get, address.addressID)) {
 
-                <div class="detailsheader">@Messages("Existing Shipping Address", Messages("details.request"))<br></div><br>
+                <div class="detailsusername">
+                Full Name: <b>@address.fullName</b><br></div>
+                Address Line 1: <b>@address.line1</b><br>
+                Address Line 2:  <b>@address.line2</b><br>
+                Town/City:  <b>@address.townCity</b><br>
+                County: <b>@address.county</b><br>
+                Postcode: <b>@address.postcode</b><br>
 
-                <div class="detailsusername">Full Name: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.fullName</b><br></div><br>
-                Address Line 1: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.addressLine1</b><br>
-                Address Line 2:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.addressLine2</b><br>
-                Town/City:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.townCity</b><br>
-                County: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.county</b><br>
-                Postcode: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Shipping").get.postCode</b>
-            }
-
-            @if(!CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").isEmpty){
-                <br><br><br><br>
-                <div class="detailsheader">@Messages("Existing Billing Address", Messages("details.request"))<br></div><br>
-
-                <div class="detailsusername">Full Name: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.fullName</b><br></div><br>
-                Address Line 1: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.addressLine1</b><br>
-                Address Line 2:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.addressLine2</b><br>
-                Town/City:  <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.townCity</b><br>
-                County: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.county</b><br>
-                Postcode: <b>@CustAddress.getAddressByType(CustAddress.findAddressesByUsername(session.get("username").get), "Billing").get.postCode</b>
+                <input type="submit" class="btn-primary" value="DELETE" style="width: 70px; margin-top:40px; margin-bottom:40px;">
+                <br>
+                }
             }
         }
 
     </div>
+
+    @helper.form(action = routes.UserAddressesController.updateAddress()) {
 
     <fieldset class="usernameInput" style="margin-left: 250px;">
         <legend>
@@ -92,7 +85,6 @@
         </div>
         }
     </div>
-
     <input type="submit" class="btn-primary" value='UPDATE DETAILS' style="width: 230px; margin-left: 600px; margin-top: 70px;">
     }
 </div>

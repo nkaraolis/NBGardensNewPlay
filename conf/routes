@@ -38,6 +38,8 @@ GET     /userAddresses              controllers.UserAddressesController.userAddr
 POST    /userAddresses              controllers.UserAddressesController.updateAddress
 GET     /userPayments               controllers.UserPaymentController.userPayments
 POST    /userPayments               controllers.UserPaymentController.updatePayment
+GET     /removeAddress/:user:adPos  controllers.UserAddressesController.deleteAddress(user: String, adPos: Int)
+GET     /removeCard/:user:cardPos   controllers.UserPaymentController.deleteCardDetails(user: String, cardPos: Int)
 
 # Routes for tracking customer orders
 GET     /history/:cid               controllers.OrderHistoryController.newPage(cid: String)
@@ -73,4 +75,5 @@ GET     /toCheckout                 controllers.CartController.checkout()
 # Routes for payment
 GET     /toPay                      controllers.PayController.readyToPay(items:String, total:Double)
 GET     /Pay                        controllers.PayController.newCheckout(products:String, total:Double)
-POST    /Pay                        controllers.PayController.save(products:String, username:String, total:Double)
+POST    /Pay                        controllers.PayController.addCard(items:String, total:Double, cardNo:String)
+POST    /Pay                        controllers.PayController.save(products:String, username:String, total:Double, cardNo: String)

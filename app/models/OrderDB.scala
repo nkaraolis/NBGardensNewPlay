@@ -18,7 +18,7 @@ import models.CustomerCardDB
 /**
   * Created by Administrator on 29/07/2016.
   */
-case class OrderDB (ordId:Int, cusId:String, carts: Array[CartItem], totalPrice: Double, datetime: String, status: String, selectedCard: CustomerCardDB, payMethod:String)
+case class OrderDB (ordId:Int, cusId:String, carts: Array[CartItem], totalPrice: Double, datetime: String, status: String, selectedCardNo: String, payMethod:String)
 
 object OrderDB {
 
@@ -55,7 +55,7 @@ object OrderDB {
       doc.getAs[Double]("totalPrice").get,
       doc.getAs[String]("datetime").get,
       doc.getAs[String]("status").get,
-      doc.getAs[CustomerCardDB]("selectedCard").get,
+      doc.getAs[String]("selectedCardNo").get,
       doc.getAs[String]("payMethod").get)
   }
 
@@ -69,7 +69,7 @@ object OrderDB {
           "totalPrice" -> order.totalPrice,
           "datetime" -> order.datetime,
           "status" -> order.status,
-          "selectedCard" -> order.selectedCard,
+          "selectedCard" -> order.selectedCardNo,
           "payMethod" -> order.payMethod
         )
   }

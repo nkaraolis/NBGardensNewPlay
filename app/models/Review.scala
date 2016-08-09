@@ -37,7 +37,7 @@ case class Review(username: String, reviewTitle: String, review: String, reviewD
       )
     }
 
-    def add(productId: String, review: Review, updater: String): Unit ={
+    def add(productId: Int, review: Review, updater: String): Unit ={
 
       val selector = BSONDocument("productId" -> productId)
       val modifier = BSONDocument(updater -> BSONDocument("reviews" -> review))

@@ -71,16 +71,26 @@ class PayController extends Controller {
         Redirect(routes.LoginController.newLogin())
       }
       println("inside the readyToPay method: " + items)
-      Ok(views.html.payPage(items, total, CustomerCardDB.loadCards(request.session.get("username").toString), PayDetailsForm)) //render view template
+      val username = request.session.get("username").get
+      //Ok(views.html.payPage(items, total, CustomerCardDB.loadCards(username.toString), PayDetailsForm)) //render view template
+      val cardNo = null
+      Ok(views.html.payPage(items, total, PayDetailsForm, cardNo)) //render view template
 
+  }
+
+  //This method is to add a customer's payment card to their order
+  def addCard(items:String, total:Double, cardNo: String) = Action {
+    implicit request =>
+      //val findCard = CustomerCardDB.findCard(cardNo)
+      Ok(views.html.payPage(items, total, PayDetailsForm, cardNo)) //render view template
+      //Redirect(routes.PayController.finishCheckout)
   }
 
 
 
 
-
   //This method saves the customer's order to the NBGardensOrders database
-  def save (products: String, username: String, total: Double) = Action {
+  def save (products: String, username: String, total: Double, cardNo: String) = Action {
     implicit request =>
       val payForm = PayDetailsForm.bindFromRequest()
       payForm.fold(success = {
@@ -88,11 +98,11 @@ class PayController extends Controller {
        val cardNumber = payForm.get.cardNumber
        val method = payForm.get.method
       //val newCard = CardDetails(newCardForm.get.method, newCardForm.data("Name on Card"), newCardForm.data("Card No"), newCardForm.data("Start Date"), newCardForm.data("Expiry Date"), newCardForm.data("Security Code"), newCardForm.data("Issue No"))
-      val selectedCard = CustomerCardDB.findCard(cardNumber).get
+      //val selectedCard = CustomerCardDB.findCard(cardId).get
       val newID = OrderDB.findNextID()
       val status = "Order Made"
       val datetime = OrderDB.getDateTime()
-      var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, selectedCard, method)
+      var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, cardNo, method)
       MongoConnector.collectionOrder.insert(order)
       //CardDetails.add(newCard)
       //Empty Cart
@@ -114,8 +124,8 @@ class PayController extends Controller {
         PayDetailsForm.bind(request2flash.data)
       else
         PayDetailsForm
-      val cards = CustomerCardDB.loadCards(request.session.get("username").toString)
-      Ok(views.html.payPage(products, total, cards, PayDetailsForm))
+      //val cards = CustomerCardDB.loadCards(request.session.get("username").toString)
+      Ok(views.html.payPage(products, total, PayDetailsForm, null))
   }
 
 
