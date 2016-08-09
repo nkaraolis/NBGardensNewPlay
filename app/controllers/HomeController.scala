@@ -33,7 +33,7 @@ class HomeController @Inject() extends Controller {
 
   def home() = Action {
     implicit request =>
-      RabbitMQSender.startSending
+      //RabbitMQSender.startSending
       Ok(views.html.home())
   }
 }
