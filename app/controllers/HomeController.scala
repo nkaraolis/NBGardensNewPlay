@@ -6,7 +6,7 @@ package controllers
 
 import javax.inject._
 
-import models.{CustomerLogin, Product, RabbitConfig, RabbitMQSender}
+import models.{Product, RabbitConfig, RabbitMQSender}
 import play.api._
 import play.api.mvc._
 import play.api.mvc.{Action, Controller, Flash}
@@ -25,11 +25,6 @@ class HomeController @Inject() extends Controller {
     implicit request =>
       Ok(views.html.confirmation(email))
   }
-
-  //  def confirm(user: CustomerLogin) = Action {
-  //    implicit request =>
-  //      Ok(views.html.confirmation(user))
-  //  }
 
   def home() = Action {
     implicit request =>
