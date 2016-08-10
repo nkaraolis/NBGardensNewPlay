@@ -16,15 +16,13 @@ import play.api.i18n.Messages
 class CartController extends Controller {
 
   // a form contents information about a product in the cart
-  val CartForm: Form[aFormForCart] = Form(
-    mapping(
+  val CartForm = Form(
+    tuple(
       "Product" -> of[String],
       "Qty" -> of[String],
       "sTotal" -> of[String],
       "pwCheck" -> nonEmptyText
     )
-    (aFormForCart.apply)
-    (aFormForCart.unapply)
   )
 
 
