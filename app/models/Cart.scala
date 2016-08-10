@@ -4,7 +4,7 @@ package models
   * Created by Administrator on 12/07/2016.
   */
 
-case class Cart (cartItems: Array[Product])
+case class Cart (cartItems: Array[CartItem])
 
 
 object Cart {
