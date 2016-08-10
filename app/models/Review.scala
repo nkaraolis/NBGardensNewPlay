@@ -50,20 +50,6 @@ case class Review(username: String, reviewTitle: String, review: String, reviewD
       Thread.sleep(500)
     }
 
-    /** Update customer address **/
-    def updateAddress(username: String, value: CustomerAddressDB, updater: String): Unit = {
-      // Finds the user to update
-      val selector = BSONDocument("username" -> username)
-      // Sets the field to update to be addresses
-      val modifier = BSONDocument(updater -> BSONDocument("addresses" -> value))
-      // Runs the update query
-      val runUpdate = MongoConnector.collectionCustomer.update(selector, modifier)
-      runUpdate onComplete {
-        Success =>
-          println("Address updated")
-      }
-      Thread.sleep(500)
-    }
 
     def findReviewsByProductId(productId: String): List[BSONDocument] = {
       // = reviews.filter(_.productId == productId)

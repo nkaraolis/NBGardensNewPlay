@@ -44,13 +44,13 @@ object CustomerCardDB {
   def findCardDetails(customer: CustomerDB, cardID : Int): CustomerCardDB = customer.cardDetails.find(_.cardID == cardID).get
 
   /** Update customer card details **/
-  def updatePayment(username: String, value: CustomerCardDB, updater: String): Unit = {
+  def updatePayment(username: String, newCard: CustomerCardDB, updater: String): Unit = {
     // Finds the user to update
     val selector = BSONDocument("username" -> username)
     // Sets the field to update to be card details
     val modifier = BSONDocument(
       updater -> BSONDocument(
-        "cardDetails" -> value))
+        "cardDetails" -> newCard))
     // Runs the update query
     val runUpdate = MongoConnector.collectionCustomer.update(selector, modifier)
     runUpdate onComplete {

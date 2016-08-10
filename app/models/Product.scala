@@ -125,11 +125,6 @@ object Product{
   }
 
 
-  //Review(var productId: String, var username: String,var reviewTitle: String, var review: String, var reviewDate: String, var rating: String) {
-
-  //(productId: String, name: String, description: String, price: String, mainImage: String, secondaryImages: String, qty: String, category: String, porousAllowed: String, reviews: Set[Review])
-
-
   implicit object ProductWriter extends BSONDocumentWriter[Product] {
     def write(product: Product) : BSONDocument = BSONDocument(
       "productId" -> product.productId,
@@ -154,7 +149,7 @@ object Product{
     for(p<-newOrder){
       val pro: Array[String] = p.split(",")
       if (pro.length == 9){
-        productsForAnOrder += Product(0,"","","","","",0,"","",List[Review]()) //Product(pro.apply(0), pro.apply(1), pro.apply(2), pro.apply(3), pro.apply(4), pro.apply(5), pro.apply(6), pro.apply(7), pro.apply(8), pro.apply(9))
+        productsForAnOrder += Product(0,"","","","","",0,"","",List[Review]())
       }
     }
 
@@ -261,6 +256,7 @@ object Product{
   }
 
 
+
   def findByNameOB(name: String) ={
     def filter(products: Set[Product], results: Set[Product]) : Set[Product] ={
       if (products.isEmpty)
@@ -276,7 +272,6 @@ object Product{
   }
 
 
-  //def findByNameS(name: String) = products.toList.find(_.name contains(name.toUpperCase()))
   def findByNameS(name: String) = products.toList.find(_.name.toLowerCase().contains(name.toLowerCase()))
 }
 
