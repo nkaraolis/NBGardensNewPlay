@@ -76,5 +76,5 @@ GET     /toCheckout                 controllers.CartController.checkout()
 # Routes for payment
 GET     /toPay                      controllers.PayController.readyToPay(items:String, total:Double)
 GET     /Pay                        controllers.PayController.newCheckout(total:Double)
-POST    /Pay                        controllers.CartController.addCard(total:Double, cardNo:String)
+POST    /AddCard:total:cardNo       controllers.CartController.addCard(total:Double, cardNo:String)
 POST    /Pay:username:total:cardNo  controllers.PayController.save(username:String, total:Double, cardNo:String)
