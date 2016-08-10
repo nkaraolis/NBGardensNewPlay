@@ -1,4 +1,4 @@
-@(products: List[CartItem], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: List[CartItem], CartForm: Form[(String, String, String, String)])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
