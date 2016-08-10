@@ -49,7 +49,8 @@ class PayController extends Controller {
       val newID = OrderDB.findNextID()
       val status = "Order Made"
       val datetime = OrderDB.getDateTime()
-      var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, cardNo, payForm.get._1)
+
+      var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, cardNo, method)
       MongoConnector.collectionOrder.insert(order)
       //Empty Cart
       Cart.clearCart()

@@ -2,7 +2,6 @@ package controllers
 
 import javax.inject._
 
-import models.{Customer, CustomerDetails}
 import play.api._
 import play.api.data.Forms._
 import play.api.data.Forms.{longNumber, mapping, nonEmptyText}
