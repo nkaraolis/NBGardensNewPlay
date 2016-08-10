@@ -13,25 +13,11 @@ object CardDetails {
 
   var cards : Set[CardDetails] = Set.empty
 
-  val fileName = "app\\data\\cardDetails.csv"
-  val file = new File(fileName)
-
 
   def add(card: CardDetails): Unit = {
     cards += card
-    //saveToCSV(cards)
   }
 
-
-
-  def saveToCSV(cards: Set[CardDetails]): Unit ={
-    val writer = new BufferedWriter(new FileWriter(file))
-    for (detail <- cards){
-      val text = detail.nameOnCard + ", " + detail.cardNo + ", " + detail.startDate + ", " + detail.expiryDate + ", " + detail.securityCode + ", " + detail.issueNo + "\n"
-      writer.write(text)
-    }
-    writer.close()
-  }
 
 
   implicit object CardDetailsReader extends BSONDocumentReader[CardDetails]{

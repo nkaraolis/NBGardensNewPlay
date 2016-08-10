@@ -14,7 +14,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 02/08/2016.
   */
-case class CartItem (proId: Int, proName: String, quantity: Int, unitPrice:Double,var porousRequired: Boolean)
+case class CartItem (proId: Int, proName: String, quantity: Int, unitPrice:Double, var porousRequired: Boolean)
 
 
 object CartItem {

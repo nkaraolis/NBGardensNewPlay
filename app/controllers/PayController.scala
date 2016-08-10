@@ -45,34 +45,34 @@ class PayController extends Controller {
 //    "Items" -> of[String],
 //    "Total" -> of[Double]))
 
-  // a form contents information about a card for the user to pay
-  val CardForm: Form[CardDetails] = Form(
-    mapping(
-      "Payment Method" -> nonEmptyText,
-      "Name on Card" -> nonEmptyText,
-      "Card No" -> nonEmptyText,
-      "Start Date" -> nonEmptyText,
-      "Expiry Date" -> nonEmptyText,
-      "Security Code" -> of[String],
-      "Issue No" -> of[String]
-    )
-    (CardDetails.apply)
-    (CardDetails.unapply)
-  )
+//  // a form contents information about a card for the user to pay
+//  val CardForm: Form[CardDetails] = Form(
+//    mapping(
+//      "Payment Method" -> nonEmptyText,
+//      "Name on Card" -> nonEmptyText,
+//      "Card No" -> nonEmptyText,
+//      "Start Date" -> nonEmptyText,
+//      "Expiry Date" -> nonEmptyText,
+//      "Security Code" -> of[String],
+//      "Issue No" -> of[String]
+//    )
+//    (CardDetails.apply)
+//    (CardDetails.unapply)
+//  )
 
 
 
-  def options = Action{
-    implicit request =>
-      val value = CardForm.bindFromRequest.data("Payment Method")
-      if(value.equals("Paypal")) {
-        val categories = Category.findAll
-        Ok(views.html.browseCat(categories))
-      }
-      else{
-        Ok("")
-      }
-  }
+//  def options = Action{
+//    implicit request =>
+//      val value = CardForm.bindFromRequest.data("Payment Method")
+//      if(value.equals("Paypal")) {
+//        val categories = Category.findAll
+//        Ok(views.html.browseCat(categories))
+//      }
+//      else{
+//        Ok("")
+//      }
+//  }
 
 
 
