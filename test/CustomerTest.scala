@@ -83,4 +83,4 @@ class LoginTest extends PlaySpec with OneAppPerTest{
   }
 
 
-}q
+}
