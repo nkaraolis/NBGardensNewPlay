@@ -15,41 +15,11 @@ object CustomerDB {
   var userList: List[BSONDocument] = List[BSONDocument]()
 
   var testingList : Set[CustomerDB] = Set.empty
-/*
-  implicit object CustomerDBReader extends BSONDocumentReader[CustomerDB] {
-    def read(doc: BSONDocument): CustomerDB =
-      CustomerDB(
-        doc.getAs[Int]("customerID").get,
-        doc.getAs[String]("fName").get,
-        doc.getAs[String]("lName").get,
-        doc.getAs[String]("email").get,
-        doc.getAs[String]("phone").get,
-        doc.getAs[String]("username").get,
-        doc.getAs[String]("password").get,
-        doc.getAs[List[CustomerAddressDB]]("addresses").get,
-        doc.getAs[List[CustomerCardDB]]("cardDetails").get
-      )
-  }*/
+
 
   /** Creates the reader and writer for the CustomerDB case class */
   implicit val customerBSONHandler = Macros.handler[CustomerDB]
 
-/*
-  implicit object CustomerDBWriter extends BSONDocumentWriter[CustomerDB] {
-    def write(customer: CustomerDB): BSONDocument = {
-      BSONDocument(
-        "customerID" -> customer.customerID,
-        "fName" -> customer.fName,
-        "lName" -> customer.lName,
-        "email" -> customer.email,
-        "phone" -> customer.phone,
-        "username" -> customer.username,
-        "password" -> customer.password,
-        "addresses" -> customer.addresses,
-        "cardDetails" -> customer.cardDetails
-      )
-    }
-  }*/
 
 
   /** Finds customer by username and returns CustomerDB object **/
@@ -71,6 +41,7 @@ object CustomerDB {
     Thread.sleep(1500)
     currentUser
   }
+
 
 
   /** Find customer by username **/
@@ -125,6 +96,7 @@ object CustomerDB {
 
 
   /** Updates the customer's field in the database **/
+  /** This method allows the user to update any of their details **/
   def updateUserField(username: String, updateField: String, value: String): Unit = {
     val selector = BSONDocument("username" -> username)
     val modifier = BSONDocument(

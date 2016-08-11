@@ -19,13 +19,13 @@ object CustomerAddressDB {
   def findAddress(customer: CustomerDB, addressID : Int): CustomerAddressDB = customer.addresses.find(_.addressID == addressID).get
 
   /** Update customer address **/
-  def updateAddress(username: String, value: CustomerAddressDB, updater: String): Unit = {
+  def updateAddress(username: String, newAddress: CustomerAddressDB, updater: String): Unit = {
     // Finds the user to update
     val selector = BSONDocument("username" -> username)
     // Sets the field to update to be addresses
     val modifier = BSONDocument(
       updater -> BSONDocument(
-        "addresses" -> value))
+        "addresses" -> newAddress))
     // Runs the update query
     val runUpdate = MongoConnector.collectionCustomer.update(selector, modifier)
     runUpdate onComplete {
@@ -50,4 +50,6 @@ object CustomerAddressDB {
         println("Address deleted")
     }
   }
+
+
 }

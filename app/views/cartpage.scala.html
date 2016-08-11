@@ -1,4 +1,4 @@
-@(products: List[CartItem], CartForm: Form[aFormForCart])(implicit flash: Flash, lang: Lang, session : Session)
+@(products: List[CartItem], CartForm: Form[(String, String, String, String)])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -44,12 +44,54 @@
                             </div>
                         </a>
                         <div class="title" name="get" style="text-align: left;">
-                            @helper.form(routes.CartController.update) {
                                 <div style="height: 130px;">
                                     <a href="@routes.ProductPageController.goToProduct(product.proName)"><dt>@product.proName</dt></a>
 
+                                    <dt style="font-size: 14px;">Description:
+
+                                        @Product.preview(Product.findById(product.proId).get.description, 35)
+                                        ...
+                                        <br><br>
+
+                                    </dt>
+
+                                    @if(Product.findById(product.proId).get.porousAllowed == "true") {
+                                        @if(product.porousRequired == false){
+                                            @helper.form(routes.CartController.updatePW){
+                                                <div style="font-size: 15px;">PorousWare : None</div>
+                                                <input type="hidden" name="Product" value="@product.proName">
+                                                <input type="submit" class="btn-primary" value="ADD POROUSWARE" style="width:180px;"/>
+                                            }
+                                        }else{
+                                            @helper.form(routes.CartController.updatePW){
+                                                <div style="font-size: 15px;">PorousWare : Added</div>
+                                                <input type="hidden" name="Product" value="@product.proName">
+                                                <input type="submit" class="btn-primary" value="REMOVE POROUSWARE" style="width:180px;"/>
+                                            }
+                                        }
+                                    }
+                                    <script type="text/javascript">
+                                    function setPW()
+                                    {
+                                        var selection;
+
+                                        if(document.getElementById("checkbox").checked == true){
+
+                                        selection = "true";
+                                        document.getElementsByName("pwCheck")[0].value = selection;
+                                        document.getElementById("checkbox").value = selection;
+                                        }
+                                        else{
+
+                                        selection = "false";
+                                        document.getElementsByName("pwCheck")[0].value = selection;
+                                        document.getElementById("checkbox").value = selection;
+                                        }
+                                    }
+                                    </script>
 
                                 </div>
+                            @helper.form(routes.CartController.update) {
                                 <br>
                                 <br>
                                 <dt style="font-size: 14px;">Quantity: @product.quantity</dt>

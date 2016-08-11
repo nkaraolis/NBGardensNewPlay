@@ -48,12 +48,12 @@ class SearchController @Inject() extends Controller {
 
       newSearchForm.fold(hasErrors = {
         form =>
-          println("Faillllllllllll")
+          println("Fail")
           Redirect(routes.HomeController.home()).flashing(Flash(form.data) +
             ("error" -> Messages("0 Results Found..")))
       }, success = {
         newSearch =>
-          println("Successfullllllllllll" )
+          println("Successfull" )
           Redirect(routes.SearchController.listResult(newSearch.name))}
       )
   }

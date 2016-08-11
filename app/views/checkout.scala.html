@@ -69,6 +69,15 @@
                         <td style="text-align: right;">@product.quantity</td>
                         <td style="text-align: right;">£@product.unitPrice</td>
                         <td style="text-align: right;">£@Product.getPrice(product.quantity, product.unitPrice)</td>
+                        <td style="text-align: right; font-size: 14px;">
+
+                            @if(Product.findById(product.proId).get.porousAllowed == "true") {
+                                @if(product.porousRequired == true){
+                                    PorousWare : Added
+                                }else{
+                                    PorousWare : None
+                                }
+                            }
 
 
                     </tr>

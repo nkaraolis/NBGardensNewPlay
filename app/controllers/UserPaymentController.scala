@@ -38,6 +38,8 @@ class UserPaymentController @Inject() extends Controller{
       Ok(views.html.userPayments(form))
   }
 
+
+
   /** Checks form for errors and then adds new card details to user if correct **/
   def updatePayment = Action {
     implicit request =>
@@ -55,6 +57,8 @@ class UserPaymentController @Inject() extends Controller{
       })
   }
 
+
+
   /** Runs the method to delete a card from the database **/
   def deleteCardDetails(username: String, cardID: Int) = Action {
     implicit request =>
@@ -64,4 +68,8 @@ class UserPaymentController @Inject() extends Controller{
 
       Redirect(routes.UserAccountController.userAccount())
   }
+
+
+
+
 }

@@ -12,12 +12,13 @@ import reactivemongo.core.nodeset.Authenticate
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
+import models.CustomerCardDB
 
 
 /**
   * Created by Administrator on 29/07/2016.
   */
-case class OrderDB (ordId:Int, cusId:String, carts: Array[CartItem], totalPrice: Double, datetime: String, status: String, payMethod:String)
+case class OrderDB (ordId:Int, cusId:String, carts: Array[CartItem], totalPrice: Double, datetime: String, status: String, selectedCardNo: String, payMethod:String)
 
 object OrderDB {
 
@@ -54,6 +55,7 @@ object OrderDB {
       doc.getAs[Double]("totalPrice").get,
       doc.getAs[String]("datetime").get,
       doc.getAs[String]("status").get,
+      doc.getAs[String]("selectedCardNo").get,
       doc.getAs[String]("payMethod").get)
   }
 
@@ -67,6 +69,7 @@ object OrderDB {
           "totalPrice" -> order.totalPrice,
           "datetime" -> order.datetime,
           "status" -> order.status,
+          "selectedCard" -> order.selectedCardNo,
           "payMethod" -> order.payMethod
         )
   }
@@ -130,4 +133,6 @@ object OrderDB {
     Thread.sleep(500)
     nextID
   }
+
+
 }

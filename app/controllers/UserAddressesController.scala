@@ -27,7 +27,7 @@ class UserAddressesController @Inject() extends Controller {
     "Full Name" -> nonEmptyText,
     "Address Type" -> nonEmptyText,
     "Line 1" -> nonEmptyText,
-    "Line 1" -> nonEmptyText,
+    "Line 2" -> nonEmptyText,
     "Town/City" -> nonEmptyText,
     "County" -> nonEmptyText,
     "Postcode" -> nonEmptyText))

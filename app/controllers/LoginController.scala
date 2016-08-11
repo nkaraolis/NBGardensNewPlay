@@ -59,12 +59,13 @@ class LoginController @Inject() extends Controller {
         LoginForm.bind(request2flash.data)
       else
         LoginForm
-      Ok(views.html.loginOurs(form))
+      Ok(views.html.login(form))
   }
 
   /** Logs out a user and clears the session **/
   def logout = Action {
     implicit request =>
+      Cart.clearCart()
       Redirect(routes.HomeController.home()).withNewSession
   }
 

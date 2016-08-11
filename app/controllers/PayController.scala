@@ -9,6 +9,7 @@ import controllers._
 import play.api.i18n.Messages
 import scala.concurrent.ExecutionContext.Implicits.global
 import controllers.CartController
+import play.api.data.format.Formats._
 
 
 /**
@@ -16,50 +17,12 @@ import controllers.CartController
   */
 class PayController extends Controller {
 
-  //val items = Cart.findAllInCart  //get product from model
+   //a payment form for the customer to select a previously saved card and a payment method (Pay Now or Pay Later)
+  val PayDetailsForm = Form(tuple(
+    "Method" -> of[String],
+    "Card" -> of[String]
 
-  // a form contents information about a card for the user to pay
-  val CardForm: Form[cardDetails] = Form(
-    mapping(
-      "Payment Method" -> nonEmptyText,
-      "Name on Card" -> nonEmptyText,
-      "Card No" -> nonEmptyText,
-      "Start Date" -> nonEmptyText,
-      "Expiry Date" -> nonEmptyText,
-      "Security Code" -> of[String],
-      "Issue No" -> of[String]
-    )
-    (cardDetails.apply)
-    (cardDetails.unapply)
-  )
-
-  def options = Action{
-    implicit request =>
-      val value = CardForm.bindFromRequest.data("Payment Method")
-      if(value.equals("Paypal")) {
-        val categories = Category.findAll
-        Ok(views.html.browseCat(categories))
-      }
-      else{
-        Ok("")
-      }
-  }
-
-  def payByCard(items: String, total:Double) = Action {
-    implicit request =>  //controller action
-      if (request.session.get("username").isEmpty) {//check the user has logged in or not
-        Redirect(routes.LoginController.newLogin())
-      }
-      Ok(views.html.payByCard(items, total, CardForm)) //render view template
-  }
-
-  def payByPaypal(items: String, total:Double) = Action {
-    implicit request =>  //controller action
-      if (request.session.get("username").isEmpty) {//check the user has logged in or not
-        Redirect(routes.LoginController.newLogin())
-      }
-      Ok(views.html.payByPaypal(items, total, CardForm)) //render view template
-  }
+  ))
 
 
 
@@ -68,48 +31,47 @@ class PayController extends Controller {
       if (request.session.get("username").isEmpty) {//check the user has logged in or not
         Redirect(routes.LoginController.newLogin())
       }
-      println("inside the readyToPay method: " + items)
-      Ok(views.html.payPage(items, total, CardForm)) //render view template
-
+      //val username = request.session.get("username").get
+      //Ok(views.html.payPage(items, total, CustomerCardDB.loadCards(username.toString), PayDetailsForm)) //render view template
+      Ok(views.html.addcard(total)) //render view template
   }
 
 
 
   //This method saves the customer's order to the NBGardensOrders database
-  // and also saves the card details to CVS
-  def save (products: String, username: String, total: Double) = Action {
+  def save (username: String, total: Double, cardNo: String) = Action {
     implicit request =>
-      val newCardForm = CardForm.bindFromRequest()
-      newCardForm.fold(success = {
-        newOrder =>
-      val newCard = cardDetails(newCardForm.get.method, newCardForm.data("Name on Card"), newCardForm.data("Card No"), newCardForm.data("Start Date"), newCardForm.data("Expiry Date"), newCardForm.data("Security Code"), newCardForm.data("Issue No"))
-      val payMethod = newCardForm.get.method
+      println("This is inside the save method, username is: " + username)
+      val payForm = PayDetailsForm.bindFromRequest()
+      payForm.fold(success = {
+        PayDetails =>
+      val method = payForm.get._1
       val newID = OrderDB.findNextID()
       val status = "Order Made"
       val datetime = OrderDB.getDateTime()
-      var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, payMethod)
+
+      var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, cardNo, method)
       MongoConnector.collectionOrder.insert(order)
-      cardDetails.add(newCard)
       //Empty Cart
       Cart.clearCart()
-          Redirect(routes.BrowseController.categoryList)
+          Redirect(routes.BrowseController.categoryList())
       }, hasErrors = {
         form =>
-         // val cart = Cart.convertToCartItems()
-          //val total = Cart.calculateCartTotal(cart)
-          Redirect(routes.PayController.newCheckout(products, total)).flashing(Flash(form.data))
+          Redirect(routes.PayController.newCheckout(total)).flashing(Flash(form.data))
       })
-
   }
 
 
-  def newCheckout(products: String, total:Double) = Action {
+
+
+  def newCheckout(total:Double) = Action {
     implicit request =>
       val form = if (request2flash.get("error").isDefined)
-        CardForm.bind(request2flash.data)
+        PayDetailsForm.bind(request2flash.data)
       else
-        CardForm
-      Ok(views.html.payPage(products, total, form))
+        PayDetailsForm
+      //val cards = CustomerCardDB.loadCards(request.session.get("username").toString)
+      Ok(views.html.payPage(total, PayDetailsForm, null))
   }
 
 

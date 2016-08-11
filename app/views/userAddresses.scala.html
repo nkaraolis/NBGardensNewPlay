@@ -28,7 +28,8 @@
 
                 @helper.form(action = routes.UserAddressesController.deleteAddress(session.get("username").get, address.addressID)) {
 
-                <div class="detailsusername">Full Name: <b>@address.fullName</b><br></div>
+                <div class="detailsusername">
+                Full Name: <b>@address.fullName</b><br></div>
                 Address Line 1: <b>@address.line1</b><br>
                 Address Line 2:  <b>@address.line2</b><br>
                 Town/City:  <b>@address.townCity</b><br>
