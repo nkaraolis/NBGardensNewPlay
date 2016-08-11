@@ -20,7 +20,7 @@ class PayController extends Controller {
    //a payment form for the customer to select a previously saved card and a payment method (Pay Now or Pay Later)
   val PayDetailsForm = Form(tuple(
     "Method" -> of[String],
-    "Card" -> of[String]
+     "Card" -> of[String]
 
   ))
 

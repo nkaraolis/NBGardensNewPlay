@@ -3,7 +3,7 @@
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
-@import models.{Cart, CustomerCardDB, PaymentDetails, CustomerDB}
+@import models.{Cart, CustomerCardDB, CustomerDB}
 @import helper._
 @import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -41,6 +41,7 @@
                     ),
                     '_disabled -> Seq("FooKey", "BazKey")
                     )
+                @helper.inputText(payForm("Card"), 'style -> "display: none")
 
             Total: £@total
             <input type="submit" class="btn-primary" value="PAY" onclick="popupAddMsg('You have successfully placed your order. Please check your emails for confirmation')" style="width:110px; margin-left: 160px;"/>
