@@ -20,7 +20,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 08/07/2016.
   */
-
+@Singleton
 class ProductPageController extends Controller {
 
   private val reviewForm : Form[Review] =

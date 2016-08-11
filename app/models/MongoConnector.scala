@@ -1,5 +1,7 @@
 package models
 
+import javax.inject.Singleton
+
 import com.typesafe.config.ConfigFactory
 import reactivemongo.api.{FailoverStrategy, MongoDriver}
 import reactivemongo.api.commands.WriteResult
@@ -19,6 +21,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by Administrator on 25/07/2016.
   */
+@Singleton
 object MongoConnector {
 
   /** Database names to connect to **/

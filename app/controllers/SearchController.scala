@@ -16,6 +16,7 @@ import views.html.helper.form
 /**
   * Created by Administrator on 14/07/2016.
   */
+@Singleton
 class SearchController @Inject() extends Controller {
 
 //  val SearchForm: Form[SearchProduct] = Form(mapping(

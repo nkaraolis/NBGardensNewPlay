@@ -1,5 +1,7 @@
 package controllers
 
+import javax.inject.Singleton
+
 import play.api.mvc._
 import models._
 import play.api.data.Form
@@ -7,6 +9,7 @@ import play.api.data.Forms._
 import play.api.data.format.Formats._
 import controllers._
 import play.api.i18n.Messages
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import controllers.CartController
 import play.api.data.format.Formats._
@@ -15,6 +18,7 @@ import play.api.data.format.Formats._
 /**
   * Created by Administrator on 21/07/2016.
   */
+@Singleton
 class PayController extends Controller {
 
    //a payment form for the customer to select a previously saved card and a payment method (Pay Now or Pay Later)

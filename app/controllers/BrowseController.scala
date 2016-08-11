@@ -1,12 +1,14 @@
 package controllers
 
+import javax.inject.Singleton
+
 import play.api.mvc.{Action, Controller}
 import models.{Category, Product}
 
 /**
   * Created by Administrator on 08/07/2016.
   */
-
+@Singleton
 class BrowseController extends Controller{
 
 

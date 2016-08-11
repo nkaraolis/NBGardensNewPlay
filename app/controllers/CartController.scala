@@ -1,6 +1,7 @@
 package controllers
 
 import java.util.Calendar
+import javax.inject.Singleton
 
 import play.api.mvc._
 import models._
@@ -12,7 +13,7 @@ import play.api.i18n.Messages
 /**
   * Created by Administrator on 08/07/2016.
   */
-
+@Singleton
 class CartController extends Controller {
 
   // a form contents information about a product in the cart
