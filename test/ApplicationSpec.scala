@@ -1,6 +1,11 @@
+import controllers.LoginController
 import org.scalatestplus.play._
 import play.api.test._
 import play.api.test.Helpers._
+import org.scalatest._
+import play.api.test._
+import play.api.test.Helpers._
+import org.scalatestplus.play._
 
 /**
  * Add your spec here.
@@ -17,7 +22,7 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
 
   }
 
-  "HomeController" should {
+  /*"HomeController" should {
 
     "render the index page" in {
       val home = route(app, FakeRequest(GET, "/")).get
@@ -27,7 +32,7 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
       contentAsString(home) must include ("Your new application is ready.")
     }
 
-  }
+  }*/
 
   "CountController" should {
 
@@ -38,5 +43,6 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
     }
 
   }
+
 
 }
