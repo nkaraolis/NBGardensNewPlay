@@ -101,9 +101,6 @@ object Product{
   }
 
 
-  def findById(id: String) = products.find(_.productId == id)
-
-
   def getImage(id: Int): String ={
     val imageStr = findById(id).get.mainImage
     imageStr
@@ -220,7 +217,7 @@ object Product{
   }
 
 
-  def findProductByName(name: String) = products.find(_.name == name)
+  //def findProductByName(name: String) = products.find(_.name == name)
 
 
   def add(Id: Int, Name: String, description: String, price: String, mainImage: String, secondaryImages: String, need: Int, category: String, porousAllowed: String, reviews: List[Review]): Unit ={
@@ -256,7 +253,7 @@ object Product{
   }
 
 
-
+  //method used by the SearchController
   def findByNameOB(name: String) ={
     def filter(products: Set[Product], results: Set[Product]) : Set[Product] ={
       if (products.isEmpty)
@@ -271,7 +268,7 @@ object Product{
     filter(products, Set.empty[Product]).toList
   }
 
-
+  //method used by the SearchController
   def findByNameS(name: String) = products.toList.find(_.name.toLowerCase().contains(name.toLowerCase()))
 }
 

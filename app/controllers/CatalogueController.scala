@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject._
 
-import models.{CatalogueDB, ContactDB, MongoConnector}
+import models.{CatalogueDB, MongoConnector}
 import play.api._
 import play.api.data.Form
 import play.api.data.Forms._
