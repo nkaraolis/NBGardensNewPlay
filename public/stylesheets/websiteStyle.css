@@ -27,6 +27,10 @@ body
  	height: 102px;
      width: 102px;
  	display: inline-block;
+	-moz-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
  }
  #icon1:hover{
  	background-image:url(../images/i22.png);
@@ -38,6 +42,10 @@ body
  	height: 102px;
      width: 102px;
  	display: inline-block;
+	-moz-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
  }
 #icon2:hover{
  	background-image:url(../images/logout.png);
@@ -82,6 +90,10 @@ body
     text-align: center;
     vertical-align: middle;
     margin-top: -102px;
+	-moz-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
 }
 
 a.icon3:visited, a.icon3:link, a.icon3:before {
@@ -109,6 +121,10 @@ a.icon3:hover:before {
 	height: 102px;
     width: 102px;
 	display: inline-block;
+	-moz-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
 }
 #trolley:hover{
 	background-image:url(../images/t11.png);
