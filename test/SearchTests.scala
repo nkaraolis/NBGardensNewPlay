@@ -20,10 +20,11 @@ class SearchTests extends FunSuite with BeforeAndAfter {
     review = Review("Jackie", "Awesome product", "This gnome is great!", "11 JUL 2016", "5")
     reviews = List(review)
     product = Product(1, "really scary gnome", "This is a really scary gnome, it will frighten everyone away", "12.99", "main-image", "secondary-image", 1, "Gnomes", "yes", reviews)
+    Product.add(1, "really scary gnome", "This is a really scary gnome, it will frighten everyone away", "12.99", "main-image", "secondary-image", 1, "Gnomes", "yes", reviews)
     review2 = Review("Jackie", "A Great Shed", "The shed was very easy to put up", "11 JUL 16", "5")
     reviews = List(review, review2)
     product2 = Product(2, "a lovely shed", "This is a lovely shed to store your tools in", "40.99", "main-image", "secondary-image", 1, "Garden Tools", "no", reviews)
-
+    Product.add(2, "a lovely shed", "This is a lovely shed to store your tools in", "40.99", "main-image", "secondary-image", 1, "Garden Tools", "no", reviews)
   }
 
 
@@ -34,6 +35,7 @@ class SearchTests extends FunSuite with BeforeAndAfter {
     //var searchController = new SearchController
     //var result = searchController.listResult(searchKeyword)
     //var product = result.get.
+
 
     val foundProduct = Product.findByNameOB(search)
     val name = foundProduct.head.name

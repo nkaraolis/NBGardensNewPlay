@@ -28,7 +28,7 @@ class CartTests extends FunSuite  with BeforeAndAfter {
     review2 = Review("Jackie", "A Great Shed", "The shed was very easy to put up", "11 JUL 16", "5")
     reviews = List(review, review2)
     product2 = Product(2, "a lovely shed", "This is a lovely shed to store your tools in", "40.99", "main-image", "secondary-image", 1, "Garden Tools", "no", reviews)
-    cartitem2 = CartItem(product.productId, product.name, 1, product.price.toDouble, false)
+    cartitem2 = CartItem(product2.productId, product2.name, 1, product2.price.toDouble, false)
   }
 
 
