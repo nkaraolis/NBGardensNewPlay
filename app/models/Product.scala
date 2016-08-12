@@ -253,7 +253,7 @@ object Product{
   }
 
 
-
+  //method used by the SearchController
   def findByNameOB(name: String) ={
     def filter(products: Set[Product], results: Set[Product]) : Set[Product] ={
       if (products.isEmpty)
@@ -268,7 +268,7 @@ object Product{
     filter(products, Set.empty[Product]).toList
   }
 
-
+  //method used by the SearchController
   def findByNameS(name: String) = products.toList.find(_.name.toLowerCase().contains(name.toLowerCase()))
 }
 
