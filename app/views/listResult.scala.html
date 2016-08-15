@@ -50,7 +50,8 @@ value
                         </div>
                     </a>
                     <div class="title" name="get" style="text-align: left;">
-                        <div style="height: 130px;">
+                        @helper.form(routes.CartController.updateFromSearch) {
+                        <div style="height: 130px; font-size: 19px;">
                             <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
                             <dt style="font-size: 14px;">Description:
 
@@ -60,14 +61,10 @@ value
                             </dt>
                         </div>
                         <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@product.price</dt>
-
-                        <input class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty." name="Qty"
-                               onfocus="if(value =='1'){value =''}" onblur="if(value ==''){value='1'}" >
-
-                        <a href="@routes.CartController.add(product.name, "1")">
-                        <input type="submit" class="btn-primary" value="ADD TO CART" style="width:110px;"/>
-                        </a>
-
+                        <input type="hidden" name="Product" value="@product.name">
+                        <input name="Qty" class="productQuantity" maxlength="2" type="text" value="1" placeholder="Qty">
+                        <input type="submit" class="btn-primary" value="ADD TO CART" onclick="popupAddMsg('This item has been added to your cart')" style="width:110px;"/>
+                        }
                     </div>
                 </div>
             </div>
