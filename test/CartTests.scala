@@ -1,12 +1,10 @@
 import models.{Cart, CartItem, Product, Review}
 import org.scalatest.FunSuite
 import org.scalatest.BeforeAndAfter
-import org.scalatest.{FlatSpec, Inside, Matchers}
 import play.api.test._
 
 //some TDD tests for the Cart class
 class CartTests extends FunSuite  with BeforeAndAfter {
-//class CartTests extends FlatSpec with Inside with Matchers {
 
   //Start with an empty cart and some variables
   var cart = Cart
@@ -62,6 +60,21 @@ class CartTests extends FunSuite  with BeforeAndAfter {
     println ("This is cTotal: "+ cTotal)
     assert(total == cTotal)
   }
+
+  //Test 5 remove a product from a cart
+  test("Remove a product from a cart"){
+    cart.removeFromCart(cartitem2)
+    var size = cart.productsInCart.length
+    assert (size == 1)
+  }
+
+  //Test 6 clear all products from a cart
+  test("Clear all products from the cart"){
+    cart.clearCart()
+    var size = cart.productsInCart.length
+    assert (size == 0)
+  }
+
 
 
 

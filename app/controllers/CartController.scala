@@ -9,6 +9,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
 import play.api.i18n.Messages
+import scala.math._
 
 /**
   * Created by Administrator on 08/07/2016.
@@ -148,7 +149,7 @@ class CartController extends Controller {
       val subTotalAdd = q.toDouble * p.price.toDouble
 
       //create a new cart item
-      val cartItem = CartItem(p.productId, p.name, qty, p.price.toDouble,false)
+      val cartItem = CartItem(p.productId, p.name, qty, p.price.toDouble, false)
 
       if(findByName(p.name).isEmpty){
 
@@ -223,6 +224,7 @@ class CartController extends Controller {
   //This method is to add a customer's payment card to their order
   def addCard(total:Double, cardNo:String) = Action {
     implicit request =>
+      println("This is inside the addCard method, total is: " + total)
       Ok(views.html.payPage(total, PayDetailsForm, cardNo)) //render the payPage view
   }
 
