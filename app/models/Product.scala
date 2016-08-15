@@ -109,15 +109,9 @@ object Product{
       futIns.onComplete {
             case Failure(e) => throw e
             case Success(writeResult) =>
-              println ("success writeResult "
-            )
+              println ("success writeResult")
       }
     }
-
-
-//    for(i<-productsForAnOrder){
-//      println(i)
-//    }
   }
 
 //  products += (
