@@ -77,40 +77,4 @@ class CartTests extends FunSuite  with BeforeAndAfter {
 
 
 
-
-
-//  //Further tests to checkout and pay for the products
-//   //Test 5 check the user is redirected when they try to checkout as they are not logged in
-//  test("Check the user is logged in when they click on checkout"){
-//    //val result = PayController.readyToPay(cart.productsInCart, cartTotal)
-//
-//    val request = FakeRequest(GET, "/Pay")
-//    val Some(result) = route(request)
-//    status(result) must equalTo(SEE_OTHER)
-//    redirectLocation(result) must beSome("/login")
-//
-//   // redirectLocation(result) must beSome.which(_ == "/login")
-//  }
-
-
-
-//  //Test 5 check the user is redirected when they try to checkout when they are not logged in
-//  test("Check the user is redirected when they try to checkout whilst not logged in"){
-//    "LoginController#authenticate" should{
-//      "Redirect to index on success" in{
-//        ...
-//        val result = loginControllerTest.authenticate.apply(request)
-//        redirectLocation(result) must be(routes.Application.index)
-//      }
-//  }
-
-
-
-
-  //do a test with user logged in
-
-
-
-  //check cart is empty after checkout and check order has been entered into the database
-
 }
