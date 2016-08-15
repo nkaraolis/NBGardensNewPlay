@@ -1,6 +1,6 @@
 package controllers
 
-import javax.inject.Inject
+import javax.inject.{Inject, Singleton}
 
 import models._
 import play.api._
@@ -14,16 +14,17 @@ import play.api.Play.current
 import play.api.data.Forms.{longNumber, mapping, nonEmptyText}
 import play.api.i18n.Messages.Implicits._
 import views.html.helper.form
-import models.{Order}
+import models.OrderDB
 /**
   * Created by Administrator on 25/07/2016.
   */
+@Singleton
 class OrderHistoryController @Inject() extends Controller {
 
   //point of entry to History page, this gets the logged in customer's orders
   def newPage(cid:String) = Action {
     implicit request =>
-      Ok(views.html.history(Order.getOrdersByCusId(cid)))
+      Ok(views.html.history(OrderDB.getOrdersByCusId(cid)))
 
   }
 
@@ -32,7 +33,7 @@ class OrderHistoryController @Inject() extends Controller {
   //method to display an order's details
   def track(id:Int) = Action {
     implicit request =>
-      Order.findOrderById(id).map { order =>
+      OrderDB.findOrderById(id).map { order =>
         Ok(views.html.trackOrder(order))
       }.getOrElse(NotFound)
 

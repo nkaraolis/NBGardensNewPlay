@@ -1,4 +1,4 @@
-@(updateAccounts: Form[CustomerDetails])(implicit flash: Flash, lang: Lang, session : Session)
+@(updateAccounts: Form[(String, String, String, String, String, String)])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -21,7 +21,7 @@
         First Name: <b>@session.get("firstName")</b><br>
         Last Name:  <b>@session.get("lastName")</b><br>
         Email:  <b>@session.get("email")</b><br>
-        Telephone: <b>@session.get("telephone")</b><br>
+        Telephone: <b>@session.get("phone")</b><br>
         Password: <b>********</b>
 
     </div>

@@ -4,15 +4,15 @@
 @import play.api.i18n.Messages.Implicits._
 @import play.api.mvc.Flash
 @import helper._
-@import models.{Cart}
+@import models.{Cart, Product}
 
 @sidebar = {
 <ul>
     <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    <li><a href="@routes.BrowseController.productList("Gnomes")">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.productList("Garden Tools")">Tools</a></li>
+    <li><a href="@routes.BrowseController.productList("Gardening Supplies")">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
@@ -37,22 +37,27 @@ function popupAddMsg(msg) {
 <div id="content" style="height: 1950px;">
     <div class="container_12">
         <div class="title">
-            <div class="fontTypeD" style="padding-bottom: 50px;">All Products</div>
+            <div class="fontTypeD" style="padding-bottom: 50px;">@products.head.category</div>
         </div>
         <div class="gallery">
             @for(product <- products) {
             <div class="borderGrid">
                 <div class="grid_3" style="">
-                    <a href="@routes.Assets.versioned(product.imgL)" class="gal">
+                    <a href="@routes.Assets.versioned(product.mainImage)" class="gal">
                         <div class="img_block" style="padding: 5px 5px 20px 5px;">
-                            <img src="@routes.Assets.versioned(product.imgS)" alt="" class="img_inner">
+                            <img src="@routes.Assets.versioned(product.mainImage)" style="height:210px; width:210px; border: 0px solid #717262;" alt="" class="img_inner">
                         </div>
                     </a>
                     <div class="title" name="get" style="text-align: left;">
                         @helper.form(routes.CartController.updateFromPL) {
-                            <div style="height: 130px;">
+                            <div style="height: 130px; font-size: 19px;">
                                 <a href="@routes.ProductPageController.goToProduct(product.name)"><dt>@product.name</dt></a>
-                                <dt style="font-size: 14px;">Description: @product.description</dt>
+                                <dt style="font-size: 14px;">Description:
+
+                                    @Product.preview(product.description, 35)
+                                    ...
+
+                                </dt>
                             </div>
                             <dt class="fontTypeB" style="text-align: right; color: #006633; padding: 20px 20px;">£@product.price</dt>
                             <input type="hidden" name="Product" value="@product.name">

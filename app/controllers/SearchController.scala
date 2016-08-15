@@ -16,6 +16,7 @@ import views.html.helper.form
 /**
   * Created by Administrator on 14/07/2016.
   */
+@Singleton
 class SearchController @Inject() extends Controller {
 
 //  val SearchForm: Form[SearchProduct] = Form(mapping(
@@ -27,7 +28,6 @@ class SearchController @Inject() extends Controller {
     "SearchIN" -> nonEmptyText.verifying("validation.name.nonexistant", !Product.findByNameS(_).isEmpty)
     )(SearchProduct.apply)(SearchProduct.unapply)
   )
-
 
   def listResult(Searched: String) = Action {
     implicit request =>
@@ -49,12 +49,12 @@ class SearchController @Inject() extends Controller {
 
       newSearchForm.fold(hasErrors = {
         form =>
-          println("Faillllllllllll")
+          println("Fail")
           Redirect(routes.HomeController.home()).flashing(Flash(form.data) +
             ("error" -> Messages("0 Results Found..")))
       }, success = {
         newSearch =>
-          println("Successfullllllllllll" )
+          println("Successfull" )
           Redirect(routes.SearchController.listResult(newSearch.name))}
       )
   }

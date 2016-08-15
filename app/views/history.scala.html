@@ -1,4 +1,4 @@
-@(Orders: List[Order])(implicit flash: Flash, lang: Lang, session : Session)
+@(Orders: List[OrderDB])(implicit flash: Flash, lang: Lang, session : Session)
 
 @import play.api.Play.current
 @import play.api.i18n.Messages
@@ -8,11 +8,11 @@
 
 @sidebar = {
 <ul>
-    <li><a href="">Categories</a></li>
-    <li><a href="news.asp">Gnomes</a></li>
-    <li><a href="contact.asp">Tools</a></li>
-    <li><a href="about.asp">Gardening<br>Supplies</a></li>
-    <li><a href="about.asp">Outdoor<br>Equipment</a></li>
+    <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
+    <li><a href="@routes.BrowseController.productList("Gnomes")">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.productList("Garden Tools")">Tools</a></li>
+    <li><a href="@routes.BrowseController.productList("Gardening Supplies")">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
 </ul>
 }
 

@@ -16,5 +16,6 @@ class IntegrationSpec extends PlaySpec with OneServerPerTest with OneBrowserPerT
 
       pageSource must include ("Your new application is ready.")
     }
+
   }
 }

@@ -1,5 +1,4 @@
-@()(implicit flash: Flash, lang: Lang, session : Session)
-
+@(catalogueForm: Form[(String, String, String, String, String, String)])(implicit flash: Flash, lang: Lang, session : Session)
 @import play.api.Play.current
 @import play.api.i18n.Messages
 @import play.api.i18n.Messages.Implicits._
@@ -9,41 +8,41 @@
 @sidebar = {
 <ul>
     <li><a href="@routes.BrowseController.categoryList">Categories</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gnomes</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Tools</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Gardening<br>Supplies</a></li>
-    <li><a href="@routes.BrowseController.categoryList">Outdoor<br>Equipment</a></li>
+    <li><a href="@routes.BrowseController.productList("Gnomes")">Gnomes</a></li>
+    <li><a href="@routes.BrowseController.productList("Garden Tools")">Tools</a></li>
+    <li><a href="@routes.BrowseController.productList("Gardening Supplies")">Gardening<br>Supplies</a></li>
+    <li><a href="@routes.BrowseController.productList("Outdoor Equipment")">Outdoor<br>Equipment</a></li>
 </ul>
 }
 
 @main(Messages("catalogue.page"))(sidebar) {
-<div id="content" style="height: 1300px;">
+<div id="content" style="height: 1500px;">
     <div id="contactheader" style="padding-top: 20px; margin-left: -770px;">Order Our Catalogue</div>
-    <fieldset id="contactform" style="margin-top:50px;">
-        <legend></legend>
-        <div class="formtext">Name: </div><br>
-        <input type="text" placeholder="John Doe"><br>
 
-        <div class="formtext">Email: </div><br>
-        <input type="text" placeholder="person&#64example.com"><br>
-
-        <div class="formtext">Address Line 1: </div><br>
-        <input type="text"><br>
-
-        <div class="formtext">Address Line 2: </div><br>
-        <input type="text"><br>
-
-        <div class="formtext">Town/City: </div><br>
-        <input type="text" style="width: 100px; margin-left: -400px;"><br>
-
-        <div class="formtext">Postcode: </div><br>
-        <input type="text" style="width: 100px; margin-left: -400px;"><br>
-
-        <div class="formtext">Delivery instructions: </div><br>
-        <textarea name="message" placeholder="ie. Leave with neighbour"></textarea><br>
-
-        <a href="@routes.HomeController.home()"> <input type="submit" class="btn-primary" value="SEND" style="margin-top: 20px; float: left;"/></a>
+    @helper.form(action = routes.CatalogueController.saveCatalogue) {
+    <fieldset id="contactform">
+        @helper.inputText(catalogueForm("Name"))
+        @helper.inputText(catalogueForm("Email"))
+        @helper.inputText(catalogueForm("Address Line 1"))
+        @helper.inputText(catalogueForm("Address Line 2"))
+        @helper.inputText(catalogueForm("Town/City"))
+        @helper.inputText(catalogueForm("Postcode"))
+        <input type="submit" class="btn-primary" style="margin-left: -375px;" value='@Messages("SEND")'>
     </fieldset>
 
+    <div class="container">
+        @if(flash.get("success").isDefined){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+        }@if(flash.get("error").isDefined){
+        <div class="alert alert-error" style="width: 300px; padding-left: 100px; color: #FF0000; font-family: 'Raleway'">
+            @flash.get("error")
+        </div>
+        }
+    </div>
+
+    }
 </div>
+
 }
