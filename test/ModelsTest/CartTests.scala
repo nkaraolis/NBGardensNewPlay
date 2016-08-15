@@ -1,8 +1,7 @@
+package ModelsTest
+
 import models.{Cart, CartItem, Product, Review}
-import org.scalatest.FunSuite
-import org.scalatest.BeforeAndAfter
-import org.scalatest.{FlatSpec, Inside, Matchers}
-import play.api.test._
+import org.scalatest.{BeforeAndAfter, FunSuite}
 
 //some TDD tests for the Cart class
 class CartTests extends FunSuite  with BeforeAndAfter {
