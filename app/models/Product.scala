@@ -188,6 +188,11 @@ object Product{
     tPrice.toDouble
   }
 
+  def getPriceAsString(qty:Int, price:Double): String ={
+    val tPrice = "%.2f".format(qty.toDouble * price)
+    tPrice
+  }
+
   def findAll = products.toList.sortBy(_.name)
 
 
