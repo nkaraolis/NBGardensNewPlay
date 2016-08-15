@@ -8,6 +8,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
 import play.api.i18n.Messages
+import scala.math._
 
 /**
   * Created by Administrator on 08/07/2016.
@@ -136,6 +137,54 @@ class CartController extends Controller {
 
   }
 
+  def updateFromSearch() = Action {
+    implicit request =>  //controller action
+      val p = Product.findByName(CartForm.bindFromRequest().data("Product")).get
+      val q:String = CartForm.bindFromRequest().data("Qty")
+
+      val qty = q.toInt
+
+      val subTotalAdd = q.toDouble * p.price.toDouble
+
+      //create a new cart item
+      val cartItem = CartItem(p.productId, p.name, qty, p.price.toDouble,false)
+
+      if(findByName(p.name).isEmpty){
+
+        // update products in cart
+        Cart.addToCart(cartItem) //get product from model
+        //products = cp //get product from model
+        products =  products :+ cartItem
+        totalT += subTotalAdd
+
+      } else{
+
+        // find the product in the cart
+        // update quantity
+
+        val productToChange = findByName(p.name)
+
+        val quantity = productToChange.get.quantity
+
+        // calculate the new total for the product
+        val subTotalUpdate = (quantity.toDouble + qty.toDouble) * productToChange.get.unitPrice
+
+        // call the renewTotalPrice function to have a new total price for the user (see renewTotalPrice)
+        removeOldPrice(productToChange.get.proName)
+
+        // remove the out of date product from the cart list
+        removeO(productToChange.get.proName)
+
+        val updatedCartItem = CartItem(p.productId, p.name, qty.toInt + quantity, p.price.toDouble,false)
+        Cart.addToCart(updatedCartItem)
+
+        products =  products :+ updatedCartItem
+        totalT += subTotalUpdate
+      }
+      Ok(views.html.cartpage(products.toList, CartForm))
+      //Redirect(routes.BrowseController.productList(p.category))//render view template
+  }
+
   // update qty from the products page, the same with above function
   def updateFromPL() = Action {
     implicit request =>  //controller action
@@ -147,7 +196,7 @@ class CartController extends Controller {
       val subTotalAdd = q.toDouble * p.price.toDouble
 
       //create a new cart item
-      val cartItem = CartItem(p.productId, p.name, qty, p.price.toDouble,false)
+      val cartItem = CartItem(p.productId, p.name, qty, p.price.toDouble, false)
 
       if(findByName(p.name).isEmpty){
 
@@ -222,6 +271,7 @@ class CartController extends Controller {
   //This method is to add a customer's payment card to their order
   def addCard(total:Double, cardNo:String) = Action {
     implicit request =>
+      println("This is inside the addCard method, total is: " + total)
       Ok(views.html.payPage(total, PayDetailsForm, cardNo)) //render the payPage view
   }
 

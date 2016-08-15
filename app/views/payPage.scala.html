@@ -31,6 +31,8 @@
 
             </div>
 
+
+
             @helper.form(routes.PayController.save(session.get("username").toString, total, cardNo)) {
             <div id="payform">
                 @helper.select(
@@ -44,6 +46,7 @@
                 @helper.inputText(payForm("Card"), 'style -> "display: none")
 
             Total: £@total
+
             <input type="submit" class="btn-primary" value="PAY" onclick="popupAddMsg('You have successfully placed your order. Please check your emails for confirmation')" style="width:110px; margin-left: 160px;"/>
             </div>
             }

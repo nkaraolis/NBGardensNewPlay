@@ -2,10 +2,12 @@ package ModelsTest
 
 import models.{Cart, CartItem, Product, Review}
 import org.scalatest.{BeforeAndAfter, FunSuite}
+import org.scalatest.FunSuite
+import org.scalatest.BeforeAndAfter
+
 
 //some TDD tests for the Cart class
 class CartTests extends FunSuite  with BeforeAndAfter {
-//class CartTests extends FlatSpec with Inside with Matchers {
 
   //Start with an empty cart and some variables
   var cart = Cart
@@ -62,41 +64,20 @@ class CartTests extends FunSuite  with BeforeAndAfter {
     assert(total == cTotal)
   }
 
+  //Test 5 remove a product from a cart
+  test("Remove a product from a cart"){
+    cart.removeFromCart(cartitem2)
+    var size = cart.productsInCart.length
+    assert (size == 1)
+  }
+
+  //Test 6 clear all products from a cart
+  test("Clear all products from the cart"){
+    cart.clearCart()
+    var size = cart.productsInCart.length
+    assert (size == 0)
+  }
 
 
-
-//  //Further tests to checkout and pay for the products
-//   //Test 5 check the user is redirected when they try to checkout as they are not logged in
-//  test("Check the user is logged in when they click on checkout"){
-//    //val result = PayController.readyToPay(cart.productsInCart, cartTotal)
-//
-//    val request = FakeRequest(GET, "/Pay")
-//    val Some(result) = route(request)
-//    status(result) must equalTo(SEE_OTHER)
-//    redirectLocation(result) must beSome("/login")
-//
-//   // redirectLocation(result) must beSome.which(_ == "/login")
-//  }
-
-
-
-//  //Test 5 check the user is redirected when they try to checkout when they are not logged in
-//  test("Check the user is redirected when they try to checkout whilst not logged in"){
-//    "LoginController#authenticate" should{
-//      "Redirect to index on success" in{
-//        ...
-//        val result = loginControllerTest.authenticate.apply(request)
-//        redirectLocation(result) must be(routes.Application.index)
-//      }
-//  }
-
-
-
-
-  //do a test with user logged in
-
-
-
-  //check cart is empty after checkout and check order has been entered into the database
 
 }

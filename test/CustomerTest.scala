@@ -58,10 +58,6 @@
 //    "find a document of user with the correct username" in CustomerDB.findCustomer("BigNoob").username.nonEmpty
 //  }
 //
-//  "Checking User Credentials" should {
-//    "check if a username and password has a match" in LoginTest.this
-//  }
-//
 //  "Find customer by username" should {
 //    "find a customer document to that corresponding" in CustomerDB.findByUsername("BigNoob").nonEmpty
 //  }

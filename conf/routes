@@ -64,6 +64,7 @@ GET     /addCart                    controllers.CartController.add(product:Strin
 GET     /removeCart                 controllers.CartController.remove(product:String)
 GET     /updateCart                 controllers.CartController.update()
 GET     /updateCartFromPL           controllers.CartController.updateFromPL()
+GET     /updateFromSearch           controllers.CartController.updateFromSearch()
 GET     /updatePW                   controllers.CartController.updatePW()
 
 # Routes for searching
