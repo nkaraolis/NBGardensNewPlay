@@ -35,8 +35,6 @@ class PayController extends Controller {
       if (request.session.get("username").isEmpty) {//check the user has logged in or not
         Redirect(routes.LoginController.newLogin())
       }
-      //val username = request.session.get("username").get
-      //Ok(views.html.payPage(items, total, CustomerCardDB.loadCards(username.toString), PayDetailsForm)) //render view template
       Ok(views.html.addcard(total)) //render view template
   }
 
@@ -53,7 +51,6 @@ class PayController extends Controller {
       val newID = OrderDB.findNextID()
       val status = "Order Made"
       val datetime = OrderDB.getDateTime()
-
       var order = new OrderDB(newID, username, Cart.productsInCart, total, datetime, status, cardNo, method)
       MongoConnector.collectionOrder.insert(order)
       //Empty Cart
@@ -64,7 +61,6 @@ class PayController extends Controller {
           Redirect(routes.PayController.newCheckout(total)).flashing(Flash(form.data))
       })
   }
-
 
 
 
