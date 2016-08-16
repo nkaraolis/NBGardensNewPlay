@@ -28,6 +28,8 @@
         <input type="submit" class="btn-primary" style="margin-left: -375px;" value='@Messages("SEND")'>
     </fieldset>
 
+    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:440px;width:700px;margin-left:1100px;'><div id='gmap_canvas' style='height:440px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">Embed your Google Map here!</a></small></div><div><small><a href="https://binaireoptieservaringen.nl/">Bij ons leest u alleen betrouwbare reviews!</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(53.557378,-0.02943500000003496),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(53.557378,-0.02943500000003496)});infowindow = new google.maps.InfoWindow({content:'<strong>NB Gardens</strong><br>Cleethorpes<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+
     <div class="container">
         @if(flash.get("success").isDefined){
         <div class="alert alert-success">
