@@ -168,14 +168,11 @@ object Product{
       )
       val futIns: Future[WriteResult] = coll.insert[BSONDocument](key)
       futIns.onComplete {
-        case Failure(e) => throw e
-        case Success(writeResult) =>
-          println ("success writeResult "
-          )
+            case Failure(e) => throw e
+            case Success(writeResult) =>
+              println ("success writeResult")
       }
     }
-
-
   }
 
 

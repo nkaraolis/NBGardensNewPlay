@@ -1,7 +1,10 @@
+package ModelsTest
+
 import models.{Cart, CartItem, Product, Review}
+import org.scalatest.{BeforeAndAfter, FunSuite}
 import org.scalatest.FunSuite
 import org.scalatest.BeforeAndAfter
-import play.api.test._
+
 
 //some TDD tests for the Cart class
 class CartTests extends FunSuite  with BeforeAndAfter {

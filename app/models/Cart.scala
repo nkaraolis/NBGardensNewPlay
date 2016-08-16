@@ -54,6 +54,4 @@ object Cart {
     }
     total
   }
-
-
 }
